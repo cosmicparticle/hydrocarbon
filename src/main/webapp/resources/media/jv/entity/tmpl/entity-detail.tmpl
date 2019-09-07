@@ -1,0 +1,259 @@
+<script id="page-title">
+	{{if /.*create/.test(mode)}}
+		${moduleTitle}-创建
+	{{else /.*update/.test(mode)}}
+		${moduleTitle}-${entity.title}-修改
+	{{else /.*detail/.test(mode)}}
+		${moduleTitle}-${entity.title}-详情
+	{{/if}}
+</script>
+
+<script id="inner-actions">
+	{{if innerActions.length > 0}}
+		<a id="actions" title="操作" on-click="toggleInnerActions"><i class="fa fa-toggle-left"></i></a>
+		<div id="actions-container" class="init close">
+			<div id="action-list">
+				{{each(i, action) innerActions}}
+					<a class="btn btn-azure shiny" href="javascript:;" title="${action.title }" on-click="do:doAction(innerActions[${i}])">
+						{{if action.iconClass}}
+							<i class="${action.iconClass }"></i>
+						{{/if}}
+						${action.title }				
+					</a>
+				{{/each}}
+			</div>
+		</div>
+	{{/if}}
+</script>
+
+<script id="outgoing-actions">
+	{{each(i, action) outgoingActions}}
+		<a class="btn-action-outgoing" on-click="do:doAction(outgoingActions[${i}])" href="javascript:;" title="${action.title }">
+			<i class="${action.iconClass }"></i>
+		</a>
+	{{/each}}
+</script>
+
+<script id="fusion-toggler">
+	<a class="fusion-mode" title="融合模式：关" id="fusion-toggler" href="javascript:;" on-click="toggleFusionMode">
+		<i class="fa fa-lightbulb-o"></i>
+	</a>
+</script>
+
+<script id="save-button">
+	<a id="save" title="保存" on-click="doSave"><i class="fa fa-check-square"></i></a>
+</script>
+
+<script id="btn-export">
+	<a class="export" title="导出" id="btn-export" on-click="doExport" href="javascript:;">
+		<i class="glyphicon glyphicon-export"></i>
+	</a>
+</script>
+<script id="timeline-toggler">
+	{{if history && history.length > 0}}
+		<a href="page:#timeline-area.toggle" title="查看历史" class="toggle-timeline btn-toggle">
+			<i class="iconfont icon-historyrecord"></i>
+		</a>
+	{{/if}}
+</script>
+<script id="timeline-area" >
+	<div id="timeline-area" class="blur-hidden" style="display:none">
+		<div class="timeline-wrapper">
+			<div class="VivaTimeline">
+				<dl>
+				{{each(i, item) historyItems}}
+					{{if item.monthStr}}
+						<dt data-month="${item.monthTime}">${item.monthStr}</dt>
+					{{else}}
+						<dd class="${i % 2 == 0? 'pos-right': 'pos-left'} clearfix ${item.current? 'current': ''}" data-id="${item.code}" data-time="${item.time}">
+							<div class="circ" on-click="do:goHistory('${item.code}')"></div>
+							<div class="time">${item.timeStr}</div>
+							<div class="events">
+								<div class="events-header">操作人：${item.userName}</div>
+							</div>
+						</dd>
+					{{/if}}
+				{{/each}}
+				{{if hasMore}}
+					<dt><a href="#" class="show-more-history">查看更多</a></dt>
+				{{else}}
+					<dt><a href="#" class="show-more-history disabled">没有更多了</a></dt>
+				{{/if}}
+			</dl>
+			</div>
+		</div>
+	</div>
+</script>
+<script id="error-icon">
+	<h1 id="showErrors" class="fa fa-info-circle" style="cursor: pointer;color: #CD5C5C;"></h1>
+</script>
+<script id="premises">
+	{{if groupPremises && groupPremises.length > 0}}
+		<div class="widget field-group entity-premises">
+			<div class="widget-header">
+				<span class="widget-caption">
+					<span class="group-title">默认字段</span>
+				</span>
+			</div>
+			<div class="widget-body field-container">
+				{{each(i, premise) groupPremises}}
+					{{if premise.fieldName}}
+						<div class="form-group field-item">
+							<label class="control-label field-title">${premise.fieldTitle }</label>
+							<div class="field-value">${premise.fieldValue}</div>
+						</div>
+					{{/if}}
+				{{/each}}
+			</div>
+		</div>  
+	{{/if}}
+</script>
+
+<script id="group-field">
+	<span class="field-view" field-type="${field.type }">${field.fieldAvailable? entity.fieldMap[field.id]: '' }</span>
+</script>
+<script id="group-field-input">
+	<span class="field-input"></span>
+</script>
+
+<script id="array-item-rows">
+	{{each(j, arrayItem) entity.arrayMap[group.id]}}
+		<tr class="value-row" origin-order="${j }">
+			<td>${j + 1 }</td>
+			{{if group.relationSubdomain}}
+				<td>${arrayItem.relationLabel }</td>
+			{{/if}}
+			{{each(k, field) group.fields}}
+				<td class="${field.fieldAvailable? '': 'field-unavailable'}" field-type="${field.type }">${field.fieldAvailable? arrayItem.fieldMap[field.id] : ''}</td>
+			{{/each}}
+		</tr>
+	{{/each}}
+</script>
+
+<script id="update-array-item-rows">
+	{{each(j, arrayItem) entity.arrayMap[group.id]}}
+		<tr class="value-row" origin-order="${j }" data-code="${arrayItem.code}" >
+			<td>${j + 1 }</td>
+			{{if group.relationSubdomain}}
+				<td>
+					<select class="array-item-relation-label-select">
+						{{each(k, label) group.relationSubdomain }}
+							<option value="${label}" ${label === arrayItem.relationLabel? 'checked="checked"': ''}>${label}</option>
+						{{/each}}
+					</select>
+				</td>
+			{{/if}}
+			{{each(k, field) group.fields}}
+				<td class="${field.fieldAvailable? '': 'field-unavailable'}" field-type="${field.type }">
+					<style target="array-item-field-input" 
+						plh-data="{field:group.fields[${k}], arrayItem:entity.arrayMap[group.id][${j}]}"
+						/>
+				</td>
+			{{/each}}
+			<td>
+				{{if group.rabcTemplateGroupId && group.rabcUnupdatable != 1}}
+					<span class="array-item-update fa fa-edit" title="编辑当前行" on-click="do:updateRow(entity.arrayMap[group.id][${j}].code, group)"></span>
+				{{/if}}
+				<span class="array-item-remove" title="移除当前行"  on-click="removeRow">×</span>
+			</td>
+		</tr>
+	{{/each}}
+</script>
+
+<script id="create-array-item-row">
+	<tr class="value-row" >
+		<td>${rownum}</td>
+		{{if group.relationSubdomain}}
+			<td>
+				<select class="array-item-relation-label-select">
+					{{each(k, label) group.relationSubdomain }}
+						<option value="${label}">${label}</option>
+					{{/each}}
+				</select>
+			</td>
+		{{/if}}
+		{{each(k, field) group.fields}}
+			<td class="${field.fieldAvailable? '': 'field-unavailable'}" field-type="${field.type }">
+				<style target="array-item-field-input" 
+					plh-data="{field:group.fields[${k}]}"
+					/>
+			</td>
+		{{/each}}
+		<td>
+			<style target="array-item-update-btn"></style>
+			<span class="array-item-remove" title="移除当前行" on-click="removeRow">×</span>
+		</td>
+	</tr>
+</script>
+
+
+<script id="keyword-search-container">
+	{{if group.isArray == 1 && entity.arrayMap[group.id] && entity.arrayMap[group.id].length > 0}}
+		<div class="widget-buttons keyword-search-container">
+			<span class="input-icon">
+				<input type="text" class="form-control input-xs" placeholder="关键字" />
+				<i class="glyphicon glyphicon-search blue"></i>
+			</span>
+		</div>
+	{{/if}}
+</script>
+
+<script id="groups">
+	{{each(i, group) groups}}
+		<div class="widget field-group">
+			<div class="widget-header">
+				<span class="widget-caption">
+					<span class="group-title">${group.title }</span>
+				</span>
+				<style target="keyword-search-container" plh-data="groups[${i}]" />
+			</div>
+			<div class="widget-body field-container">
+				{{if group.isArray != 1}}
+					{{each(j, field) group.fields}}
+						<div class="form-group field-item ${field.fieldAvailable? '': 'field-unavailable' } ${field.colNum == 2? 'dbcol': '' }"
+							title="${field.fieldAvailable? '': '无效字段' }">
+							<label class="control-label field-title">${field.title }</label>
+							<div class="field-value">
+								<style target="group-field" plh-data="groups[${i}].fields[${j}]" />
+							</div> 
+						</div>
+					{{/each}}
+				{{else}} 
+					<div class="table-scrollable field-array-table">
+						<table class="table table-striped table-bordered table-hover">
+							<thead>
+								<tr class="title-row">
+									<th>序号</th>
+									{{if group.relationSubdomain}}
+										<th class="sorting">关系</th>
+									{{/if}}
+									{{each(j, field) group.fields}}
+										<th class="${field.fieldAvailable? field.type == 'file'? '': 'sorting': 'field-unavailable'}" 
+											title="${field.fieldAvailable? '': '无效字段' }"
+											field-type="${field.type }">${field.title }</th>
+									{{/each}}
+									{{if mode === 'create' || mode === 'update' || mode === 'user_update'}}
+										<th width="20px">
+											{{if group.unallowedCreate != 1}}
+												<span class="array-item-add" title="添加一行" on-click="do:addArrayItemRow(groups[${i}])">+</span>
+											{{/if}}
+											{{if group.dialogSelectType == 'stmpl' && group.selectionTemplateId || group.dialogSelectType == 'ttmpl' && group.rabcTreeTemplateId || group.dialogSelectType == 'ltmpl' && group.rabcTemplateGroupId}}
+												<a title="选择" ttmpl-id="11" href="javascript:;" class="open-select-dialog fa fa-link" on-click="do:dialogSelectRow(groups[${i}])"></a>
+											{{/if}}
+											{{if group.rabcTemplateGroupId && group.rabcUncreatable != 1}}
+												<span class="iconfont icon-add-3 rabd-add" on-click="do:dialogCreateEntity(groups[${i}])"></span>
+											{{/if}}
+										</th>
+									{{/if}}
+								</tr>
+							</thead>
+							<tbody>
+								<style target="array-item-rows" plh-data="groups[${i}]" />
+							</tbody>
+						</table>
+					</div>
+				{{/if}}
+			</div>
+		</div>
+	{{/each}}
+</script>

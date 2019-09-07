@@ -1,0 +1,184 @@
+@charset "UTF-8";
+.sidemenu-main .modules-container .widget-header .widget-buttons{
+	display: block;
+	float: right;
+}
+.sidemenu-main .modules-container .widget-buttons a,
+.sidemenu-main .block-container .widget-buttons a{
+	font-size: 20px;
+    color: #00BFFF;
+}
+.sidemenu-main .block-container .widget-buttons a{
+	color: #e46f61;
+}
+.sidemenu-main .modules-container .widget-buttons a:hover{
+	opacity: 0.6;
+}
+.sidemenu-main .modules-container a#save{
+	/* display: none */
+}
+.sidemenu-main .dd-handle{
+	cursor: pointer;
+}
+.sidemenu-main  span.level-operate {
+    float: right;
+    font-size: 1.5em;
+}
+
+.sidemenu-main #level1-list>.dd-item>.dd-handle span.level-operate a{
+    margin-left: 5px;
+}
+.sidemenu-main #level1-list>.dd-item>.dd-handle span.level-operate a[data-auths=""]>i{
+    color: #ccc !important;
+}
+.sidemenu-main span.level-operate a:hover{
+    color: #aaa;
+}
+.sidemenu-main .modules-container .level1-title>input[type="text"],
+.sidemenu-main .modules-container .level2-title>input[type="text"] {
+    padding: 2px 10px;
+    width: 10em;
+}
+.sidemenu-main .modules-container select.module-select,
+.sidemenu-main .modules-container select.group-select{
+	float: right;
+    padding: 2px 10px;
+}
+.sidemenu-main .modules-container span.tip-level-title {
+    float: right;
+    color: #bbb;
+}
+.sidemenu-main .modules-container span.tip-level-title:not(:empty):before {
+    content: "(";
+}
+.sidemenu-main .modules-container span.tip-level-title:not(:empty):after {
+    content: "）";
+}
+.sidemenu-main .modules-container li[module-name]>.dd-handle {
+    background-color: #ddd;
+}
+.sidemenu-main .modules-container li[module-name]>.dd-handle:hover {
+    background-color: #ccc;
+}
+.sidemenu-main .modules-container span.level1-title, 
+.sidemenu-main .modules-container span.level2-title {
+    padding-right: 2em;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    cursor: text;
+}
+
+.sidemenu-main #level1-list>li>ol.dd-list {
+    padding-left:  0;
+    margin-left: 30px;
+    min-height: 50px;
+    padding-left: 5px;
+    border: 1px solid #bbb;
+}
+
+.sidemenu-main .widget-body.menu-container,
+.sidemenu-main .widget-body.block-container,
+.sidemenu-main .mds-container .widget-body {
+    max-height: 400px;
+    min-height: 50vh;
+    width: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.sidemenu-main .dd-item.module-wrapper>.dd-handle {
+    cursor: default;
+    background-color: #6cac87;
+    color: #fff;
+}
+
+.sidemenu-main #level1-list>.dd-item>.dd-handle {
+    background-color: #769de0;
+}
+.sidemenu-main #level1-list>.dd-item>.dd-handle * {
+    color: #fff;
+}
+
+.sidemenu-main .dd-item.module-wrapper>.dd-handle a {
+    color: #fff;
+}
+
+.sidemenu-main li.module-wrapper li>div {
+    border: 1px solid #ddd;
+}
+
+.sidemenu-main .level1-title>input[type="text"] {
+    background-color: #769de0 !important;
+    border: 1px solid #aaa;
+}
+
+.sidemenu-main li.dd-item>.dd-handle>.level-operate>a[data-auths=""]>.authority-config{
+	color: #aaa;
+}
+
+.sidemenu-main input#modules-search::-webkit-input-placeholder {
+    color: #bbb;
+}
+.sidemenu-main .searching li {
+    display: none !important;
+}
+
+.sidemenu-main .searching li.searching-matched,
+.sidemenu-main .searching li.searching-matched-part {
+    display: block !important;
+}
+
+.sidemenu-main .searching li.searching-matched li {
+    display: block !important;
+}
+
+.sidemenu-main .searching li.searching-matched-part li.searching-matched {
+    display: block !important;
+}
+
+.sidemenu-main li.dd-item.module-wrapper.stat-module>.dd-handle {
+    background-color: #2dc3e8;
+}
+
+
+.sidemenu-main .block-container .dd-item.block-wrapper>.dd-handle {
+    cursor: pointer;
+    background-color: #e46f61;
+    color: #fff;
+}
+
+.sidemenu-main .block-container .dd-item.block-wrapper>.dd-handle a {
+    color: #fff;
+}
+
+.sidemenu-main .block-container li.block-wrapper.dd-item.selected>.dd-handle {
+    background-color: #FF4040;
+}
+
+.sidemenu-main .custom-page-wrapper>.dd-handle {
+    background-color: #FFB90F;
+    color: #fff;
+}
+.sidemenu-main .custom-page-wrapper>.dd-handle span.level-operate a{
+    color: #fff;
+    margin-left: 5px;
+}
+
+.sidemenu-main .btn-add-custom-page {
+    color: #FFB90F;
+    font-size: 20px;
+}
+
+.sidemenu-main .custom-page-wrapper .tip-level-title {
+    color: #e8e8e8 !important;
+}
+.sidemenu-main .l2-menu-item-view-custom>.dd-handle {
+    background-color: #ddd;
+}
+
+.sidemenu-main li.block-wrapper.dd-item.drop-hover.ui-droppable>.dd-handle {
+    background-color: 	#FF4500;
+}
+.coping-ele{
+	cursor: url("../img/cursor-add.ico") 1 1, default;
+}

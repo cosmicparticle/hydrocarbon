@@ -1,0 +1,76 @@
+<script id="btn-query">
+	<div class="form-group">
+		<button id="btn-query" type="button" on-click="query" class="form-control btn btn-default">查询</button>
+	</div>
+</script>
+<script id="table-header">
+	<th width="30">
+		<label title="全选">
+			<input type="checkbox" class="colored-blue select-all partly">
+            <span class="text"></span>
+        </label>
+    </th>
+	{{each(i, column) columns}}
+		<th>${column.title}</th>
+	{{/each}}
+</script>
+<script id="entity-row">
+	<tr data-code="${entity.code }">
+		<td>
+			<label>
+				<input type="checkbox" class="colored-blue row-selectable-checkbox">
+				<span class="text"></span>
+			</label>
+		</td>
+	</tr>
+</script>
+
+<script id="select-entities">
+	{{if dialogType == 'stmpl' || dialogType == 'ltmpl'}}
+		<div class="row list-area">
+			<table class="table row-selectable">
+				<thead>
+					<tr>
+						<style target="table-header"></style>
+					</tr>
+				</thead>
+				<tbody>
+					<style target="entity-rows"></style>
+				</tbody>
+			</table>
+			<style target="paginator"></style>
+		</div>
+	{{else dialogType == 'ttmpl'}}
+		<style>
+			{{if config.nodeStyle.defaultNodeColor}}
+				.cpf-tree-id-${config.treeId} li>a>b{background-color:${config.nodeStyle.defaultNodeColor}}
+			{{/if}}
+			{{each(i, nodeStyle) config.nodeStyles}}
+				.cpf-tree-id-${config.treeId} li.tree-node-id-${nodeStyle.nodeId}>a>b{background-color:${nodeStyle.nodeColor}}
+			{{/each}}
+		</style>
+		<div id="entities-tree-container" class="cpf-tree cpf-tree-id-${config.treeId}"></div>
+	{{/if}}
+</script>
+
+<script id="entity-rows">
+	{{each(index, entity) entities}}
+		<tr data-code="${entity.code }">
+			<td>
+				<label>
+					<input type="checkbox" class="colored-blue row-selectable-checkbox">
+					<span class="text"></span>
+				</label>
+			</td>
+			{{each(i, col) columns}}
+				<td class="${col.fieldAvailable? '': 'col-field-unavailable' }">
+					{{if col.specialField && col.specialField === 'number'}}
+						${index + 1}
+					{{else}} 
+						${col.fieldAvailable? entity.cellMap[col.id] : '' }
+					{{/if}}
+				</td>
+			{{/each}}
+		</tr>
+	{{/each}}
+</script>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="datacenter">
+        <wb-resource deploy-path="/" source-path="/target/m2e-wtp/web-resources"/>
+        <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
+        <dependent-module archiveName="eln1-0.0.2.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/eln1/eln1">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="dataserver-1.42.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/dataserver/dataserver">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="entityResolver-2.72.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/entityResolver/entityResolver">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <property name="java-output-path" value="/hydrocarbon/target/classes"/>
+        <property name="context-root" value="datacenter"/>
+    </wb-module>
+</project-modules>

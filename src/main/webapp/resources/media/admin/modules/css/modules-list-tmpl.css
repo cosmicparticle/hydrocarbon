@@ -1,0 +1,133 @@
+@CHARSET "UTF-8";
+
+.module-list-tmpl div#export-window {
+	height: auto;
+	padding-bottom: 10px;
+}
+
+.module-list-tmpl #export-window .export-window-title h3 {
+    margin: 5px 10px;
+    font-size: 18px;
+    float: left;
+}
+.module-list-tmpl #export-window .export-window-title label {
+    float: right;
+    margin-right: 20px;
+}
+
+.module-list-tmpl .export-window-title {
+    border-bottom: 1px solid #f0f0f0;
+    display: block;
+    width: 100%;
+    clear: right;
+    height: 30px;
+}
+
+.module-list-tmpl #export-window>div>.row {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.module-list-tmpl #export-window * {
+    font-size: 15px;
+}
+
+.module-list-tmpl #export-window input#export-range-start,#export-window input#export-range-end {
+    width: 6em;
+}
+
+.module-list-tmpl #export-window .data-range>div {
+}
+
+.module-list-tmpl #export-window #export-progress{
+	margin: 0;
+    margin-top: 1.5em;
+    padding: 0;
+    margin-left: 1em;
+    margin-right: 2em;
+    float: left;
+    width: 86%;
+    overflow: visible;
+}
+.module-list-tmpl #export-window #export-progress .progress-text {
+    position: absolute;
+    top: -1.3em;
+    font-size: small;
+    left: 36%;
+    color: #666;
+}
+.module-list-tmpl #export-window .row.export-operate-area {
+    border-bottom: none;
+}
+.module-list-tmpl #export-window div#export-msg {
+    border-bottom: none;
+    border-top: none;
+}
+
+.module-list-tmpl #export-window div#export-msg >* {
+    font-size: 10px;
+}
+
+.module-list-tmpl #export-window div#export-msg {text-indent: 1em;line-height: 1em;height: 1.2em;word-break: keep-all;}
+.module-list-tmpl form.form-inline>.form-group{
+    height: 2.8em;
+    line-height: 2.8em;
+    margin-right: 0.7em;
+    white-space: nowrap;
+}
+.module-list-tmpl form.form-inline>.form-group label.control-label:after{
+	content: "：";
+}
+
+
+
+.module-list-tmpl .criteria-field-unavailable {
+    background-color: #999;
+    position: relative;
+}
+.module-list-tmpl .criteria-field-unavailable:before{
+    content: "\e73d";
+    font-family: "iconfont" !important;
+    font-size: 2em;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    position: absolute;
+    -moz-osx-font-smoothing: grayscale;
+    right: 0;
+    color: #FFff00;
+}
+.module-list-tmpl .criteria-field-unavailable:after {
+    content: "";
+    width: 3em;
+    display: inline-block;
+}
+
+.module-list-tmpl th.col-field-unavailable,
+.module-list-tmpl td.col-field-unavailable {
+    background-color: #888;
+    border: solid #888 !important;
+    position: relative !important;
+}
+.module-list-tmpl th.col-field-unavailable:before {
+    content: "\e73d";
+    font-family: "iconfont" !important;
+    font-size: 2em;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    position: absolute;
+    -moz-osx-font-smoothing: grayscale;
+    top:0;
+    color: #FFff00;
+}
+
+.module-list-tmpl .row.external-export-message>p {
+    text-align: center;
+}
+
+.module-list-tmpl .form-group span.cpf-daterangepicker,
+.module-list-tmpl .form-group span.cpf-textrange {
+    width: 20em;
+    display: inline-block;
+}
+
+

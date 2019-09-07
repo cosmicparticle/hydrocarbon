@@ -1,0 +1,127 @@
+<form class="form-horizontal field-group-config-dialog">
+	<div class="form-group">
+		<label class="col-lg-5 col-xs-5 tooltip-label">
+			允许直接创建
+			<span class="badge" title="允许用户点击按钮，添加一行空白行行进行编辑，并在保存后进行融合" data-toggle="tooltip"  data-placement="bottom">?</span>
+		</label>
+		<label class="col-lg-7 col-xs-7">
+			<input id="allow-create" class="checkbox-slider toggle colored-blue" type="checkbox" ${unallowedCreate != 1? 'checked="checked"': ''} />
+			<span class="text"></span>
+		</label>
+	</div>
+	{{if isRelation}}
+		<div class="form-group">
+			<label class="col-lg-5 col-xs-5 tooltip-label">
+				弹出框选择形式
+				<span class="badge" title="允许用户点击按钮，在打开的实体列表弹出框中，选择实体后返回并添加关系" data-toggle="tooltip" data-placement="bottom">?</span>
+			</label>
+			<div class="col-lg-7 col-xs-7 dialog-select-type">
+				<div class="">
+					<label>
+						<input class="stmpl-checkbox colored-blue" type="checkbox" value="stmpl" 
+							${dialogSelectType == 'stmpl' && selectionTemplateId? 'checked="checked"': ''} />
+						<span class="text">普通列表</span>
+					</label>
+					<a class="stmpl-link dialog-link" title="编辑弹出框列表模板"><i class="fa fa-link"></i></a>
+				</div>
+				<div class="">
+					<label>
+						<input class="colored-blue" value="ttmpl" type="checkbox"
+						${dialogSelectType == 'ttmpl'? 'checked="checked"': ''} />
+						<span class="text">树形结构</span>
+					</label>
+				</div>
+				<div class="">
+					<label>
+						<input class="colored-blue" value="ltmpl" type="checkbox" 
+						${dialogSelectType == 'ltmpl'? 'checked="checked"': ''}/>
+						<span class="text">关联模板组合列表</span>
+					</label>
+				</div>
+			</div>
+		</div>
+		{{if isRabc}}
+			<div class="form-group">
+				<label class="col-lg-5 col-xs-5 tooltip-label">
+					关联树形模板
+					<span class="badge" title="允许用户点击按钮，在打开的树形弹出框中，选择实体后返回并添加关系" data-toggle="tooltip" data-placement="bottom">?</span>
+				</label>
+				<div class="col-lg-7 col-xs-7">
+					<a 
+						class="choose-tmpl choose-ttmpl form-control"
+						href="admin/tmpl/tree/choose_with_node_module/${rabcModule }" 
+						title="选择树形模板"
+						choose-key="choose-ttmpl-${uuid}" 
+						crn-choose-ttmpl-${uuid}="title" 
+						>${rabcTreeTemplateId? rabcTreeTemplateTitle: '选择树形模板' }</a>
+					<i class="unselect-ttmpl unselect-tmpl" title="取消关联树形模板"></i>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-lg-5 col-xs-5 tooltip-label">
+					可选节点
+					<span class="badge" title="" data-toggle="tooltip" data-placement="bottom">?</span>
+				</label>
+				<div class="col-lg-7 col-xs-7 selectable-nodes-container">
+					<select class="selectable-nodes"></select>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-lg-5 col-xs-5 tooltip-label">
+					关联模板组合
+					<span class="badge" title="用于获得在弹出框添加和编辑实体时，显示实体的详情模板" data-toggle="tooltip" >?</span>
+				</label>
+				<div class="col-lg-7 col-xs-7">
+					<a 
+						class="choose-tmpl choose-tmplgroup form-control"
+						href="admin/tmpl/group/choose/${rabcModule }" 
+						title="选择模板组合"
+						choose-key="choose-tmplgroup-${uuid}" 
+						crn-choose-tmplgroup-${uuid}="title" 
+						>${rabcTemplateGroupId? rabcTemplateGroupTitle: '选择模板组合' }</a>
+					<i class="unselect-tmplgroup unselect-tmpl" title="取消关联模板组合"></i>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-lg-5 col-xs-5 tooltip-label">
+					显示弹出添加按钮
+					<span class="badge" title="打开弹出框创建一个实体，然后返回并添加一行关系" data-toggle="tooltip">?</span>
+				</label>
+				<label class="col-lg-7 col-xs-7">
+					<input class="rabccreatable-checkbox checkbox-slider toggle colored-blue" type="checkbox" ${rabcUncreatable == 1? '': 'checked="checked"'} />
+					<span class="text"></span>
+				</label>
+			</div>
+			<div class="form-group">
+				<label class="col-lg-5 col-xs-5 tooltip-label">
+					显示弹出编辑按钮
+					<span class="badge" title="打开弹出框编辑实体，保存后更新当前关系的数据" data-toggle="tooltip" >?</span>
+				</label>
+				<label class="col-lg-7 col-xs-7">
+					<input class="rabcupdatable-checkbox checkbox-slider toggle colored-blue" type="checkbox" ${rabcUnupdatable == 1? '': 'checked="checked"'} />
+					<span class="text"></span>
+				</label>
+			</div>
+		{{/if}}
+	{{/if}}
+	<div class="form-group">
+		<label class="col-lg-5 col-xs-5 tooltip-label">
+			筛选
+			<span class="badge" title="筛选当前字段组显示关系/多值属性" data-toggle="tooltip">?</span>
+		</label>
+		<div class="col-lg-7 col-xs-7">
+			<label>
+				<input class="arrayitem-fiter-checkbox checkbox-slider toggle colored-blue" type="checkbox" ${arrayItemFilterId? 'checked="checked"': ''}>
+				<span class="text"></span>
+			</label>
+			<a class="arrayitem-fiter-link dialog-link" title="编辑筛选器"><i class="fa fa-link"></i></a>
+		</div>
+	</div>
+</form>
+<div class="modal-footer">
+	<div class="row">
+		<div class="col-lg-3 col-lg-offset-4">
+			<input id="submit" class="btn btn-primary btn-block submit" type="button" value="确定" /> 
+		</div>
+	</div>
+</div>

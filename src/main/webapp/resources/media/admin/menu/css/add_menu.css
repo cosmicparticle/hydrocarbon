@@ -1,0 +1,267 @@
+@charset "utf-8";
+body,html {
+    padding: 0;
+    margin: 0;
+    width:100%;
+    height:100%;
+}
+ul,li,p {
+    padding:0;
+    margin:0;
+    list-style: none;
+}
+* {
+    box-sizing: border-box;
+}
+div.ui-page,div.ui-body {
+    width:100%;
+    height:100%;
+    position: relative;
+}
+div.ui-content {
+    position: absolute;
+    width:780px;
+    height:500px;
+    top:50%;
+    left:50%;
+    margin-left:-390px;
+    margin-top:-250px;
+    border:1px solid #eeeeee;
+    padding-top:0;
+}
+
+div.ui-content > div.menu-preview-area {
+    width:320px;
+    height:500px;
+    background:url('../images/bg-mobile-head.png') no-repeat;
+    position: relative;
+    border-right:1px solid #eeeeee;
+    float:left;
+}
+
+div.menu-preview-area > div.menu-preview-title {
+    width:100%;
+    height:85px;
+    line-height: 85px;
+    text-align: center;
+    color:#ffffff;
+}
+
+div.menu-preview-area >ul.menu-preview-menu {
+    position: absolute;
+    bottom:2px;
+    left:0;
+    right:0;
+    height:50px;
+    background:url('../images/bg-mobile-foot.png') no-repeat;
+    border-top:1px solid #eeeeee;
+    padding-left:43px;
+}
+/*
+ *菜单部分
+*/
+ul.menu-preview-menu > li {
+    height:50px;
+    line-height: 50px;
+    float:left;
+    font-size: 14px;
+    border-right:1px solid #eeeeee;
+    text-align: center;   
+    cursor: pointer;
+    position: relative;
+}
+
+ul.menu-preview-menu > li.menu-name {
+    color:#616161;
+}
+ul.menu-preview-menu > li.menu-name.active {
+    color:#44b549;
+    border:1px solid #44b549;
+}
+ul.menu-preview-menu > li.menu-name.active > i {
+    content:"";
+    position: absolute;
+    top:-0.8em;
+    right:-0.8em;
+    display:block;
+    width:1.6em;
+    height:1.6em;
+    border-radius:50%;
+    background:#e15f63 url('../images/icon-close.png') no-repeat center center;
+    background-size:0.8em 0.8em;
+    z-index: 9;
+}
+ul.menu-preview-menu > li.menu-name.more:before{
+    content:'';
+    background:url('../images/icons.png') no-repeat 0 -48px;
+    clear:both;
+    height:7px;
+    width:7px;
+    display: inline-block;
+    margin-right:5px;
+}
+ul.menu-preview-menu >li.menu-add:after,
+ul.submenu > li.submenu-add:after {
+    content:"";
+    background:url('../images/icons.png') no-repeat 0 3px;
+    clear:both;
+    height:1em;
+    padding-left:1.3em;
+}
+
+ul.menu-preview-menu >li.menu-add.active {
+    border:1px solid #44b549;
+    color:#44b549;
+}
+
+ul.menu-preview-menu >li.menu-add.active:after {
+    content:"添加菜单";
+    background-position: 0 -21px;
+}
+
+ul.submenu {
+    width:100%;
+    position:absolute;
+    bottom:70px;
+    border:1px solid #eeeeee;
+    color:#616161;
+    display:none;
+    padding:0 0.5em;
+    background-color:#fafafa;
+}
+li.menu-name.expand > ul.submenu {
+    display: block;
+}
+
+ul.submenu > li.submenu-name {
+    border-top:1px solid #eeeeee;
+}
+li.menu-name.expand > ul.submenu:first-child {
+    border-top:none;
+}
+ul.submenu:after {
+    content:'';
+    display: block;
+    width:0;
+    height:0;
+    border-left:0.6em solid transparent;
+    border-right:0.6em solid transparent;
+    border-top:0.8em solid #fafafa;
+    position: absolute;
+    bottom:-0.7em;
+    left:50%;
+    margin-left:-0.7em;
+}
+ul.submenu:before{
+    content:'';
+    display: block;
+    width:0;
+    height:0;
+    border-left:0.7em solid transparent;
+    border-right:0.7em solid transparent;
+    border-top:0.9em solid #eeeeee;
+    position: absolute;
+    bottom:-0.9em;
+    left:50%;
+    margin-left:-0.8em;
+}
+ul.submenu >li.submenu-name {
+    position: relative;
+    width:100%;
+    height:50px;
+}
+ul.submenu > li.submenu-name.active {
+    color:#44b549;
+}
+ul.submenu > li.submenu-name.active>i {
+    content:"";
+    position: absolute;
+    top:-0.8em;
+    right:-0.8em;
+    display:block;
+    width:1.6em;
+    height:1.6em;
+    border-radius:50%;
+    background:#e15f63 url('../images/icon-close.png') no-repeat center center;
+    background-size:0.8em 0.8em;
+    z-index: 9;
+}
+
+/*右边命名部分*/
+div.menu-name-area {
+    margin-left:320px;
+    height:500px;
+    background-color:#f4f5f9;
+    padding:1em;
+}
+div.menu-name-area >div.operation-menuname {
+    display: none;
+    font-size: 13px;
+}
+div.menu-name-area >div.operation-menuname:after {
+    content:'';
+    display:block;
+    clear:both;
+}
+div.menu-name-area >div.operation-menuname > div {
+	margin-bottom:1em;
+	
+}
+div.menu-name-area >div.operation-menuname > div >span {
+    display: block;
+    float:left;
+     height:2.4em;
+     line-height: 2.4em;
+     margin-right:1.4em;
+}
+div.menu-name-area >div.operation-menuname > div >p {
+    
+}
+div.menu-name-area >div.operation-menuname> div >p> input {
+    width:18em;
+    height:2.2em;
+    border:1px solid #e7e7eb;
+    outline: none;
+    text-indent: 1em;
+    font-size: 14px;
+}
+div.menu-name-area >div.operation-menuname >div > p>span.menu-name-info {
+    display:block;
+    font-size: 12px;
+    color:#8d8d8d;
+    margin-top:0.6em;
+	margin-left:7em;
+}
+div.menu-name-area >div.operation-menuname >input.save {
+    position: absolute;
+    bottom: 1em;
+    display: block;
+    right: 3em;
+    width: 5em;
+    height: 2.6em;
+    border-radius: 3px;
+    border: none;
+    background:#44b549;;
+    color: #ffffff;
+    outline: none;
+    font-weight: bold;
+    cursor: pointer;
+}
+ div.menu-name-area >div.operation-menuname >input.save:active{
+     background:#0A4415;
+ }
+div.menu-name-area >span {
+    display:block;
+    width:100%;
+    height:500px;
+    line-height: 500px;
+    text-align: center;
+}
+#initData {
+	display:none;
+}
+
+/* 样式重叠问题 */
+.page-sidebar .sidebar-menu .submenu {
+	bottom:0;
+}

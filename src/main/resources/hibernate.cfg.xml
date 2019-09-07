@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+	"-//Hibernate/Hibernate Configuration DTD 5.0//EN"
+	"classpath://dtd/hibernate-configuration-3.0.dtd"
+	>
+
+<hibernate-configuration>
+    <session-factory>
+    	<!-- 设置方言为MySQL -->
+		<property name="dialect">org.hibernate.dialect.MySQL5Dialect</property>
+		<!-- 设置获得Session的方法是Hibernate5的方式 -->
+		<property name="current_session_context_class">org.springframework.orm.hibernate5.SpringSessionContext</property>
+		<property name="show_sql">true</property>
+    </session-factory>
+</hibernate-configuration>

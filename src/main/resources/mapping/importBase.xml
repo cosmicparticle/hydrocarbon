@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ABC name="importBase" abcattr="人口信息" alias="importBase" class="" xmlns="http://www.w3school.com.cn"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<attribute name="唯一编码" abcattr="唯一编码" />
+	<attribute name="姓名" abcattr="姓名" /><!--基本信息 -->
+	<attribute name="身份证号" abcattr="身份证" />
+	<attribute name="住所类型" abcattr="住所类型" /><!--基本信息 -->
+	<attribute name="健康状况" abcattr="健康状况" /><!--基本信息 -->
+	<attribute name="出生地" abcattr="出生地" /><!--基本信息 -->
+	<attribute name="出生日期" abcattr="出生日期" /><!--基本信息 -->
+	<attribute name="参加工作时间" abcattr="参加工作时间" /><!--基本信息 -->
+	<attribute name="国籍" abcattr="国籍" /><!--基本信息 -->
+	
+	<label name="人口标签" subdomain="户籍人口,残疾人,单亲,个体工商户,灵活就业,创业就业,有车,困难救助人员" />
+
+	<multiattribute name="证件信息" abcattr="证件信息">
+		<attribute name="证件类型" abcattr="证件类型" />
+		<attribute name="证件号码" abcattr="证件号码" />
+		<attribute name="有效截止日期" abcattr="有效截止日期" />
+		<attribute name="签发日期" abcattr="签发日期" />
+	</multiattribute>
+	
+	<relation name="家人信息">
+		<label subdomain="子女,父母" />
+		<ABC name="家人信息" abcattr="人口信息">
+			<attribute name="姓名" abcattr="姓名" /><!--基本信息 -->
+			<attribute name="婚姻状况" abcattr="婚姻状况" /><!--基本信息 -->
+			<attribute name="学位" abcattr="学位" /><!--基本信息 -->
+			<attribute name="宗教信仰" abcattr="宗教信仰" /><!--基本信息 -->
+			<attribute name="居住状态" abcattr="居住状态" /><!--基本信息 -->
+			<attribute name="性别" abcattr="性别" /><!--基本信息 -->
+			<attribute name="户口性质" abcattr="户口性质" /><!--基本信息 -->
+			<multiattribute name="教育信息" abcattr="教育信息">
+				<attribute name="所获学历" abcattr="所获学历" />
+				<attribute name="所获学位" abcattr="所获学位" />
+				<attribute name="教育水平" abcattr="教育水平" />
+				<attribute name="毕业时间" abcattr="毕业时间" />
+				<attribute name="毕业学校" abcattr="毕业学校" />
+				<attribute name="所学专业" abcattr="所学专业" />
+			</multiattribute>
+		</ABC>
+	</relation>
+</ABC>

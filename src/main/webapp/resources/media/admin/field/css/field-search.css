@@ -1,0 +1,306 @@
+@CHARSET "UTF-8";
+
+.field-search{
+	font-size: 14px;
+}
+
+div.fieldpicker-container ul.nav li.array-field>a{
+	background-color: #9F79EE !important;
+}
+
+/***********自动完成样式Start*****************/
+/*****************************************/
+
+.field-search .typeahead {
+	background-color: #fff;
+}
+
+.field-search .typeahead:focus {
+	border: 2px solid #0097cf;
+}
+
+.field-search .tt-query {
+	-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+	-moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+	box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+}
+
+.field-search .tt-hint {
+	color: #999
+}
+
+.field-search .tt-menu {
+	width: 100%;
+	margin: 0;
+	padding: 8px 0;
+	background-color: #fff;
+	border: 1px solid #ccc;
+	-webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
+	-moz-box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
+	box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
+}
+
+.field-search .tt-suggestion {
+	padding: 3px 16px;
+	line-height: 1.3em;
+	margin: 0;
+}
+
+.field-search .tt-suggestion:hover {
+	cursor: pointer;
+	color: #fff;
+	background-color: #0097cf;
+}
+
+.field-search .tt-suggestion.tt-cursor {
+	color: #fff;
+	background-color: #0097cf;
+}
+
+.field-search .tt-suggestion p {
+	margin: 0;
+}
+
+.field-search .gist {
+	font-size: 14px;
+}
+
+.field-search #custom-templates .empty-message {
+	padding: 5px 10px;
+	text-align: center;
+}
+
+.field-search #multiple-datasets .league-name {
+	margin: 0 20px 5px 20px;
+	padding: 3px 0;
+	border-bottom: 1px solid #ccc;
+}
+
+.field-search #scrollable-dropdown-menu .tt-menu {
+	max-height: 150px;
+	overflow-y: auto;
+}
+
+.field-search #rtl-support .tt-menu {
+	text-align: right;
+}
+/*****************************************/
+/***********自动完成样式End*******************/
+
+
+.field-search {
+    width: 15em;
+    display: inline-block;
+    line-height: 34px;
+}
+.field-search .search-input-wrapper {
+    display: inline-block;
+    width: 100%;
+}
+.field-search .search-input-wrapper>span{
+	width: 100%;
+}
+.field-search .search-input-wrapper .input-xs {
+    padding-left: 26px;
+    padding-right: 26px;
+}
+
+.field-search i.field-picker-button {
+    left: initial;
+    right: 0;
+    cursor: pointer;
+    font-size: 17px;
+}
+.field-search i.field-picker-button:HOVER {
+	color: #388E8E !important;
+}
+
+div.fieldpicker-container {
+    position: absolute;
+    right: -20px;
+    bottom: -15em;
+    top: 35px;
+    z-index: 9999;
+    display: none;
+    width: 420px;
+    background-color:  #fff;
+    border: 1px solid #ccc;
+}
+
+.fieldpicker-container .nav-tabs.nav-justified {
+    display: flex;
+    flex-direction: row;
+    position: absolute;
+    right: 0;
+    left: 30px;
+    width: auto;
+}
+.fieldpicker-container .nav-tabs.nav-justified>li {
+    display: block;
+    height: 30px;
+    line-height: 30px;
+    border-right: 1px solid #dcdcdc;
+    border-bottom: 1px solid #dcdcdc;
+    width: 100px;
+}
+
+.fieldpicker-container .nav-tabs.nav-justified>li>a {
+    height: 29px;
+    word-break: keep-all;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+    line-height: 30px;
+    border-top: none !important;
+    background-color: #fafafa;
+    margin-top: 0;
+    width: 109px;
+    padding: 0;
+}
+
+.fieldpicker-container .nav-tabs.nav-justified>li.active>a{
+	background-color: #fff;
+	height: 32px;
+}
+.fieldpicker-container .nav-tabs.nav-justified>li.dropdown>a{
+    width: 90px;
+}
+.fieldpicker-container a.dropdown-toggle {
+	text-align: center;
+}
+ .fieldpicker-container a.dropdown-toggle>span {
+    word-break: keep-all;
+    max-width: 3em;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    display: inline-block;
+}
+.fieldpicker-container a.dropdown-toggle:AFTER{
+	content: "\f0dd";
+    vertical-align: top;
+    line-height: 25px;
+}
+.fieldpicker-container li.dropdown ul.dropdown-menu li>a {
+    width: 170px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+a.fieldpicker-field-item, a.fieldpicker-composite-item {
+    border: 1px solid #c2c2c2;
+    padding: 2px 9px;
+    margin: 0 5px;
+    word-break: keep-all;
+    color: #00C5CD;
+}
+a.fieldpicker-field-item:hover,
+ a.fieldpicker-composite-item:hover {
+    border: 1px solid #a0a0a0;
+    color: 	#009ACD;
+}
+.fieldpicker-field-container {
+    width: 100%;
+    min-height: 100%;
+    word-break: keep-all;
+    word-wrap: break-word;
+}
+.fieldpicker-container .tab-content {
+    padding: 5px 10px;
+}
+
+a.disabled.fieldpicker-field-item,
+a.disabled.fieldpicker-composite-item {
+    color: #ccc !important;
+}
+a.fieldpicker-field-item.field-hidden,
+a.fieldpicker-composite-item.field-hidden {
+    display: none;
+}
+
+
+span.fieldpicker-mode {
+    width: 30px;
+    height: 30px;
+    display: inline-block;
+    position: absolute;
+    left: 0;
+    border: 1px solid #ededed;
+    overflow: visible;
+    background-color: #fff;
+}
+span.fieldpicker-mode>i{
+    text-align: center;
+    display: block;
+    width: 20px;
+    height: 20px;
+    line-height: 15px;
+    padding: 0;
+    margin: 5px;
+    border-radius: 10px;
+    border: 3px solid #5db2ff;
+    font-weight: bold;
+    font-style: initial;
+    cursor: pointer;
+    color: #5db2ff;
+    font-size: 11px;
+}
+
+span.fieldpicker-mode>i:hover{
+	border-color: #ccc;
+	color: #ccc;
+}
+
+span.fieldpicker-mode>ol{
+	position: absolute;
+	width: 90px;
+	top: 15px;
+	left: 28px;
+	list-style-type: none;
+	-webkit-margin-before: 0;
+	-webkit-margin-after: 0;
+	-webkit-margin-start: 0;
+	-webkit-margin-end: 0;
+	-webkit-padding-start: 0;
+	z-index: 1000;
+	background-color: #fff;
+	border: 1px solid #ccc;
+	font-size: 14px;
+	display: none;
+}
+
+span.fieldpicker-mode>ol>li{
+	padding-left: 20px;
+	cursor: pointer;
+}
+span.fieldpicker-mode>ol>li:not(:first-child){
+	border-top: 1px solid #ddd;
+}
+span.fieldpicker-mode>ol>li:hover{
+	background-color: #5db2ff;
+	color: #eee;
+}
+span.fieldpicker-mode>ol>li.selected{
+	padding-left: 0;
+}
+
+span.fieldpicker-mode>ol>li.selected:before{
+	display: inline-block;
+	width: 20px;
+	text-align: center;
+	content: "\f00c";
+	font-family: FontAwesome;
+	font-style: normal;
+	font-weight: normal;
+	line-height: 1;
+	font-size: 14px;
+	-webkit-font-smoothing: antialiased;
+}
+
+
+.fieldpicker-container.appendout {
+    position: absolute;
+    height: 200px;
+    z-index: 1000;
+}

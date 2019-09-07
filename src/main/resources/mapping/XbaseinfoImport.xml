@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ABC name="baseinfoImport" abcattr="人口信息" alias="baseinfoImport"
+	class="" xmlns="http://www.w3school.com.cn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<attribute name="code" alias="编码" abcattr="唯一编码" />
+	<attribute name="peoplecode" alias="编码" abcattr="唯一编码" />
+	<attribute name="address" alias="居住地址" abcattr="通用地址" />
+	<attribute name="name" alias="姓名" abcattr="姓名" />
+	<attribute name="idcode" alias="证件号码" abcattr="证件号码" />
+	<attribute name="gender" alias="性别" abcattr="性别" />
+	<attribute name="birthday" alias="出生日期" datatype="DATE"
+		abcattr="出生日期" />
+	<attribute name="contact1" alias="联系号码1" abcattr="联系电话" />
+	<attribute name="contact2" alias="联系号码2" abcattr="备用电话" />
+	<attribute name="nation" alias="民族" abcattr="民族" />
+	<attribute name="nativePlace" alias="籍贯" abcattr="籍贯" />
+	<attribute name="formerName" alias="曾用名" abcattr="曾用名" />
+
+	<attribute name="householdPlace" alias="户籍地址" abcattr="户籍地址" />
+	<attribute name="编辑时间" alias="编辑时间" abcattr="更新时间" />
+	<!-- <attribute name="householdPlace" alias="户籍地址" abcattr="地址" attrsubtype="101002" 
+		/> <attribute name="国籍" alias="国籍" abcattr="国籍" /> -->
+
+	<attribute name="maritalStatus" alias="婚姻状况" abcattr="婚姻状况" />
+	<attribute name="bloodType" alias="血型" abcattr="血型" />
+	<attribute name="healthCondition" alias="健康状况" abcattr="健康状况" />
+	<attribute name="religion" alias="宗教信仰" abcattr="宗教信仰" />
+	<attribute name="militaryStatus" alias="兵役" abcattr="兵役状况" />
+	<attribute name="统战人士类型" alias="统战人士类型" abcattr="统战人士类别" />
+
+
+	<label name="是否本区机关干部" alias="是否本区机关干部" subdomain="本区机关干部" />
+	<label name="劳模" alias="劳模" subdomain="劳模" />
+	<label name="军转干部" alias="军转干部" subdomain="军转干部" />
+	<label name="离退休干部" alias="离退休干部" subdomain="离退休干部" />
+	<label name="三无老人" alias="三无老人" subdomain="三无老人" />
+	<label name="是否有车" alias="是否有车" subdomain="有车" />
+	<label name="peopleType" alias="人口类型" subdomain="户籍人口,流动人口" />
+
+	<!-- 低保信息 -->
+	<attribute name="lowIncomeInsuredCode" alias="低保证号" abcattr="低保证号" />
+	<label name="lowIncomeInsureType" alias="低保人员类别" subdomain="低保人员,残保人员" />
+	<attribute name="lowIncomeInsuredReason" alias="低保原因"
+		abcattr="低保原因" />
+	<attribute name="lowIncomeInsuredId" alias="享受低保标识" abcattr="享受低保标识" />
+	<attribute name="lowIncomeInsuredAmount" alias="享受低保金额"
+		abcattr="享受低保金额" datatype="FLOAT" />
+	<attribute name="lowIncomeInsuredStart" alias="低保开始时间"
+		datatype="DATE" abcattr="享受开始日期" />
+	<attribute name="lowIncomeInsuredEnd" alias="低保结束时间"
+		datatype="DATE" abcattr="享受结束日期" />
+
+	<!-- 残疾人信息 -->
+	<attribute name="handicappedCode" alias="残疾人号" abcattr="残疾人号" />
+	<attribute name="handicappedLevel" alias="残疾级别" abcattr="残疾级别" />
+	<attribute name="handicappedType" alias="残疾类型" abcattr="残疾类型" />
+	<attribute name="handicappedReason" alias="残疾原因" abcattr="残疾原因" />
+
+	<!-- 失业信息 -->
+	<attribute name="unemployeeDate" alias="就失业日期" abcattr="就失业日期"
+		datatype="DATE" />
+	<attribute name="unemployeeCode" alias="就失业证号" abcattr="就失业证号" />
+	<attribute name="unemployeeStatus" alias="就失业状态" abcattr="就失业状态" />
+	<attribute name="hardToEmployeeType" alias="就业困难人员类型"
+		abcattr="就业困难人员类型" />
+	<attribute name="employeeType" alias="就业类型" abcattr="就业类型" />
+	<attribute name="employeeCapacity" alias="就业能力" abcattr="就业能力" />
+	<attribute name="employeeSituation" alias="就业情况" abcattr="就业情况" />
+	<attribute name="employeeDestination" alias="就业去向" abcattr="就业去向" />
+	<attribute name="employeeWay" alias="就业途径" abcattr="就业途径" />
+
+	<!-- 党员信息 -->
+	<attribute name="politicalStatus" alias="政治面貌" abcattr="政治面貌" />
+	<attribute name="partyDate" alias="入党日期" datatype="DATE"
+		abcattr="入党日期" />
+	<attribute name="partyPost" alias="党内职务" abcattr="党内职务" />
+	<attribute name="partyOrganization" alias="所在党组织" abcattr="所在党组织" />
+	<attribute name="partySuperior" alias="党组织隶属" abcattr="党组织隶属" />
+	<attribute name="partyOrgContact" alias="党组织联系电话" abcattr="党组织电话" />
+
+	<!-- 工作信息 -->
+	<multiattribute name="任职情况" abcattr="任职情况">
+		<attribute name="任职名称" abcattr="任职名称" />
+		<attribute name="任职起始时间" abcattr="任职起始时间" />
+	</multiattribute>
+
+	<!-- 计生信息 -->
+	<attribute name="childrenCount" alias="子女数" abcattr="子女数"
+		datatype="INT" />
+	<attribute name="contraceptionMeasure" alias="节育措施" abcattr="节育措施" />
+	<attribute name="pregnancyWeeks" alias="现孕周" abcattr="现孕周"
+		datatype="INT" />
+	<attribute name="familyPlanningCode" alias="计划生育证编号" abcattr="计划生育证编号" />
+	<attribute name="familyPlanningType" alias="计划生育证类型" abcattr="计划生育证类型" />
+
+	<relation name="医疗信息">
+		<label subdomain="家庭医生" />
+		<ABC name="familydoctor" abcattr="人口信息">
+			<attribute name="姓名" alias="姓名" abcattr="姓名" />
+			<attribute name="身份证号码" alias="证件号码" abcattr="证件号码" />
+		</ABC>
+	</relation>
+	
+	<relation name="家庭关系">
+		<label subdomain="夫妻,子女,父母" />
+		<ABC name="familyMember" abcattr="人口信息">
+			<attribute name="姓名" alias="姓名" abcattr="姓名" />
+			<attribute name="性别" alias="性别a" abcattr="性别" />
+			<attribute name="身份证号码" alias="证件号码" abcattr="证件号码" />
+			<attribute name="出生日期" alias="出生日期a" datatype="date"
+				abcattr="出生日期" />
+
+		</ABC>
+	</relation>
+
+	<relation name="家庭信息">
+		<label subdomain="家庭信息" />
+		<ABC name="familyInfomation" abcattr="家庭信息">
+			<attribute name="家庭人数" alias="家庭人数" datatype="int" abcattr="家庭人数" />
+			<attribute name="家庭地址" alias="家庭地址" abcattr="家庭地址" />
+
+			<attribute name="familyContact" alias="家庭电话" abcattr="家庭电话" />
+			<attribute name="familyFinancialSituation" alias="家庭经济状况"
+				abcattr="家庭经济状况" />
+			<attribute name="familyType" alias="家庭类别" abcattr="家庭类别" />
+			<attribute name="familyYearIncome" alias="家庭年收入" abcattr="家庭年收入"
+				datatype="FLOAT" />
+			<attribute name="familySituation" alias="家庭情况" abcattr="家庭情况" />
+			<attribute name="familyAvgMonthIncome" alias="家庭月人均收入"
+				abcattr="家庭月人均收入" datatype="FLOAT" />
+			<attribute name="familyUnemployeeCount" alias="家庭失业人数"
+				abcattr="家庭失业人数" datatype="INT" />
+
+			<label name="家庭类型" alias="家庭类型" subdomain="户籍家庭,非户籍家庭" />
+			<relation name="家庭成员">
+				<label subdomain="户主,成员" />
+				<ABC name="member" abcattr="人口信息">
+					<attribute name="姓名" alias="姓名" abcattr="姓名" />
+					<attribute name="身份证号码" alias="证件号码" abcattr="证件号码" />
+				</ABC>
+			</relation>
+		</ABC>
+	</relation>
+</ABC>

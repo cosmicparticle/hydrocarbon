@@ -1,0 +1,112 @@
+@charset "UTF-8";
+.tmpl-group-update .field-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    min-height: 60px;
+}
+.tmpl-group-update .field-item{
+	width: 50%;
+    margin-left: 0;
+    margin-right: 0;
+    line-height: 2.5em;
+    min-height: 2.5em;
+    font-size: 1.1em;
+    float: left;
+    border-bottom: 1px solid #ddd;
+    position: relative;
+    margin: 7px 0;
+}
+
+.tmpl-group-update label.field-title {
+    width: 20%;
+    padding-right: 4%;
+    font-weight: bold;
+}
+
+.tmpl-group-update .field-item>.field-title, .tmpl-group-update .field-item>.field-value{
+	display: inline-block;
+    min-height: 2.5em;
+    line-height: 2.5em;
+    padding-top: 0;
+    margin-top: 0;
+    font-size: 16px;
+    vertical-align: middle;
+    word-break: break-all;
+}
+
+.tmpl-group-update .field-value {
+    width: 70%;
+    max-height: 12em;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+.tmpl-group-update span.field-view {
+    line-height: 2em;
+    word-break: break-word;
+    display: inline-block;
+    width: 100%;
+}
+
+
+.tmpl-group-update .field-item .operate-buttons{
+	position: absolute;
+    font-size: 1.4em !important;
+    background-color: #fff;
+    line-height: 2em !important;
+    height: 2em !important;
+    padding: 0 1em;
+    border-radius: 7px;
+    border: 1px solid #eee;
+    display: none;
+    cursor: default;
+}
+.tmpl-group-update .field-item .operate-buttons{
+	left: 5%;
+    top: -2em;
+}
+
+.tmpl-group-update .form-group:HOVER .operate-buttons{
+	display: block;
+}
+
+
+.tmpl-group-update .operate-buttons a{
+	cursor: pointer;
+	color: #57b5e3;
+	margin: 0 0.2em;
+}
+.tmpl-group-update .operate-buttons a:HOVER{
+	color: #c9e2dd;
+}
+
+.tmpl-group-update .field-view>input, 
+.tmpl-group-update .field-view>select,
+.tmpl-group-update .field-view>textarea {
+    height: 34px !important;
+    line-height: 34px;
+    padding: 0 10px;
+    width: 100% !important;
+    border-radius: 3px !important;
+}
+.tmpl-group-update .field-view>select {
+    line-height: 3em;
+    height: 3em;
+}
+
+.tmpl-group-update #list-actions input,
+.tmpl-group-update #detail-actions input{
+	text-align: center;
+}
+
+label.multi-transactional{
+	display: none;
+}
+
+.tmpl-group-update label.multi-transactional.show{
+	display: inline-block !important;
+}
+
+.base-fields>label {
+    margin: 0 15px;
+}

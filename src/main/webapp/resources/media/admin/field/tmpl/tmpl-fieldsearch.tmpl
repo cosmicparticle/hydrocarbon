@@ -1,0 +1,70 @@
+<div class="fieldpicker-container">
+	<span class="fieldpicker-mode">
+		<i>F</i>
+		<ol style="display:none">
+			{{if hasFieldMode('field')}}
+				<li class="selected" fieldpicker-mode="field">字段</li>
+			{{/if}}
+			{{if hasFieldMode('relation')}}
+				<li fieldpicker-mode="relation">关系</li>
+			{{/if}}
+			{{if hasFieldMode('multiattr')}}
+				<li fieldpicker-mode="multiattr">多值属性</li>
+			{{/if}}
+		</ol>
+	</span>
+	<ul class="nav nav-tabs nav-justified">
+		{{if composites.length > 0}}
+			<li data-id="${composites[0].c_id}" class="active ${composites[0].isArray == 1 ?'array-field':''}"><a data-toggle="tab" href="#ctab_${pickerKey }_0">${composites[0].cname }</a></li>
+		{{/if}}
+		{{if composites.length > 1}}
+			<li data-id="${composites[1].c_id}" class="${composites[1].isArray == 1?'array-field':''}"><a data-toggle="tab" href="#ctab_${pickerKey }_1">${composites[1].cname }</a></li>
+			{{if composites.length > 2}}
+				<li data-id="${composites[2].c_id}" class="${composites[2].isArray == 1?'array-field':''}"><a data-toggle="tab" href="#ctab_${pickerKey }_2">${composites[2].cname }</a></li>
+			{{/if}}
+		{{/if}}
+		{{if composites.length > 3}}
+			<li class="dropdown">
+				<a data-toggle="dropdown" class="fa dropdown-toggle" href="#">
+					<span>更多</span>
+				</a>
+				<ul class="dropdown-menu dropdown-blue">
+					{{each(i, composite) composites}}
+						{{if i > 2}}
+							<li data-id="${composites[i].c_id}" class="${composite.isArray == 1?'array-field':''}"><a data-toggle="tab" href="#ctab_${pickerKey }_${i }">${composite.cname }</a></li>
+						{{/if}}
+					{{/each}}
+				</ul>
+			</li>
+		{{/if}}
+	</ul>
+	<div class="tab-content">
+		{{each(i, composite) composites}}
+			<div id="ctab_${pickerKey }_${i }" class="tab-pane {{if i==0}}active{{/if}}">
+				<div class="fieldpicker-field-container">
+					{{each(i, field) composite.fields}}
+						<a href="#" data-id="${field.id}" class="fieldpicker-field-item ${field.isShow? '': 'field-hidden'}">${field.cname }</a>
+					{{/each}}
+				</div>
+			</div>
+		{{/each}}
+		<div id="ctab_${pickerKey }_relations" class="tab-pane relations-tab composites-tab">
+			<div class="fieldpicker-field-container">
+				{{each(i, composite) composites}}
+					{{if composite.addType === 5}}
+						<a href="#" data-id="${composite.c_id}" class="fieldpicker-composite-item">${composite.cname }</a>
+					{{/if}}
+				{{/each}}
+			</div>
+		</div>
+		<div id="ctab_${pickerKey }_multiattrs" class="tab-pane multiattrs-tab composites-tab">
+			<div class="fieldpicker-field-container">
+				{{each(i, composite) composites}}
+					{{if composite.addType === 4}}
+						<a href="#" data-id="${composite.c_id}" class="fieldpicker-composite-item">${composite.cname }</a>
+					{{/if}}
+				{{/each}}
+			</div>
+		</div>
+	</div>
+</div>

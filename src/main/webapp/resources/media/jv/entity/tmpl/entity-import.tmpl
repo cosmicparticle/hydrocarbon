@@ -1,0 +1,26 @@
+<script id="page-title">
+	<h1>${module.title }导入</h1>
+</script>
+<script id="message">
+	<p data-index="${index}" class="${type}">
+		<span>${typeTitle}&emsp;${timeStr}&emsp;</span>
+		<span>${text}</span>
+	</p>
+</script>
+<script id="log-setting">
+	<div class="form-horizontal">
+		<div class="form-group">
+			<label class="col-lg-4 control-label">日志消息数上限</label>
+			<div class="col-lg-8">
+				<input class="form-control cpf-field-int" type="number" id="maxShowMsgCount" value="${maxShowMsgCount}" max="5000" on-input="limitMax" placeholder="最多不能超过5000"/>
+			</div>
+		</div>
+	</div>
+	<div class="modal-footer">
+		<div class="row">
+			<div class="col-lg-3 col-lg-offset-4">
+				<input id="submit" class="btn btn-primary btn-block submit" type="button" value="确定" /> 
+			</div>
+		</div>
+	</div>
+</script>

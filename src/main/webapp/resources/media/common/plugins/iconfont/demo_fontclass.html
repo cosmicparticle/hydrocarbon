@@ -1,0 +1,184 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>IconFont</title>
+    <link rel="stylesheet" href="demo.css">
+    <link rel="stylesheet" href="iconfont.css">
+</head>
+<body>
+    <div class="main markdown">
+        <h1>IconFont 图标</h1>
+        <ul class="icon_lists clear">
+            
+                <li>
+                <i class="icon iconfont icon-recover"></i>
+                    <div class="name">recover</div>
+                    <div class="fontclass">.icon-recover</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-clock4"></i>
+                    <div class="name">clock1</div>
+                    <div class="fontclass">.icon-clock4</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-ccexport"></i>
+                    <div class="name">cc-export</div>
+                    <div class="fontclass">.icon-ccexport</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-cc-import"></i>
+                    <div class="name">cc-import</div>
+                    <div class="fontclass">.icon-cc-import</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-disabled"></i>
+                    <div class="name">icon-disabled</div>
+                    <div class="fontclass">.icon-disabled</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-tools"></i>
+                    <div class="name">LC_icon_list_line_18</div>
+                    <div class="fontclass">.icon-tools</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-20"></i>
+                    <div class="name">export-o</div>
+                    <div class="fontclass">.icon-20</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-21"></i>
+                    <div class="name">import-o</div>
+                    <div class="fontclass">.icon-21</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-light"></i>
+                    <div class="name">light</div>
+                    <div class="fontclass">.icon-light</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-listzuhe"></i>
+                    <div class="name">list_组合</div>
+                    <div class="fontclass">.icon-listzuhe</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-recovery"></i>
+                    <div class="name">recovery</div>
+                    <div class="fontclass">.icon-recovery</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-flash_on"></i>
+                    <div class="name">flash_on</div>
+                    <div class="fontclass">.icon-flash_on</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-leiappmulti"></i>
+                    <div class="name">lei_app_ multi</div>
+                    <div class="fontclass">.icon-leiappmulti</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-leiappsingle"></i>
+                    <div class="name">lei_app_ single</div>
+                    <div class="fontclass">.icon-leiappsingle</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-flash_off"></i>
+                    <div class="name">flash_off</div>
+                    <div class="fontclass">.icon-flash_off</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-detail"></i>
+                    <div class="name">detail</div>
+                    <div class="fontclass">.icon-detail</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-group"></i>
+                    <div class="name">组合管理</div>
+                    <div class="fontclass">.icon-group</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-warning"></i>
+                    <div class="name">warning</div>
+                    <div class="fontclass">.icon-warning</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-checked"></i>
+                    <div class="name">checked</div>
+                    <div class="fontclass">.icon-checked</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-historyrecord"></i>
+                    <div class="name">history record</div>
+                    <div class="fontclass">.icon-historyrecord</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-authority"></i>
+                    <div class="name">权限</div>
+                    <div class="fontclass">.icon-authority</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-history"></i>
+                    <div class="name">history</div>
+                    <div class="fontclass">.icon-history</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-template"></i>
+                    <div class="name">template</div>
+                    <div class="fontclass">.icon-template</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-rule"></i>
+                    <div class="name">rule engine</div>
+                    <div class="fontclass">.icon-rule</div>
+                </li>
+            
+        </ul>
+
+        <h2 id="font-class-">font-class引用</h2>
+        <hr>
+
+        <p>font-class是unicode使用方式的一种变种，主要是解决unicode书写不直观，语意不明确的问题。</p>
+        <p>与unicode使用方式相比，具有如下特点：</p>
+        <ul>
+        <li>兼容性良好，支持ie8+，及所有现代浏览器。</li>
+        <li>相比于unicode语意明确，书写更直观。可以很容易分辨这个icon是什么。</li>
+        <li>因为使用class来定义图标，所以当要替换图标时，只需要修改class里面的unicode引用。</li>
+        <li>不过因为本质上还是使用的字体，所以多色图标还是不支持的。</li>
+        </ul>
+        <p>使用步骤如下：</p>
+        <h3 id="-fontclass-">第一步：引入项目下面生成的fontclass代码：</h3>
+
+
+        <pre><code class="lang-js hljs javascript"><span class="hljs-comment">&lt;link rel="stylesheet" type="text/css" href="./iconfont.css"&gt;</span></code></pre>
+        <h3 id="-">第二步：挑选相应图标并获取类名，应用于页面：</h3>
+        <pre><code class="lang-css hljs">&lt;<span class="hljs-selector-tag">i</span> <span class="hljs-selector-tag">class</span>="<span class="hljs-selector-tag">iconfont</span> <span class="hljs-selector-tag">icon-xxx</span>"&gt;&lt;/<span class="hljs-selector-tag">i</span>&gt;</code></pre>
+        <blockquote>
+        <p>"iconfont"是你项目下的font-family。可以通过编辑项目查看，默认是"iconfont"。</p>
+        </blockquote>
+    </div>
+</body>
+</html>

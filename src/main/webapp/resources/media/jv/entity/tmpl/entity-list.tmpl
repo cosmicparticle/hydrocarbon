@@ -1,0 +1,165 @@
+<script id="th">
+	<th width="30">
+		<label title="全选">
+			<input type="checkbox" class="colored-blue select-all partly">
+            <span class="text"></span>
+        </label>
+    </th>
+    {{each(i, col) columns}}
+		{{if disabledColIds.indexOf(col.id) < 0}}
+			<th class="${col.fieldAvailable? '': 'col-field-unavailable' }"
+				title="${col.fieldAvailable? '': '无效字段'}">${col.title }</th>
+		{{/if}}
+	{{/each}}
+</script>
+
+<script id="entity-row">
+	<tr data-code="${entity.code }">
+		<td>
+			<label>
+				<input type="checkbox" class="colored-blue row-selectable-checkbox">
+	            <span class="text"></span>
+	        </label>
+	    </td>
+	    {{each(i, col) columns}}
+			{{if disabledColIds.indexOf(col.id) < 0}}
+				<td class="${col.fieldAvailable? '': 'col-field-unavailable' }">
+					{{if col.specialField}}
+						{{if col.specialField === 'number'}}
+							${index + 1}
+						{{else col.specialField.startsWith('operate')}}
+							{{if operates.indexOf('detail') >= 0}}
+								<a href="jv/entity/curd/detail/${menu.id}/${entity.code}" 
+									target="entity_detail_${menu.id }_${entity.code }" 
+									title="${menu.title}-${entity.entityTitle}-详情"
+									class="tab btn btn-success btn-xs">
+									<i class="fa fa-book"></i>详情
+								</a>
+							{{/if}}
+							{{if operates.indexOf('update') >= 0}}
+								<a target="module_update_${menu.id }_${entity.code }" 
+									title="${menu.title}-${entity.entityTitle}-修改" 
+									href="jv/entity/curd/update/${menu.id }/${entity.code }" 
+									class="tab btn btn-info btn-xs edit">
+									<i class="fa fa-edit"></i>修改
+								</a>
+							{{/if}}
+						{{/if}}
+					{{else}} 
+						${col.fieldAvailable? entity.cellMap[col.id] : '' }
+					{{/if}}
+				</td>
+			{{/if}}
+	    {{/each}}
+	</tr>
+</script> 
+<script id="form-buttons">
+	{{if !tmplGroup || hasCriterias && tmplGroup.hideQueryButton != 1}}
+		<button type="submit" class="btn btn-default" title="${hidenCriteriaDesc }">查询</button>
+	{{/if}}
+	{{if tmplGroup}}
+		{{if tmplGroup.hideDeleteButton != 1}}
+			<button on-click="do:doAction('delete')" id="btn-delete" class="btn btn-danger" disabled="disabled">删除选中</button>
+		{{/if}}
+		{{each(i, action) tmplGroup.action}}
+			{{if action.face == 'list'}}
+				<button class="btn btn-azure shiny action-button" 
+				on-click="do:doAction(${action.id}, '${action.title}')"
+				data-id="${action.id }" data-multiple="${action.multiple }"
+				title="${action.title }"
+				disabled="disabled">
+					<c:if test="${action.iconClass}">
+						<i class="${action.iconClass }"></i>
+					</c:if>
+					${action.title }
+				</button> 
+			{{/if}}
+		{{/each}}
+	{{/if}}
+</script>
+
+<script id="paginator">
+	<div class="cpf-paginator">
+		<ul class="pagination pagination-sm">
+			{{if totalCount == null}}
+				<li class="cpf-paginator-total-count" on-click="viewCount"><span>点击查看总数</span></li>
+			{{else}}
+				<li class="cpf-paginator-total-count counted"><span>共${totalCount}条</span></li>
+			{{/if}}
+			
+			<li class="cpf-paginator-pagesize">
+				<select class="page-size-select" on-change="changePageSize">
+					<option value="5">5</option>
+					<option value="10">10</option>
+					<option value="15">15</option>
+					<option value="20">20</option>
+					</select>
+			</li>
+			{{if pageInfo.pageNo > 1}}
+				<li on-click="do:goPage(1)"><a href="#">«</a></li>
+			{{/if}}
+			{{each(i, pn) pageNos.frontPageNos}}
+				<li 
+					on-click="${pn == pageInfo.pageNo? '': 'do:goPage(' + pn + ')'}"
+					class="${pn == pageInfo.pageNo? 'active': ''}"><a href="#">${pn}</a></li>
+			{{/each}}
+			{{if pageNos.endPageNos}}
+				<li><a href="#">...</a></li>
+				{{each(i, pn) pageNos.endPageNos}}
+					<li on-click="do:goPage(${pn})"><a href="#">${pn}</a></li>
+				{{/each}}
+			{{/if}}
+			<li class="cpf-paginator-jump">
+				<input type="text" class="cpf-paginator-jump-text" />
+				<button on-click="goPageTo" type="button" class="cpf-paginator-jump-button btn-default btn">go</button>
+			</li>
+		</ul>
+	</div>
+</script> 
+<script id="viewcols-window">
+	<div id="viewcols-window" class="detail-toggle-sublist blur-hidden" style="display: none;height: 100px">
+		<div class="viewcols-wrapper">
+			{{each(i, col) columns}}
+				{{if col.fieldAvailable && col.fieldId}}
+					<span data-id="${col.id }" class="${disabledColIds.indexOf(col.id) < 0? '': 'disabled'}" on-click="do:toggleSelect(columns[${i}])">${col.title }</span>
+				{{/if}}
+			{{/each}}
+		</div>
+		<div class="viewcols-footer">
+			<a href="#" id="btn-cols-submit" class="btn btn-primary" on-click="changeCols">确定</a>
+		</div>
+	</div>
+</script>
+
+<script id="header-buttons">
+	{{if tmplGroup && tmplGroup.treeTemplateId && !tmplGroup.hideTreeToggleButton}}
+		<a class="tab" id="btn-toggle-tree" href="jv/entity/curd/tree/${menuId }" title="${menuTitle}-树形视图" target="entity_list_tree_${menuId }">
+			<i class="iconfont icon-tree"></i>
+		</a>
+	{{/if}}
+	{{if statView || tmplGroup && !tmplGroup.hideExportButton}}
+		<a class="export btn-toggle" title="导出" id="btn-export " href="#" on-click="do:toggle('#export-window')">
+			<i class="glyphicon glyphicon-export"></i>
+		</a>
+	{{/if}}
+	{{if tmplGroup && moduleWritable}}
+		{{if !tmplGroup.hideImportButton}}
+			<a class="import tab" href="jv/entity/curd/import/${menuId }" title="导入" target="entity_import_${menuId}">
+				<i class="glyphicon glyphicon-import"></i>
+			</a>
+		{{/if}}
+		{{if !tmplGroup.hideCreateButton}}
+			<a class="tab" href="jv/entity/curd/create/${menuId }" title="创建" target="entity_${menuId }_add">
+				<i class="fa fa-plus"></i>
+			</a>
+		{{/if}}
+	{{/if}}
+	{{if statView}}
+		<a title="重新统计" id="btn-recalc" href="#" on-click="recalc">
+			<i class="fa fa-coffee"></i>
+		</a>
+		<a class="hbtn-purple btn-toggle" title="显示列" on-click="do:toggle('#viewcols-window')" href="#" >
+			<i class="fa fa-table"></i>
+		</a>
+	{{/if}}
+</script>

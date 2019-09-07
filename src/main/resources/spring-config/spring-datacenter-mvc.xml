@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:sec="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc 
+	http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd 
+	http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-4.3.xsd 
+	http://www.springframework.org/schema/context 
+	http://www.springframework.org/schema/context/spring-context-4.3.xsd
+	http://www.springframework.org/schema/security
+	http://www.springframework.org/schema/security/spring-security.xsd">
+
+	
+	
+	<!-- controller自动扫描(自动注入) -->
+	<context:component-scan base-package="cn.sowell.datacenter.*.controller.*" />
+	
+	<!-- 请求映射处理，位置放在前面表示这些配置的优先级高于spring的默认处理器 -->
+	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+		<property name="synchronizeOnSession" value="true" />
+    	<!-- 参数解析器 -->
+    	<property name="customArgumentResolvers">
+      		<list>
+        		<!-- PageInfo参数的解析器 -->
+        		<bean class="cn.sowell.copframe.dto.page.PageInfoArgumentResolver" />
+        		<!-- 构造参数map的解析器 -->
+        		<bean class="cn.sowell.datacenter.common.RequestParameterMapCompositeResolver" />
+        		<!-- 获得api请求的用户 -->
+        		<bean class="cn.sowell.datacenter.common.ApiUserResolver" />
+      		</list>
+    	</property>
+    	<!-- Controller的消息转换器 -->
+    	<property name="messageConverters">
+        	<list>
+        		<!-- 支持在application/json请求下，将请求主体转换为JsonRequest对象 -->
+				<bean class="cn.sowell.copframe.messageConverter.JsonRequestConverter" />
+				<!-- 支持在application/xml请求下，将请求主体转换为XmlRequest对象 -->
+				<bean class="cn.sowell.copframe.messageConverter.XmlRequestConverter" />
+        		<!-- 用于将返回的Json字符串转化编码 -->
+				<bean class="cn.sowell.copframe.messageConverter.JsonStringConverter">
+					<property name="supportedMediaTypes">    
+						<list>    
+							<value>application/json;charset=UTF-8</value>
+						</list>
+					</property>    
+				</bean>
+				<!-- 用于将返回的jsonReponse对象写到响应正文中 -->
+				<bean class="cn.sowell.copframe.messageConverter.ResponseJsonConverter"  />
+				<!-- 用于将返回的xmlReponse对象写到响应正文中 -->
+				<bean class="cn.sowell.copframe.messageConverter.XMLResponseConverter"  />
+				<!-- 用于将返回的AjaxPageResponse转换成JSON并写到响应正文中 -->
+				<bean class="cn.sowell.copframe.messageConverter.AjaxPageResponseConverter"  />
+				<!-- 用于将返回的纯字符串转换编码 -->
+				<bean class="org.springframework.http.converter.StringHttpMessageConverter">
+					<constructor-arg value="UTF-8" /> 
+					<property name="supportedMediaTypes">    
+						<list>    
+							<value>*/*;charset=UTF-8</value> 
+						</list>    
+					</property>    
+				</bean>
+				<!-- 二进制流转换器 -->
+   				<bean class="org.springframework.http.converter.ByteArrayHttpMessageConverter"/> 
+				<!-- fastJson的json转换器 -->
+				<bean class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter4" />
+        	</list>     
+		</property>
+	</bean>
+
+	<!-- request请求参数绑定类型定义-->
+	<bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+	    <property name="converters">
+	        <set>
+	            <!-- 此处可以定义多种转换类型 -->
+	            <bean class="cn.sowell.datacenter.common.interceptor.DateParameterConverter" />
+	        </set>
+	    </property>
+	</bean>
+	<!-- 开启注解功能 -->
+	<mvc:annotation-driven />
+	
+	
+	<!-- 装载全局Controller的异常处理，这个类将所有异常显示到控制台，并且将异常信息返回到客户端 -->
+	<bean class="cn.sowell.datacenter.common.DatacenterControllerExceptionHandler" />
+    <bean class="cn.sowell.copframe.ControllerExceptionHandler" />
+	
+	<!-- 对模型视图名称的解析，即在模型视图名称添加前后缀 -->
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
+		<property name="prefix" value="/WEB-INF/jsp" />
+	</bean>
+	
+	
+	<!-- 图片获取 maxUploadSize：设置最大限制 字节为单位-->  
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">  
+	    <property name="maxUploadSize" value="10240000"></property>  
+	</bean>  
+	
+	<bean class="cn.sowell.copframe.spring.file.FileUtils">
+		<constructor-arg value="${upload_path}" />
+		<constructor-arg value="${upload_uri}" />
+	</bean>
+	
+	<mvc:interceptors>
+		<!-- 用于在请求中设置一些常用的变量 -->
+		<bean
+			class="cn.sowell.datacenter.common.interceptor.CommonRequestAttributeSetInterceptor" />
+	</mvc:interceptors>
+	
+	<mvc:cors>
+		<mvc:mapping path="/api2/**" allowed-headers="datacenter-token,content-type" max-age="3600"  />
+	</mvc:cors>
+	
+	<bean class="cn.sowell.datacenter.resource.ResourceController" >
+		<property name="fileLocation">
+			<map>
+				<entry key="field-input-typemap.json" value="classpath*:field-input-typemap.json" />
+			</map>
+		</property>
+	</bean>
+	
+	<mvc:resources mapping="/media/**" location="/resources/media/" />
+	
+	<!-- 开启注解 -->
+	<sec:global-method-security authentication-manager-ref="authenticationManager"
+		pre-post-annotations="enabled"
+		proxy-target-class="true"
+	 />
+	
+</beans>

@@ -1,0 +1,168 @@
+@charset "UTF-8";
+#entities-tree-container{
+	width: 50%;
+	border: 1px solid #aaa;
+	padding: 10px;
+	margin: 10px 0;
+	font-size: 14px;
+}
+div.cpf-tree {
+	webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+.cpf-tree ul {
+	margin: 0;
+	list-style: none;
+	margin-block-start: 0;
+	margin-block-end: 0;
+	margin-inline-start: 0;
+	margin-inline-end: 0;
+	padding-inline-start: 0;
+}
+
+.cpf-tree li {
+	margin: 3px 0;
+	border-top: 1px solid #eee;
+}
+
+.cpf-tree li>ul {
+	display: none;
+}
+
+.cpf-tree li.node-expanded>ul {
+	display: block;
+}
+
+.cpf-tree li>a {
+	display: flex;
+	align-items: center;
+	height: 2.5em;
+	line-height: 2.5em;
+	background-color: #fff;
+	color: #444;
+	padding: 0 1em;
+	border-bottom: 1px solid;
+	border-color: darkred;
+	border: none;
+	position: relative;
+}
+
+.cpf-tree li>ul {
+	margin-left: 2em;
+}
+
+.cpf-tree li>a>b{
+	background-color: #57b5e3;
+	display: inline-block;
+	width: 5px;
+	height: 90%;
+	margin-right: 5px;
+}
+
+.cpf-tree li>a>i {
+	font-weight: bold;
+	cursor: pointer;
+	font-style: normal;
+	margin-right: 5px;
+}
+
+
+.cpf-tree li>a>i:before {
+	content: "\e606";
+}
+
+.cpf-tree li>a>i:before {
+	font-family: 'iconfont';
+}
+
+.cpf-tree li.node-expanded>a>i:before {
+	content: "\e605";
+}
+
+.cpf-tree li.node-unexpandable>a>i:before {
+	content: '';
+}
+
+.cpf-tree li>a>label {
+	font-family: 'iconfont';
+	font-size: inherit;
+	margin: 0;
+	padding: 0;
+	cursor: pointer;
+	margin-right: 5px;
+	display: none;
+}
+.cpf-tree li>a>span {
+	webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	font-family: 微软雅黑;
+}
+
+.cpf-tree li>a>label:before {
+	content: "\e603";
+}
+
+.cpf-tree li>a.node-checked>label:before {
+	content: "\e618";
+}
+
+
+ul.tree-rels>li>a {
+    background-color: #fff;
+    height: 2em;
+    line-height: 2em;
+}
+ul.tree-rels>li>a>span{
+    font-size: 0.8em;
+    color: #666;
+    text-decoration: underline;
+}
+
+.cpf-tree li.next-page>a {
+    height: 1.6em;
+    line-height: 1.6em;
+    background-color: #eee;
+    color: #888;
+    font-size: 0.7em;
+    text-align: center;
+    cursor: pointer;
+    border: 1px solid #eee;
+    display: block;
+}
+.cpf-tree li.next-page>a:hover {
+    background-color: #fff;
+}
+
+.cpf-tree li>a>.node-operates {
+    display: none;
+    position: absolute;
+    right: 0;
+    height: 100%;
+}
+
+.cpf-tree li>a:hover>.node-operates {
+    display: flex;
+}
+
+.cpf-tree li>a>.node-operates>.node-operate-icons>i {
+    color: #000;
+    font-size: 18px;
+    cursor: pointer;
+    z-index: 1000;
+    margin: 0 5px;
+}
+.cpf-tree li>a>.node-operates>.node-operate-icons>i:hover{
+    color: #666;
+}
+
+.cpf-tree li>a>.node-operates>.node-operate-icons {
+    display: flex;
+    align-items: center;
+    background-color: rgba(18,109,239,0.5);
+    padding: 0 10px;
+}

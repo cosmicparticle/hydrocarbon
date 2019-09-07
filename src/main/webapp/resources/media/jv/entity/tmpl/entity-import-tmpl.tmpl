@@ -1,0 +1,33 @@
+
+<script id="tmpl-field-rows">
+	<tr composite-id="${field.compositeId? field.compositeId : ''}">
+		<td>
+			<span class="field-title">${field.title}</span>
+		</td>
+		<td class="field-name">${field.title}</td>
+		<td>
+			{{if field.fieldId }}
+				<a class="btn btn-xs remove-col" on-click="do:removeRow(field)">
+					<i class="fa fa-trash-o"></i>
+				</a>
+			{{/if}}
+		</td>
+	</tr>
+	
+</script>
+
+<script id="tmpl-list">
+	<div id="tmpl-list" class="detail-toggle-sublist blur-hidden">
+		<div class="detail-toggle-sublist-wrapper">
+			{{each(i, tmplItem) tmpls}}
+				<a href="javascript:;" on-click="do:showTmpl(tmpls[${i}])" class="tmpl-item" data-id="${tmplItem.id}">
+					<span class="detail-toggle-sublist-icon"><i class="fa fa-lightbulb-o"></i></span>
+					<span class="detail-toggle-sublist-item-body">
+						<span class="detail-toggle-sublist-item-name">${tmplItem.title }</span>
+						<span class="detail-toggle-sublist-item-date">${tmplItem.updateTimeStr }</span>
+					</span>
+				</a>
+			{{/each}}
+		</div>
+	</div>
+</script>

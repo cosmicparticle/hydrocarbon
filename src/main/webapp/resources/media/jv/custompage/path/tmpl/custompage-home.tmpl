@@ -1,0 +1,32 @@
+<script id="page">
+	<style>
+		.custompage-home{
+			background-color: #004881;
+		}
+		.custompage-home table>thead>tr>th {
+			background-color: #004881 !important;
+			color: #fff;
+			border: 1px solid #5ff !important;
+		}
+		.custompage-home table>tbody>tr.task-ranking-row>td{
+			background-color: #004881;
+			border-bottom: 1px solid #4ff !important;
+			border-right: 1px solid #4ff !important;
+			color: #fff;
+		}
+		.anchorBL{
+			display:none;
+		}
+	</style>
+	<div style="position: absolute;left: 0;right: 0;top: 0;bottom: 0;" class="custompage-home">
+		<div style="height:98%;padding-top:2%;">
+			<div class="col-lg-4" style="height:100%;">
+				<div style="height:50%;" after-render="renderTaskRanking"></div>
+				<div style="height:50%;" after-render="renderBar"></div>
+			</div>
+			<div class="col-lg-8"  style="height:100%;" after-render="renderMap" ></div>
+		</div>
+	</div>
+</script>
+
+

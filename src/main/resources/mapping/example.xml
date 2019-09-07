@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ABC name="example" abcattr="人口信息" class=""
+	xmlns="http://www.w3school.com.cn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<attribute name="peoplecode" alias="编码a" abcattr="唯一编码" />
+	<attribute name="地址" alias="地址a" abcattr="通用地址" />
+	<attribute name="姓名" alias="姓名a" abcattr="姓名" />
+	<attribute name="身份证号码" alias="证件号码a" abcattr="证件号码" />
+	<attribute name="性别" alias="性别a" abcattr="性别" />
+	<attribute name="出生日期" alias="出生日期a" datatype="date" abcattr="出生日期" />
+	<attribute name="联系号码1" alias="联系号码1a" abcattr="联系电话" />
+	<attribute name="联系号码2" alias="联系号码2a" abcattr="备用电话" />
+	<attribute name="民族" alias="民族a" abcattr="民族" />
+	<attribute name="籍贯" alias="籍贯a" abcattr="籍贯" />
+	<attribute name="曾用名" alias="曾用名a" abcattr="曾用名" />
+	<attribute name="户籍所在地" alias="户籍地址a" abcattr="户籍地址" />
+	<attribute name="编辑时间" alias="编辑时间" datatype="datetime"
+		abcattr="此人更新时间" />
+	<!-- <attribute name="国籍" alias="国籍" abcattr="国籍" /> -->
+	<attribute name="政治面貌" alias="政治面貌" abcattr="政治面貌" />
+	<attribute name="婚姻状况" alias="婚姻状况" abcattr="婚姻状况" />
+	<attribute name="血型" alias="血型" abcattr="血型" />
+	<attribute name="健康状况" alias="健康状况" abcattr="健康状况" />
+	<attribute name="宗教信仰" alias="宗教信仰" abcattr="宗教信仰" />
+	<attribute name="兵役" alias="兵役" abcattr="兵役状况" />
+	<attribute name="统战人士类型" alias="统战人士类型" abcattr="统战人士类别" />
+	<label name="是否本区机关干部" alias="是否本区机关干部" subdomain="本区机关干部" />
+	<label name="劳模" alias="劳模" subdomain="劳模" />
+	<label name="军转干部" alias="军转干部" subdomain="军转干部" />
+	<label name="离退休干部" alias="离退休干部" subdomain="离退休干部" />
+	<label name="三无老人" alias="三无老人" subdomain="三无老人" />
+	<label name="是否有车" alias="是否有车" subdomain="有车" />
+	<label name="人口类型" alias="人口类型" subdomain="户籍人口,流动人口" />
+	
+	<!-- 工作信息 -->
+	<multiattribute name="workExperience" abcattr="工作经历">
+		<attribute name="companyName" alias="公司名称" abcattr="工作单位名称" />
+		<attribute name="workAddress" alias="工作地址" abcattr="通用地址" />
+		<attribute name="unitContact" alias="单位电话" abcattr="联系电话" />
+		<attribute name="workDepartment" alias="当前部门" abcattr="工作部门" />
+		<attribute name="unitNature" alias="单位性质" abcattr="单位性质" />
+		<attribute name="salary" alias="工资" abcattr="月收入" datatype="FLOAT" />
+		<attribute name="workDuty" alias="工作职责" abcattr="工作职责" />
+		<attribute name="workSubject" alias="工作主题" abcattr="分管工作" />
+		<attribute name="workedOccupation" alias="曾从事职业" abcattr="曾从事职业" />
+	</multiattribute>
+
+	<multiattribute name="教育信息" abcattr="教育经历">
+			<attribute name="school name" alias="院校名称" abcattr="院校名称" />
+			<attribute name="enter date" alias="入职日期" datatype="DATE"
+				abcattr="入学日期" />
+	</multiattribute>
+
+	<relation name="医疗信息">
+		<label subdomain="家庭医生" />
+		<ABC name="familydoctor" abcattr="人口信息">
+			<attribute name="姓名" alias="姓名" abcattr="姓名" />
+			<attribute name="身份证号码" alias="证件号码" abcattr="证件号码" />
+		</ABC>
+	</relation>
+	<relation name="家庭关系">
+		<label subdomain="夫妻,子女,父母" />
+		<ABC name="familyMember" abcattr="人口信息">
+			<attribute name="姓名" alias="姓名" abcattr="姓名" />
+			<attribute name="性别" alias="性别a" abcattr="性别" />
+			<attribute name="身份证号码" alias="证件号码" abcattr="证件号码" />
+			<attribute name="出生日期" alias="出生日期a" datatype="date"
+				abcattr="出生日期" />
+		</ABC>
+	</relation>
+	
+	
+	<relation name="家庭信息">
+		<label subdomain="家庭信息" />
+		<ABC name="familyInfomation" abcattr="家庭信息">
+			<attribute name="家庭人数" alias="家庭人数" datatype="int" abcattr="家庭人数" />
+			<attribute name="家庭地址" alias="家庭地址" abcattr="家庭地址" />
+			<label name="家庭类型" alias="家庭类型" subdomain="户籍家庭,非户籍家庭" />
+			<record name="家庭成员">
+				<label subdomain="户主,成员" />
+				<ABC name="member" abcattr="人口信息">
+					<attribute name="姓名" alias="姓名" abcattr="姓名" />
+					<attribute name="身份证号码" alias="证件号码" abcattr="证件号码" />
+				</ABC>
+			</record>
+		</ABC>
+	</relation>
+
+</ABC>

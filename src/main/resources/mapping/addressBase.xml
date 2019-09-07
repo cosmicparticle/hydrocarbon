@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ABC name="addressBase" abcattr="统一地址" alias="addressBase"
+	class="" xmlns="http://www.w3school.com.cn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<attribute name="编码" abcattr="唯一编码" />
+	<attribute name="地址级别" abcattr="地址级别" datatype="INT" />
+	<attribute name="所属行政区域" abcattr="所属行政区域" />
+	<attribute name="地址简称" abcattr="地址简称" />
+	<attribute name="编辑时间" abcattr="编辑时间" />
+	
+</ABC>

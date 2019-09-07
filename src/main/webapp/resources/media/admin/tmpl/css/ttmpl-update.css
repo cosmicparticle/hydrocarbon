@@ -1,0 +1,308 @@
+@charset "UTF-8";
+
+.ttmpl-update .form-value {
+    /* border: 1px solid #ccc; */
+    /* display: flex; */
+    /* padding: 5px 0; */
+    float: right;
+}
+
+.ttmpl-update .operate-buttons {
+    display: flex;
+    /* border: 1px solid #ccc; */
+}
+.ttmpl-update .operate-buttons>.operate-buttons-common{
+	width: 100%;
+}
+.node-text {
+    height: 4em;
+    border: 1px solid #ccc;
+    padding: 0.5em;
+}
+
+.ttmpl-update label.node-title {
+    min-width: 10px;
+}
+
+
+.node-relations {
+    display: flex;
+    border: 1px solid #ccc;
+    height: 14em;
+    overflow-y: hidden;
+    /* position: relative; */
+}
+.selectable-relations {height: 100%;}
+
+.node-relations>div{
+    height: 100%;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    padding: 0;
+}
+
+.relation-criterias {
+    padding: 5px;
+    height: 100%;
+}
+
+.relation-criteria-detail {
+    width: 70%;
+    padding: 0.7em 0.3em;
+    display: none;
+}
+
+
+.relation-criteria-detail>div {
+    display: flex;
+    height: 2.5em;
+    align-items: center;
+}
+
+.relation-criteria-detail>div>label{
+    width: 5em;
+    text-align: right;
+    padding-right: 1em;
+}
+
+.node-relations>div.relation-criteria-detail {
+    padding: 7px 10px;
+}
+
+
+
+div.selectable-relations, div.relation-criterias {
+    /* padding: 5px 0; */
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 25px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+div.selectable-relations>*, 
+.relation-criterias>* {
+    font-size: 13px;
+    padding: 4px 5px;
+    width: 100%;
+    display: block;
+    position: relative;
+}
+div.selectable-relations>div:not(:last-child), 
+.relation-criterias>div:not(:last-child) {
+	border-bottom: 1px solid #eee;
+}
+
+div.selectable-relations>*:hover,
+div.relation-criterias>*:hover {
+    background-color: #eee;
+    cursor: pointer;
+    color: #444;
+}
+
+div.selectable-relations>*.selected, 
+.relation-criterias>*.criteria-item.criteria-selected {
+    background-color: #5db2ff;
+    color: #fff;
+}
+
+div..selectable-relations>*.selected:hover,
+div.relation-criterias>*.criteria-item.criteria-selected:hover {
+	background-color: #468bcc;
+	color: #fff;
+}
+
+
+
+.node-relations .tab-content {
+    position: inherit;
+    top: inherit;
+    right: inherit;
+    left: inherit;
+    bottom: inherit;
+}
+
+.node-relations .tabbable>.nav-tabs{
+    background-color: #fff;
+    border-left: 1px solid #ddd;
+}
+
+.node-relations .tabbable>.nav-tabs>li.active{
+    background-color: #ddd'
+}
+
+.node-relations .tabbable>.nav-tabs>li>a{
+    width: 50px;
+    min-width: unset;
+    font-size: 14px;
+    line-height: 2em;
+    padding: 2px 5px;
+    text-align: center;
+}
+
+.node-relations .tabbable,
+.node-relations .tabbable>* {
+    height: 100%;
+}
+
+.relation-config {
+    width: 80%;
+}
+
+
+.node-relations .tabbable .tab-pane{
+    height: 100%;
+    overflow: hidden;
+}
+
+.node-relations .tabbable .tab-pane.active{
+    display:flex;
+}
+.relation-criteria-fields {
+    width: 15em;
+    border-right: 1px solid #ddd;
+    display: block;
+}
+
+
+
+
+.node-relation-selector, .criteria-opr-area {
+    display: inline-block;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #fff;
+}
+
+.node-relation-list {
+    width: 20%;
+}
+
+.node-relation-list,.relation-criteria-fields {
+	position: relative;
+	border: 1px solid #eee;
+}
+
+
+
+.node-relation-selector>i,.criteria-opr-area>i{
+    cursor: pointer;
+    display: inline-block;
+    height: 100%;
+    width: 20px;
+    text-align: center;
+}
+.node-relation-selector>i:hover,
+.criteria-opr-area>i:hover{
+    background-color: #eee;
+}
+
+.node-relation-selector>i:before {
+    content: "+";
+}
+
+.node-relation-selector>div {
+    bottom: 1em;
+    position: absolute;
+    right: 80%;
+    left: -20px;
+}
+
+.node-relation-popup {
+    display: none;
+    padding: 0;
+}
+
+.node-relation-popup.actived {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    left: 5px;
+    bottom: 1em;
+    background-color: #fefefe;
+    color: #444;
+    border: 1px solid #ddd;
+    height: 100px;
+    width: 10em;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+.node-relation-popup>*{
+    font-size: 13px;
+    padding: 4px 5px;
+    cursor: pointer;
+    margin: 0;
+    height: 2em;
+    width: 100%;
+}
+
+.node-relation-popup>*:hover{
+    background-color: #ddd;
+    
+}
+
+
+.input-icon.field-search.criteria-field-search {
+    display: block;
+    height: auto;
+}
+
+.criteria-opr-area{
+    display: block;
+    background-color: #fff;
+    border-top: 1px solid #eee;
+    height: 20px;
+}
+.criteria-opr-area>i:before {
+    content: "+";
+}
+
+
+
+.relation-criterias span.btn-remove-criteria,
+.selectable-relations .btn-remove-relation {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 27px;
+    line-height: 27px;
+    width: 20px;
+    text-align: center;
+    display: block;
+    cursor: pointer;
+}
+.relation-criterias span.btn-remove-criteria:hover,
+.selectable-relations .btn-remove-relation:hover{
+    background-color: rgba(200,200,200,0.6);
+}
+.relation-criterias span.btn-remove-criteria:before,
+.selectable-relations .btn-remove-relation:before {
+    content: "×";
+}
+
+
+
+
+
+
+
+#relation-label-value-wrap .select2-container--bootstrap .select2-selection--multiple .select2-search--inline .select2-search__field {
+  height: 24px;
+  line-height: 24px;
+}
+#relation-label-value-wrap .select2-container--bootstrap .select2-selection--multiple {
+  min-height: 24px;
+}
+
+
+
+
+.relation-criteria-detail.relation-filter-mode-label .relation-filter-field-mode {
+    display: none !important;
+}
+.relation-criteria-detail.relation-filter-mode-field .relation-filter-label-mode {
+    display: none !important;
+}
+

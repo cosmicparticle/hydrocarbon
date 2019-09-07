@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ABC name="hspeople" abcattr="人员信息" class=""
+	xmlns="http://www.w3school.com.cn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<attribute name="编码" alias="" abcattr="唯一编码" />
+	<attribute name="编辑时间" alias="编辑时间" datatype="datetime"
+		abcattr="更新时间" />
+	<attribute name="专业名称" abcattr="专业名称" /><!-- 基本信息 -->
+	<attribute name="健康状况" abcattr="健康状况" /><!-- 基本信息 -->
+	<attribute name="党内职务" abcattr="党内职务" /><!-- 基本信息 -->
+	<attribute name="党校培训时间" abcattr="党校培训时间" /><!-- 基本信息 -->
+	<attribute name="入党时间" abcattr="入党时间" /><!-- 基本信息 -->
+	<attribute name="入学年份" abcattr="入学年份" /><!-- 基本信息 -->
+	<attribute name="入学日期" abcattr="入学日期" /><!-- 基本信息 -->
+	<attribute name="出生日期" abcattr="出生日期" /><!-- 基本信息 -->
+	<attribute name="办学形式" abcattr="办学形式" /><!-- 基本信息 -->
+	<attribute name="办学类型" abcattr="办学类型" /><!-- 基本信息 -->
+	<attribute name="助贷情况" abcattr="助贷情况" /><!-- 基本信息 -->
+	<attribute name="培养联系人" abcattr="培养联系人" /><!-- 基本信息 -->
+	<attribute name="姓名" abcattr="姓名" /><!-- 基本信息 -->
+	<attribute name="婚姻状况" abcattr="婚姻状况" /><!-- 基本信息 -->
+	<attribute name="学习形式" abcattr="学习形式" /><!-- 基本信息 -->
+	<attribute name="学习情况" abcattr="学习情况" /><!-- 基本信息 -->
+	<attribute name="学号" abcattr="学号" /><!-- 基本信息 -->
+	<attribute name="学籍状态" abcattr="学籍状态" /><!-- 基本信息 -->
+	<attribute name="宗教信仰" abcattr="宗教信仰" /><!-- 基本信息 -->
+	<attribute name="家庭通信地址" abcattr="家庭通信地址" /><!-- 基本信息 -->
+	<attribute name="宿舍号" abcattr="宿舍号" /><!-- 基本信息 -->
+	<attribute name="录取分数" abcattr="录取分数" /><!-- 基本信息 -->
+	<attribute name="性别" abcattr="性别" /><!-- 基本信息 -->
+	<attribute name="户籍地" abcattr="户籍地" /><!-- 基本信息 -->
+	<attribute name="所在支部" abcattr="所在支部" /><!-- 基本信息 -->
+	<attribute name="所在班级" abcattr="所在班级" /><!-- 基本信息 -->
+	<attribute name="招生季节" abcattr="招生季节" /><!-- 基本信息 -->
+	<attribute name="政治面貌" abcattr="政治面貌" /><!-- 基本信息 -->
+	<attribute name="是否在校" abcattr="是否在校" /><!-- 基本信息 -->
+	<attribute name="来源省" abcattr="来源省" /><!-- 基本信息 -->
+	<attribute name="欠学费情况" abcattr="欠学费情况" /><!-- 基本信息 -->
+	<attribute name="民族" abcattr="民族" /><!-- 基本信息 -->
+	<attribute name="民族考生类别" abcattr="民族考生类别" /><!-- 基本信息 -->
+	<attribute name="生源地" abcattr="生源地" /><!-- 基本信息 -->
+	<attribute name="申请入党时间" abcattr="申请入党时间" /><!-- 基本信息 -->
+	<attribute name="积极分子时间" abcattr="积极分子时间" /><!-- 基本信息 -->
+	<attribute name="籍贯" abcattr="籍贯" /><!-- 基本信息 -->
+	<attribute name="考试号" abcattr="考试号" /><!-- 基本信息 -->
+	<attribute name="联系电话" abcattr="联系电话" /><!-- 基本信息 -->
+	<attribute name="血型" abcattr="血型" /><!-- 基本信息 -->
+	<attribute name="认定档次" abcattr="认定档次" /><!-- 基本信息 -->
+	<attribute name="认定理由" abcattr="认定理由" /><!-- 基本信息 -->
+	<attribute name="身份证号" abcattr="身份证号" /><!-- 基本信息 -->
+
+	<multiattribute name="享受资助" abcattr="享受资助">
+		<attribute name="资助类别" abcattr="资助类别" />
+		<attribute name="资助标准" abcattr="资助标准" />
+		<attribute name="开始时间" abcattr="开始时间" />
+		<attribute name="结束时间" abcattr="结束时间" />
+	</multiattribute>
+
+	<multiattribute name="证件信息" abcattr="证件信息">
+		<attribute name="证件类别" abcattr="证件类别" />
+		<attribute name="证件编号" abcattr="证件编号" />
+	</multiattribute>
+
+	<multiattribute name="任职情况" abcattr="任职情况">
+		<attribute name="任职起始时间" abcattr="任职起始时间" />
+		<attribute name="任职终止时间" abcattr="任职终止时间" />
+		<attribute name="任职名称" abcattr="任职名称" />
+		<attribute name="任职级别" abcattr="任职级别" />
+		<attribute name="任职描述" abcattr="任职描述" />
+	</multiattribute>
+
+	<multiattribute name="获奖情况" abcattr="获奖情况">
+		<attribute name="获奖时间" abcattr="获奖时间" />
+		<attribute name="获奖级别" abcattr="获奖级别" />
+		<attribute name="获奖名称" abcattr="获奖名称" />
+	</multiattribute>
+
+	<multiattribute name="科研立项" abcattr="科研立项">
+		<attribute name="科研立项时间" abcattr="科研立项时间" />
+		<attribute name="科研立项级别" abcattr="科研立项级别" />
+		<attribute name="科研立项名称" abcattr="科研立项名称" />
+	</multiattribute>
+
+	<multiattribute name="社会实践" abcattr="社会实践">
+		<attribute name="社会实践时间" abcattr="社会实践时间" />
+		<attribute name="社会实践名称" abcattr="社会实践名称" />
+		<attribute name="社会实践内容" abcattr="社会实践内容" />
+	</multiattribute>
+
+	<multiattribute name="各期成绩排名" abcattr="各期成绩排名">
+		<attribute name="学期名称" abcattr="学期名称" />
+		<attribute name="学分绩点" abcattr="学分绩点" />
+		<attribute name="班级排名" abcattr="班级排名" />
+		<attribute name="排名人数" abcattr="排名人数" />
+	</multiattribute>
+
+	<multiattribute name="勤工岗" abcattr="勤工岗">
+		<attribute name="岗位名称" abcattr="岗位名称" />
+		<attribute name="学期" abcattr="学期" />
+		<attribute name="年份" abcattr="年份" />
+		<attribute name="描述" abcattr="描述" />
+	</multiattribute>
+
+	<multiattribute name="实习信息" abcattr="实习信息">
+		<attribute name="实习住址" abcattr="实习住址" />
+		<attribute name="实习电话" abcattr="实习电话" />
+		<attribute name="开始时间" abcattr="开始时间" />
+		<attribute name="是否实习在岗" abcattr="是否实习在岗" />
+		<attribute name="岗位描述" abcattr="岗位描述" />
+		<attribute name="专业是否对口" abcattr="专业是否对口" />
+		<attribute name="实习工资" abcattr="实习工资" />
+		<attribute name="岗位获取途径" abcattr="岗位获取途径" />
+	</multiattribute>
+
+	<multiattribute name="心理生" abcattr="心理生">
+		<attribute name="问题记录时间" abcattr="问题记录时间" />
+		<attribute name="问题描述" abcattr="问题描述" />
+		<attribute name="心理测试类别" abcattr="心理测试类别" />
+		<attribute name="干预措施" abcattr="干预措施" />
+		<attribute name="有无吃药" abcattr="有无吃药" />
+		<attribute name="整体状况" abcattr="整体状况" />
+		<attribute name="心理生备注" abcattr="心理生备注" />
+	</multiattribute>
+
+	<multiattribute name="毕业信息" abcattr="毕业信息">
+		<attribute name="毕业中学" abcattr="毕业中学" />
+		<attribute name="毕业类别" abcattr="毕业类别" />
+	</multiattribute>
+
+	<multiattribute name="成绩信息" abcattr="成绩信息">
+		<attribute name="成绩学年" abcattr="成绩学年" />
+		<attribute name="成绩学期" abcattr="成绩学期" />
+		<attribute name="课程名称" abcattr="课程名称" />
+		<attribute name="课程类型" abcattr="课程类型" />
+		<attribute name="课程成绩" abcattr="课程成绩" />
+	</multiattribute>
+
+
+</ABC>

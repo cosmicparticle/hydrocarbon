@@ -1,0 +1,38 @@
+<script id="paginator">
+	<div class="cpf-paginator">
+		<ul class="pagination pagination-sm">
+			{{if totalCount == null}}
+				<li class="cpf-paginator-total-count" on-click="viewCount"><span>点击查看总数</span></li>
+			{{else}}
+				<li class="cpf-paginator-total-count counted"><span>共${totalCount}条</span></li>
+			{{/if}}
+			
+			<li class="cpf-paginator-pagesize">
+				<select class="page-size-select" on-change="changePageSize">
+					<option value="5">5</option>
+					<option value="10">10</option>
+					<option value="15">15</option>
+					<option value="20">20</option>
+					</select>
+			</li>
+			{{if pageNo > 1}}
+				<li on-click="do:goPage(1)"><a href="#">«</a></li>
+			{{/if}}
+			{{each(i, pn) pageNos.frontPageNos}}
+				<li 
+					on-click="${pn == pageNo? '': 'do:goPage(' + pn + ')'}"
+					class="${pn == pageNo? 'active': ''}"><a href="#">${pn}</a></li>
+			{{/each}}
+			{{if pageNos.endPageNos}}
+				<li><a href="#">...</a></li>
+				{{each(i, pn) pageNos.endPageNos}}
+					<li on-click="do:goPage(${pn})"><a href="#">${pn}</a></li>
+				{{/each}}
+			{{/if}}
+			<li class="cpf-paginator-jump">
+				<input type="text" class="cpf-paginator-jump-text" />
+				<button on-click="goPageTo" type="button" class="cpf-paginator-jump-button btn-default btn">go</button>
+			</li>
+		</ul>
+	</div>
+</script>

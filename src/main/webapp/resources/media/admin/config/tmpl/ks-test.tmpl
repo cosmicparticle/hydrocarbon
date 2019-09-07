@@ -1,0 +1,21 @@
+<script id="ks-criterias">
+	{{each(i, criteria) ks.criterias}}
+		<div class="row" style="margin-top:5px;display: flex;align-items: center;">
+			<label class="control-label col-lg-2 col-lg-offset-1">${criteria.name}</label>
+			<div class="col-lg-8">
+				<input ${criteria.source === 'param'? 'readonly="readonly"': ''} on-change="do:triggerCriteriaChange(ks.criterias[${i}])" class="form-control criteria-value" type="text"/>
+			</div>
+			{{if criteria.source === 'param'}}
+				<div class="col-lg-1">
+					<div class="checkbox" title="切换参数显示状态">
+						<label>
+							<input type="checkbox" on-change="do:toggleCriteriaEnabled(ks.criterias[${i}])" />
+							<span class="text"></span>
+						</label>
+					</div>
+				</div>
+			{{/if}}
+		</div>
+	{{/each}}
+
+</script>

@@ -1,0 +1,22 @@
+<script id="table">
+	<table class="table">
+		{{if data.headers}}
+			<thead>
+				<tr class="${headerRowClass}">
+					{{each(i, header) data.headers}}
+						<th>${header.title}</th>
+					{{/each}}
+				</tr>
+			</thead>
+		{{/if}}
+		<tbody>
+			{{each(i, row) data.rows}}
+				<tr class="${dataRowClass}">
+					{{each(j, cell) row.cells}}
+						<td>${cell.title}</td>
+					{{/each}}
+				</tr>
+			{{/each}}
+		</tbody>
+	<table>
+</script>

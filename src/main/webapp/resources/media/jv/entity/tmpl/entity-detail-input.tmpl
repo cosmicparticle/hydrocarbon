@@ -1,0 +1,65 @@
+<script id="input-text">
+	<input type="text" />
+</script>
+<script id="input-int">
+	<input type="text" />
+</script>
+
+<script id="input-textarea">
+	<textarea></textarea>
+</script>
+
+<script id="input-password">
+	<span class="cpf-field-input-password-wrapper">
+		<input type="password" autocomplete="off"/>
+		<input type="password" autocomplete="off" />
+	</span>
+</script>
+
+<script id="input-select">
+	<span class="field-input-wrapper">
+		<select input-role="select">
+			{{if withoutEmpty != true}}
+				<option value="">---请选择---</option>
+			{{/if}}
+			{{each(i, option) options}}
+				<option value="${option.value}">${option.title}</option>
+			{{/each}}
+		</select>
+	</span>
+</script>
+
+<script id="input-multiselect">
+	<span class="field-input-wrapper">
+		<span class="cpf-select-sign cpf-select-sign-and"></span>
+		<select multiple="multiple">
+			{{each(i, option) options}}
+				<option value="${option.value}">${option.title}</option>
+			{{/each}}
+		</select>
+	</span>
+</script>
+
+<script id="input-date">
+	<input type="text" readonly="readonly" class="field-input-readonly">
+</script>
+
+<script id="input-decimal">
+	<input type="number">
+</script>
+
+<script id="input-caselect">
+	<span class="cpf-field-input-caselect cpf-field-input">
+		<span class="cpf-field-input-caselect-input"></span>
+	</span>
+</script>
+
+<script id="input-file">
+	<span class="cpf-file-input-container cpf-field-input">
+	</span>
+</script>
+
+
+<script id="input-unknown">
+	<span title="未知控件-${fieldType}">未知控件</span>
+</script>

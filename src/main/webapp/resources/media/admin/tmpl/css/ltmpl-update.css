@@ -1,0 +1,555 @@
+@CHARSET "UTF-8";
+.ltmpl-update{
+	font-size: 15px;
+}
+.ltmpl-update .widget-caption{
+	font-size: 1.3em;
+}
+.ltmpl-update label{
+	font-size: 1em;
+}
+
+.ltmpl-update input#tmplTitle {
+    margin-bottom: 1.8em;
+    font-size: 1em;
+    line-height: 2.5em;
+    height: 2.5em;
+}
+
+
+.ltmpl-update .row.col-field-search>div {
+    padding: 0;
+}
+.ltmpl-update .row.col-field-search .field-search{
+	width: 100%;
+}
+.ltmpl-update .table-config-area .row {
+    margin: 0;
+    border: none;
+}
+
+
+.ltmpl-update .row.col-field-search {margin-bottom: 10px;}
+
+.ltmpl-update .cols-wrapper {
+    margin-top: 10px;
+    border: 1px solid #d0d0d0;
+    height: 200px;
+    font-size: 0.9em;
+    padding: 0;
+   	position: relative;
+   	overflow: hidden; 
+}
+
+.ltmpl-update .cols-container {
+    position: absolute;
+    left: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    right: -15px;
+    top: 0;
+    bottom: 0;
+}
+
+.ltmpl-update .cols-container .row {
+    border-bottom: 1px solid #ddd;
+    margin: 0 3px;
+    position: relative;
+    height: 37px;
+    line-height: 37px;
+    cursor: move;
+}
+
+.ltmpl-update .cols-container span.col-operates {
+    position: absolute;
+    right: 15px;
+    font-size: 0.6em;
+    top: 0;
+    height: 37px;
+    line-height: 37px;
+}
+
+.ltmpl-update span.col-name {
+   display: inline-block;
+    width: 70%;
+    text-align: left;
+    text-indent: 1.4em;
+    height: 37px;
+    line-height: 37px;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.ltmpl-update .config-label {
+    display: inline-block;
+}
+
+.ltmpl-update .table-config-comment>.row {
+    height: 40px;
+    line-height: 40px;
+}
+
+.ltmpl-update div#show-col {
+    font-size: 0.9em;
+}
+.ltmpl-update .table-config-comment div,
+.ltmpl-update .table-config-comment label{
+	padding: 0;
+}
+.ltmpl-update #pageSize {
+    height: 2em;
+    line-height: 2em;
+    width: 8em;
+    text-align: center;
+}
+
+.ltmpl-update input[type=checkbox].checkbox-slider.colored-blue+.text:before{
+	margin-right: 1.2em;
+}
+
+.ltmpl-update .cols-container span.col-operates i{
+	font-size: 16px;
+	cursor: pointer;
+	color: #333;
+	margin-right: 5px;
+}
+.ltmpl-update .cols-container span.col-operates i.fa{
+	font-size: 18px;
+}
+.ltmpl-update .cols-container span.col-operates i:HOVER {
+	color: #999;
+}
+
+.ltmpl-update td[field-id=row-operates] a+a{
+	margin-left: 5px;
+}
+
+.ltmpl-update #isAscending {
+    height: 34px;
+    line-height: 48px;
+    margin-left: 15px;
+}
+
+.ltmpl-update #isAscending .text {
+    line-height: 34px;
+    height: 34px;
+    vertical-align: middle;
+    margin: 0;
+}
+.ltmpl-update #isAscending .text:before{
+    content: "升序";
+    text-align: right;
+    padding-right: 10px;
+    padding-left: 0;
+    width: 70px;
+}
+.ltmpl-update #isAscending input:checked+.text:before{
+    content: "降序";
+    text-align: left;
+    padding-right: 0;
+}
+.ltmpl-update #isAscending .checkbox-slider:checked+.text:after{
+	left: 50px;
+}
+
+
+
+
+.ltmpl-update .criterias-area-body{
+	width: 100%;
+	font-size: 15px;
+	height: 350px;
+	display: flex;
+}
+
+.ltmpl-update .criterias-area-title,.ltmpl-update  .criteria-detail-title {
+    border-bottom: 1px solid #d0d0d0;
+    padding-left: 10px;
+    top: 0;
+    left: 0;
+    position: absolute;
+    right: 0;
+    height: 35px;
+    line-height: 35px;
+}
+
+.ltmpl-update .criterias-area-title h2,.ltmpl-update .criteria-detail-title h2 {
+    font-size: 18px;
+    margin: 0;
+    padding: 0;
+    height: 35px;
+    line-height: 35px;
+    float: left;
+}
+
+.ltmpl-update .criterias-area-title span#add-criteria{
+	float: right;
+    display: inline-block;
+    font-size: 17px;
+    margin-right: 10px;
+    border: 2px solid #ccc;
+    border-radius: 50%;
+    height: 30px;
+    width: 30px;
+    margin-top: 2px;
+    line-height: 27px;
+    text-align: center;
+    color: #5db2ff;
+    border-color: #5db2ff;
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+.ltmpl-update .criterias-area,.ltmpl-update .criteria-detail-area {
+    padding: 0;
+}
+.ltmpl-update .criteria-detail-area{
+	display: none;
+}
+
+.ltmpl-update .criterias-wrapper,.ltmpl-update .criteria-detail-wrapper {
+    overflow: hidden;
+    position: absolute;
+    top: 40px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 10px;
+}
+
+.ltmpl-update .criterias-container, .ltmpl-update .criteria-detail-container {
+    overflow-x: hidden;
+    overflow-y: scroll;
+    position: absolute;
+    left: 10px;
+    right: -20px;
+    bottom: 10px;
+    top: 0;
+    display: block;
+}
+
+.ltmpl-update .criterias-area-body>div {
+    height: 100%;
+}
+
+.ltmpl-update .critreias-area-wrapper, .ltmpl-update .criteria-detail-area-wrapper {
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+.ltmpl-update .criteria-item {
+    width: 96%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border: 1px solid #eee;
+    margin-top: 10px;
+    cursor: default !important;
+    min-height: 70px;
+    position: relative;
+    overflow: hidden;
+}
+.ltmpl-update .criteria-item.criteria-hidden {
+    background-color: #efefef;
+    border-color: #bbb;
+}
+.ltmpl-update .criteria-item.criteria-selected {
+    border: 2px solid #5db2ff;
+}
+
+
+.ltmpl-update .criteria-item:hover span.btn-remove-criteria{
+    display: inline;
+}
+.ltmpl-update span.btn-remove-criteria {
+    display: none;
+    position: absolute;
+    right: -25px;
+    top: -25px;
+    width: 50px;
+    height: 50px;
+    background-color: #5db2ff;
+    border-radius: 50%;
+    line-height: 73px;
+    vertical-align: bottom;
+    text-indent: 10px;
+    color: #fff;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.ltmpl-update span.btn-remove-criteria:hover {
+    background-color: #87CEFF;
+}
+.ltmpl-update span.btn-remove-criteria:before {
+    content: "×";
+}
+
+
+.ltmpl-update .criteria-property-name {
+    display: flex;
+    width: 30%;
+}
+.ltmpl-update .criteria-property-name>span{
+	text-align: center;
+	display: block;
+	width: 100%;
+	font-weight: bolder;
+    font-size: 1.2em;
+}
+
+.ltmpl-update .criteria-partitions-container {
+    display: flex;
+    width: 70%;
+    flex-direction: column;
+    border-left: 1px solid #eee;
+}
+.criteria-partitions-container>.criteria-partition:first-child .criteria-partition-relation{
+	visibility: hidden;
+}
+
+.ltmpl-update .criteria-partition {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	height: 40px;
+	text-align: center;
+	line-height: 40px;
+}
+.ltmpl-update .criteria-partition:hover{
+	background-color: 	#FfFfFf;
+}
+.ltmpl-update .criteria-partition+.criteria-partition{
+	border-top: 1px solid #eee;
+}
+.ltmpl-update .criteria-partition:nth-child(even){
+	background-color: #fdfdfd !important;
+}
+.ltmpl-update .criteria-partition-relation {
+    width: 20%;
+}
+
+.ltmpl-update .criteria-partition-comparator {
+    width: 20%;
+}
+
+.ltmpl-update .criteria-partition-value {
+    width: 60%;
+}
+
+.ltmpl-update .criteria-show-toggle-row span.text{
+	font-size:9px;
+	color: #999 !important;
+}
+.ltmpl-update .criteria-show-toggle-row>div{
+	padding-left: 2em;
+}
+
+
+.ltmpl-update .criteria-detail-container>.row>div{
+    padding-left: 2em;
+}
+.ltmpl-update .criteria-field-search-row .field-search {
+    width: 90%;
+}
+
+.ltmpl-update .criteria-detail-container .row {
+    border: none;
+}
+.ltmpl-update .criteria-show-toggle-row {
+    height: 40px;
+    line-height: 40px;
+}
+
+.ltmpl-update .criteria-detail-show-config-container>div {
+    float: left;
+    width: 100%;
+    margin: 5px 0;
+}
+.ltmpl-update .criteria-detail-show-config-container>div>label{
+    width: 30%;
+    display: inline-block;
+}
+.ltmpl-update .criteria-detail-show-config-container>div>div{
+    width: 65%;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.ltmpl-update .criteria-detail-show-config-container{
+	padding-left: 50px;
+}
+.ltmpl-update .criteria-detail-partitions-container{
+	display: none;
+	padding-left: 50px;
+}
+
+
+
+.ltmpl-update .critreias-area-wrapper,
+.ltmpl-update .criteria-detail-area-wrapper{
+	border : 1px solid #d0d0d0;
+	width: 97%;
+}
+
+.ltmpl-update .criteria-detail-partitions-container>div {
+    width: 95%;
+    height: 30px;
+    position: relative;
+    line-height: 30px;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+.ltmpl-update .criteria-detail-partition>div{
+    float:left;
+    text-align: center;
+    position: absolute;
+    border: 1px solid #ccc;
+    background-color: #fff !important;
+}
+.ltmpl-update .criteria-detail-relation {
+    left: 0;
+    width: 5em;
+}
+
+.ltmpl-update .criteria-detail-comparator {
+    left: 5.2em;
+    width: 6em;
+}
+
+.ltmpl-update .criteria-detail-value {
+    left: 11.4em;
+    right: 1.7em;
+}
+.ltmpl-update .criteria-detail-partition>div>input,
+.ltmpl-update .criteria-detail-partition>div>select{
+    width:100%;
+    height: 100%;
+    border:none;
+    padding: 0 8px;
+    background-color: #fff !important;
+}
+.ltmpl-update .criteria-detail-partition>div>input{
+	padding-left: 0.5em;
+}
+.ltmpl-update .criteria-detail-partition>div>input:focus,
+.ltmpl-update .criteria-detail-partition>div>select:focus{
+	outline:none;
+	border:none;
+	box-shadow: none;
+}
+@media (max-width:992px){
+	.ltmpl-update .criterias-area-body{
+		height: 700px;
+	}
+	.ltmpl-update .criteria-detail-area {
+		margin-top: 15px;
+	}
+	.ltmpl-update .criterias-area-body>div{
+		height: 50%;
+	}
+}
+.ltmpl-update .criteria-partition-add {
+    background-color: #efefef;
+    text-align: center;
+    font-size: 20px !important;
+    color: #5db2ff!important;
+    border: 1px solid #ddd;
+    cursor: pointer;
+    margin-top: 15px
+}
+.ltmpl-update .criteria-partition-add:hover{
+	background-color: #f9f9f9;
+}
+.ltmpl-update .criteria-detail-partition-operate {
+    right: 0;
+    width: 1.8em;
+    cursor: pointer;
+}
+.ltmpl-update .criteria-detail-partition-operate>span:before{
+    content: "×";
+}
+.ltmpl-update .criteria-detail-partition>div.criteria-detail-partition-operate:hover{
+    color: #999;
+    background-color: #eee !important;
+}
+
+.ltmpl-update div#relation-label-row {
+    /* min-height: 60px; */
+}
+.ltmpl-update div#relation-label-row>label {
+    height: 100%;
+    display: block;
+    float: left;
+}
+.ltmpl-update div#relation-label-row>#relation-label-value-wrap{
+    height: 100%;
+    display: block;
+    float: left;
+    max-height: 100px;
+    overflow: auto;
+}
+
+
+.ltmpl-update .row.col-field-unavailable,
+.ltmpl-update th.col-field-unavailable,
+.ltmpl-update td.col-field-unavailable {
+    background-color: #888;
+    border: solid #888 !important;
+    position: relative !important;
+}
+.ltmpl-update .row.col-field-unavailable:after,
+.ltmpl-update th.col-field-unavailable:before {
+    content: "\e73d";
+    font-family: "iconfont" !important;
+    font-size: 2em;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    position: absolute;
+    -moz-osx-font-smoothing: grayscale;
+    top:0;
+    color: #FFff00;
+}
+
+
+.ltmpl-update #criteria-detail-cover{
+	display: none;
+}
+
+.ltmpl-update div#criteria-detail-cover.cover-active {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    display: block;
+    background-color: #fff;
+    opacity: 0.7;
+    z-index: 100000;
+}
+
+.ltmpl-update .criteria-item.criteria-field-unavailable {
+    background-color: #999;
+}
+
+.ltmpl-update .criteria-item.criteria-field-unavailable:before {
+    content: "\e73d";
+    font-family: "iconfont" !important;
+    font-size: 2em;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    position: absolute;
+    -moz-osx-font-smoothing: grayscale;
+    color: #FFff00;
+}
+
+.ltmpl-update .hide-when-no-field select {
+    padding: 3px 10px;
+}
+.ltmpl-update .hide-when-no-field input[type="text"]{
+    padding: 3px;
+}

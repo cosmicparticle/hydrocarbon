@@ -1,0 +1,189 @@
+<script id="change-mode">
+	{{if mode === 'module'}}
+		模块列表
+		<a href="#" id="change-mode" title="切换到自定义页面"  on-click="do:changeTo('custom')"><i class="fa fa-exchange"></i></a>
+	{{else mode === 'custom'}}
+		自定义页面列表
+		<a href="#" id="change-mode" title="切换到模块页面"  on-click="do:changeTo('module')"><i class="fa fa-exchange"></i></a>
+	{{/if}}
+</script>
+<script id="btn-add-custom-page">
+	{{if mode === 'custom'}}
+		<a href="#" class="btn-add-custom-page" title="添加自定义页面" on-click="addCustomPage"><i class="fa fa-plus-square"></i></a>
+	{{/if}}
+</script>
+<script id="blocks">
+	{{each(i, block) blocks}}
+		<li class="block-wrapper dd-item ${block === selectedBlock? 'selected': ''}" on-render="do:bindBlock(blocks[${i}])">
+			<div class="dd-handle" on-click="do:selectBlock(blocks[${i}])">
+				<span class="block-title" on-dblclick="do:editTitle(blocks[${i}])">${block.title}</span>
+				<span class="level-operate">
+					<a href="#" data-auths="${block.authorities}" title="权限：(${(blockAuthDescMap[block.id] || []).join(';')})" on-click="do:selectAuthority(blocks[${i}])"><i class="authority-config icon iconfont icon-authority"></i></a>
+					<a href="#" on-click="do:removeBlock(blocks[${i}])"><i class="del-level fa fa-trash-o"></i></a>
+				</span>
+			</div>
+		</li>
+	{{/each}}	
+</script>
+<script id="l2menu">
+	<li class="dd-item l2-menu-item l2-menu-item-view-${l2Menu.viewType}" on-render="do:bindL2Menu(l2Menu)">
+		<div class="dd-handle">
+			<span class="level2-title" on-dblclick="do:editTitle(l2Menu)">${l2Menu.title }</span>
+			<span class="level-operate">
+				<a href="#" data-auths="${l2Menu.authorities}" title="权限：()" on-click="do:selectAuthority(l2Menu)"><i class="authority-config icon iconfont icon-authority"></i></a>
+				<a href="#" on-click="do:removeL2Menu(l2Menu, l1Menu)"><i class="del-level fa fa-trash-o"></i></a>
+			</span>
+			{{if l2Menu.templateGroupId}}
+				<span class="tip-level-title">${l2Menu.templateModuleTitle}-${l2Menu.statViewTitle }</span>
+			{{else l2Menu.statViewId}}
+				<span class="tip-level-title">${l2Menu.templateModuleTitle}-${l2Menu.statViewTitle }</span>
+			{{else l2Menu.customPageTitle}}
+				<span class="tip-level-title">自定义-<span on-render="do:listenToCustomChange(l2Menu)">${l2Menu.customPageTitle }</span></span>
+			{{/if}}
+		</div>
+	</li>
+</script>
+<script id="menus">
+	{{if selectedBlock}}
+		{{each(i, l1Menu) selectedBlock.l1Menus}}
+			<li class="dd-item l1-menu-item" on-render="do:bindL1Menu(selectedBlock.l1Menus[${i}])">
+				<div class="dd-handle">
+					<i class="drag-handle icon-CombinedShape iconfont"></i>
+					<span class="level1-title" on-dblclick="do:editTitle(selectedBlock.l1Menus[${i}])">${l1Menu.title }</span>
+					<span class="level-operate">
+						<a href="#" data-auths="${l1Menu.authorities}" title="权限：(${(l1AuthDescMap[l1Menu.id] || []).join(';')}" on-click="do:selectAuthority(selectedBlock.l1Menus[${i}])"><i class="authority-config icon iconfont icon-authority"></i></a>
+						<a href="#" on-click="do:removeL1Menu(selectedBlock.l1Menus[${i}], selectedBlock)"><i class="del-level fa fa-trash-o"></i></a>
+					</span>
+				</div>
+				<ol class="dd-list">
+					{{if l1Menu.l2Menus && l1Menu.l2Menus.length > 0}}
+						{{each(j, l2Menu) l1Menu.l2Menus}}
+							<li class="dd-item l2-menu-item l2-menu-item-view-${l2Menu.viewType}" on-render="do:bindL2Menu(selectedBlock.l1Menus[${i}].l2Menus[${j}])">
+								<div class="dd-handle">
+									<span class="level2-title"  on-dblclick="do:editTitle(selectedBlock.l1Menus[${i}].l2Menus[${j}])">${l2Menu.title }</span>
+									<span class="level-operate">
+										<a href="#" data-auths="${l2Menu.authorities}" title="权限：(${(l2AuthDescMap[l2Menu.id] || []).join(';')})"  on-click="do:selectAuthority(selectedBlock.l1Menus[${i}].l2Menus[${j}])"><i class="authority-config icon iconfont icon-authority"></i></a>
+										<a href="#" on-click="do:removeL2Menu(selectedBlock.l1Menus[${i}].l2Menus[${j}], selectedBlock.l1Menus[${i}])"><i class="del-level fa fa-trash-o"></i></a>
+									</span>
+									{{if l2Menu.templateGroupId}}
+										<span class="tip-level-title">${l2Menu.templateModuleTitle}-${l2Menu.templateGroupTitle}</span>
+									{{else l2Menu.statViewId}}
+										<span class="tip-level-title">${l2Menu.templateModuleTitle}-${l2Menu.statViewTitle }</span>
+									{{else l2Menu.customPageTitle}}
+										<span class="tip-level-title">自定义-<span on-render="do:listenToCustomChange(selectedBlock.l1Menus[${i}].l2Menus[${j}])">${l2Menu.customPageTitle }</span></span>
+									{{/if}}
+								</div>
+							</li>
+						{{/each}}
+					{{/if}}
+				</ol>
+			</li>
+		{{/each}}
+	{{/if}}
+</script>
+
+
+<script id="modules">
+	<ol id="modules-container" class="dd-list modules-container">
+		{{each(i, module) modules}}
+			{{if !module.statDetail}}
+				<li class="dd-item module-wrapper">
+					<div class="dd-handle">
+						<span class="source-title">${module.title }</span>
+						<span class="level-operate">
+							<a title="列表模板" href="admin/tmpl/ltmpl/list/${module.name }" class="tab" target="${module.name }_ltmpl_list"><i class="iconfont icon-tools"></i></a>
+							<a title="详情模板" href="admin/tmpl/dtmpl/list/${module.name }" class="tab" target="${module.name }_dtmpl_list"><i class="iconfont icon-detail"></i></a>
+							<a title="操作模板" href="admin/tmpl/atmpl/list/${module.name }" class="tab" target="${module.name }_atmpl_list"><i class="iconfont icon-action"></i></a>
+							<a title="字段过滤" href="admin/tmpl/dictfilter/list/${module.name }" class="tab" target="${module.name }_dictfilter_list"><i class="iconfont icon-filter"></i></a>
+							<a title="树形结构" href="admin/tmpl/tree/list/${module.name }" class="tab" target="${module.name }_tmpl_tree_list"><i class="iconfont icon-tree"></i></a>
+							<a title="模板组合" href="admin/tmpl/group/list/${module.name }" class="tab" target="${module.name }_tmpl_group_list"><i class="iconfont icon-group"></i></a>
+						</span>
+					</div>
+					<ol class="dd-list">
+						{{each(j, tmplGroup) module.tmplGroups}}
+							<li>
+								<div class="dd-handle md-group-title" on-render="do:bindViewData('normal', modules[${i}].tmplGroups[${j}], modules[${i}])">
+									<span class="source-title">${tmplGroup.title }</span>
+								</div>
+							</li>
+						{{/each}}
+					</ol>
+				</li>
+			{{else}}
+				<li class="dd-item module-wrapper stat-module">
+					<div class="dd-handle">
+						<span class="source-title">${module.title }</span>
+						<span class="level-operate">
+							<a title="列表模板" href="admin/tmpl/stat/ltmpl/list/${module.name }" class="tab" target="${module.name }_stat_ltmpl_list"><i class="iconfont icon-tools"></i></a>
+							<a title="统计视图模板" href="admin/tmpl/stat/vtmpl/list/${module.name }" class="tab" target="${module.name }_stat_tmpl_group_list"><i class="iconfont icon-group"></i></a>
+						</span>
+					</div>
+					<ol class="dd-list">
+						{{each(j, view) module.statDetail.views}}
+							<li>
+								<div class="dd-handle md-group-title" on-render="do:bindViewData('stat', modules[${i}].statDetail.views[${j}], modules[${i}])">
+									<span class="source-title">${view.title }</span>
+								</div>
+							</li>
+						{{/each}}
+					</ol>
+				</li>
+			{{/if}}
+		{{/each}}
+	</ol>
+</script>
+<script id="customPages">
+	<ol id="custom-page-container" class="dd-list modules-container" style="${mode === 'custom'? '': 'display:none;'}">
+		{{each(i, customPage) customPages}}
+			<li class="dd-item custom-page-wrapper" title="${customPage.description}">
+				<div class="dd-handle" on-render="do:bindViewData('custom', customPages[${i}])">
+					<span class="source-title">${customPage.title}</span>
+					<span class="level-operate">
+						<a href="#" on-click="do:editCustomPage(customPages[${i}])"><i class="fa fa-edit"></i></a>
+						<a href="#" on-click="do:removeCustomPage(customPages[${i}])"><i class="fa fa-trash-o"></i></a>
+					</span>
+					<span class="tip-level-title custom-page-path">${customPage.path}</span>
+				</div>
+			</li>
+		{{/each}}
+	</ol>
+</script>
+
+
+<script id="customPageConfig">
+	<form class="bv-form form-horizontal validate-form">
+		<div class="form-group">
+			<label class="col-lg-3 col-xs-3 tooltip-label control-label">
+				名称
+				<span class="badge" title="自定义页面的名称，不能为空" data-toggle="tooltip" data-placement="bottom">?</span>
+			</label>
+			<div class="col-lg-9 col-xs-9">
+				<input class="form-control" type="text" name="title" id="custom-page-title" value="${customPage.title}" data-bv-notempty="true" data-bv-notempty-message="不能为空"/>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-3 col-xs-3 tooltip-label control-label">
+				路径
+				<span class="badge" title="自定义页面的路径，不能为空" data-toggle="tooltip" data-placement="bottom">?</span>
+			</label>
+			<div class="col-lg-9 col-xs-9">
+				<input class="form-control" type="text" name="path" id="custom-page-path" value="${customPage.path}" data-bv-notempty="true" data-bv-notempty-message="不能为空"/>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-3 col-xs-3 tooltip-label control-label">
+				描述
+			</label>
+			<div class="col-lg-9 col-xs-9">
+				<textarea class="form-control" name="desc" id="custom-page-desc" rows="10">${customPage.description}</textarea>
+			</div>
+		</div>
+	</form>
+	<div class="modal-footer">
+		<div class="row">
+			<div class="col-lg-3 col-lg-offset-4">
+				<input id="submit" class="btn btn-primary btn-block submit" type="button" value="确定" /> 
+			</div>
+		</div>
+	</div>
+</script>

@@ -1,0 +1,47 @@
+.btn-icon-selector {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    background-color: #57b5e3;
+    opacity: 0.5;
+    border-radius: 5px;
+    cursor: pointer;
+    color: #fff;
+    padding: 5px;
+    text-align: center;
+}
+.btn-icon-selector>i {
+    font-size: 20px;
+}
+
+.icon-selector-flex {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.icon-selector-flex>span {
+    display: inline-block;
+    width: 35px;
+    height: 33px;
+    margin: 8px;
+    padding: 7px;
+    background-color: #57b5e3;
+    opacity: 0.5;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.icon-selector-flex>span>i {
+    font-size: 20px;
+    color: #fff;
+}
+
+.icon-selector-flex>span:hover{
+    opacity: 0.3;
+}
+
+.icon-selector-flex>span.icon-selector-selected {
+    border: 2px solid #000;
+    border-radius: 0;
+}

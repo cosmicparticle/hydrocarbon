@@ -1,0 +1,395 @@
+@CHARSET "UTF-8";
+.viewtmpl-update {
+    min-height: 95%;
+}
+.viewtmpl-update .widget-caption{
+	font-size: 1.3em;
+}
+.viewtmpl-update .movable, .viewtmpl-update .movable label{
+	cursor: move;
+}
+.viewtmpl-update .field-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    min-height: 60px;
+}
+.viewtmpl-update .field-item , .viewtmpl-update .field-item-placeholder{
+    width: 50%;
+    margin-left: 0;
+    margin-right: 0;
+    line-height: 3.5em;
+    min-height: 3.5em;
+    font-size: 1.1em;
+    float: left;
+    border-bottom: 1px solid #ddd;
+    position: relative;
+    margin: 7px 0;
+}
+.viewtmpl-update .field-item-placeholder{
+	background-color: #888;
+}
+.viewtmpl-update .field-item-placeholder.dbcol{
+	width: 100% !important;
+}
+.viewtmpl-update .dbcol.field-item {
+    width: 100% !important;
+}
+.viewtmpl-update label.field-title {
+    width: 20%;
+    padding-right: 4%;
+    font-weight: bold;
+}
+.viewtmpl-update .dbcol label.field-title {
+    width: 10% !important;
+    padding-right: 2% !important;
+}
+
+.viewtmpl-update .group-item-placeholder{
+	width: 100%;
+	height: 40px;
+	background-color: #aaa;
+}
+.viewtmpl-update .field-item>.field-title, .viewtmpl-update .field-item>.field-value{
+	display: inline-block;
+    min-height: 3.5em;
+    line-height: 3.5em;
+    padding-top: 0;
+    margin-top: 0;
+    font-size: 16px;
+    vertical-align: middle;
+    word-break: break-word;
+}
+.viewtmpl-update span.field-view {
+    line-height: 2em;
+    word-break: break-word;
+    display: inline-block;
+}
+.viewtmpl-update .field-item .operate-buttons, .viewtmpl-update .widget-caption>.operate-buttons {
+	position: absolute;
+    font-size: 1.4em !important;
+    background-color: #fff;
+    line-height: 2em !important;
+    height: 2em !important;
+    padding: 0 1em;
+    border-radius: 7px;
+    border: 1px solid #eee;
+    display: none;
+    cursor: default;
+}
+.viewtmpl-update .field-item .operate-buttons{
+	left: 18%;
+    top: -2em;
+}
+.viewtmpl-update .field-item.dbcol .operate-buttons{
+	left: 9%;
+    top: -2em;
+}
+.viewtmpl-update .operate-buttons a{
+	cursor: pointer;
+	color: #57b5e3;
+	margin: 0 0.2em;
+}
+.viewtmpl-update .operate-buttons a:HOVER{
+	color: #c9e2dd;
+}
+.viewtmpl-update .form-group:HOVER .operate-buttons{
+	display: block;
+}
+.viewtmpl-update .widget-caption>.operate-buttons{
+	left: 1em;
+    top: -2em;
+}
+.viewtmpl-update .widget-caption:HOVER>.operate-buttons{
+	display: inline-block;
+}
+
+
+.viewtmpl-update .field-value {
+    width: 70%;
+    max-height: 20em;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+.viewtmpl-update input.field-view{
+	font-size: 18px;
+	height: 2em;
+	line-height: 2em;
+}
+.viewtmpl-update #group-container {
+	margin-top: 20px;
+}
+.viewtmpl-update .field-search {
+    width: 15em;
+    display: inline-block;
+}
+.viewtmpl-update .remove-group{
+	font-size: 1.5em;
+	cursor: pointer;
+	color: #57b5e3;
+}
+.viewtmpl-update .remove-group:HOVER {
+	color: #c9e2dd;
+}
+.viewtmpl-update .group-container{
+	padding-bottom: 50px;
+}
+.viewtmpl-update .box-holdplace{
+	background-color: #888 !important;
+	border: 1px solid #000;
+}
+.viewtmpl-update #operate-area {
+    font-size: 3em;
+    line-height: 1.23em;
+    padding-right: 1em;
+    position: absolute;
+    bottom: 20px;
+    right: 1em;
+    z-index: 1000;
+    width: 1em;
+}
+.viewtmpl-update #operate-area a i{
+	cursor: pointer;
+	color: #57b5e3;
+	opacity: 0.5;
+}
+.viewtmpl-update #operate-area a i:HOVER{
+	opacity: 1;
+}
+.viewtmpl-update span.group-title{
+	cursor: move;
+	padding-right: 1em;
+}
+.viewtmpl-update input.group-title{
+	display: inline-block;
+    height: 1.5em;
+    font-size: 0.8em;
+    width: 10em;
+}
+.viewtmpl-update input.field-title{
+	width: 5em;
+	height: 1.4em;
+	line-height: 1.5em;
+	display: inline-block;
+	font-size: 16px;
+	text-align: right;
+}
+.viewtmpl-update .search-input-wrapper {
+    display: inline-block;
+    width: 100%;
+}
+.viewtmpl-update .search-input-wrapper>span{
+	width: 100%;
+}
+.viewtmpl-update .search-input-wrapper .input-xs {
+    padding-left: 26px;
+    padding-right: 26px;
+}
+
+.viewtmpl-update .field-search i.field-picker-button {
+    left: initial;
+    right: 0;
+    cursor: pointer;
+    font-size: 17px;
+}
+.viewtmpl-update .field-search i.field-picker-button:HOVER {
+	color: #388E8E !important;
+}
+
+.viewtmpl-update span.field-title-d {
+    display: inline !important;
+    word-break: keep-all !important;
+    opacity: 0 !important;
+}
+.viewtmpl-update .header-row>* {
+    height: 2.5em;
+    line-height: 2.5em;
+    text-align: right;
+    margin-bottom: 0;
+    font-size: 15px !important;
+    vertical-align: middle;
+}
+.viewtmpl-update input#tmplName {
+    font-size: 1em;
+    line-height: 2.5em;
+    height: 2.5em;
+}
+
+.viewtmpl-update div.fieldpicker-container {
+    position: absolute;
+    right: -20px;
+    bottom: -15em;
+    top: 35px;
+    z-index: 9999;
+    display: none;
+    width: 420px;
+}
+
+.viewtmpl-update .fieldpicker-container .nav-tabs.nav-justified {
+    display: flex;
+    flex-direction: row;
+}
+.viewtmpl-update .fieldpicker-container .nav-tabs.nav-justified>li {
+    display: block;
+    height: 30px;
+    line-height: 30px;
+    border-right: 1px solid #dcdcdc;
+    border-bottom: 1px solid #dcdcdc;
+    width: 110px;
+}
+
+.viewtmpl-update .fieldpicker-container .nav-tabs.nav-justified>li>a {
+    height: 29px;
+    word-break: keep-all;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+    line-height: 30px;
+    border-top: none;
+    background-color: #fafafa;
+    margin-top: 0;
+    width: 109px;
+    padding: 0;
+}
+
+.viewtmpl-update .fieldpicker-container .nav-tabs.nav-justified>li.active>a{
+	background-color: #fff;
+	height: 32px;
+}
+.viewtmpl-update .fieldpicker-container .nav-tabs.nav-justified>li.dropdown>a{
+    width: 90px;
+}
+.viewtmpl-update .fieldpicker-container a.dropdown-toggle {
+	text-align: center;
+}
+.viewtmpl-update .fieldpicker-container a.dropdown-toggle>span {
+    word-break: keep-all;
+    max-width: 3em;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    display: inline-block;
+}
+.viewtmpl-update .fieldpicker-container a.dropdown-toggle:AFTER{
+	content: "\f0dd";
+    vertical-align: top;
+    line-height: 25px;
+}
+.viewtmpl-update .fieldpicker-container li.dropdown ul.dropdown-menu li>a {
+    width: 170px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.viewtmpl-update a.fieldpicker-field-item {
+    border: 1px solid #c2c2c2;
+    padding: 2px 9px;
+    margin: 0 5px;
+    word-break: keep-all;
+    color: #00C5CD;
+}
+.viewtmpl-update a.fieldpicker-field-item:hover {
+    border: 1px solid #a0a0a0;
+    color: 	#009ACD;
+}
+.viewtmpl-update .fieldpicker-field-container {
+    width: 100%;
+    min-height: 100%;
+    word-break: keep-all;
+    word-wrap: break-word;
+}
+.viewtmpl-update .fieldpicker-container .tab-content {
+    padding: 5px 10px;
+}
+
+.viewtmpl-update a.disabled.fieldpicker-field-item {
+    color: #ccc !important;
+}
+
+.viewtmpl-update a#save i{
+    color: #EEAD0E !important;
+}
+.viewtmpl-update a#save i:HOVER{
+    color: 	#FFC125 !important;
+}
+
+
+/***********自动完成样式Start*****************/
+/*****************************************/
+
+.viewtmpl-update .typeahead {
+	background-color: #fff;
+}
+
+.viewtmpl-update .typeahead:focus {
+	border: 2px solid #0097cf;
+}
+
+.viewtmpl-update .tt-query {
+	-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+	-moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+	box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+}
+
+.viewtmpl-update .tt-hint {
+	color: #999
+}
+
+.viewtmpl-update .tt-menu {
+	width: 100%;
+	margin: 0;
+	padding: 8px 0;
+	background-color: #fff;
+	border: 1px solid #ccc;
+	-webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
+	-moz-box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
+	box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
+}
+
+.viewtmpl-update .tt-suggestion {
+	padding: 3px 16px;
+	line-height: 1.3em;
+	margin: 0;
+}
+
+.viewtmpl-update .tt-suggestion:hover {
+	cursor: pointer;
+	color: #fff;
+	background-color: #0097cf;
+}
+
+.viewtmpl-update .tt-suggestion.tt-cursor {
+	color: #fff;
+	background-color: #0097cf;
+}
+
+.viewtmpl-update .tt-suggestion p {
+	margin: 0;
+}
+
+.viewtmpl-update .gist {
+	font-size: 14px;
+}
+
+.viewtmpl-update #custom-templates .empty-message {
+	padding: 5px 10px;
+	text-align: center;
+}
+
+.viewtmpl-update #multiple-datasets .league-name {
+	margin: 0 20px 5px 20px;
+	padding: 3px 0;
+	border-bottom: 1px solid #ccc;
+}
+
+.viewtmpl-update #scrollable-dropdown-menu .tt-menu {
+	max-height: 150px;
+	overflow-y: auto;
+}
+
+.viewtmpl-update #rtl-support .tt-menu {
+	text-align: right;
+}
+/*****************************************/
+/***********自动完成样式End*******************/

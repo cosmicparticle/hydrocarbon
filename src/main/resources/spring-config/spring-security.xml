@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/security
+	http://www.springframework.org/schema/security/spring-security.xsd"
+	>
+
+	<debug />
+	<!-- 处理管理系统登录之后的认证对象 -->
+	<authentication-manager alias="authenticationManager" id="authenticationManager" erase-credentials="false">
+		<authentication-provider user-service-ref="adminUserService">
+			<password-encoder hash="md5" />
+		</authentication-provider>
+	</authentication-manager>
+	<beans:bean id="webexpressionHandler" class="org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler" />
+	<beans:bean id="cpfInvalidSessionStrategy" class="cn.sowell.copframe.web.CpfInvalidSessionStrategy" />
+	<!-- 拦截管理界面请求 -->
+	<http pattern="/admin/login" security="none" />
+	<http pattern="/admin/**" use-expressions="true" auto-config="true" authentication-manager-ref="authenticationManager">
+		<intercept-url pattern="/admin/**"  access="hasAuthority(@confAuthenService.getAdminDefaultAuthen())"  />
+
+		<!-- 同一时间内允许同一账号保持4个在线,error-if-maximum-exceeded="true"表示第第四个以后的登不进去 -->
+		<session-management invalid-session-strategy-ref="cpfInvalidSessionStrategy" >
+			<concurrency-control max-sessions="4" error-if-maximum-exceeded="true" />
+		</session-management>
+		<csrf disabled="true" />
+		<form-login 
+				login-page="/admin/login"
+				default-target-url="/admin/"
+				authentication-failure-url="/admin/login?error=1"
+				username-parameter="ddxy-admin-username"
+				password-parameter="ddxy-admin-password"
+				login-processing-url="/admin/doLogin"
+		/>
+		<logout logout-success-url="/admin/login" logout-url="/admin/logout"
+			invalidate-session="true" delete-cookies="JSESSIONID" />
+	</http>
+</beans:beans>

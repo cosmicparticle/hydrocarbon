@@ -1,0 +1,74 @@
+ltmpl:(Object)
+	列表模板数据
+		id: (Number)
+			标识
+		title:	(String)
+			模板标题
+		module:(String)
+			模块名称
+		operates:(Array<String>)
+			可用的操作。
+			数组内可能包括的值：{"detai", "update", "remove"}
+			
+		columns: (Array)
+			显示列的数组，数组内的元素的属性包括
+				id:(String)
+					列字段标识
+				title:(String)
+					列字段名
+				specialField:(String)
+					特殊列，可取值包括:{"number", "operate(-d)(-u)(-r)"}
+				order:(Number)
+					排序
+				fieldAvailable:(Boolean)
+					字段是否可用
+entities:(Array<Object>)
+	查询的结果实体数组，数组内元素对象的属性包括
+		code:(String)
+			实体标识
+		index:(Number)
+			查询结果中的全局列表索引
+		fields:(Array<Object>)
+			实体字段数组。如果是显示表格的话，每行的列数据就是从这个地方取。另外显示珍宝阁的数组内元素对象的属性包括
+			id:(Number)
+				列标识
+			title:(String)
+				表头列名
+			value:(String)
+				实体在该列的字段值。
+		
+criterias:(Array<Object>)
+	查询条件数组，数组内元素对象的属性主要包括:
+		id:(Number)
+			标识
+		title:(String)
+			条件字段名
+		value:(String)
+			条件字段值
+		inputType:(String)			
+			条件字段的表单类型，需要前端根据这个类型构造自定义表单（可能需要参考其他字段元数据来构造表单，如 select 表单的 option 数据源需要用 fieldId 去请求接口来获得）
+		queryShow:(Number)
+			条件是否需要被显示
+		defaultValue:(String)
+			条件的默认值，当value为空的时候，defaultValue是当前条件的初始查询值
+		fieldAvailable:(Boolean)
+			查询字段是否可用，为false的字段不能被用于查询
+		order:(Number)
+			排序
+		fieldId:(Number)
+			条件字段标志，常用于从接口请求元数据
+			
+		
+	
+module:Object
+	所在模块的信息
+		name:(String)
+		title:(String)
+	
+	
+	
+	
+范例
+
+	{"entities":[],"criterias":[{"fieldKey":"姓名","defaultValue":"","queryShow":1,"templateId":29999,"title":"姓名","relation":"and","comparator":"t1","inputType":"text","id":29999,"value":"","fieldAvailable":true,"fieldId":30001,"order":0},{"fieldKey":"身份证号码","defaultValue":"","queryShow":1,"templateId":29999,"title":"身份证号码","relation":"and","comparator":"t1","inputType":"text","id":30113,"value":"","fieldAvailable":true,"fieldId":30212,"order":1},{"fieldKey":"性别","defaultValue":"","queryShow":1,"templateId":29999,"title":"性别","relation":"and","comparator":"s1","inputType":"select","id":30000,"value":"","fieldAvailable":true,"fieldId":30002,"order":2},{"fieldKey":"出生日期","defaultValue":"~","queryShow":1,"templateId":29999,"title":"出生日期","relation":"and","comparator":"dr1","inputType":"daterange","id":30036,"value":"~","fieldAvailable":true,"fieldId":30222,"order":3},{"fieldKey":"婚姻状况","defaultValue":"","queryShow":1,"templateId":29999,"title":"婚姻状况","relation":"and","comparator":"s1","inputType":"select","id":30071,"value":"","fieldAvailable":true,"fieldId":30014,"order":4},{"fieldKey":"是否独生子","defaultValue":"","queryShow":1,"templateId":29999,"title":"是否独生子","relation":"and","comparator":"s1","inputType":"select","id":30072,"value":"","fieldAvailable":true,"fieldId":30010,"order":5},{"defaultValue":"","queryShow":1,"templateId":29999,"title":"家庭关系","relation":"and","comparator":"re1","relationLabel":"","inputType":"relation_existion","id":30128,"compositeId":30746,"value":"","fieldAvailable":true,"order":6}],"module":{"name":"DRpS9ECSt6","title":"人口管理"},"pageInfo":{"count":0,"endIndex":9,"firstIndex":0,"isPaging":true,"pageNo":1,"pageSize":10},"ltmpl":{"columns":[{"createTime":1543133016000,"fieldAvailable":true,"id":31706,"order":0,"specialField":"number","templateId":29999,"title":"#","updateTime":1543133016000},{"createTime":1543133016000,"fieldAvailable":true,"fieldId":30001,"fieldKey":"姓名","id":31699,"order":1,"templateId":29999,"title":"姓名","updateTime":1543133016000},{"createTime":1543133016000,"fieldAvailable":true,"fieldId":30212,"fieldKey":"身份证号码","id":31705,"order":2,"templateId":29999,"title":"身份证号码","updateTime":1543133016000},{"createTime":1543133016000,"fieldAvailable":true,"fieldId":30002,"fieldKey":"性别","id":31700,"order":3,"templateId":29999,"title":"性别","updateTime":1543133016000},{"createTime":1543133016000,"fieldAvailable":true,"fieldId":30004,"fieldKey":"户籍所在地","id":31702,"order":4,"templateId":29999,"title":"户籍所在地","updateTime":1543133016000},{"createTime":1543133016000,"fieldAvailable":true,"fieldId":30005,"fieldKey":"户籍地门牌号","id":31703,"order":5,"templateId":29999,"title":"户籍地门牌号","updateTime":1543133016000},{"createTime":1543133016000,"fieldAvailable":true,"fieldId":30011,"fieldKey":"联系电话","id":31704,"order":6,"templateId":29999,"title":"联系电话","updateTime":1543133016000},{"createTime":1543133016000,"fieldAvailable":true,"id":31701,"order":7,"specialField":"operate-d-u-r","templateId":29999,"title":"操作","updateTime":1543133016000}],"module":"DRpS9ECSt6","id":29999,"title":"基本列表"}}
+	

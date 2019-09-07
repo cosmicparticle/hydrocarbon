@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taglib version="2.0" xmlns="http://java.sun.com/xml/ns/j2ee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee web-jsptaglibrary_2_0.xsd">
+	<tlib-version>1.0</tlib-version>
+	<jsp-version>2.0</jsp-version>
+	<short-name>Entity</short-name>
+	<uri>/tld/EntityTag</uri>
+	<tag>
+		<name>Criteria</name>
+		<tag-class>cn.sowell.datacenter.common.jstl.EntityTag</tag-class>
+		<body-content>empty</body-content>
+		<attribute>
+			<name>viewCriteia</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+</taglib>

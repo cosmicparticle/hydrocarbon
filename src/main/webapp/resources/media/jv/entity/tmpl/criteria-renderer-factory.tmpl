@@ -1,0 +1,56 @@
+<script id="text">
+	<input class="form-control" 
+		type="text" name="${name}" 
+		placeholder="${criteria.placeholder}" />
+</script>
+<script id="select">
+	<select class="form-control cpf-select2" name="${name}">
+		<option value="">--请选择--</option>
+		{{each(i, option) options}}
+			<option value="${option.value}">${option.title}</option>
+		{{/each}}
+	</select>
+</script>
+<script id="multiselect">
+	<select class="form-control cpf-select2 format-submit-value" multiple="multiple" name="${name}">
+		<option value="">--请选择--</option>
+		{{each(i, option) options}}
+			<option value="${option.value}">${option.title}</option>
+		{{/each}}
+	</select>
+</script>
+<script id="date">
+	<input class="form-control datepicker" autocomplete="off" type="text" name="${name}"  />
+</script>
+<script id="label">
+	
+</script>
+<script id="relation_existion">
+</script>
+<script id="daterange">
+</script>
+<script id="range">
+</script>
+<script id="datetime">
+</script>
+<script id="time">
+</script>
+<script id="yearmonth">
+</script>
+<script id="ymrange">
+</script>
+<script id="decimal"> 
+	<input class="form-control cpf-field-decimal" autocomplete="off" type="text" name="${name}" />
+</script>
+<script id="int">
+<input class="form-control cpf-field-int" autocomplete="off" type="text" name="${name}"  />
+</script>
+<script id="unknow">
+	<input type="text" disabled="disabled" placeholder="没有配置对应的控件${criteria.inputType}"  />
+</script>
+<script id="form-group">
+	<div criteria-id="${criteria.id}" class="form-group ${criteria.fieldAvailable? '': 'criteria-field-unavailable'}"
+		title="${criteria.fieldAvailable? '': '无效字段'}">
+		<label class="control-label">${criteria.title }</label>
+	</div>
+</script>

@@ -1,0 +1,24 @@
+<script id="ks-criteria-row">
+	<tr on-render="">
+		<td>
+			<select on-change="do:setCriteria('source', criteria)" on-render="do:initCriteriaValue('source', criteria.source, criteria)">
+				<option value="path-var">路径参数</option>
+				<option value="param">请求参数</option>
+			</select>
+		</td>
+		<td class="form-group">
+				<input class="form-control" type="text" on-change="do:setCriteria('name', criteria)" value="${criteria.name || ''}" 
+				name="${criteria.uuid}"  />
+		</td>
+		<td>
+			<select class="form-control" on-change="do:setCriteria('ltmplFieldId', criteria)" on-render="do:initCriteriaValue('ltmplFieldId', criteria.ltmplFieldId, criteria)">
+				{{each(i, field) ltmplCriteraFields}}
+					<option value="${field.id}">${field.title}</option>
+				{{/each}}
+			</select>
+		</td>
+		<td>
+			<a class="btn btn-danger btn-xs" on-click="do:removeCriteria(criteria)">移除</a>
+		</td>
+	</tr>
+</script>

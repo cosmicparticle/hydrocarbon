@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns="http://www.so-well.cn/module-config">
+
+	<module name="people" title="人口">
+		<entity id="base" mapping-name="baseinfoImport" default="true">
+			<code name="peoplecode" />
+			<title name="姓名" />
+		</entity>
+		<entity id="importBase" mapping-name="importBase"></entity>
+		<entity id="importLowincome" mapping-name="importLowincome" />
+		<entity id="importFamilyPlanning" mapping-name="importFamilyPlanning" />
+		<functions>
+			<function name="export" />
+		</functions>
+		<import>
+			<composite name="base" entity-id="importBase" title="基本数据" />
+			<composite name="lowincome" entity-id="importLowincome"
+				title="低保数据" />
+			<composite name="familyPlanning" entity-id="importFamilyPlanning"
+				title="计生数据" />
+		</import>
+	</module>
+	<module name="student" title="学生">
+		<entity id="studentpartyBase" mapping-name="studentpartyBase"
+			default="true">
+			<code name="peoplecode" />
+			<title name="姓名" />
+		</entity>
+		<import>
+			<composite name="studentpartyBase" entity-id="studentpartyBase"
+				title="学生基本数据" />
+		</import>
+	</module>
+	<module name="disabledpeople" title="助残">
+		<entity id="disabledpeople" mapping-name="disabledpeople"
+			default="true">
+			<code name="编码" />
+			<title name="姓名" />
+		</entity>
+		<import>
+			<composite name="disabledpeople" entity-id="disabledpeople"
+				title="残助数据" />
+		</import>
+	</module>
+	<module name="disablederror" title="助残错误信息">
+		<entity id="disablederror" mapping-name="disablederror"
+			default="true">
+			<code name="编码" />
+			<title name="错误名称" />
+		</entity>
+		<import>
+			<composite name="disablederror" entity-id="disablederror"
+				title="残助错误信息" />
+		</import>
+	</module>
+	<module name="hspeople" title="党建">
+		<entity id="hspeople" mapping-name="hspeople" default="true">
+			<code name="编码" />
+			<title name="姓名" />
+		</entity>
+		<import>
+			<composite name="hspeople" entity-id="hspeople" title="党员管理" />
+		</import>
+	</module>
+	<module name="address" title="地址">
+		<entity id="addressBase" mapping-name="addressBase" default="true">
+			<code name="编码" />
+			<title name="地址简称" />
+		</entity>
+		<import>
+			<composite name="addressBase" entity-id="addressBase"
+				title="地址基本数据" />
+		</import>
+	</module>
+</config>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ABC name="importLowincome" abcattr="人口信息" alias="importLowincome" class="" xmlns="http://www.w3school.com.cn"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<attribute name="编码" alias="编码" abcattr="唯一编码" />
+	<attribute name="姓名" alias="姓名" abcattr="姓名" />
+	<attribute name="证件号码" alias="证件号码" abcattr="证件号码" />
+	
+	<!-- 低保信息 -->
+	<attribute name="低保证号" alias="低保证号" abcattr="低保证号" />
+	<attribute name="低保人员类别" alias="低保人员类别" abcattr="低保人员类别" />
+	<attribute name="低保原因" alias="低保原因" abcattr="低保原因" />
+	<attribute name="享受低保标识" alias="享受低保标识" abcattr="享受低保标识" />
+	<attribute name="享受低保金额" alias="享受低保金额" abcattr="享受低保金额" datatype="FLOAT" />
+	<attribute name="享受开始日期" alias="享受开始日期" datatype="DATE"  abcattr="享受开始日期" />
+	<attribute name="享受结束日期" alias="享受结束日期" datatype="DATE" abcattr="享受结束日期" />
+	
+</ABC>

@@ -1,0 +1,114 @@
+<script id="ks-list">
+	{{each(i, ks) ksList}}
+		<tr data-id="${ks.id}" data-title="${ks.title}" class="${ks.disabled == 1? 'ks-disabled': ''}">
+			<td>
+				<label>
+					<input type="checkbox" class="colored-blue row-selectable-checkbox">
+					<span class="text"></span>
+				</label>
+			</td>
+			<td>${i + 1}</td>
+			<td>${ks.title}</td>
+			<td>${ks.path}</td>
+			<td>${KS_TYPE_MAP[ks.type]}</td>
+			<td>${ks.description}</td>
+			<td>
+				<a target="ks_update_${ks.id}" 
+					title="(${ks.title})轻服务修改" 
+					href="admin/config/ks/edit/${ks.id}" 
+					class="tab btn btn-info btn-xs edit">
+					<i class="fa fa-edit"></i>修改
+				</a>
+				<a target="ks_test_${ks.id}" 
+					title="轻服务测试（${ks.title}）" 
+					href="admin/config/ks/test/${ks.id}"
+					
+					class="tab btn btn-success btn-xs test">
+					<i class="fa fa-eye"></i>测试
+				</a>
+			</td>
+		</tr>
+	{{/each}}
+</script>
+
+<script id="ks-test-page">
+	<div class="row">
+		<div class="col-lg-10 col-lg-offset-1 col-sm-12 col-xs-12">
+			<div class="widget">
+				<div class="widget-header">
+					<span class="widget-caption">请求用户</span>
+					<div class="widget-buttons buttons-bordered">
+						<button on-click="signIn" on-prepare="btn-sign-in" class="btn btn-xs btn-primary">登录</button>
+					</div>
+				</div>
+				<div class="widget-body">
+					<div class="row">
+						<div class="form-group col-lg-5">
+							<input on-prepare="username" on-change="userChanged" type="text" class="form-control" autocomplete="new-password" placeholder="用户名"/>
+						</div>
+						<div class="form-group col-lg-5">
+							<input on-prepare="password" on-change="userChanged" type="password" class="form-control" autocomplete="new-password" placeholder="密码" />
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="widget">
+				<div class="widget-header">
+					<span class="widget-caption">请求参数</span>
+				</div>
+				<div class="widget-body">
+					{{each(i, criteria) ks.criterias}}
+						<div class="row" style="margin-top:5px">
+							<label class="control-label col-lg-3 col-lg-offset-2">${criteria.name}</label>
+							<div class="col-lg-5">
+								<input on-render="do:addCriteria(ks.criterias[${i}])" on-change="do:triggerCriteriaChange(ks.criterias[${i}])" class="form-control col-lg-4" type="text"/>
+							</div>
+						</div>
+					{{/each}}
+				</div>
+			</div>
+			
+			<div class="widget">
+				<div class="widget-header">
+					<span class="widget-caption">请求预览</span>
+					<div class="widget-buttons buttons-bordered">
+						<button on-click="submit" on-prepare="btn-submit" class="btn btn-xs btn-primary" disabled="disabled">提交</button>
+					</div>
+				</div>
+				<div class="widget-body">
+					<div class="row">
+						<div class="form-group col-lg-12">
+							<label class="control-label col-lg-12">提交路径</label>
+							<div class="col-lg-12">
+								<input class="form-control" type="text" on-prepare="path" value="${ks.path}" />
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group col-lg-12">
+							<label class="col-lg-12">请求参数体</label>
+							<div class="col-lg-12">
+								<textarea class="form-control"></textarea>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="widget">
+				<div class="widget-header">
+					<span class="widget-caption">返回数据</span>
+				</div>
+				<div class="widget-body">
+					<div class="row">
+						<div class="col-lg-12">
+							<textarea on-prepare="resData" rows="20" class="form-control"></textarea>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+		</div>
+	</div>
+</script>

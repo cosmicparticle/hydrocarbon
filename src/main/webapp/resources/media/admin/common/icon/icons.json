@@ -1,0 +1,23 @@
+{
+	"iconsTree"	: {
+		"clazz"		: "fa",
+		"prefix"	: "fa-",
+		"icons"		: [
+			 {"clazz": "book", "title": ""}
+			,{"clazz": "stack-exchange"}
+			,{"clazz": "anchor"}
+			,{"clazz": "adjust"}
+			,{"clazz": "archive"}
+			,{"clazz": "arrows"}
+			,{"clazz": "arrows-h"}
+			,{"clazz": "arrows-v"}
+			,{"clazz": "bars"}
+			,{"clazz": "beer"}
+			,{"clazz": "bell"}
+			,{"clazz": "bell-o"}
+			,{"clazz": "bolt"}
+			,{"className" : "cross"}
+		]
+	}
+	
+}

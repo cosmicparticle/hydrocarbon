@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:task="http://www.springframework.org/schema/task" xmlns:jaxws="http://cxf.apache.org/jaxws"
+	xmlns:jaxrs="http://cxf.apache.org/jaxrs"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc 
+		http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd 
+		http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans-4.3.xsd 
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd
+        http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.3.xsd
+		http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd
+		http://cxf.apache.org/jaxrs http://cxf.apache.org/schemas/jaxrs.xsd">
+		
+	<import resource="spring-core.xml"/>
+	<import resource="spring-dao.xml"/>
+
+	<context:component-scan base-package="com.abc" />
+	<context:component-scan base-package="com.zhsq" />
+
+	<!-- dao自动扫描 -->
+	<context:component-scan base-package="cn.sowell.datacenter.model.*.dao.impl" />
+	<!-- serivce自动扫描 -->
+	<context:component-scan base-package="cn.sowell.datacenter.model.*.service.impl" />
+
+
+	<!-- dao自动扫描 -->
+	<context:component-scan base-package="cn.sowell.dataserver.model.*.dao.impl" />
+	<!-- serivce自动扫描 -->
+	<context:component-scan base-package="cn.sowell.dataserver.model.*.service.impl" />
+	
+	
+	<context:component-scan base-package="cn.sowell.dataserver.model.*.manager.impl" />
+	
+	<context:component-scan base-package="cn.sowell.dataserver.model.tmpl.duplicator.impl" />
+	
+
+	<!-- 默认访问权限的获取service -->
+	<bean id="confAuthenService" class="cn.sowell.datacenter.model.config.service.impl.ConfigAuthencationServiceImpl" />
+
+	<bean id="dBFusionConfigContextFactory" class="cn.sowell.datacenter.entityResolver.config.DBFusionConfigContextFactory">
+		<property name="sessionFactory" ref="sessionFactory" />
+		<property name="fieldService" ref="dictionaryServiceImpl" />
+		<property name="userCodeService" ref="adminUserService" />
+	</bean>
+	<bean id="dBModuleConfigMediator" class="cn.sowell.datacenter.entityResolver.config.DBModuleConfigMediator">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
+	<!-- 查询条件转换器 -->
+	<bean class="cn.sowell.dataserver.model.modules.bean.criteriaConveter.CriteriaConverterFactoryImpl" >
+		<property name="extendConverters">
+			<list>
+				<bean class="cn.sowell.dataserver.model.modules.bean.criteriaConveter.UserRelationExistCriteriaConverter"></bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean
+		class="cn.sowell.copframe.spring.propTranslator.PropertyValueTranslatorSet">
+		<property name="translatorSet">
+			<set>
+				<bean
+					class="cn.sowell.copframe.spring.propTranslator.translator.DatePropertyValueTranlator" />
+			</set>
+		</property>
+	</bean>
+
+	<bean
+		class="cn.sowell.copframe.spring.propTranslator.PropertyValueTranslatorSet">
+		<property name="translatorSet">
+			<set>
+				<bean
+					class="cn.sowell.copframe.spring.propTranslator.translator.DatePropertyValueTranlator" />
+			</set>
+		</property>
+	</bean>
+
+	<bean class="cn.sowell.copframe.dao.utils.NormalOperateDaoImpl" />
+
+	<bean class="cn.sowell.dataserver.model.dict.validator.ModuleCachableMetaSupportorImpl" />
+
+	<task:annotation-driven /> <!-- 定时器开关 -->
+	<bean class="cn.sowell.datacenter.model.modules.bean.PeopleExportHandlerTask" />
+
+	<jaxws:server id="ModelReLoadService" address="/modelReLoadService"
+		serviceClass="com.abc.service.ModelReLoadService">
+		<jaxws:serviceBean>
+			<bean class="com.abc.service.impl.ModelReLoadServiceImpl"></bean>
+		</jaxws:serviceBean>
+		<jaxws:properties>
+			<entry key="mtom-enabled" value="true" />
+		</jaxws:properties>
+	</jaxws:server>
+	
+	<bean name="datacenterReloadServiceImpl" class="cn.sowell.datacenter.ws.impl.DatacenterReloadServiceImpl" />
+	
+	<jaxws:server address="/configReloadService" serviceClass="cn.sowell.datacenter.ws.DatacenterReloadService">
+		<jaxws:serviceBean>
+			<ref bean="datacenterReloadServiceImpl"/>
+		</jaxws:serviceBean>
+	</jaxws:server>
+
+
+	<bean class="cn.sowell.copframe.spring.CPFSpringContextLoader" />
+	
+	<bean class="cn.sowell.copframe.spring.file.FilePublisher" >
+		<property name="fileUtils">
+			<bean class="cn.sowell.copframe.spring.file.FileUtils" >
+				<constructor-arg value="${file_publish_path}" />
+				<!-- 这个要与web.xml中的servlet一致 -->
+				<constructor-arg value="/download-files/" />
+			</bean>
+		</property>
+	</bean>
+
+
+</beans>

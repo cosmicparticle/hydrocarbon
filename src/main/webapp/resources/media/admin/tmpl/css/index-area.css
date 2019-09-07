@@ -1,0 +1,73 @@
+@charset "UTF-8";
+.index-area {
+    position: absolute;
+    top: 100px;
+    right: 20px;
+    background: rgba(240,240,240,0.6);
+    width: 110px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    max-height: 50vh;
+    overflow: hidden;
+}
+
+.index-area span.btn-close:after {
+    content: "—";
+}
+
+.index-area span.btn-close {
+    display: inline-block;
+    height: 15px;
+    width: 15px;
+    font-size: 10px;
+    background-color: rgba(255,0,0,0.6);
+    border-radius: 10px;
+    line-height: 15px;
+    text-align: center;
+    color: #fff;
+    position: absolute;
+    right: -6px;
+    top: -6px;
+    cursor: pointer;
+}
+
+.index-area span.btn-close:hover {
+    background-color: rgba(255,0,0,0.9);
+}
+.index-title-wrapper {
+    max-height: 50vh;
+    overflow-y: scroll;
+    margin-right: -17px;
+}
+
+.index-area .index-title-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.index-area .index-title-list>p {
+    text-align: left;
+    padding: 3px 0;
+    margin: 0;
+    padding-left: 1em;
+    padding-right: 10px;
+    line-height: 30px;
+    height: 37px;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+    margin-block-start: 0;
+    margin-block-end: 0;
+    margin-inline-start: 0;
+    margin-inline-end: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.index-area .index-title-list>p:hover{
+    background-color: #fff;
+}
+
+.index-area .index-title-list>p.current {
+    background-color: #fdfdfd;
+    cursor: default;
+}

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ABC name="importHandicapped" abcattr="人口信息" alias="importHandicapped" class="" xmlns="http://www.w3school.com.cn"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<attribute name="编码" alias="编码" abcattr="唯一编码" />
+	<attribute name="姓名" alias="姓名" abcattr="姓名" />
+	<attribute name="证件号码" alias="证件号码" abcattr="证件号码" />
+	<!-- 残疾人信息 -->
+	<attribute name="残疾人号" alias="残疾人号" abcattr="残疾人号" />
+	<attribute name="残疾级别" alias="残疾级别" abcattr="残疾级别" />
+	<attribute name="残疾类型" alias="残疾类型" abcattr="残疾类型" />
+	<attribute name="残疾原因" alias="残疾原因" abcattr="残疾原因" />
+</ABC>

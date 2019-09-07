@@ -1,0 +1,408 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ABC name="people" abcattr="人口信息" class="" xmlns="http://www.w3school.com.cn"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<attribute name="peoplecode" alias="" abcattr="唯一编码" />
+	<attribute name="编辑时间" alias="编辑时间" datatype="datetime"
+		abcattr="更新时间" />
+	<attribute name="身份证号" abcattr="身份证" />
+	<attribute name="住所类型" abcattr="住所类型" /><!--基本信息 -->
+	<attribute name="健康状况" abcattr="健康状况" /><!--基本信息 -->
+	<attribute name="出生地" abcattr="出生地" /><!--基本信息 -->
+	<attribute name="出生日期" abcattr="出生日期" /><!--基本信息 -->
+	<attribute name="参加工作时间" abcattr="参加工作时间" /><!--基本信息 -->
+	<attribute name="国籍" abcattr="国籍" /><!--基本信息 -->
+	<attribute name="姓名" abcattr="姓名" /><!--基本信息 -->
+	<attribute name="姓名汉语拼音" abcattr="姓名汉语拼音" /><!--基本信息 -->
+	<attribute name="婚姻状况" abcattr="婚姻状况" /><!--基本信息 -->
+	<attribute name="学位" abcattr="学位" /><!--基本信息 -->
+	<attribute name="宗教信仰" abcattr="宗教信仰" /><!--基本信息 -->
+	<attribute name="居住状态" abcattr="居住状态" /><!--基本信息 -->
+	<attribute name="性别" abcattr="性别" /><!--基本信息 -->
+	<attribute name="户口性质" abcattr="户口性质" /><!--基本信息 -->
+	<attribute name="户籍类型" abcattr="户籍类型" /><!--基本信息 -->
+	<attribute name="承租信息" abcattr="承租信息" /><!--基本信息 -->
+	<attribute name="指纹标识" abcattr="指纹标识" /><!--基本信息 -->
+	<attribute name="政治面貌" abcattr="政治面貌" /><!--基本信息 -->
+	<attribute name="文化程度" abcattr="文化程度" /><!--基本信息 -->
+	<attribute name="曾用名" abcattr="曾用名" /><!--基本信息 -->
+	<attribute name="民族" abcattr="民族" /><!--基本信息 -->
+	<attribute name="注销原因" abcattr="注销原因" /><!--基本信息 -->
+	<attribute name="注销时间" abcattr="注销时间" /><!--基本信息 -->
+	<attribute name="特长爱好" abcattr="特长爱好" /><!--基本信息 -->
+	<attribute name="籍贯" abcattr="籍贯" /><!--基本信息 -->
+	<attribute name="统战人士类型" abcattr="统战人士类型" /><!--基本信息 -->
+	<attribute name="虹膜标识" abcattr="虹膜标识" /><!--基本信息 -->
+	<attribute name="血型" abcattr="血型" /><!--基本信息 -->
+	<attribute name="语种" abcattr="语种" /><!--基本信息 -->
+	<attribute name="身高" abcattr="身高" /><!--基本信息 -->
+	<attribute name="邮政编码" abcattr="邮政编码" /><!--基本信息 -->
+	<attribute name="伤残性质" abcattr="伤残性质" /><!--残疾信息 -->
+	<attribute name="伤残等级" abcattr="伤残等级" /><!--残疾信息 -->
+	<attribute name="伤残部位" abcattr="伤残部位" /><!--残疾信息 -->
+	<attribute name="医疗保障类别" abcattr="医疗保障类别" /><!--残疾信息 -->
+	<attribute name="残疾原因" abcattr="残疾原因" /><!--残疾信息 -->
+	<attribute name="残疾类型" abcattr="残疾类型" /><!--残疾信息 -->
+	<attribute name="残疾级别" abcattr="残疾级别" /><!--残疾信息 -->
+	<attribute name="致残日期" abcattr="致残日期" /><!--残疾信息 -->
+	<attribute name="培训次数" abcattr="培训次数" /><!--就失业信息 -->
+	<attribute name="失业日期" abcattr="失业日期" /><!--就失业信息 -->
+	<attribute name="就业去向" abcattr="就业去向" /><!--就失业信息 -->
+	<attribute name="就业困难人员类型" abcattr="就业困难人员类型" /><!--就失业信息 -->
+	<attribute name="就业情况" abcattr="就业情况" /><!--就失业信息 -->
+	<attribute name="就业意向" abcattr="就业意向" /><!--就失业信息 -->
+	<attribute name="就业标识" abcattr="就业标识" /><!--就失业信息 -->
+	<attribute name="就业类型" abcattr="就业类型" /><!--就失业信息 -->
+	<attribute name="就业能力" abcattr="就业能力" /><!--就失业信息 -->
+	<attribute name="就失业状态" abcattr="就失业状态" /><!--就失业信息 -->
+	<attribute name="已推荐次数" abcattr="已推荐次数" /><!--就失业信息 -->
+	<attribute name="意向职位" abcattr="意向职位" /><!--就失业信息 -->
+	<attribute name="意向行业" abcattr="意向行业" /><!--就失业信息 -->
+	<attribute name="技能" abcattr="技能" /><!--就失业信息 -->
+	<attribute name="技能等级" abcattr="技能等级" /><!--就失业信息 -->
+	<attribute name="最近就业培训时间" abcattr="最近就业培训时间" /><!--就失业信息 -->
+	<attribute name="期望薪金" abcattr="期望薪金" /><!--就失业信息 -->
+	<attribute name="未就业原因" abcattr="未就业原因" /><!--就失业信息 -->
+	<attribute name="求职意愿" abcattr="求职意愿" /><!--就失业信息 -->
+	<attribute name="注销失业原因" abcattr="注销失业原因" /><!--就失业信息 -->
+	<attribute name="注销失业日期" abcattr="注销失业日期" /><!--就失业信息 -->
+	<attribute name="注销失业标识" abcattr="注销失业标识" /><!--就失业信息 -->
+	<attribute name="签订劳动合同标识" abcattr="签订劳动合同标识" /><!--就失业信息 -->
+	<attribute name="领取保险金截止时间" abcattr="领取保险金截止时间" /><!--就失业信息 -->
+	<attribute name="领取保险金起始时间" abcattr="领取保险金起始时间" /><!--就失业信息 -->
+	<attribute name="不能参加组织生活原因" abcattr="不能参加组织生活原因" /><!--党员信息 -->
+	<attribute name="任职时间" abcattr="任职时间" /><!--党员信息 -->
+	<attribute name="党内职务" abcattr="党内职务" /><!--党员信息 -->
+	<attribute name="党员管理类型" abcattr="党员管理类型" /><!--党员信息 -->
+	<attribute name="党员类别" abcattr="党员类别" /><!--党员信息 -->
+	<attribute name="党组织建制" abcattr="党组织建制" /><!--党员信息 -->
+	<attribute name="党组织所在社区" abcattr="党组织所在社区" /><!--党员信息 -->
+	<attribute name="入党日期" abcattr="入党日期" /><!--党员信息 -->
+	<attribute name="其他职务" abcattr="其他职务" /><!--党员信息 -->
+	<attribute name="工作职责" abcattr="工作职责" /><!--党员信息 -->
+	<attribute name="所在组织" abcattr="所在组织" /><!--党员信息 -->
+	<attribute name="能否参加组织生活" abcattr="能否参加组织生活" /><!--党员信息 -->
+	<attribute name="转正时间" abcattr="转正时间" /><!--党员信息 -->
+	<attribute name="发放安全套" abcattr="发放安全套" /><!--计生信息 -->
+	<attribute name="避孕宣传" abcattr="避孕宣传" /><!--计生信息 -->
+	<attribute name="个人年收入" abcattr="个人年收入" /><!--个人收支 -->
+	<attribute name="开销情况" abcattr="开销情况" /><!--个人收支 -->
+	<attribute name="收入情况" abcattr="收入情况" /><!--个人收支 -->
+	<attribute name="经济来源" abcattr="经济来源" /><!--个人收支 -->
+	<attribute name="照片" abcattr="照片" /><!--人口照片 -->
+	<attribute name="安置情况" abcattr="安置情况" /><!--刑释信息 -->
+	<attribute name="安置日期" abcattr="安置日期" /><!--刑释信息 -->
+	<attribute name="居民反映情况" abcattr="居民反映情况" /><!--刑释信息 -->
+	<attribute name="未安置原因" abcattr="未安置原因" /><!--刑释信息 -->
+	<attribute name="危险从业类别" abcattr="危险从业类别" /><!--危险品从业信息 -->
+	<attribute name="有效开始日期" abcattr="有效开始日期" /><!--危险品从业信息 -->
+	<attribute name="入伍时间" abcattr="入伍时间" /><!--参军信息 -->
+	<attribute name="兵役状态" abcattr="兵役状态" /><!--参军信息 -->
+	<attribute name="在部队职务" abcattr="在部队职务" /><!--参军信息 -->
+	<attribute name="所在部队" abcattr="所在部队" /><!--参军信息 -->
+	<attribute name="牺牲年份" abcattr="牺牲年份" /><!--参军信息 -->
+	<attribute name="退役时间" abcattr="退役时间" /><!--参军信息 -->
+	<attribute name="初次发现吸毒日期" abcattr="初次发现吸毒日期" /><!--吸毒信息 -->
+	<attribute name="吸毒人员类型" abcattr="吸毒人员类型" /><!--吸毒信息 -->
+	<attribute name="吸毒关注情况" abcattr="吸毒关注情况" /><!--吸毒信息 -->
+	<attribute name="吸毒原因" abcattr="吸毒原因" /><!--吸毒信息 -->
+	<attribute name="吸毒后果" abcattr="吸毒后果" /><!--吸毒信息 -->
+	<attribute name="吸毒帮扶情况" abcattr="吸毒帮扶情况" /><!--吸毒信息 -->
+	<attribute name="吸毒状态" abcattr="吸毒状态" /><!--吸毒信息 -->
+	<attribute name="吸毒管控等级" abcattr="吸毒管控等级" /><!--吸毒信息 -->
+	<attribute name="戒毒情况" abcattr="戒毒情况" /><!--吸毒信息 -->
+	<attribute name="查获日期" abcattr="查获日期" /><!--吸毒信息 -->
+	<attribute name="毒品来源" abcattr="毒品来源" /><!--吸毒信息 -->
+	<attribute name="滥用毒品种类" abcattr="滥用毒品种类" /><!--吸毒信息 -->
+	<attribute name="管控情况" abcattr="管控情况" /><!--吸毒信息 -->
+	<attribute name="国安人员分类" abcattr="国安人员分类" /><!--国安信息 -->
+	<attribute name="国安级别" abcattr="国安级别" /><!--国安信息 -->
+	<attribute name="处置意见" abcattr="处置意见" /><!--国安信息 -->
+	<attribute name="所属派出所" abcattr="所属派出所" /><!--国安信息 -->
+	<attribute name="主诉明细" abcattr="主诉明细" /><!--妇幼人员保健 -->
+	<attribute name="产次" abcattr="产次" /><!--妇幼人员保健 -->
+	<attribute name="处理" abcattr="处理" /><!--妇幼人员保健 -->
+	<attribute name="妊娠结局" abcattr="妊娠结局" /><!--妇幼人员保健 -->
+	<attribute name="孕次" abcattr="孕次" /><!--妇幼人员保健 -->
+	<attribute name="已出生子女情况" abcattr="已出生子女情况" /><!--妇幼人员保健 -->
+	<attribute name="已抚养子女情况" abcattr="已抚养子女情况" /><!--妇幼人员保健 -->
+	<attribute name="普查次数" abcattr="普查次数" /><!--妇幼人员保健 -->
+	<attribute name="现孕周" abcattr="现孕周" /><!--妇幼人员保健 -->
+	<attribute name="育龄妇女类型" abcattr="育龄妇女类型" /><!--妇幼人员保健 -->
+	<attribute name="胎数" abcattr="胎数" /><!--妇幼人员保健 -->
+	<attribute name="三属定期抚恤金" abcattr="三属定期抚恤金" /><!--民政-优抚 -->
+	<attribute name="优抚对象类别" abcattr="优抚对象类别" /><!--民政-优抚 -->
+	<attribute name="伤残抚恤金" abcattr="伤残抚恤金" /><!--民政-优抚 -->
+	<attribute name="入伍日期" abcattr="入伍日期" /><!--民政-优抚 -->
+	<attribute name="其它" abcattr="其它" /><!--民政-优抚 -->
+	<attribute name="减免经费" abcattr="减免经费" /><!--民政-优抚 -->
+	<attribute name="区县政府定期补助金" abcattr="区县政府定期补助金" /><!--民政-优抚 -->
+	<attribute name="医疗经费" abcattr="医疗经费" /><!--民政-优抚 -->
+	<attribute name="实际减免幅度" abcattr="实际减免幅度" /><!--民政-优抚 -->
+	<attribute name="市政府定期补助金" abcattr="市政府定期补助金" /><!--民政-优抚 -->
+	<attribute name="市政府规定减免幅度" abcattr="市政府规定减免幅度" /><!--民政-优抚 -->
+	<attribute name="护理费" abcattr="护理费" /><!--民政-优抚 -->
+	<attribute name="最低生活保障金" abcattr="最低生活保障金" /><!--民政-优抚 -->
+	<attribute name="民政优抚合计" abcattr="民政优抚合计" /><!--民政-优抚 -->
+	<attribute name="病情" abcattr="病情" /><!--民政-优抚 -->
+	<attribute name="粮油帮困卡" abcattr="粮油帮困卡" /><!--民政-优抚 -->
+	<attribute name="街道定期补助金" abcattr="街道定期补助金" /><!--民政-优抚 -->
+	<attribute name="学习能力" abcattr="学习能力" /><!--特殊人群信息 -->
+	<attribute name="定向能力" abcattr="定向能力" /><!--特殊人群信息 -->
+	<attribute name="治疗情况" abcattr="治疗情况" /><!--特殊人群信息 -->
+	<attribute name="生活能力" abcattr="生活能力" /><!--特殊人群信息 -->
+	<attribute name="精神状态" abcattr="精神状态" /><!--特殊人群信息 -->
+	<attribute name="自理能力" abcattr="自理能力" /><!--特殊人群信息 -->
+	<attribute name="记忆力情况" abcattr="记忆力情况" /><!--特殊人群信息 -->
+	<attribute name="违法犯罪情况" abcattr="违法犯罪情况" /><!--犯罪信息 -->
+	<attribute name="困难及诉求" abcattr="困难及诉求" /><!--留守信息 -->
+	<attribute name="留守人员类型" abcattr="留守人员类型" /><!--留守信息 -->
+	<attribute name="留守帮扶情况" abcattr="留守帮扶情况" /><!--留守信息 -->
+	<attribute name="三涉情况" abcattr="三涉情况" /><!--矫正信息 -->
+	<attribute name="刑法执行类别" abcattr="刑法执行类别" /><!--矫正信息 -->
+	<attribute name="刑罚变更执行情况" abcattr="刑罚变更执行情况" /><!--矫正信息 -->
+	<attribute name="判决书号" abcattr="判决书号" /><!--矫正信息 -->
+	<attribute name="判决机关" abcattr="判决机关" /><!--矫正信息 -->
+	<attribute name="四史情况" abcattr="四史情况" /><!--矫正信息 -->
+	<attribute name="奖惩情况" abcattr="奖惩情况" /><!--矫正信息 -->
+	<attribute name="情况说明" abcattr="情况说明" /><!--矫正信息 -->
+	<attribute name="接收方式" abcattr="接收方式" /><!--矫正信息 -->
+	<attribute name="最新服务时间" abcattr="最新服务时间" /><!--矫正信息 -->
+	<attribute name="检查监督漏管情况" abcattr="检查监督漏管情况" /><!--矫正信息 -->
+	<attribute name="检查监督脱管情况" abcattr="检查监督脱管情况" /><!--矫正信息 -->
+	<attribute name="漏管原因" abcattr="漏管原因" /><!--矫正信息 -->
+	<attribute name="漏管纠正情况" abcattr="漏管纠正情况" /><!--矫正信息 -->
+	<attribute name="矫正人员分类" abcattr="矫正人员分类" /><!--矫正信息 -->
+	<attribute name="矫正人员编号" abcattr="矫正人员编号" /><!--矫正信息 -->
+	<attribute name="矫正小组人员组成情况" abcattr="矫正小组人员组成情况" /><!--矫正信息 -->
+	<attribute name="矫正开始日期" abcattr="矫正开始日期" /><!--矫正信息 -->
+	<attribute name="矫正管控等级" abcattr="矫正管控等级" /><!--矫正信息 -->
+	<attribute name="矫正类型" abcattr="矫正类型" /><!--矫正信息 -->
+	<attribute name="矫正结束日期" abcattr="矫正结束日期" /><!--矫正信息 -->
+	<attribute name="矫正解除类型" abcattr="矫正解除类型" /><!--矫正信息 -->
+	<attribute name="脱管原因" abcattr="脱管原因" /><!--矫正信息 -->
+	<attribute name="脱管纠正情况" abcattr="脱管纠正情况" /><!--矫正信息 -->
+	<attribute name="个人代码" abcattr="个人代码" /><!--离退休信息 -->
+	<attribute name="企退编号" abcattr="企退编号" /><!--离退休信息 -->
+	<attribute name="接收日期" abcattr="接收日期" /><!--离退休信息 -->
+	<attribute name="档案号码" abcattr="档案号码" /><!--离退休信息 -->
+	<attribute name="特殊退休对象类别" abcattr="特殊退休对象类别" /><!--离退休信息 -->
+	<attribute name="社会保障号" abcattr="社会保障号" /><!--离退休信息 -->
+	<attribute name="离退休单位" abcattr="离退休单位" /><!--离退休信息 -->
+	<attribute name="离退休日期" abcattr="离退休日期" /><!--离退休信息 -->
+	<attribute name="退休人员管理形式" abcattr="退休人员管理形式" /><!--离退休信息 -->
+	<attribute name="退休人员类别" abcattr="退休人员类别" /><!--离退休信息 -->
+	<attribute name="配偶状况" abcattr="配偶状况" /><!--离退休信息 -->
+	<attribute name="初次发病日期" abcattr="初次发病日期" /><!--精神病信息 -->
+	<attribute name="医疗保障" abcattr="医疗保障" /><!--精神病信息 -->
+	<attribute name="参与管理人员类型" abcattr="参与管理人员类型" /><!--精神病信息 -->
+	<attribute name="发病对家庭和社会影响" abcattr="发病对家庭和社会影响" /><!--精神病信息 -->
+	<attribute name="实施住院治疗原因" abcattr="实施住院治疗原因" /><!--精神病信息 -->
+	<attribute name="家务劳动" abcattr="家务劳动" /><!--精神病信息 -->
+	<attribute name="康复措施" abcattr="康复措施" /><!--精神病信息 -->
+	<attribute name="患病名称" abcattr="患病名称" /><!--精神病信息 -->
+	<attribute name="接收康复训练机构名称" abcattr="接收康复训练机构名称" /><!--精神病信息 -->
+	<attribute name="是否有其他疾病" abcattr="是否有其他疾病" /><!--精神病信息 -->
+	<attribute name="是否有精神病家族史" abcattr="是否有精神病家族史" /><!--精神病信息 -->
+	<attribute name="服药情况" abcattr="服药情况" /><!--精神病信息 -->
+	<attribute name="治疗医院名称" abcattr="治疗医院名称" /><!--精神病信息 -->
+	<attribute name="目前精神病情" abcattr="目前精神病情" /><!--精神病信息 -->
+	<attribute name="确诊医院" abcattr="确诊医院" /><!--精神病信息 -->
+	<attribute name="确诊日期" abcattr="确诊日期" /><!--精神病信息 -->
+	<attribute name="社会人际交往" abcattr="社会人际交往" /><!--精神病信息 -->
+	<attribute name="精神帮扶情况" abcattr="精神帮扶情况" /><!--精神病信息 -->
+	<attribute name="精神病人员类型" abcattr="精神病人员类型" /><!--精神病信息 -->
+	<attribute name="精神病危险性评估等级" abcattr="精神病危险性评估等级" /><!--精神病信息 -->
+	<attribute name="精神诊断类型" abcattr="精神诊断类型" /><!--精神病信息 -->
+	<attribute name="肇事具体行为" abcattr="肇事具体行为" /><!--精神病信息 -->
+	<attribute name="肇事肇祸次数" abcattr="肇事肇祸次数" /><!--精神病信息 -->
+	<attribute name="药物及剂量和用法" abcattr="药物及剂量和用法" /><!--精神病信息 -->
+	<attribute name="药物治疗" abcattr="药物治疗" /><!--精神病信息 -->
+	<attribute name="主要疾病" abcattr="主要疾病" /><!--老年信息 -->
+	<attribute name="享受最低生活保障类型" abcattr="享受最低生活保障类型" /><!--老年信息 -->
+	<attribute name="享受服务类型" abcattr="享受服务类型" /><!--老年信息 -->
+	<attribute name="享受标准" abcattr="享受标准" /><!--老年信息 -->
+	<attribute name="人员类别" abcattr="人员类别" /><!--老年信息 -->
+	<attribute name="养老服务补贴" abcattr="养老服务补贴" /><!--老年信息 -->
+	<attribute name="养老服务补贴开始享受时间" abcattr="养老服务补贴开始享受时间" /><!--老年信息 -->
+	<attribute name="出行方式" abcattr="出行方式" /><!--老年信息 -->
+	<attribute name="参加社团" abcattr="参加社团" /><!--老年信息 -->
+	<attribute name="听力情况" abcattr="听力情况" /><!--老年信息 -->
+	<attribute name="呼叫器描述" abcattr="呼叫器描述" /><!--老年信息 -->
+	<attribute name="子女数" abcattr="子女数" /><!--老年信息 -->
+	<attribute name="居住情况" abcattr="居住情况" /><!--老年信息 -->
+	<attribute name="性格特征" abcattr="性格特征" /><!--老年信息 -->
+	<attribute name="担任角色" abcattr="担任角色" /><!--老年信息 -->
+	<attribute name="政府资助型养老服务说明" abcattr="政府资助型养老服务说明" /><!--老年信息 -->
+	<attribute name="日常卫生" abcattr="日常卫生" /><!--老年信息 -->
+	<attribute name="洗澡情况" abcattr="洗澡情况" /><!--老年信息 -->
+	<attribute name="病史情况" abcattr="病史情况" /><!--老年信息 -->
+	<attribute name="社会活动" abcattr="社会活动" /><!--老年信息 -->
+	<attribute name="穿脱衣服" abcattr="穿脱衣服" /><!--老年信息 -->
+	<attribute name="老人类型" abcattr="老人类型" /><!--老年信息 -->
+	<attribute name="血压" abcattr="血压" /><!--老年信息 -->
+	<attribute name="视力情况" abcattr="视力情况" /><!--老年信息 -->
+	<attribute name="起搏器情况" abcattr="起搏器情况" /><!--老年信息 -->
+	<attribute name="身体情况" abcattr="身体情况" /><!--老年信息 -->
+	<attribute name="过敏史" abcattr="过敏史" /><!--老年信息 -->
+	<attribute name="饮食情况" abcattr="饮食情况" /><!--老年信息 -->
+	<attribute name="高龄津(补)贴开始享受时间" abcattr="高龄津(补)贴开始享受时间" /><!--老年信息 -->
+	<attribute name="高龄津贴额度" abcattr="高龄津贴额度" /><!--老年信息 -->
+	<attribute name="关注类型" abcattr="关注类型" /><!--艾滋病信息 -->
+	<attribute name="感染途径" abcattr="感染途径" /><!--艾滋病信息 -->
+	<attribute name="案件类别" abcattr="案件类别" /><!--艾滋病信息 -->
+	<attribute name="艾滋帮扶情况" abcattr="艾滋帮扶情况" /><!--艾滋病信息 -->
+	<attribute name="艾滋收治情况" abcattr="艾滋收治情况" /><!--艾滋病信息 -->
+	<attribute name="艾滋收治机构名称" abcattr="艾滋收治机构名称" /><!--艾滋病信息 -->
+
+	<label name="人口标签" subdomain="户籍人口,残疾人,单亲,个体工商户,灵活就业,创业就业,有车,困难救助人员" />
+
+	<multiattribute name="证件信息" abcattr="证件信息">
+		<attribute name="证件类型" abcattr="证件类型" />
+		<attribute name="证件号码" abcattr="证件号码" />
+		<attribute name="有效截止日期" abcattr="有效截止日期" />
+		<attribute name="签发日期" abcattr="签发日期" />
+	</multiattribute>
+
+	<multiattribute name="工作信息" abcattr="工作信息">
+		<attribute name="单位名称" abcattr="单位名称" />
+		<attribute name="工作状态" abcattr="工作状态" />
+		<attribute name="职业" abcattr="职业" />
+		<attribute name="职务" abcattr="职务" />
+		<attribute name="职称" abcattr="职称" />
+		<attribute name="入职时间" abcattr="入职时间" />
+		<attribute name="离职时间" abcattr="离职时间" />
+		<attribute name="离职因别" abcattr="离职因别" />
+		<attribute name="单位地址" abcattr="单位地址" />
+		<attribute name="单位电话" abcattr="单位电话" />
+	</multiattribute>
+
+	<multiattribute name="教育信息" abcattr="教育信息">
+		<attribute name="所获学历" abcattr="所获学历" />
+		<attribute name="所获学位" abcattr="所获学位" />
+		<attribute name="教育水平" abcattr="教育水平" />
+		<attribute name="毕业时间" abcattr="毕业时间" />
+		<attribute name="毕业学校" abcattr="毕业学校" />
+		<attribute name="所学专业" abcattr="所学专业" />
+	</multiattribute>
+
+	<multiattribute name="犯罪信息" abcattr="犯罪信息">
+		<attribute name="犯罪名称" abcattr="犯罪名称" />
+		<attribute name="重新犯罪案由" abcattr="重新犯罪案由" />
+		<attribute name="犯罪行为" abcattr="犯罪行为" />
+		<attribute name="具体罪名" abcattr="具体罪名" />
+		<attribute name="罪名" abcattr="罪名" />
+		<attribute name="服刑结束日期" abcattr="服刑结束日期" />
+		<attribute name="服刑开始日期" abcattr="服刑开始日期" />
+		<attribute name="判刑期" abcattr="判刑期" />
+		<attribute name="前科情况" abcattr="前科情况" />
+		<attribute name="服刑场所" abcattr="服刑场所" />
+		<attribute name="判决日期" abcattr="判决日期" />
+		<attribute name="刑教期" abcattr="刑教期" />
+		<attribute name="释放日期" abcattr="释放日期" />
+	</multiattribute>
+
+	<multiattribute name="流口信息" abcattr="流口信息">
+		<attribute name="流入原因" abcattr="流入原因" />
+		<attribute name="流动人口登记日期" abcattr="流动人口登记日期" />
+		<attribute name="流入时间" abcattr="流入时间" />
+		<attribute name="流入来源" abcattr="流入来源" />
+		<attribute name="离开时间" abcattr="离开时间" />
+		<attribute name="已居住时限" abcattr="已居住时限" />
+		<attribute name="预居住时限" abcattr="预居住时限" />
+	</multiattribute>
+
+	<multiattribute name="境外人士" abcattr="境外人士">
+		<attribute name="抵达日期" abcattr="抵达日期" />
+		<attribute name="外文名" abcattr="外文名" />
+		<attribute name="预计离开日期" abcattr="预计离开日期" />
+		<attribute name="外文姓名" abcattr="外文姓名" />
+		<attribute name="来华目的" abcattr="来华目的" />
+		<attribute name="登记日期" abcattr="登记日期" />
+	</multiattribute>
+
+	<multiattribute name="精神病信息" abcattr="精神病信息">
+		<attribute name="肇事肇祸日期" abcattr="肇事肇祸日期" />
+		<attribute name="肇事肇祸地点" abcattr="肇事肇祸地点" />
+		<attribute name="肇事肇祸内容" abcattr="肇事肇祸内容" />
+	</multiattribute>
+
+	<multiattribute name="低保信息" abcattr="低保信息">
+		<attribute name="享受低保金额" abcattr="享受低保金额" />
+		<attribute name="享受截止时间" abcattr="享受截止时间" />
+		<attribute name="享受开始时间" abcattr="享受开始时间" />
+		<attribute name="申请人" abcattr="申请人" />
+		<attribute name="批准日期" abcattr="批准日期" />
+		<attribute name="享受记录次数" abcattr="享受记录次数" />
+		<attribute name="享受人数" abcattr="享受人数" />
+		<attribute name="执行日期" abcattr="执行日期" />
+		<attribute name="是否享受" abcattr="是否享受" />
+		<attribute name="丧劳情况" abcattr="丧劳情况" />
+		<attribute name="工资" abcattr="工资" />
+		<attribute name="低保人员类别" abcattr="低保人员类别" />
+		<attribute name="低保原因" abcattr="低保原因" />
+	</multiattribute>
+
+	<multiattribute name=" 妇幼人员保健" abcattr=" 妇幼人员保健">
+		<attribute name="胎位" abcattr="胎位" />
+		<attribute name="出生身高" abcattr="出生身高" />
+		<attribute name="出生体重" abcattr="出生体重" />
+		<attribute name="注销日期" abcattr="注销日期" />
+		<attribute name="注销原因" abcattr="注销原因" />
+		<attribute name="建卡日期" abcattr="建卡日期" />
+		<attribute name="分娩方式" abcattr="分娩方式" />
+		<attribute name="随访结果" abcattr="随访结果" />
+		<attribute name="初步诊断" abcattr="初步诊断" />
+		<attribute name="末次月经" abcattr="末次月经" />
+		<attribute name="产休地" abcattr="产休地" />
+		<attribute name="孕前体重" abcattr="孕前体重" />
+		<attribute name="妇育编号" abcattr="妇育编号" />
+	</multiattribute>
+
+	<multiattribute name="现状表现" abcattr="现状表现">
+		<attribute name="类型" abcattr="类型" />
+		<attribute name="内容" abcattr="内容" />
+		<attribute name="时间" abcattr="时间" />
+	</multiattribute>
+
+	<multiattribute name="人口备注" abcattr="人口备注">
+		<attribute name="备注类别" abcattr="备注类别" />
+		<attribute name="内容" abcattr="内容" />
+	</multiattribute>
+
+	<multiattribute name="人力资源证书" abcattr="人力资源证书">
+		<attribute name="名称" abcattr="名称" />
+		<attribute name="编号" abcattr="编号" />
+		<attribute name="签发日期" abcattr="签发日期" />
+		<attribute name="有效截止日期" abcattr="有效截止日期" />
+	</multiattribute>
+
+	<multiattribute name="信访信息" abcattr="信访信息">
+		<attribute name="上访原因" abcattr="上访原因" />
+		<attribute name="上访状态" abcattr="上访状态" />
+		<attribute name="上访类型" abcattr="上访类型" />
+		<attribute name="上访时间" abcattr="上访时间" />
+	</multiattribute>
+
+	<relation name="家人信息">
+		<label subdomain="子女,父母" />
+		<ABC name="家人信息" abcattr="人口信息">
+			<attribute name="姓名" abcattr="姓名" /><!--基本信息 -->
+			<attribute name="婚姻状况" abcattr="婚姻状况" /><!--基本信息 -->
+			<attribute name="学位" abcattr="学位" /><!--基本信息 -->
+			<attribute name="宗教信仰" abcattr="宗教信仰" /><!--基本信息 -->
+			<attribute name="居住状态" abcattr="居住状态" /><!--基本信息 -->
+			<attribute name="性别" abcattr="性别" /><!--基本信息 -->
+			<attribute name="户口性质" abcattr="户口性质" /><!--基本信息 -->
+			<multiattribute name="教育信息" abcattr="教育信息">
+				<attribute name="所获学历" abcattr="所获学历" />
+				<attribute name="所获学位" abcattr="所获学位" />
+				<attribute name="教育水平" abcattr="教育水平" />
+				<attribute name="毕业时间" abcattr="毕业时间" />
+				<attribute name="毕业学校" abcattr="毕业学校" />
+				<attribute name="所学专业" abcattr="所学专业" />
+			</multiattribute>
+		</ABC>
+	</relation>
+
+
+</ABC>

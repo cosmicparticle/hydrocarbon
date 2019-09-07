@@ -1,0 +1,42 @@
+<script id="res-tree-view">
+	<div class="col-lg-6" on-prepare="tree-view"></div>
+	<div class="col-lg-6" on-prepare="node-editor" style="display:none;">
+		<div class="row">
+			<div class="form-group col-lg-12">
+				<label class="control-label">节点类型</label>
+				<div>
+					<select class="form-control" on-prepare="nodeType" on-change="changeNodeType">
+						<option value="">---请选择---</option>
+						<option value="field">字段</option>
+						<option value="normal">普通字段组</option>
+						<option value="array">数组字段组</option>
+					</select>
+				</div>
+			</div>
+			<div class="form-group col-lg-12">
+				<label class="control-label">字段</label>
+				<div>
+					<select class="form-control" on-prepare="field-select" on-change="changeField"></select>
+				</div>
+			</div>
+			<div class="form-group col-lg-12">
+				<label class="control-label">字段名</label>
+				<div>
+					<input class="form-control" type="text" on-prepare="fieldName" on-change="changeFieldName" />
+				</div>
+			</div>
+			<div class="form-group col-lg-12">
+				<label class="control-label">描述</label>
+				<div>
+					<input class="form-control" type="text" on-prepare="desc" on-change="changeDesc" />
+				</div>
+			</div>
+			<div class="form-group col-lg-12">
+				<a class="btn btn-primary" on-prepare="btn-add-child" on-click="addChildNode">添加子节点</a>
+				<a class="btn btn-primary" on-prepare="btn-add-sibling" on-click="addSiblingNode">添加兄弟节点</a>
+				<a class="btn btn-danger" on-prepare="btn-remove-node" on-click="removeNode">移除节点</a>
+				<a class="btn btn-success" on-prepare="btn-save-temp" on-click="saveTemp" style="display:none;">保存</a>
+			</div>
+		</div>
+	</div>
+</script>

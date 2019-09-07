@@ -1,0 +1,395 @@
+{
+	"text"		: {
+		"comparators"		: [
+			{
+				"title"	: "包含",
+				"key"	: "t1"
+			},
+			{
+				"title"	: "开头为",
+				"key"	: "t2"
+			},
+			{
+				"title"	: "结尾为",
+				"key"	: "t3"
+			},
+			{
+				"title"	: "等于",
+				"key"	: "t4"
+			},
+			{
+				"title"	: "不包含",
+				"key"	: "t1n",
+				"class"	: "negative"
+			},
+			{
+				"title"	: "开头不为",
+				"key"	: "t2n",
+				"class"	: "negative"
+			},
+			{
+				"title"	: "结尾不为",
+				"key"	: "t3n",
+				"class"	: "negative"
+			},
+			{
+				"title"	: "不等于",
+				"key"	: "t4n"
+			}
+		]
+	},
+	"textarea"	: {
+		"comparators"		: [],
+		"ref_comparators"	: "text.*",
+		"sub_compatators"	: []
+	},
+	"select"	: {
+		"comparators"		: [
+			{
+				"title"	: "为",
+				"key"	: "s1"
+			},
+			{
+				"title"	: "不为",
+				"key"	: "s1n"
+			}
+		]
+	},
+	"multiselect": {
+		"comparators"		: [
+			{
+				"title"	: "包括于",
+				"key"	: "ms1"
+			},
+			{
+				"title"	: "不包括于",
+				"key"	: "ms1n"
+			}
+		]
+	},
+	"checkbox"	: {
+		"rel_comparators"	: "multiselect.*"
+	},
+	"radio"		: {
+		"ref_comparators"	: "select.*"
+	},
+	"date"		: {
+		"comparators"		: [
+			{
+				"title"	: "在",
+				"key"	: "d1"
+			},
+			{
+				"title"	: "早于",
+				"key"	: "d2"
+			},
+			{
+				"title"	: "晚于",
+				"key"	: "d3"
+			},
+			{
+				"title"	: "不在",
+				"key"	: "d1n"
+			},
+			{
+				"title"	: "不早于",
+				"key"	: "d2n",
+				"class"	: "negative"
+			},
+			{
+				"title"	: "不晚于",
+				"key"	: "d3n",
+				"class"	: "negative"
+			}
+		]
+	},
+	"time"		: {
+		"comparators"		: [
+			{
+				"title"	: "在",
+				"key"	: "d1"
+			},
+			{
+				"title"	: "早于",
+				"key"	: "d2"
+			},
+			{
+				"title"	: "晚于",
+				"key"	: "d3"
+			},
+			{
+				"title"	: "不在",
+				"key"	: "d1n"
+			},
+			{
+				"title"	: "不早于",
+				"key"	: "d2n",
+				"class"	: "negative"
+			},
+			{
+				"title"	: "不晚于",
+				"key"	: "d3n",
+				"class"	: "negative"
+			}
+		]
+	},
+	"datetime"	: {
+		"comparators"		: [
+			{
+				"title"	: "在",
+				"key"	: "d1"
+			},
+			{
+				"title"	: "早于",
+				"key"	: "d2"
+			},
+			{
+				"title"	: "晚于",
+				"key"	: "d3"
+			},
+			{
+				"title"	: "不在",
+				"key"	: "d1n"
+			},
+			{
+				"title"	: "不早于",
+				"key"	: "d2n",
+				"class"	: "negative"
+			},
+			{
+				"title"	: "不晚于",
+				"key"	: "d3n",
+				"class"	: "negative"
+			}
+		]
+	},
+	"yearmonth"	: {
+		"comparators"		: [
+			{
+				"title"	: "在",
+				"key"	: "d1"
+			},
+			{
+				"title"	: "早于",
+				"key"	: "d2"
+			},
+			{
+				"title"	: "晚于",
+				"key"	: "d3"
+			},
+			{
+				"title"	: "不在",
+				"key"	: "d1n"
+			},
+			{
+				"title"	: "不早于",
+				"key"	: "d2n",
+				"class"	: "negative"
+			},
+			{
+				"title"	: "不晚于",
+				"key"	: "d3n",
+				"class"	: "negative"
+			}
+		]
+	},
+	"daterange"	: {
+		"comparators"		: [
+			{
+				"title"	: "在",
+				"key"	: "dr1"
+			},
+			{
+				"title"	: "不在",
+				"key"	: "dr1n",
+				"class"	: "negative"
+			}
+		]
+	},
+	"timerange"	: {
+		"comparators"		: [
+			{
+				"title"	: "在",
+				"key"	: "rn1"
+			},
+			{
+				"title"	: "不在",
+				"key"	: "rn1n",
+				"class"	: "negative"
+			}
+		]
+	},
+	"datetimerange"	: {
+		"comparators"		: [
+			{
+				"title"	: "在",
+				"key"	: "dr1"
+			},
+			{
+				"title"	: "不在",
+				"key"	: "dr1n",
+				"class"	: "negative"
+			}
+		]
+	},
+	"ymrange"		: {
+		"comparators"		: [
+			{
+				"title"	: "在",
+				"key"	: "dr1"
+			},
+			{
+				"title"	: "不在",
+				"key"	: "dr1n",
+				"class"	: "negative"
+			}
+		]
+	},
+	"autocomplete"	: {
+		"comparators"		: [
+			{
+				"title"	: "为",
+				"key"	: "a1"
+			},
+			{
+				"title"	: "不为",
+				"key"	: "a1n",
+				"class"	: "negative"
+			}
+		]
+	},
+	"label"			: {
+		"comparators"		: [
+			{
+				"title"	: "包含其一",
+				"key"	: "l1"
+			},
+			{
+				"title"	: "包含全部",
+				"key"	: "l2"
+			},
+			{
+				"title"	: "不包含",
+				"key"	: "l1n",
+				"class"	: "negative"
+			}
+		]
+	},
+	"relation_existion"	: {
+		"comparators"		: [
+			{
+				"title"	: "包含关系",
+				"key"	: "re1"
+			},
+			{
+				"title"	: "不包含关系",
+				"key"	: "re1n"
+			},
+			{
+				"title"	: "与当前用户关系",
+				"key"	: "re2",
+				"premise-classes-e"	: ["user"]
+			}
+		]
+	},
+	"range"	: {
+		"comparators"		: [
+			{
+				"title"	: "在",
+				"key"	: "rg1"
+			},
+			{
+				"title"	: "不在",
+				"key"	: "rg1n",
+				"class"	: "negative"
+			}
+		]
+	},
+	"int"	: {
+		"comparators"		: [
+			{
+				"title"	: "等于",
+				"key"	: "n1"
+			},
+			{
+				"title"	: "小于",
+				"key"	: "n2"
+			},
+			{
+				"title"	: "大于",
+				"key"	: "n3"
+			},
+			{
+				"title"	: "不等于",
+				"key"	: "n1n",
+				"class"	: "negative"
+			},
+			{
+				"title"	: "不大于",
+				"key"	: "n3n",
+				"class"	: "negative"
+			},
+			{
+				"title"	: "不小于",
+				"key"	: "n2n",
+				"class"	: "negative"
+			}
+		]
+	},
+	"decimal"	: {
+		"comparators"		: [
+			{
+				"title"	: "等于",
+				"key"	: "n1"
+			},
+			{
+				"title"	: "小于",
+				"key"	: "n2"
+			},
+			{
+				"title"	: "大于",
+				"key"	: "n3"
+			},
+			{
+				"title"	: "不等于",
+				"key"	: "n1n",
+				"class"	: "negative"
+			},
+			{
+				"title"	: "不大于",
+				"key"	: "n3n",
+				"class"	: "negative"
+			},
+			{
+				"title"	: "不小于",
+				"key"	: "n2n",
+				"class"	: "negative"
+			}
+		]
+	},
+	"caseelect"		: {
+		"comparators"		: [
+			{
+				"title"	: "为",
+				"key"	: "s1"
+			},
+			{
+				"title"	: "不为",
+				"key"	: "s1n"
+			}
+		]
+	},
+	"none"			: {
+		"class"		: "hidden-only",
+		"comparators"		: [
+			{
+				"title"	: "不为空",
+				"key"	: "none1"
+			},
+			{
+				"title"	: "为空",
+				"key"	: "none1n"
+			}
+		]
+	}
+}

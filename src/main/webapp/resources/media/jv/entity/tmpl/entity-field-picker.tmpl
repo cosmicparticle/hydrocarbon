@@ -1,0 +1,26 @@
+<script id="fields-container"> 
+	<div class="panel-group accordion fields-container" id="fields-container-${uuid}">
+		{{each(i, composite) composites}}
+			{{if composite.fields && composite.fields.length > 0}}
+				<div class="panel panel-default"> 
+					<div class="panel-heading"> 
+						<h4 class="panel-title"> 
+							<a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#fields-container-${uuid}" href="#collapse-${uuid}-${composite.id}"> 
+								${composite.name}
+							</a> 
+						</h4> 
+					</div>  
+					<div id="collapse-${uuid}-${composite.id}" class="panel-collapse collapse" style="height: 0px;"> 
+						<div class="panel-body border-red">
+							{{each(j, field) composite.fields}}
+								<label field-id="${field.id}" on-click="do:selectField(composites[${i}].fields[${j}])">${field.name}</label>
+							{{/each}}
+						</div> 
+					</div> 
+				</div>  
+			{{/if}}
+		{{/each}}
+	</div> 
+</script>
+
+

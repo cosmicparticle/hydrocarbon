@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans 
+           http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context-4.3.xsd
+           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+           
+          
+	<!-- 声明Hibernate的SessionFactory -->
+    <bean id="sessionFactory" 
+        class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+        <!-- 结合配置文件 -->
+        <property name="configLocations">
+        	<value>classpath:hibernate.cfg.xml</value>
+        </property>
+
+        <property name="dataSource" ref="dataSource" /> 
+        <property name="packagesToScan">
+            <list>
+            	<value>cn.sowell.datacenter.model.*.pojo</value>
+            	<value>cn.sowell.dataserver.model.*.pojo</value>
+            	<value>cho.carbon.extface.dto</value>
+            	<value>cho.carbon.*.extface.dto</value>
+        	</list>
+        </property>
+    </bean>
+	<!-- 数据库连接池使用c3p0来管理，这些参数在jdbc.properties中进行配置 -->
+    <bean id="dataSource"
+        class="com.mchange.v2.c3p0.ComboPooledDataSource"  destroy-method="close">
+        <property name="driverClass" value="${driverClass}" />
+        <property name="jdbcUrl" value="${jdbcUrl}" />
+        <property name="user" value="${username}" />
+        <property name="password" value="${password}" />
+        <property name="acquireIncrement" value="${acquireIncrement}"></property>  
+        <property name="initialPoolSize" value="${initialPoolSize}"></property>  
+        <property name="maxIdleTime" value="${maxIdleTime}"></property>  
+        <property name="maxPoolSize" value="${maxPoolSize}"></property>  
+        <property name="minPoolSize" value="${minPoolSize}"></property>  
+        <property name="acquireRetryDelay" value="1000"></property>  
+        <property name="acquireRetryAttempts" value="60"></property>  
+        <property name="breakAfterAcquireFailure" value="false"></property> 
+        <property name="testConnectionOnCheckin" value="false"></property> 
+        <property name="testConnectionOnCheckout" value="true"></property> 
+        <property name="preferredTestQuery" value="select 1"></property> 
+    </bean>
+	
+ 
+	<!-- 开启事务管理器（声明式事务在tx:annotation-driven中打开） -->  
+	 <bean id="transactionManager"
+        class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+
+	<!-- 配置通用DAO的事务,要求按照特定方法名来配置事务 -->
+	 <tx:advice id="commonAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+        	<!-- 数据库修改方法.表示当前方法必须运行在事务中。如果当前事务存在，方法将会在该事务中运行。否则，会启动一个新的事务 -->
+            <tx:method name="create*" propagation="REQUIRED" />
+            <tx:method name="update*" propagation="REQUIRED" />
+            <tx:method name="merge*" propagation="REQUIRED" />
+            <tx:method name="delete*" propagation="REQUIRED" />
+            <tx:method name="save*" propagation="REQUIRED" />
+             <!-- 查询方法, 表示当前方法不需要事务上下文，但是如果存在当前事务的话，那么该方法会在这个事务中运行。 -->
+            <tx:method name="get*" propagation="SUPPORTS" />
+            <tx:method name="query*" propagation="SUPPORTS" />
+
+            <!-- 通用方法 -->
+            <tx:method name="*" propagation="SUPPORTS"/>
+        </tx:attributes>
+    </tx:advice>
+    
+    <!-- 通用事务的AOP配置， -->
+	<aop:config>
+		<aop:pointcut id="interceptorPointCuts"
+			expression="(execution(* cn.sowell.datacenter.model.*.service.impl.*.*(..)))
+			" />
+		<aop:pointcut id="interceptorPointCuts1"
+			expression="(execution(* cn.sowell.dataserver.model.*.service.impl.*.*(..)))
+			" />
+		<aop:advisor advice-ref="commonAdvice" pointcut-ref="interceptorPointCuts" />
+		<aop:advisor advice-ref="commonAdvice" pointcut-ref="interceptorPointCuts1" />
+	</aop:config>
+	
+    
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+</beans>

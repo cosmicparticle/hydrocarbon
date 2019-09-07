@@ -1,0 +1,47 @@
+@charset "UTF-8";
+
+.statview-list .viewcols-wrapper {
+    margin: 3px;
+    padding: 0 4px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.statview-list .viewcols-wrapper>span {
+    font-size: 12px;
+    border: 1px solid #ccc;
+    padding: 3px 7px;
+    margin: 2px 3px;
+    cursor: pointer;
+}
+
+.statview-list .viewcols-wrapper>span:hover{
+    color: #427fed;
+}
+
+.statview-list .viewcols-wrapper>span.disabled {
+    color: #aaa;
+}
+
+
+.statview-list .viewcols-footer {
+    position: absolute;
+    bottom: 0;
+    height: 30px;
+    line-height: 30px;
+    background: #fff;
+    border-top: 1px solid #ccc;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.statview-list .viewcols-footer>a {
+    font-size: 13px;
+    padding: 0 7px;
+    line-height: 25px;
+    height: 25px;
+    margin-right: 5px;
+
+}

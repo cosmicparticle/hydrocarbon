@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ABC name="disabledpeople" abcattr="助残信息" class=""
+	xmlns="http://www.w3school.com.cn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+	<attribute name="编码" alias="" abcattr="唯一编码" />
+	<attribute name="编辑时间" alias="编辑时间" datatype="datetime"
+		abcattr="更新时间" />
+
+	<attribute name="出生日期" abcattr="出生日期" /><!-- 基本信息 -->
+	<attribute name="姓名" abcattr="姓名" /><!-- 基本信息 -->
+	<attribute name="性别" abcattr="性别" /><!-- 基本信息 -->
+	<attribute name="救助圈等级" abcattr="救助圈等级" /><!-- 基本信息 -->
+	<attribute name="死亡日期" abcattr="死亡日期" /><!-- 基本信息 -->
+	<attribute name="残疾证" abcattr="残疾证" /><!-- 基本信息 -->
+	<attribute name="求学类型" abcattr="求学类型" /><!-- 基本信息 -->
+	<attribute name="身份证" abcattr="身份证" /><!-- 基本信息 -->
+	<attribute name="驾驶证" abcattr="驾驶证" /><!-- 基本信息 -->
+	<attribute name="住所类型" abcattr="住所类型" /><!-- 基本信息 -->
+	<attribute name="医疗自付金额" abcattr="医疗自付金额" /><!-- 基本信息 -->
+	<attribute name="意外类型" abcattr="意外类型" /><!-- 基本信息 -->
+	<attribute name="护理地类型" abcattr="护理地类型" /><!-- 基本信息 -->
+	<attribute name="备注" abcattr="备注" /><!-- 基本信息 -->
+	<attribute name="户籍地址" abcattr="户籍地址" /><!-- 基本信息 -->
+	<attribute name="行政区域编码" abcattr="行政区域编码" /><!-- 基本信息 -->
+	<attribute name="社区名称" abcattr="社区名称" /><!-- 基本信息 -->
+	<attribute name="居住地址" abcattr="居住地址" /><!-- 基本信息 -->
+	<attribute name="困难类型" abcattr="困难类型" /><!-- 基本信息 -->
+	<attribute name="所属救助站" abcattr="所属救助站" /><!-- 基本信息 -->
+	<attribute name="救助证" abcattr="救助证" /><!-- 基本信息 -->
+
+	<label name="人口标签" subdomain="户籍人口,残疾人,单亲,个体工商户,灵活就业,创业就业,有车,困难救助人员" />
+
+	<multiattribute name="民政保障信息" abcattr="民政保障信息" ops="并">
+		<attribute name="参保时间" abcattr="参保时间" />
+		<attribute name="参保事项" abcattr="参保事项" />
+		<attribute name="参保金额" abcattr="参保金额" />
+		<attribute name="发放频次" abcattr="发放频次" />
+		<attribute name="状态" abcattr="状态" />
+		<attribute name="最高限额" abcattr="最高限额" />
+		<attribute name="其他说明" abcattr="其他说明" />
+		<attribute name="参保依据" abcattr="参保依据" /> 
+	</multiattribute>
+	<multiattribute name="发票信息" abcattr="发票信息" ops="写" >
+		<attribute name="发票类型" abcattr="发票类型" />
+		<attribute name="发票金额" abcattr="发票金额" />
+		<attribute name="有效期" abcattr="有效期" />
+	</multiattribute>
+	<multiattribute name="器材信息" abcattr="器材信息" ops="写" >
+		<attribute name="器材类型" abcattr="器材类型" />
+	</multiattribute>
+
+	<multiattribute name="机构证明信息" abcattr="机构证明信息" ops="写">
+		<attribute name="证明类别" abcattr="证明类别" />
+	</multiattribute>
+
+	<multiattribute name="手术信息" abcattr="手术信息" ops="写">
+	<attribute name="手术名称" abcattr="手术名称" />
+		<attribute name="手术时间" abcattr="手术时间" />
+		<attribute name="手术类别" abcattr="手术类别" />
+		<attribute name="手术医院" abcattr="手术医院" />
+	</multiattribute>
+
+	<multiattribute name="伤残明细" abcattr="伤残明细" ops="写">
+		<attribute name="伤残详举" abcattr="伤残详举" />
+	</multiattribute>
+
+	<multiattribute name="残疾信息" abcattr="残疾信息" ops="写">
+		<attribute name="残疾类型" abcattr="残疾类型" />
+		<attribute name="残疾级别" abcattr="残疾级别" />
+		<attribute name="注销日期" abcattr="注销日期" />
+		<attribute name="发证日期" abcattr="发证日期" />
+	</multiattribute>
+
+	<multiattribute name="住院记录" abcattr="住院记录" ops="写">
+		<attribute name="住院时间" abcattr="住院时间" />
+		<attribute name="出院时间" abcattr="出院时间" />
+		<attribute name="住院天数" abcattr="住院天数" />
+		<attribute name="住院类型" abcattr="住院类型" />
+		<attribute name="医院名称" abcattr="医院名称" />
+		<attribute name="重大疾病" abcattr="重大疾病" />
+	</multiattribute>
+
+	<multiattribute name="康复记录" abcattr="康复记录" ops="写">
+		<attribute name="开始时间" abcattr="开始时间" />
+		<attribute name="结束时间" abcattr="结束时间" />
+		<attribute name="康复天数" abcattr="康复天数" />
+		<attribute name="机构名称" abcattr="机构名称" />
+	</multiattribute>
+
+	<multiattribute name="工商记录" abcattr="工商记录" ops="写">
+		<attribute name="开始时间" abcattr="开始时间" />
+		<attribute name="结束时间" abcattr="结束时间" />
+		<attribute name="营业执照号" abcattr="营业执照号" />
+	</multiattribute>
+
+	<multiattribute name="完税信息" abcattr="完税信息" ops="写">
+		<attribute name="完税时间" abcattr="完税时间" />
+		<attribute name="完税凭证" abcattr="完税凭证" />
+	</multiattribute>
+
+	<multiattribute name="学业证书" abcattr="学业证书" ops="写">
+		<attribute name="发放时间" abcattr="发放时间" />
+		<attribute name="证书类型" abcattr="证书类型" />
+	</multiattribute>
+
+	<relation name="子女信息">
+		<label subdomain="子女" />
+		<ABC name="子女信息" abcattr="助残信息">
+			<attribute name="姓名" abcattr="姓名" />
+			<attribute name="性别" abcattr="性别" />
+			<attribute name="出生日期" abcattr="出生日期" />
+			<attribute name="求学类型" abcattr="求学类型" />
+			<multiattribute name="发票信息" abcattr="发票信息">
+				<attribute name="发票类型" abcattr="发票类型" />
+				<attribute name="发票金额" abcattr="发票金额" />
+				<attribute name="有效期" abcattr="有效期" />
+			</multiattribute>
+			<multiattribute name="机构证明信息" abcattr="机构证明信息">
+				<attribute name="证明类别" abcattr="证明类别" />
+			</multiattribute>
+		</ABC>
+	</relation>
+</ABC>

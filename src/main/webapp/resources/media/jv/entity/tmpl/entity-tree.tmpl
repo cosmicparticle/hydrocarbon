@@ -1,0 +1,51 @@
+<script type="jquery/tmpl" id="node-item-tmpl">
+	<li class="tree-node-id-${nodeTmpl.id}" node-id="${nodeTmpl.id}" entity-code="${entityCode}" uuid="${uuid}">
+		<a>
+			<b></b>
+			{{if hasRelations}}
+				<i></i>
+			{{/if}}
+			{{if checkableNodeIds.indexOf(nodeTmpl.id) >= 0}}
+				<label style="display:block"></label>
+			{{/if}}
+			<span>${text }</span>
+			{{if renderOperates !== false}}
+				<div class="node-operates">
+					<div class="node-operate-icons">
+						{{if nodeTmpl.templateGroupId}}
+							{{if nodeTmpl.hideDetailButton != 1}}
+								<i title="打开详情页" class="fa fa-book" action-type="detail" on-click="do:openPage('detail', ${nodeTmpl.id}, '${entityCode}', '节点详情-${text}')"></i>
+							{{/if}}
+							{{if nodeTmpl.hideUpdateButton != 1}}
+								<i title="打开修改页" class="fa fa-edit" action-type="update" on-click="do:openPage('update', ${nodeTmpl.id}, '${entityCode}', '节点编辑-${text}')"></i>
+							{{/if}}
+						{{/if}}
+					</div>
+				</div>
+			{{/if}}
+		</a>
+	</li>
+</script>
+<script type="jquery/tmpl" id="load-more-tmpl">
+	<li class="next-page">
+		<a><span>加载更多</span></a>
+	</li>
+</script>
+<script type="jquery/tmpl" id="rels-tmpl">
+	<ul class="tree-rels">
+		{{each(i, rel) rels}}
+			<li rel-id="${rel.id }">
+				<a>
+					<i></i>
+					<label></label>
+					<span>${rel.title }</span>
+				</a>
+			</li>
+		{{/each}}
+	</ul>
+</script>
+<script id="form-buttons">
+	{{if isRenderButton}}
+		<button on-click="rootQuery" type="submit" class="btn btn-default" title="${hidenCriteriaDesc }">查询</button>
+	{{/if}}
+</script>

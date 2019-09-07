@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans    
+	     http://www.springframework.org/schema/beans/spring-beans-4.3.xsd    
+	     http://www.springframework.org/schema/context    
+	     http://www.springframework.org/schema/context/spring-context.xsd    
+	     http://www.springframework.org/schema/mvc    
+	     http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd">
+
+	<!-- 默认日期时间格式 -->
+	<bean id="dateFormat" class="cn.sowell.copframe.utils.date.CommonDateFormat" />
+	
+	<!-- 加载jdbc.properties配置文件 -->
+    <bean id="propConfig" class="cn.sowell.copframe.spring.properties.PropertyPlaceholder">
+		<property name="order" value="1" />
+		<property name="ignoreUnresolvablePlaceholders" value="true" />
+		<property name="locations">
+			<list>
+				<value>classpath:jdbc.properties</value>
+				<value>classpath:config.properties</value>
+			</list>
+		</property>  
+	</bean>
+	
+</beans>    

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ABC name="importFamilyPlanning" abcattr="人口信息" alias="importFamilyPlanning" class="" xmlns="http://www.w3school.com.cn"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<attribute name="编码" alias="编码" abcattr="唯一编码" />
+	<attribute name="姓名" alias="姓名" abcattr="姓名" />
+	<attribute name="证件号码" alias="证件号码" abcattr="证件号码" />
+	<!-- 计生信息 -->
+	<attribute name="子女数" alias="子女数" abcattr="子女数" datatype="INT" />
+	<attribute name="节育措施" alias="节育措施" abcattr="节育措施" />
+	<attribute name="现孕周" alias="现孕周" abcattr="现孕周" datatype="INT" />
+	<attribute name="计划生育证编号" alias="计划生育证编号" abcattr="计划生育证编号" />
+	<attribute name="计划生育证类型" alias="计划生育证类型" abcattr="计划生育证类型" />
+	
+</ABC>

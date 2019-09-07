@@ -1,0 +1,19 @@
+<div class="icon-selector-container">
+	<div class="icon-selector-header">
+		
+	</div>
+	<div class="icon-selector-wrapper">
+		<div class="icon-selector-flex">
+			{{each(i, icon) icons}}
+				<span><i class="${icon.clazz}" title="${icon.title}"></i></span>
+			{{/each}}
+		</div>
+	</div>
+</div>
+<div class="modal-footer">
+	<div class="row center">
+		<div>
+			<input id="submit" class="btn btn-primary btn-block submit" type="button" value="确定" /> 
+		</div>
+	</div>
+</div>

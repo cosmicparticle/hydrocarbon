@@ -1,0 +1,72 @@
+<script id="blocks">
+	{{if blocks.length > 0 || sysConfig.showBlocksAnyway == 1}}
+		<ul>
+			{{each(i, theBlock) blocks}}
+				<li class="${theBlock.id == currentBlockId? 'current': ''}">
+					<div>
+						<a class="open-link" href="jv/main/index?blockId=${theBlock.id}">${theBlock.title }</a>
+						{{if theBlock.l1Menus && theBlock.l1Menus.length > 0}}
+							<div class="dropdown-icon"><i class="fa fa-caret-down"></i></div>
+						{{/if}}
+					</div>
+					{{if theBlock.l1Menus && theBlock.l1Menus.length > 0}}
+						<ul>
+							{{each(j, l1Menu) theBlock.l1Menus}}
+								<li>
+									<div>
+										<a>${l1Menu.title }</a>
+										{{if l1Menu.l2Menus && l1Menu.l2Menus.length > 0}}
+											<div class="dropdown-icon"><i class="fa fa-caret-down"></i></div>
+										{{/if}}
+									</div>
+									{{if l1Menu.l2Menus &&  l1Menu.l2Menus.length > 0}}
+										<ul>
+											{{each(k, l2Menu) l1Menu.l2Menus}}
+												<li>
+													<div><a class="open-link" href="jv/main/index?menuId=${l2Menu.id }">${l2Menu.title }</a></div>
+												</li>
+											{{/each}}
+										</ul>
+									{{/if}}
+								</li>
+							{{/each}}
+						</ul>
+					{{/if}}
+				</li>
+			{{/each}}
+		</ul>
+	 {{/if}}
+</script>
+
+<script id="menus">
+	{{if currentBlock}}
+		{{each(i, l1) currentBlock.l1Menus}}
+			 <li l1-menu-id="${l1.id}">
+				<a href="#" class="menu-dropdown">
+					<i class="menu-icon fa fa-bookmark"></i>
+					<span class="menu-text">${l1.title }</span>
+				</a>
+				<ul class="submenu">
+					{{each(j, level2) l1.l2Menus}}
+						{{if level2.customPagePath}}
+							<li>
+								<a class="tab" l2-menu-id="${level2.id}"  href="jv/custompage/path/${level2.customPagePath}" 
+									target="custom_page_${level2.customPageId }" title="${level2.title }">
+									<span class="menu-text">${level2.title }</span>
+								</a>
+							</li>
+						{{else}}
+							<li>
+								<a class="tab" l2-menu-id="${level2.id}" href="jv/entity/curd/list/${level2.id }" 
+									target="entity_list_${level2.id }" title="${level2.title }">
+									<span class="menu-text">${level2.title }</span>
+								</a>
+							</li>
+						{{/if}}
+					{{/each}}
+				</ul>
+			</li>
+		{{/each}}
+	{{/if}}
+	
+</script>

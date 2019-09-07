@@ -1,0 +1,60 @@
+@CHARSET "UTF-8";
+
+
+.modules-selection form.form-inline>.form-group{
+    height: 2.8em;
+    line-height: 2.8em;
+    margin-right: 0.7em;
+}
+.modules-selection form.form-inline>.form-group label.control-label:after{
+	content: "：";
+}
+
+.modules-selection .criteria-field-unavailable {
+    background-color: #999;
+    position: relative;
+}
+.modules-selection .criteria-field-unavailable:before{
+    content: "\e73d";
+    font-family: "iconfont" !important;
+    font-size: 2em;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    position: absolute;
+    -moz-osx-font-smoothing: grayscale;
+    right: 0;
+    color: #FFff00;
+}
+.modules-selection .criteria-field-unavailable:after {
+    content: "";
+    width: 3em;
+    display: inline-block;
+}
+
+.modules-selection th.col-field-unavailable,
+.modules-selection td.col-field-unavailable {
+    background-color: #888;
+    border: solid #888 !important;
+    position: relative !important;
+}
+.modules-selection th.col-field-unavailable:before {
+    content: "\e73d";
+    font-family: "iconfont" !important;
+    font-size: 2em;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    position: absolute;
+    -moz-osx-font-smoothing: grayscale;
+    top:0;
+    color: #FFff00;
+}
+
+
+.modules-selection .list-area tbody>tr.selected{
+	background-color: #87CEEB;
+	color: #fff;
+}
+.modules-selection .list-area tbody>tr.selected:HOVER td{
+	color: #000;
+	background-color: #BBFFFF !important;
+}

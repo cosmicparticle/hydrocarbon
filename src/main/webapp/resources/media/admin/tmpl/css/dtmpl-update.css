@@ -1,0 +1,503 @@
+@CHARSET "UTF-8";
+.dtmpl-update {
+    min-height: 95%;
+}
+.dtmpl-update .widget-caption{
+	font-size: 1.3em;
+}
+.dtmpl-update .movable, .dtmpl-update .movable label{
+	cursor: move;
+}
+.dtmpl-update .field-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    min-height: 60px;
+}
+.dtmpl-update .field-item , .dtmpl-update .field-item-placeholder{
+    width: 50%;
+    margin-left: 0;
+    margin-right: 0;
+    line-height: 2.5em;
+    min-height: 2.5em;
+    font-size: 1.1em;
+    float: left;
+    border-bottom: 1px solid #ddd;
+    position: relative;
+    margin: 7px 0;
+}
+.dtmpl-update .field-item:hover{
+    background-color: #eee;
+}
+.dtmpl-update .field-item-placeholder{
+	background-color: #888;
+}
+.dtmpl-update .field-item-placeholder.dbcol{
+	width: 100% !important;
+}
+.dtmpl-update .dbcol.field-item {
+    width: 100% !important;
+}
+.dtmpl-update label.field-title {
+    width: 20%;
+    padding-right: 4%;
+    font-weight: bold;
+}
+.dtmpl-update .dbcol label.field-title {
+    width: 10% !important;
+    padding-right: 2% !important;
+}
+
+.dtmpl-update .group-item-placeholder{
+	width: 100%;
+	height: 40px;
+	background-color: #aaa;
+}
+.dtmpl-update .field-item>.field-title, .dtmpl-update .field-item>.field-value{
+	display: inline-block;
+    min-height: 2.5em;
+    line-height: 2.5em;
+    padding-top: 0;
+    margin-top: 0;
+    font-size: 16px;
+    vertical-align: middle;
+    word-break: break-all;
+}
+.dtmpl-update span.field-view {
+    line-height: 2em;
+    word-break: break-word;
+    display: inline-block;
+}
+.dtmpl-update .field-item .operate-buttons, 
+.dtmpl-update .widget-caption>.operate-buttons,
+.dtmpl-update .field-array-table thead th>.operate-buttons {
+	position: absolute;
+    font-size: 1.4em !important;
+    background-color: #fff;
+    line-height: 2em !important;
+    height: 2em !important;
+    padding: 0 1em;
+    border-radius: 7px;
+    border: 1px solid #eee;
+    display: none;
+    cursor: default;
+}
+.dtmpl-update .field-item .operate-buttons{
+	left: 18%;
+    top: -2em;
+}
+.dtmpl-update .field-item.dbcol .operate-buttons{
+	left: 9%;
+    top: -2em;
+}
+.dtmpl-update .field-array-table thead th{
+	position: relative;
+
+}
+.dtmpl-update .field-array-table thead th:hover>.operate-buttons,
+.dtmpl-update .field-array-table thead th>.operate-buttons:hover {
+	display: block;
+	right: 5px;
+	top: 1.5em;
+	z-index: 1000;
+}
+
+.dtmpl-update .operate-buttons a{
+	cursor: pointer;
+	color: #57b5e3;
+	margin: 0 0.2em;
+}
+.dtmpl-update .operate-buttons a:HOVER{
+	color: #c9e2dd;
+}
+.dtmpl-update .form-group:HOVER .operate-buttons{
+	display: block;
+}
+.dtmpl-update .widget-caption>.operate-buttons{
+	left: 1em;
+    top: -2em;
+}
+.dtmpl-update .widget-caption:HOVER>.operate-buttons{
+	display: inline-block;
+}
+
+
+.dtmpl-update .field-value {
+    width: 70%;
+    max-height: 20em;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+.dtmpl-update input.field-view{
+	font-size: 18px;
+	height: 2em;
+	line-height: 2em;
+}
+.dtmpl-update #group-container {
+	margin-top: 20px;
+}
+.dtmpl-update .remove-group{
+	font-size: 1.5em;
+	cursor: pointer;
+	color: #57b5e3;
+}
+.dtmpl-update .remove-group:HOVER {
+	color: #c9e2dd;
+}
+.dtmpl-update .group-container{
+	padding-bottom: 50px;
+}
+.dtmpl-update .field-array-table tr.title-row th{
+	cursor: move;
+}
+.dtmpl-update .field-array-table tr.title-row th input{
+	font-size: 13px;
+}
+.dtmpl-update .box-holdplace{
+	background-color: #888 !important;
+	border: 1px solid #000;
+}
+.dtmpl-update #operate-area {
+    font-size: 3em;
+    line-height: 1.23em;
+    padding-right: 1em;
+    position: absolute;
+    bottom: 20px;
+    right: 1em;
+    z-index: 1000;
+    width: 1em;
+}
+.dtmpl-update #operate-area a i{
+	cursor: pointer;
+	color: #57b5e3;
+	opacity: 0.5;
+}
+.dtmpl-update #operate-area a i:HOVER{
+	opacity: 1;
+}
+.dtmpl-update span.group-title{
+	cursor: move;
+	padding-right: 1em;
+}
+.dtmpl-update input.group-title{
+	display: inline-block;
+    height: 1.5em;
+    font-size: 0.8em;
+    width: 10em;
+}
+.dtmpl-update input.field-title{
+	width: 5em;
+	height: 1.4em;
+	line-height: 1.5em;
+	display: inline-block;
+	font-size: 16px;
+	text-align: right;
+}
+
+.dtmpl-update span.field-title-d {
+    display: inline !important;
+    word-break: keep-all !important;
+    opacity: 0 !important;
+    white-space: nowrap;
+}
+.dtmpl-update .header-row>* {
+    height: 2.5em;
+    line-height: 2.5em;
+    text-align: right;
+    margin-bottom: 0;
+    font-size: 15px !important;
+    vertical-align: middle;
+}
+.dtmpl-update input#tmplName {
+    font-size: 1em;
+    line-height: 2.5em;
+    height: 2.5em;
+}
+
+.dtmpl-update a#save i{
+    color: #EEAD0E !important;
+}
+.dtmpl-update a#save i:HOVER{
+    color: 	#FFC125 !important;
+}
+.dtmpl-update .field-group-array th{
+	min-width: 50px;
+}
+.dtmpl-update select.tmpl-relation-labels{
+	width: 90%;
+}
+
+
+.field-item.field-unavailable,
+th.field-unavailable,
+td.field-unavailable {
+    background-color: #888 !important;
+    border: 1px solid #888 !important;
+    position: relative;
+}
+.field-item.field-unavailable:before {
+    content: "\e73d";
+    font-family: "iconfont" !important;
+    font-size: 2em;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    position: absolute;
+    -moz-osx-font-smoothing: grayscale;
+    left: 0;
+    top:0;
+    color: #FFff00;
+}
+th.field-unavailable:before {
+	content: "\e73d";
+    font-family: "iconfont" !important;
+    font-size: 2em;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    position: absolute;
+    -moz-osx-font-smoothing: grayscale;
+    top:0;
+    color: #FFff00;
+}
+
+
+
+
+
+.dtmpl-update .dtmpl-field-validates{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    display: block;
+    height: 1em;
+    line-height: 1em;
+}
+.dtmpl-update .dtmpl-field-validates:before{
+    content: "";
+    display: inline-block;
+    position: absolute;
+    left: 0;
+    right:0;
+    top:0;
+    bottom: 0;
+    background-color: #fff;
+    opacity: 0.3;
+}
+.dtmpl-update .dtmpl-field-validates>i{
+    display: none;
+    height: 100%;
+    width: 1em;
+    margin-left: 5px;
+    cursor: pointer !important;
+    z-index: 10000;
+}
+.dtmpl-update .dtmpl-field-validates>i.active-validator{
+	display: inline-block;
+}
+
+.dtmpl-update .dtmpl-field-validates i {
+    cursor: pointer !important;
+}
+
+.dtmpl-update i.dtmpl-field-validate-required:before{
+	content: "*";
+    color: #f00;
+}
+
+
+.dtmpl-update ul.field-validate-menu {
+    display: none;
+    position: absolute;
+    left: 5em;
+    background-color: #fff;
+    top: 1.6em;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    padding: 0;
+}
+.dtmpl-update .field-validate-a:hover+ul.field-validate-menu,
+.dtmpl-update ul.field-validate-menu:hover
+{
+    display: block;
+}
+
+.dtmpl-update ul.field-validate-menu>li {
+    font-size: 13px;
+    line-height: 25px;
+    list-style-type: none;
+    margin-left: 0;
+    padding: 0 10px;
+    border-bottom: 1px solid #ccc;
+    min-width: 10em;
+    cursor: pointer;
+}
+
+.dtmpl-update ul.field-validate-menu>li:hover {
+    background-color: #57b5e3;
+}
+
+.dtmpl-update li.checked-validate:before {
+    content: "\e775";
+    font-family: "iconfont" !important;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    padding-right: 7px;
+}
+
+.dtmpl-update .select-arrayitem-control{
+	
+}
+
+.dtmpl-update .create-arrayitem-control a.btn, .dtmpl-update .select-arrayitem-control a.btn {
+    padding: 0px 5px;
+    font-size: 12px;
+    line-height: 20px;
+}
+
+.dtmpl-update .create-arrayitem-control>label{
+    border-right: 2px solid #ddd;
+    padding-right: 10px;
+}
+
+.dtmpl-update .create-arrayitem-control>label>input[type=checkbox]+span.text {
+    z-index: inherit;
+}
+
+.dtmpl-update a.field-setdefval>i:before {
+    content: "V";
+}
+.dtmpl-update a.field-setdefval.tounsetdefval>i:before {
+    text-decoration: line-through;
+}
+
+
+.dtmpl-update .field-group[stmpl-id=""] .btn-toselect{
+	display: none !important;
+}
+.dtmpl-update .field-group[stmpl-id] .btn-toselect{
+	display: inline-block;
+}
+
+.dtmpl-update div#dtmpl-list-container {
+    height: 150px;
+    width: 300px;
+    top: 55px;
+    font-size: 14px;
+}
+
+
+.dtmpl-update div#dtmpl-list-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.dtmpl-update div#dtmpl-list-wrapper>div {
+    display: block;
+    width: 100%;
+    height: 40px;
+    background-color: #62cdb5;
+    line-height: 40px;
+    padding: 3px;
+    cursor: pointer;
+    margin: 5px 0;
+    padding: 0 10px;
+}
+
+
+.field-group-config-dialog a.choose-tmpl.form-control {
+    height: 23px;
+    line-height: 23px;
+    font-size: 14px;
+    padding: 0 10px;
+    margin: 0 0 10px 0;
+}
+
+.field-group-config-dialog>.form-group {
+    margin-bottom: 7px;
+    padding-top: 7px;
+}
+
+.field-group-config-dialog a.dialog-link {
+    width: 28px;
+    height: 28px;
+    line-height: 18px;
+    display: inline-block;
+    cursor: pointer;
+    color: #5db2ff;
+    font-size: 16px;
+}
+
+.field-group-config-dialog .form-group>div {
+    position: relative;
+    display: flex;
+}
+
+.field-group-config-dialog i.unselect-tmpl {
+    width: 23px;
+    text-align: center;
+    cursor: pointer;
+    height: 23px;
+    line-height: 23px;
+    border-radius: 23px;
+}
+
+.field-group-config-dialog i.unselect-tmpl:hover{
+    background-color: #eee;
+}
+.field-group-config-dialog i.unselect-tmpl:before {
+    content: "×";
+}
+
+
+
+.field-group-config-dialog .selectable-nodes {
+    width: 100%;
+    border: 2px solid #ddd;
+    max-height: 6em;
+    overflow-y: auto;
+}
+.field-group-config-dialog .selectable-nodes>div{
+    padding: 3px 5px;
+    display: flex;
+    justify-content: space-between;
+}
+.field-group-config-dialog .selectable-nodes>div:not(:last-child){
+     border-bottom: 1px solid #eee;
+}
+.field-group-config-dialog .selectable-nodes>div:hover{
+    background-color: #eee;
+}
+.field-group-config-dialog .selectable-nodes>div>span{
+    font-size: 13px;
+}
+
+
+.field-group-config-dialog .selectable-nodes>div>i:before {
+    content: "×";
+}
+
+.field-group-config-dialog .selectable-nodes>div>i {
+    width: 20px;
+    text-align: center;
+    cursor: pointer;
+    display: inline-block;
+    height: 20px;
+    border-radius: 20px;
+}
+.field-group-config-dialog .selectable-nodes>div>i:hover{
+    background-color: #ddd;
+}
+
+.field-group-config-dialog .form-group>.selectable-nodes-container {
+    display: block;
+}
+
+.field-group-config-dialog .dialog-select-type {
+    flex-direction: column;
+}
+
+.dtmpl-update .field-array-table tr.title-row th>span {
+    min-width: 2em;
+    height: 1em;
+    display: inline-block;
+}
