@@ -144,7 +144,7 @@
 				$page,
 				'${entity.code}',
 				{type, menuId: '${menu.id}', nodeId} ,
-				'${historyId}');
+				'${versionCode}');
 		
 	});
 </script>

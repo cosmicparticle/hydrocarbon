@@ -50,7 +50,7 @@ define(function(require, exports, module){
 			}
 		}
 	
-	exports.init = function($page, entityCode, uriData, historyId){
+	exports.init = function($page, entityCode, uriData, versionCode){
 		var uriGenerator = uriGeneratorFactory(entityCode, uriData);
 		if(entityCode === ''){
 			Dialog.notice('数据不存在', 'warning');
@@ -77,7 +77,7 @@ define(function(require, exports, module){
 						appendHistory(data.history);
 						curPageNo ++;
 						timelineInited = true;
-						if(!historyId && $('.VivaTimeline>dl>dd.current', $page).length == 0){
+						if(!versionCode && $('.VivaTimeline>dl>dd.current', $page).length == 0){
 							$('.VivaTimeline>dl>dd', $page).first().addClass('current');
 						}
 					}
@@ -90,8 +90,8 @@ define(function(require, exports, module){
 			}
 		});
 		$('.VivaTimeline', $page).on('click', '.circ', function(){
-			var hid = parseInt($(this).closest('dd').attr('data-id'));
-			$page.getLocatePage().loadContent(uriGenerator.detail(), null, {historyId:hid, dtmplId: uriData.dtmplId});
+			var verCode = $(this).closest('dd').attr('data-versionCode');
+			$page.getLocatePage().loadContent(uriGenerator.detail(), null, {versionCode:verCode, dtmplId: uriData.dtmplId});
 			
 		});
 		
@@ -131,7 +131,7 @@ define(function(require, exports, module){
 					$item.find('.time').text(Utils.formatDate(new Date(item.timeKey), 'yyyy-MM-dd hh:mm:ss'));
 					$item.find('.events-header').text('操作人：' + item.userName);
 					//$item.find('.events-body').text('详情');
-					$item.attr('data-id', item.id).attr('data-time', item.timeKey);
+					$item.attr('data-versionCode', item.code).attr('data-time', item.timeKey);
 					var inserted = false;
 					var $dds = $month.nextUntil('dt');
 					if($dds.length > 0){
@@ -158,8 +158,8 @@ define(function(require, exports, module){
 				$dd.each(function(i){
 					var $this = $(this);
 					if(!checked){
-						var hid = $this.attr('data-id');
-						if(historyId == hid){
+						let verCode = $this.attr('data-versionCode');
+						if(versionCode == verCode){
 							$this.addClass('current');
 							checked = true;
 						}
@@ -209,7 +209,7 @@ define(function(require, exports, module){
 				if(yes){
 					$CPF.showLoading();
 					Ajax.ajax(uriGenerator.exportDetail(), {
-						historyId	: historyId
+						versionCode	: versionCode
 					}, function(data){
 						if(data.status === 'suc'){
 							if(data.uuid){
