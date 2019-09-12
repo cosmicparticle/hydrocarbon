@@ -222,8 +222,11 @@ public class AdminDetailTemplateController {
 
 			// group.setId();
 			group.setTitle(dcomp.getTitle());
-			group.setIsArray(dcomp.getIsArray() != null ? 1 : null);
-			group.setCompositeId(dcomp.getId());
+			if(dcomp.getIsArray()!=null) {
+				group.setIsArray(1);
+				group.setCompositeId(dcomp.getId());
+			} 
+			
 			// group.setDialogSelectType(dcomp.);
 			// group.setRabcTemplateGroupId();
 			// group.setRabcUncreatable(jGroup.getInteger("rabcUncreatable"));
@@ -312,6 +315,7 @@ public class AdminDetailTemplateController {
 									field.setColNum((dbcol == null || !dbcol) ? 1 : 2);
 									field.setOrder(j++);
 									field.setValidators(jField.getString("validators"));
+									field.setRefGroupId(jField.getLong("refGroupId"));
 									group.getFields().add(field);
 								}
 							}

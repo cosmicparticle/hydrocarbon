@@ -10,7 +10,7 @@
 	
 	<properties>
 		<version.kie>7.10.0.Final</version.kie>
-		<version.carbon-core>0.35</version.carbon-core>
+		<version.carbon-core>0.37</version.carbon-core>
 		<version.dataserver>1.42</version.dataserver>
 		<version.cpfweb>0.2.14</version.cpfweb>
 		<version.cpfutils>0.3.23</version.cpfutils>
