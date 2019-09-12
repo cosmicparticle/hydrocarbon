@@ -18,6 +18,9 @@
 			<a class="tab"  href="admin/tmpl/dtmpl/to_create/${module.name }" title="创建模板" target="create_dtmpl">
 				<i class="fa fa-plus"></i>
 			</a>
+			<a class=""  href="admin/tmpl/dtmpl/to_create_default/${module.name }" title="自动生成" >
+				 <div  style="font-size: 20px;font-weight:700;">1+</div>
+			</a>
 		</div>
 	</div>
 	<div class="page-body" style="font-size: 15px;">
