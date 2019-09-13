@@ -111,6 +111,8 @@ define(function(require1, exports, module){
 							optionGroupKey	: field.optGroupKey,
 							name			: field.name,
 							type			: field.type,
+							pointModuleName	: field.pointModuleName
+	
 						}, $group, {
 							isArrayField	: field.composite.isArray == 1,
 							relations		: field.composite.relationSubdomain
@@ -780,6 +782,7 @@ define(function(require1, exports, module){
 									id			: $field.attr('data-id'),
 									fieldId		: $field.attr('field-id'),
 									refGroupId	: $field.attr('refGroupId'),
+									pointModuleName	: $field.attr('pointModuleName'),
 									title		: $field.find('label.field-title').text(),
 									viewVal		: '',
 									dbcol		: $field.is('.dbcol'),
@@ -978,7 +981,8 @@ define(function(require1, exports, module){
 					onSubmit	: function(data){
 						if(data && data[0]){
 							$field.attr('refGroupId',data[0].id);
-							$current.attr('title',data[0].title);
+							$field.attr('pointModuleName',pointMName);
+							$current.attr('title','已选组合:'+data[0].title);
 						}
 					}
 				});

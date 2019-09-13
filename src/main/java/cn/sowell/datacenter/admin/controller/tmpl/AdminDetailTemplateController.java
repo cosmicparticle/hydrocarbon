@@ -245,6 +245,7 @@ public class AdminDetailTemplateController {
 				// field.setId(jField.getLong("id"));
 				field.setFieldId(dfield.getId());
 				field.setTitle(dfield.getTitle());
+				field.setPointModuleName(dfield.getPointModuleName());
 				if(dcomp.getIsArray()!=null) {
 					field.setViewValue("XXX");
 				} else {
@@ -321,6 +322,7 @@ public class AdminDetailTemplateController {
 									field.setOrder(j++);
 									field.setValidators(jField.getString("validators"));
 									field.setRefGroupId(jField.getLong("refGroupId"));
+									field.setPointModuleName(jField.getString("pointModuleName"));
 									group.getFields().add(field);
 								}
 							}

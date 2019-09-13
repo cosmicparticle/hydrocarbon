@@ -95,6 +95,7 @@ define(function(require1, exports, module){
 									optGroupId	: thisField.optionGroupId,
 									optGroupKey	: thisField.optionGroupId + (thisField.casLevel? ('@' + thisField.casLevel): ''),
 									fieldPattern: thisField.fieldPattern,
+									pointModuleName	: thisField.pointModuleName,
 									composite	: $.extend({}, thisComposite, {
 											data	: {}
 									}),

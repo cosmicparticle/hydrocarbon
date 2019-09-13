@@ -115,7 +115,7 @@
 		<td field-id="\${fieldId}" class="\${fieldAvailable? '': 'field-unavailable'}">\${dv }</td>
 	</script>
 	<script type="jquery/tmpl" id="tmpl-field">
-		<div class="form-group field-item movable \${fieldAvailable? '': 'field-unavailable'} \${colNum == 2? 'dbcol': ''}" field-id="\${fieldId}" refGroupId="\${refGroupId}"  data-id="\${id}"
+		<div class="form-group field-item movable \${fieldAvailable? '': 'field-unavailable'} \${colNum == 2? 'dbcol': ''}" field-id="\${fieldId}" refGroupId="\${refGroupId}" pointModuleName="\${pointModuleName}"  data-id="\${id}"
 			title="\${fieldAvailable? fieldOriginTitle: '无效字段' }">
 			<div class="dtmpl-field-validates">
 				<i class="dtmpl-field-validate-required \${validators.required? 'active-validator': ''}"></i>
@@ -133,7 +133,7 @@
 				<ul class="field-validate-menu">
 					<li validate-name="required" class="\${validators.required? 'checked-validate': ''}">必填</li>
 				</ul>
- 				<a  class="field-refmodule-a \${pointModuleName? pointModuleName : 'hide' } " title="\${refGroupTitle? refGroupTitle: '选择组合'}"  ><i class="icon iconfont icon-group"></i></a>
+ 				<a  class="field-refmodule-a \${pointModuleName? pointModuleName : 'hide' } " title="\${refGroupTitle? '已选组合:'+refGroupTitle: '选择组合'}"  ><i class="icon iconfont icon-group"></i></a>
 			</div>
 		</div>
 	</script>
