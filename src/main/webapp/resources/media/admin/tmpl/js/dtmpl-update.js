@@ -1,4 +1,6 @@
 define(function(require1, exports, module){
+	"use strict";
+	var Dialog = require1('dialog');
 	 function adjustFieldTitle($titleLabel){
 		var $titleSpan = $('<span class="field-title-d">').text($titleLabel.text());
 		$titleLabel.empty().append($titleSpan);
@@ -134,6 +136,9 @@ define(function(require1, exports, module){
 						fieldType		: groupFieldData.type,
 						fieldName		: groupFieldData.name,
 						optGroupKey		: groupFieldData.optionGroupKey,
+						pointModuleName : groupFieldData.pointModuleName,
+						refGroupId		: groupFieldData.refGroupId,
+						refGroupTitle   : groupFieldData.refGroupTitle,
 						validators		: []
 				};
 				var VALIDATORS = ['require1d'];
@@ -774,6 +779,7 @@ define(function(require1, exports, module){
 							var field = {
 									id			: $field.attr('data-id'),
 									fieldId		: $field.attr('field-id'),
+									refGroupId	: $field.attr('refGroupId'),
 									title		: $field.find('label.field-title').text(),
 									viewVal		: '',
 									dbcol		: $field.is('.dbcol'),
@@ -958,6 +964,27 @@ define(function(require1, exports, module){
 				toggleFieldExpand($field);
 			});
 			
+			//选择模板组合
+			bindPageEvent('click', '.field-refmodule-a i', function(e){
+				var $field = getLocateField(this);
+				//请求打开选择模板组合对话框
+				var pointMName=$field.data('field-data').pointModuleName;
+				var $current = $(this);
+				Dialog.openDialog("admin/tmpl/group/choose/"+pointMName, 
+						"选择关联模板", undefined, {
+					undefined,
+					width		: 1000,
+					height		: 400,
+					onSubmit	: function(data){
+						if(data && data[0]){
+							$field.attr('refGroupId',data[0].id);
+							$current.attr('title',data[0].title);
+						}
+					}
+				});
+				
+			});
+
 			//删除字段
 			bindPageEvent('click', '.remove-field i', function(e){
 				var $field = getLocateField(e.target),

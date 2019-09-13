@@ -43,7 +43,7 @@
 			<div id="ctab_${pickerKey }_${i }" class="tab-pane {{if i==0}}active{{/if}}">
 				<div class="fieldpicker-field-container">
 					{{each(i, field) composite.fields}}
-						<a href="#" data-id="${field.id}" class="fieldpicker-field-item ${field.isShow? '': 'field-hidden'}">${field.cname }</a>
+						<a href="#" data-id="${field.id}"  class="fieldpicker-field-item ${field.isShow? '': 'field-hidden'}">${field.cname }</a>
 					{{/each}}
 				</div>
 			</div>

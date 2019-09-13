@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html;charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/jsp/common/base_empty.jsp"%>
 <c:set var="title">
 	<c:choose>
@@ -9,9 +10,10 @@
 
 
 <title>${title }</title>
-<div id="dtmpl-update-${module.name}-${tmpl.id }-${RES_STAMP}" class="dtmpl-update">
+<div id="dtmpl-update-${module.name}-${tmpl.id }-${RES_STAMP}"
+	class="dtmpl-update">
 	<script type="jquery/tmpl" id="tmpl-field-group">
-		<div class="widget field-group" data-id="\${id}" stmpl-id="\${selectionTemplateId}" rdtmpl-id="\${relationDetailTemplateId}" rabc-tmpl-group-id="\${rabcTemplateGroupId}" array-item-filter-id="\${arrayItemFilterId}">
+		<div class="widget field-group" data-id="\${id}" stmpl-id="\${selectionTemplateId}"  rdtmpl-id="\${relationDetailTemplateId}" rabc-tmpl-group-id="\${rabcTemplateGroupId}" array-item-filter-id="\${arrayItemFilterId}">
 			<div class="widget-header">
 				<span class="widget-caption">
 					<span class="group-title">\${title}</span>
@@ -113,7 +115,7 @@
 		<td field-id="\${fieldId}" class="\${fieldAvailable? '': 'field-unavailable'}">\${dv }</td>
 	</script>
 	<script type="jquery/tmpl" id="tmpl-field">
-		<div class="form-group field-item movable \${fieldAvailable? '': 'field-unavailable'} \${colNum == 2? 'dbcol': ''}" field-id="\${fieldId}" data-id="\${id}"
+		<div class="form-group field-item movable \${fieldAvailable? '': 'field-unavailable'} \${colNum == 2? 'dbcol': ''}" field-id="\${fieldId}" refGroupId="\${refGroupId}"  data-id="\${id}"
 			title="\${fieldAvailable? fieldOriginTitle: '无效字段' }">
 			<div class="dtmpl-field-validates">
 				<i class="dtmpl-field-validate-required \${validators.required? 'active-validator': ''}"></i>
@@ -131,22 +133,23 @@
 				<ul class="field-validate-menu">
 					<li validate-name="required" class="\${validators.required? 'checked-validate': ''}">必填</li>
 				</ul>
+ 				<a  class="field-refmodule-a \${pointModuleName? pointModuleName : 'hide' } " title="\${refGroupTitle? refGroupTitle: '选择组合'}"  ><i class="icon iconfont icon-group"></i></a>
 			</div>
 		</div>
 	</script>
-		
-		
+
+
 	<div class="page-header">
 		<div class="header-title">
 			<h1>${title }</h1>
 		</div>
 		<div class="header-buttons">
-			<a class="refresh" title="刷新" id="refresh-toggler" href="page:refresh">
-				<i class="glyphicon glyphicon-refresh"></i>
+			<a class="refresh" title="刷新" id="refresh-toggler"
+				href="page:refresh"> <i class="glyphicon glyphicon-refresh"></i>
 			</a>
 			<c:if test="${mainModule != null }">
-				<a id="load-dtmpl" title="加载已有模板" href="#">
-					<i class="glyphicon glyphicon-hand-down"></i>
+				<a id="load-dtmpl" title="加载已有模板" href="#"> <i
+					class="glyphicon glyphicon-hand-down"></i>
 				</a>
 			</c:if>
 		</div>
@@ -159,14 +162,16 @@
 		</div>
 		<div class="row header-row">
 			<div class="col-lg-10 col-lg-offset-1">
-				<input type="hidden" name="tmplId" value="" />
-				<input type="text" class="form-control" id="tmplName" placeholder="请输入模板名称" value="${tmpl.title }">
+				<input type="hidden" name="tmplId" value="" /> <input type="text"
+					class="form-control" id="tmplName" placeholder="请输入模板名称"
+					value="${tmpl.title }">
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-lg-offset-1 col-sm-offset-1 col-xs-offset-1 col-lg-10 col-sm-10 col-xs-10" id="group-container">
-				<form class="form-horizontal group-container">
-				</form>
+			<div
+				class="col-lg-offset-1 col-sm-offset-1 col-xs-offset-1 col-lg-10 col-sm-10 col-xs-10"
+				id="group-container">
+				<form class="form-horizontal group-container"></form>
 			</div>
 		</div>
 	</div>
@@ -177,13 +182,11 @@
 				<div>\${title}</div>
 			</div>
 		</script>
-		<div id="dtmpl-list-container" 
-				class="detail-toggle-sublist" 
-				title="点击加载对应详情模板"
-				style="display: none;">
+		<div id="dtmpl-list-container" class="detail-toggle-sublist"
+			title="点击加载对应详情模板" style="display: none;">
 			<div id="dtmpl-list-wrapper"></div>
 		</div>
-		<script id="dialog-dtmpl-save-options"  type="jquery/tmpl">
+		<script id="dialog-dtmpl-save-options" type="jquery/tmpl">
 			<div class="">
 				<div class="row">
 					<label class="col-lg-3">域</label>

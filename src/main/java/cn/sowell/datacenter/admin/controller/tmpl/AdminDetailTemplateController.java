@@ -245,7 +245,12 @@ public class AdminDetailTemplateController {
 				// field.setId(jField.getLong("id"));
 				field.setFieldId(dfield.getId());
 				field.setTitle(dfield.getTitle());
-				field.setViewValue("XXX");
+				if(dcomp.getIsArray()!=null) {
+					field.setViewValue("XXX");
+				} else {
+					field.setViewValue("");
+				}
+				
 				Boolean dbcol = null;
 				field.setColNum((dbcol == null || !dbcol) ? 1 : 2);
 				field.setOrder(j++);
