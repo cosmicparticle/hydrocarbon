@@ -1207,7 +1207,7 @@ define(function(require, exports, module) {
 							$container.addClass('ref-readonly');
 							$operates.find('.fa-times').hide();
 							if (!pa.value) {
-								$thumb.text('无取值');
+								$thumb.text('无');
 							}
 						} else {
 							$container.removeClass('ref-readonly');
@@ -1244,7 +1244,7 @@ define(function(require, exports, module) {
 				function setValue(value, $thumb) {
 					$thumb.html("");
 					var $i;
-										
+
 					$i = $('<i  class="open-detail-dialog" group-id > '
 							+ value.substring(32) + ' <i/>');
 					$i.attr('code', value.substring(0, 32));
@@ -1268,7 +1268,17 @@ define(function(require, exports, module) {
 						
 					},
 					setReadonly : function(toReadonly) {
-						
+						if (toReadonly != false) {
+							$container.addClass('ref-readonly');
+							if (!pa.value) {
+								$thumb.text('无');
+							}
+						} else {
+							$container.removeClass('ref-readonly');
+							if (!pa.value) {
+								setValue("",$thumb);
+							}
+						}
 					},
 					getSubmitData : function() {
 						return $container.val();
@@ -1276,9 +1286,9 @@ define(function(require, exports, module) {
 					
 				};
 				
-				if (param.readonly === true) {
-					$container.funcMap.setReadonly(true);
-				}
+				//不管三七二十一，都是只读
+				$container.funcMap.setReadonly(true);
+				
 
 				return $container;
 			}
