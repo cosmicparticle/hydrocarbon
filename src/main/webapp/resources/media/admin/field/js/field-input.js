@@ -1227,6 +1227,60 @@ define(function(require, exports, module) {
 				}
 
 				return $container;
+			},
+			'relselect' : function() {
+				var pa = _param;
+
+				var menuid = pa.menuid ? pa.menuid : mainmenuid;
+
+				var $container = $('<span class="cpf-refselect-input-container cpf-field-input">');
+
+				var $thumb = $('<span class="cpf-refselect-input-thumb">');
+
+				setValue(pa.value, $thumb);
+				$container.append($thumb);
+				var $page = $container;
+
+				function setValue(value, $thumb) {
+					$thumb.html("");
+					var $i;
+										
+					$i = $('<i  class="open-detail-dialog" group-id > '
+							+ value.substring(32) + ' <i/>');
+					$i.attr('code', value.substring(0, 32));
+					$thumb.append($i);
+					$i.click(function() {
+						var $this = $(this);
+						var existCodes = [];
+						var fields = [ pa.refcognitiontitle, pa.refshowtitle ];
+						Dialog.openDialog("admin/modules/curd/detail/" + menuid
+								+ '/' + pa.refgroupid + '/'
+								+ $this.attr("code"), undefined, undefined, {
+							width : 1000,
+							height : 500
+						});
+
+					});
+				}
+
+				$container.funcMap = {
+					setDisabled : function(toDisabled) {
+						
+					},
+					setReadonly : function(toReadonly) {
+						
+					},
+					getSubmitData : function() {
+						return $container.val();
+					}
+					
+				};
+				
+				if (param.readonly === true) {
+					$container.funcMap.setReadonly(true);
+				}
+
+				return $container;
 			}
 		};
 

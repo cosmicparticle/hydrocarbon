@@ -212,6 +212,20 @@ define(function(require, exports, module){
 						readonly: true
 					});
 					$this.empty().append(fieldInput.getDom());
+					break;
+				case 'relselect':
+					var complexValue = $this.text().trim();
+					var refgroupid=$this.attr("refgroupid");
+					var menuid=$this.attr("menuid");
+					var fieldInput = new FieldInput({
+						type	: 'relselect',
+						value	: complexValue,
+						refgroupid:refgroupid,
+						menuid:menuid,
+						readonly: true
+					});
+					$this.empty().append(fieldInput.getDom());
+					break;
 				default:
 			}
 		});
