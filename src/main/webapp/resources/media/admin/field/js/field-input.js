@@ -3,7 +3,7 @@
  */
 define(function(require, exports, module) {
 	"use strict";
-
+	var Dialog = require('dialog');
 	function FieldInput(_param) {
 		var defaultParam = {
 			// 字段类型
@@ -1084,6 +1084,150 @@ define(function(require, exports, module) {
 				}
 				return $container;
 
+			},
+			'refselect' : function() {
+				var pa = _param;
+
+				var menuid = pa.menuid ? pa.menuid : mainmenuid;
+
+				var $container = $('<span class="cpf-refselect-input-container cpf-field-input">');
+
+				var $thumb = $('<span class="cpf-refselect-input-thumb">');
+				
+				var $operates = $('<span class="cpf-refselect-input-operates">')
+				.append(
+						$('<i class="fa fa-times">').click(
+								
+								function() {
+									var $this = $(this);
+									$this.closest('span .cpf-refselect-input-thumb');
+									require('dialog').confirm(
+											'是否移除该引用？', function(yes) {
+												if (yes) {
+													setValue("", $thumb);
+												}
+											});
+								}));
+				
+				setValue(pa.value, $thumb);
+				$container.append($thumb);
+				var $page = $container;
+
+				function setValue(value, $thumb) {
+					$thumb.html("");
+					var $code = $('<input   type="hidden" />');
+					setNormalAttrs($code);
+					$code.val(value.substring(0, 32));
+					var $i;
+					$thumb.append($code);
+					if (!value) {
+						$i=$('<i group-id class="open-select-dialog"> <i/> ');
+						$thumb.append($i);
+						$i.click(function() {
+							var $this = $(this);
+							var existCodes = [];
+							var fields = [ pa.refcognitiontitle,
+									pa.refshowtitle ];
+							Dialog.openDialog(
+											"admin/modules/curd/rel_selection/"
+													+ menuid + '/'
+													+ pa.refgroupid,
+											undefined,
+											undefined,
+											{
+												width : 1000,
+												height : 400,
+												onSubmit : function(entitiesLoader) {
+													appendRelValue(
+															entitiesLoader,
+															fields,
+															$this.closest('span .cpf-refselect-input-thumb'));
+												}
+											});
+
+						}
+								);
+						
+					} else {
+						$i=$('<i  class="open-detail-dialog" group-id > ' + value.substring(32) + ' <i/>');
+						$i.attr('code',value.substring(0, 32));
+						$thumb.append($i);
+						$i.click(
+								function() {
+									var $this = $(this);
+									var existCodes = [];
+									var fields = [ pa.refcognitiontitle,
+											pa.refshowtitle ];
+									Dialog.openDialog(
+													"admin/modules/curd/detail/"
+															+ menuid + '/'+pa.refgroupid+'/'
+															+ $this.attr("code"),
+													undefined,
+													undefined,
+													{
+														width : 1000,
+														height : 500
+													});
+
+								});
+						$thumb.append($operates);
+					}
+					
+				}
+
+				
+
+				function appendRelValue(entitiesLoader, fields, $span) {
+
+					entitiesLoader(fields)
+							.done(
+									function(entities) {
+										console.log(entities);
+										if (entitiesLoader.codes.length > 0) {
+											var value = entitiesLoader.codes[0]
+													+ entities[entitiesLoader.codes[0]][fields[1]];
+											setValue(value, $span);
+										}
+									});
+				}
+				
+				
+
+				
+				$container.funcMap = {
+					setDisabled : function(toDisabled) {
+						if (toDisabled) {
+							$operates.find('.fa-times').hide();
+						} else {
+							$operates.find('.fa-times').show();
+						}
+					},
+					setReadonly : function(toReadonly) {
+						if (toReadonly != false) {
+							$container.addClass('file-readonly');
+							$operates.find('.fa-times').hide();
+							if (inputFile == null && !originFileURL) {
+								$thumb.text('无文件');
+							}
+						} else {
+							$container.removeClass('file-readonly');
+							$operates.find('.fa-times').show();
+							if (inputFile == null && !originFileURL) {
+								$thumb.html('<i></i>');
+							}
+						}
+					},
+					getSubmitData : function() {
+						return $container.val();
+					}
+					
+				};
+				
+				if (param.readonly === true) {
+					$container.funcMap.setReadonly(true);
+				}
+
+				return $container;
 			}
 		};
 
@@ -1152,9 +1296,9 @@ define(function(require, exports, module) {
 				try {
 					this.getDom().val(val, ignoreTrigger);
 				} catch (e) {
-					
+
 				}
-				
+
 			}
 			if (!ignoreTrigger) {
 				this.__triggerValueChanged();
@@ -1326,8 +1470,7 @@ define(function(require, exports, module) {
 		}
 	}
 
-	$
-			.extend(
+	$.extend(
 					FieldInput,
 					{
 						globalOptionsCacheTimeLineMap : {},

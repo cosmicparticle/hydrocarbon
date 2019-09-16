@@ -24,7 +24,7 @@ define(function(require, exports, module){
 		
 		var $entityRowTmpl = $('#entity-row-tmpl', $page);
 		
-		var columns = param.stmpl.columns;
+		var columns = param.stmpl.columns?param.stmpl.columns:param.ltmpl.columns;
 		
 		function appendEntity(entity, rowNumber){
 			var $row = $entityRowTmpl.tmpl({

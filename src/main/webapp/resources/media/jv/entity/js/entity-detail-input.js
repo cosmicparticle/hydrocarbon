@@ -262,6 +262,11 @@ define(function(require, exports, module){
 				case 'file':
 					prepare(require('entity/js/tmpl_param/FileInputTemplateParameter'))
 					break;
+				case 'refselect':
+					prepare(require('entity/js/tmpl_param/RefselectInputTemplateParameter'),{
+						refgroupid:this.param.refgroupid
+					})
+					break;
 				default	:
 					prepare(new AbstractTemplateParameter());
 			}

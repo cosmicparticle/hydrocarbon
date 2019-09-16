@@ -809,6 +809,80 @@ span.cpf-select2-sign.cpf-select2-sign-or:after {
 	display: none;
 }
 
+.cpf-refselect-input-container {
+    display: flex;
+    flex-direction: row;
+    border: 1px solid #ddd;
+    padding: 5px;
+    overflow-y: hidden;
+    overflow-x: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    height: 60px;
+    min-width: 4em;
+}
+
+.cpf-refselect-input-container .cpf-refselect-input-thumb {
+	display: inline-block;
+    line-height: 48px;
+    margin-left: 5%;
+    position: relative;
+}
+
+.cpf-refselect-input-container .cpf-refselect-input-thumb>i {
+    margin-left: 1em;
+    text-decoration: underline;
+    cursor: pointer;
+    color: #888;
+    font-style: normal;
+}
+
+.cpf-refselect-input-container .cpf-refselect-input-thumb>i:hover {
+    text-decoration: none;
+}
+
+.cpf-refselect-input-container .cpf-refselect-input-thumb>i.open-select-dialog:after {
+    content: "选择引用对象";
+}
+
+.cpf-refselect-input-container .cpf-refselect-input-thumb>.cpf-refselect-input-operates {
+	display: none;
+    position: absolute;
+    top: 0;
+    line-height: 20px;
+    right:-10px;
+    flex-direction: column;
+    bottom: 0;
+}
+
+.cpf-refselect-input-container .cpf-refselect-input-thumb:hover>.cpf-refselect-input-operates{
+    display: flex;
+}
+.cpf-refselect-input-container .cpf-refselect-input-thumb>.cpf-refselect-input-operates:before{
+    content: "";
+    background-color: #ccc;
+    opacity: 0.5;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+.cpf-refselect-input-container .cpf-refselect-input-thumb>.cpf-refselect-input-operates>i{
+    display: inline;
+    color: #2dc3e8;
+    font-size: 20px;
+    cursor: pointer;
+    position: relative;
+}
+.cpf-refselect-input-container .cpf-refselect-input-thumb>.cpf-refselect-input-operates>i:hover{
+    color: #ed4e2a;
+}
+.cpf-refselect-input-container .cpf-refselect-input-thumb>.cpf-refselect-input-operates>i:last-child{
+    margin-top: 8px;
+}
+.cpf-refselect-input-container .cpf-refselect-input-thumb>img.cpf-refselect-located+.cpf-refselect-input-operates>i.fa-download{
+	display: none;
+}
+
 
 .cpf-field-input-caselectt-sels{
 	display: none;

@@ -111,10 +111,17 @@
 													<span class="field-input" 
 														fInp-type="${tmplField.type }"
 														fInp-name="${tmplField.fieldName }"
+														fInp-refgroupid="${tmplField.refGroupId }"
+														fInp-refgroupdtmplid="${tmplField.refGroupDtmplid }"
+														fInp-refgroupltmplid="${tmplField.refGroupLtmplid }"
+														fInp-mainmenuid="${mainMenu.id }"
+														fInp-menuid="${menu.id }"
 														fInp-value="${entity != null? fieldValue: tmplField.viewValue }"
 														fInp-optkey="${tmplField.optionGroupKey }"
 														fInp-fieldkey="${module.name }@${tmplField.fieldName }"
 														fInp-readonly="${fieldReadonly}"
+														fInp-refCognitionTitle="${tmplField.refCognitionTitle }"
+														fInp-refShowTitle="${tmplField.refShowTitle }"
 													>
 													</span>
 												</div>

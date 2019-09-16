@@ -350,7 +350,7 @@ define(function(require, exports, module){
 						.attr('fInp-fieldkey', $title.attr('fInp-fieldkey'))
 						.attr('fname-full', $title.attr('fname-full'))
 						.attr('fInp-value', $title.attr('fInp-value'))
-						.attr('fInp-readonly', readonly)
+						.attr('fInp-readonly', readonly).attr('fInp-refgroupid',$title.attr('fInp-refgroupid'))
 						.appendTo($('<span class="field-value"></span>').appendTo($td));
 					if($title.attr('fInp-optset')){
 						$fieldInput.attr('fInp-optset', $title.attr('fInp-optset'));
@@ -455,6 +455,13 @@ define(function(require, exports, module){
 				readonly	: attr('fInp-readonly') == 'true',
 				optionsSet	: attr('fInp-optset'),
 				fieldKey	: attr('fInp-fieldkey'),
+				refgroupid	: attr('fInp-refgroupid'),
+				refgroupdtmplid:attr('fInp-refGroupDtmplid'),
+				refgroupltmplid:attr('fInp-refGroupLtmplid'),
+				mainmenuid	: attr('fInp-mainmenuid'),
+				menuid	: attr('fInp-menuid'),
+				refcognitiontitle:attr('fInp-refCognitionTitle'),
+				refshowtitle:attr('fInp-refShowTitle'),
 				$page		: $page
 			};
 		};
