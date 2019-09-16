@@ -830,7 +830,6 @@ span.cpf-select2-sign.cpf-select2-sign-or:after {
 }
 
 .cpf-refselect-input-container .cpf-refselect-input-thumb>i {
-    margin-left: 1em;
     text-decoration: underline;
     cursor: pointer;
     color: #888;

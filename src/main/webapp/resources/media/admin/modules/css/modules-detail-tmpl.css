@@ -483,6 +483,11 @@ th.field-unavailable:before {
     background-color: #eee;
 }
 
+.entity-detail-tmpl .field-input .cpf-refseclect-input-container.ref-readonly {
+    cursor: not-allowed;
+    background-color: #eee;
+}
+
 .entity-detail-tmpl.entity-detail-page .widget.field-group .widget-buttons.keyword-search-container {
     position: absolute;
     right: 0;

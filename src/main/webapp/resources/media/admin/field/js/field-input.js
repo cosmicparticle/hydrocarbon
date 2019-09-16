@@ -1204,16 +1204,15 @@ define(function(require, exports, module) {
 					},
 					setReadonly : function(toReadonly) {
 						if (toReadonly != false) {
-							$container.addClass('file-readonly');
+							$container.addClass('ref-readonly');
 							$operates.find('.fa-times').hide();
-							if (inputFile == null && !originFileURL) {
-								$thumb.text('无文件');
+							if (!pa.value) {
+								$thumb.text('无取值');
 							}
 						} else {
-							$container.removeClass('file-readonly');
-							$operates.find('.fa-times').show();
-							if (inputFile == null && !originFileURL) {
-								$thumb.html('<i></i>');
+							$container.removeClass('ref-readonly');
+							if (!pa.value) {
+								setValue("",$thumb);
 							}
 						}
 					},

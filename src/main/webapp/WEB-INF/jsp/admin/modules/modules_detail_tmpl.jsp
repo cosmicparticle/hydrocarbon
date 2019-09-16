@@ -73,7 +73,7 @@
 											title="${tmplField.fieldAvailable? '': '无效字段' }">
 											<label class="control-label field-title">${tmplField.title }</label>
 											<div class="field-value">
-												<span class="field-view" field-type="${tmplField.type }">${tmplField.fieldAvailable? entity.smap[tmplField.fieldName]: '' }</span>
+												<span class="field-view" refgroupid="${tmplField.refGroupId }" menuid="${tmplField.refGroupId!=null ? menu.id:'' }" field-type="${tmplField.type }">${tmplField.fieldAvailable? entity.smap[tmplField.fieldName]: '' }</span>
 											</div>
 										</div>
 									</c:forEach>
