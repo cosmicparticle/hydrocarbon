@@ -60,6 +60,9 @@ define(function(require, exports, module){
 		
 		renderFrameData('res');
 		renderFrameData('post');
+		
+		context.setStatus('ksType','single-query')
+		
 		loadTmplMap();
 		loadModules();
 		loadKaruiService();
@@ -159,7 +162,13 @@ define(function(require, exports, module){
 		
 		function afterSelectDtmpl(){
 			 afterSelectDtmpl_r('res');
-			 afterSelectDtmpl_r('post');
+			var type= context.getStatus('ksType');
+			 if(type === 'multi-query' || type === 'single-query'){
+				 
+			 }else{
+				 afterSelectDtmpl_r('post'); 
+			 }
+			 
 		}
 		
 		function afterSelectDtmpl_r(prefix){
@@ -336,10 +345,10 @@ define(function(require, exports, module){
 			var type = context.getStatus('ksType');
 			if(type === 'multi-query' || type === 'single-query'){
 				$this["0"].domMap["post-tree-view"].closest(".requestpost").addClass("hidden");
-				$this["0"].domMap["res-tree-view"].closest(".requestparam").removeClass("hidden");
+				$this["0"].domMap["post-tree-view"].closest(".requestpost").prev(".requestparam").removeClass("hidden");
 			}else{
 				$this["0"].domMap["post-tree-view"].closest(".requestpost").removeClass("hidden");
-				$this["0"].domMap["res-tree-view"].closest(".requestparam").addClass("hidden");
+				$this["0"].domMap["post-tree-view"].closest(".requestpost").prev(".requestparam").addClass("hidden");
 			}
 		}
 		

@@ -680,10 +680,14 @@ define(function(require, exports, module){
 					if(dtmplFieldGroup.isArray == 1){
 						compositeSource.dtmplCompositeId = dtmplFieldGroup.id;
 						compositeSource.type = 'array';
+						if(dtmplFieldGroup.composite.compositeType === 'relation' ){
+							putProperty(compositeSource.fields, {id:Label.LABEL_KEY,title:'关系名称',desc:'关系名称'});
+						}
 					}
 					for(var i in dtmplFieldGroup.fields){
 						putProperty(compositeSource.fields, dtmplFieldGroup.fields[i]);
 					}
+					
 					parent[fieldName] = compositeSource;
 				}
 				

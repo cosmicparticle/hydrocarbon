@@ -209,6 +209,13 @@ define(function(require, exports, module){
 				
 				submit		: function(){
 					var path = context.getStatus('path');
+					var pathVar = context.getStatus('pathVar');
+					for(var name in pathVar){
+						if(pathVar[name] !== undefined){
+							path = path+"/"+ pathVar[name];
+						}
+					}
+					
 					var ks = context.getStatus('ks');
 					var isMultiQuery = ks.type === 'multi-query'
 					var API_PREFIX = 'api2/ks/c/';

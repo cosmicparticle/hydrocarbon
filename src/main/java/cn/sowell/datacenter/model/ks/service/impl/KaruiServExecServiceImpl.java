@@ -78,6 +78,16 @@ public class KaruiServExecServiceImpl implements KaruiServExecService {
 		KaruiServ ks = matcher.getKaruiServ();
 		String ksType = ks.getType();
 		if (KaruiServ.TYPE_SINGLE_QUERY.equals(ksType) || KaruiServ.TYPE_MULTI_QUERY.equals(ksType)) {
+
+			for (KaruiServCriteria criteria : ks.getCriterias()) {// 路径参数是必须填写的
+				if (KaruiServCriteria.SOURCE_PATH_VAR.equals(criteria.getSource())) {
+					String pv = matcher.getPathVariableMap().get(criteria.getName());
+					if (pv == null || pv.trim().equals("")) {
+						return null;
+					}
+				}
+			}
+
 			// 获得查询池
 			EntityQueryPool qPool = EntityQueryPoolUtils.getEntityQueryPool(user);
 			// 注册一个查询
@@ -118,7 +128,7 @@ public class KaruiServExecServiceImpl implements KaruiServExecService {
 					ks.getRequestJsonMetaResolver().resolve(matcher.getParameters().get("JSONENTITY")));
 
 			if (code != null) {// 执行查询
-				if(ks.getResponseMeta()==null) {//若果没有定义需要返回的entity信息，直接返回 code
+				if (ks.getResponseMeta() == null) {// 若果没有定义需要返回的entity信息，直接返回 code
 					JSONObject jResult = new JSONObject();
 					jResult.put("code", code);
 					return jResult;
