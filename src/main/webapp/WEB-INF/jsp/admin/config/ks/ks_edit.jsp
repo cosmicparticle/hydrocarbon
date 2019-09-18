@@ -83,7 +83,7 @@
 					</div>
 				</div>
 				
-				<div class="widget">
+				<div class="widget requestparam" >
 					<div class="widget-header">
 						<span class="widget-caption">
 							请求参数配置
@@ -112,14 +112,40 @@
 					</div>
 				</div>
 				
+				<div class="widget requestpost" >
+					<div class="widget-header">
+						<span class="widget-caption">
+							提交数据配置
+						</span>
+						<div class="widget-buttons">
+							<a href="#" on-click="switchResEditorView" prefix='post' title="切换树形视图/代码视图">
+								<i class="iconfont icon-view"   style="font-size:22px;"></i>
+							</a>
+						</div>
+						<div class="widget-buttons buttons-bordered">
+							<a href="#" on-click="toggleExpand" title="全屏/还原">
+								<i class="fa fa-expand" style="font-size:22px;"></i>
+							</a>
+						</div>
+					</div>
+					<div class="widget-body">
+						<div class="row" on-prepare="post-tree-view"></div>
+						<div class="row" on-prepare="post-code-view">
+							<div class="form-group col-lg-12" >
+								<pre on-prepare="post-editor" style="height: 300px;font-size: 17px;"></pre>
+							</div>
+						</div>
+					</div>
+				</div>
+				
 				<div class="widget">
 					<div class="widget-header">
 						<span class="widget-caption">
 							返回数据配置
 						</span>
 						<div class="widget-buttons">
-							<a href="#" on-click="switchResEditorView" title="切换树形视图/代码视图">
-								<i class="iconfont icon-view" style="font-size:22px;"></i>
+							<a href="#" on-click="switchResEditorView"  prefix='res' title="切换树形视图/代码视图">
+								<i class="iconfont icon-view"  style="font-size:22px;"></i>
 							</a>
 						</div>
 						<div class="widget-buttons buttons-bordered">
@@ -137,7 +163,7 @@
 						</div>
 					</div>
 				</div>
-				
+
 			</form>
 		</div>
 	</div>

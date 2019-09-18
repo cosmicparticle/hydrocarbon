@@ -134,6 +134,23 @@ define(function(require, exports, module){
 				}
 			})([{id:'paramsEditor', mode:'properties'}, 
 				{id:'resEditor', mode: 'json'}]);
+			
+			(function(inputs){
+				for(var i in inputs){
+					var input = inputs[i];
+					var editor = ace.edit(context.getDom(input.id)[0], {
+			            theme: "ace/theme/monokai",
+			            mode: "ace/mode/" + input.mode,
+			            wrap: true,
+			            autoScrollEditorIntoView: true,
+			            enableBasicAutocompletion: true,
+			            enableSnippets: true,
+			            enableLiveAutocompletion: true,
+			        });
+					editor.setReadOnly(false);
+					context.setStatus(input.id, editor);
+				}
+			})([ {id:'postEditor', mode: 'json'}]);
 		}
 		
 		function testUserTokenCached(userTokenCached){
@@ -197,15 +214,20 @@ define(function(require, exports, module){
 					var API_PREFIX = 'api2/ks/c/';
 					if(path){
 						var params = {};
-						var paramVar = context.getStatus('paramVar');
-						for(var name in paramVar){
-							if(paramVar[name] !== undefined){
-								params[name] = paramVar[name];
+						if(ks.type === 'multi-query' || ks.type === 'single-query'){
+							var paramVar = context.getStatus('paramVar');
+							for(var name in paramVar){
+								if(paramVar[name] !== undefined){
+									params[name] = paramVar[name];
+								}
 							}
+							if(isMultiQuery){
+								validatePageParam();
+							}
+						}else{
+							params['JSONENTITY']=context.getStatus('postEditor').getValue();
 						}
-						if(isMultiQuery){
-							validatePageParam();
-						}
+						
 						Ajax.ajax(API_PREFIX + path, params, undefined, {headersHandler:tokenHeaderSetter(context.getStatus('token'))}).done(function(data){
 							var resEditor = context.getStatus('resEditor');
 							if(data.result){

@@ -92,6 +92,20 @@
 				
 				<div class="widget">
 					<div class="widget-header">
+						<span class="widget-caption">提交实体数据</span>
+					</div>
+					<div class="widget-body">
+						<div class="row">
+							<div class="col-lg-12">
+								<pre on-prepare="postEditor" style="height: 300px;font-size: 17px;"></pre>
+								<!-- <textarea on-prepare="resData" rows="20" class="form-control"></textarea> -->
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="widget">
+					<div class="widget-header">
 						<span class="widget-caption">返回数据</span>
 					</div>
 					<div class="widget-body">

@@ -30,10 +30,13 @@ define(function(require, exports, module){
 			originKs		: null,
 			tmplMap			: null,
 			criterias		: [],
+			ksType:null,
 			//返回数据视图的类型
 			resViewType		: 'treeview',
 			//返回数据的元数据对象
-			resSource		: {fields:[]}
+			resSource		: {fields:[]},
+			postViewType		: 'treeview',
+			postSource		: {fields:[]}
 		});
 		
 		context
@@ -46,14 +49,17 @@ define(function(require, exports, module){
 			.bind('initLtmplSetted', [renderOriginKs])
 			.bind('resSource', [setResponseSource])
 			.bind('resViewType', [setResponseSource])
-			
+			.bind('postSource', [setRequestPostSource])
+			.bind('postViewType', [setRequestPostSource])
+			.bind('ksType',setKsType);
 			;
 		
 		var pageEvents = getPageEvents();
 		require('event').bindScopeEvent($page, pageEvents);
 		require('event').prepareToContext($page, context);
 		
-		renderFrameData();
+		renderFrameData('res');
+		renderFrameData('post');
 		loadTmplMap();
 		loadModules();
 		loadKaruiService();
@@ -84,9 +90,9 @@ define(function(require, exports, module){
 			}
 		}
 		
-		function renderFrameData(){
+		function renderFrameData(prefix){
 			initSelect2(context.getDom('type'), KS_TYPE_OPTIONS);
-			var resEditor = ace.edit(context.getDom('res-editor')[0], {
+			var editor = ace.edit(context.getDom(prefix+'-editor')[0], {
 	            theme: "ace/theme/monokai",
 	            mode: "ace/mode/json",
 	            wrap: true,
@@ -95,8 +101,9 @@ define(function(require, exports, module){
 	            enableSnippets: true,
 	            enableLiveAutocompletion: true
 	        });
-			var resTreeView = require('config/js/json-tree-view').initTree(context.getDom('res-tree-view'));
-			context.setStatus({resEditor, resTreeView});
+			var treeView = require('config/js/json-tree-view').initTree(context.getDom(prefix+'-tree-view'));
+			context.setStatus(prefix+'Editor',editor);
+			context.setStatus(prefix+'TreeView',treeView);
 		}
 		
 		/**
@@ -151,16 +158,29 @@ define(function(require, exports, module){
 		}
 		
 		function afterSelectDtmpl(){
+			 afterSelectDtmpl_r('res');
+			 afterSelectDtmpl_r('post');
+		}
+		
+		function afterSelectDtmpl_r(prefix){
 			var selectedDtmpl = context.getStatus('selectedDtmpl');
 			if(selectedDtmpl){
 				//设置树形视图的原始详情模板数据源
-				var resTreeView = context.getStatus('resTreeView');
-				resTreeView.setDetailFieldSource(selectedDtmpl.fieldGroups);
+				var treeView = context.getStatus(prefix+'TreeView');
+				treeView.setDetailFieldSource(selectedDtmpl.fieldGroups);
+				var confirmStr;
+				if('res'==prefix){
+					 confirmStr="是否生成该详情模板的返回数据配置？";
+				}else{
+					 confirmStr="是否生成该详情模板的提交数据配置？";
+				}
+				
+				
 				//除了修改页面的第一次加载时，其他时候都要询问是否要自动生成元数据
 				if(!context.getStatus('originKs') || context.getStatus('initDtmplSetted')){
-					Dialog.confirm('是否生成该详情模板的返回数据配置？').done(function(){
-						var resSource = resTreeView.buildSource();
-						context.setStatus({resSource});
+					Dialog.confirm(confirmStr).done(function(){
+						var source = treeView.buildSource();
+						context.setStatus(prefix+'Source',source);
 					});
 				}
 			}
@@ -184,6 +204,24 @@ define(function(require, exports, module){
 			}
 		}
 		
+		function setRequestPostSource(){
+			var postSource = context.getStatus('postSource');
+			if(postSource){
+				switch(context.getStatus('postViewType')){
+				case 'treeview':
+					context.getStatus('postTreeView').render({source: postSource});
+					context.getDom('post-code-view').hide();
+					context.getDom('post-tree-view').show();
+					break;
+				case 'code':
+					context.getStatus('postEditor').setValue(JSON.stringify(postSource, null, '\t'));
+					context.getDom('post-tree-view').hide();
+					context.getDom('post-code-view').show();
+					break;
+				} 
+			}
+		}
+		
 		function renderOriginKs(){
 			var originKs = context.getStatus('originKs');
 			var modules = context.getStatus('modules');
@@ -193,6 +231,7 @@ define(function(require, exports, module){
 					context.getDom('auths').text('点击后查看权限');
 				}
 				context.setStatus('resSource', JSON.parse(originKs.responseMeta));
+				context.setStatus('postSource', JSON.parse(originKs.requestPostMeta));
 				if(modules){
 					if(context.getStatus('initLtmplSetted') && originKs.criterias){
 						var selectedLtmpl = context.getStatus('selectedLtmpl');
@@ -235,6 +274,7 @@ define(function(require, exports, module){
 					detailTemplateId: context.getDom('dtmpl').val(),
 					listTemplateId	: context.getDom('ltmpl').val(),
 					responseMeta	: JSON.stringify(context.getStatus('resSource')),
+					requestPostMeta	: JSON.stringify(context.getStatus('postSource')),
 					authority		: context.getDom('auths').attr('auths'),
 					criterias		: context.getStatus('criterias')
 				};
@@ -291,6 +331,18 @@ define(function(require, exports, module){
 			return selectedLtmpl && selectedLtmpl.criterias || [];
 		}
 		
+		function setKsType(){
+			var $this=$(this);
+			var type = context.getStatus('ksType');
+			if(type === 'multi-query' || type === 'single-query'){
+				$this["0"].domMap["post-tree-view"].closest(".requestpost").addClass("hidden");
+				$this["0"].domMap["res-tree-view"].closest(".requestparam").removeClass("hidden");
+			}else{
+				$this["0"].domMap["post-tree-view"].closest(".requestpost").removeClass("hidden");
+				$this["0"].domMap["res-tree-view"].closest(".requestparam").addClass("hidden");
+			}
+		}
+		
 		
 		/**
 		 * 页面中的事件
@@ -298,8 +350,7 @@ define(function(require, exports, module){
 		function getPageEvents(){
 			return {
 				changeType	: function(){
-					var type = this.value;
-					
+					context.setStatus('ksType', this.value);
 				},
 				changeModule: function(){
 					var $this = $(this);
@@ -389,16 +440,18 @@ define(function(require, exports, module){
 				},
 				//切换返回数据视图
 				switchResEditorView	: function(){
+					
 					var $this = $(this);
+					var prefix=$this.attr('prefix');
 					var doSwitch = function(){
 						Utils.switchClass($this.children('i'), 'icon-view', 'icon-code', function(showTreeView){
-							context.setStatus('resViewType', showTreeView? 'treeview': 'code');
+							context.setStatus(prefix+'ViewType', showTreeView? 'treeview': 'code');
 						});
 					}
 					var $icon = $this.children('i');
 					if($icon.is('.icon-code')){
 						try{
-							var resSource = JSON.parse(context.getStatus('resEditor').getValue());
+							var resSource = JSON.parse(context.getStatus(prefix+'Editor').getValue());
 							context.properties.resSource = resSource;
 							doSwitch();
 						}catch(e){
@@ -406,7 +459,7 @@ define(function(require, exports, module){
 							return;
 						}
 					}else{
-						context.getStatus('resTreeView').permitLeave().done(function(){
+						context.getStatus(prefix+'TreeView').permitLeave().done(function(){
 							doSwitch();
 						});
 					}
@@ -414,15 +467,16 @@ define(function(require, exports, module){
 				//放大缩小返回数据视图
 				toggleExpand: function(){
 					var $this = $(this);
+					var prefix=$this.attr('prefix');
 					var $widget = $(this).closest('.widget');
 					var expanded = $widget.is('.expanded');
-					var resEditor = context.getStatus('resEditor');
+					var resEditor = context.getStatus(prefix+'Editor');
 					if(expanded){
 						$widget.removeClass('expanded');
-						context.getDom('res-editor').css('height', '300px').removeClass('fixed-full');
+						context.getDom(prefix+'-editor').css('height', '300px').removeClass('fixed-full');
 					}else{
 						$widget.addClass('expanded');
-						context.getDom('res-editor').css('height', 'auto').addClass('fixed-full');
+						context.getDom(prefix+'-editor').css('height', 'auto').addClass('fixed-full');
 					}
 					resEditor.resize();
 					Utils.switchClass($this.children('i'), 'fa-compress', 'fa-expand', function(compressed){

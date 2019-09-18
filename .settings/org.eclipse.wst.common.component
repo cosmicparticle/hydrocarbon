@@ -7,7 +7,7 @@
         <dependent-module archiveName="eln1-0.0.2.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/eln1/eln1">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="dataserver-1.43.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/dataserver/dataserver">
+        <dependent-module archiveName="dataserver-1.44.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/dataserver/dataserver">
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <dependent-module archiveName="entityResolver-2.72.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/entityResolver/entityResolver">
