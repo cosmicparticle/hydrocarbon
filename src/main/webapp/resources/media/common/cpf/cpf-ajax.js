@@ -445,8 +445,8 @@ define(function(require, exports, module){
 			checkCompleted			: function(res, progress){
 				return res.completed ==  true;
 			},
-			messageSequeueGetter	: function(res){return res['messageSequeue']},
-			handleWithMessageSequeue: function(msgSequeue){}
+			messageSequeueGetter	: function(res){return res['messageSequence']},
+			handleWithMessageSequence: function(msgSequeue){}
 		};
 		var param = $.extend({}, defaultParam , _param);
 		var pId = null;
@@ -498,7 +498,7 @@ define(function(require, exports, module){
 						if(msgSequeue && $.isArray(msgSequeue.messages) && msgSequeue.endIndex){
 							currentMessageIndex = msgSequeue.endIndex;
 							try{
-								param.handleWithMessageSequeue.apply(param, [msgSequeue]);
+								param.handleWithMessageSequence.apply(param, [msgSequeue]);
 							}catch(e1){console.error(e1)}
 						}
 						//轮询请求获得回复
