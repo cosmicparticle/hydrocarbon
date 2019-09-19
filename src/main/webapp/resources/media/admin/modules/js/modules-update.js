@@ -187,7 +187,7 @@ define(function(require, exports, module){
 			require('dialog').openDialog(uriGenerator.rdtmpl(fieldGroupId), 
 					undefined, undefined, {
 				reqParam	: {entityCode: entityCode},
-				width		: 1000,
+				width		: 1100,
 				height		: 500,
 				events:	{
 					afterSave	: function(entitiesLoader){

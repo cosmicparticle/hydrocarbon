@@ -27,6 +27,7 @@ import cn.sowell.datacenter.admin.controller.AdminConstants;
 import cn.sowell.datacenter.entityResolver.Composite;
 import cn.sowell.dataserver.model.dict.pojo.DictionaryComposite;
 import cn.sowell.dataserver.model.dict.service.DictionaryService;
+import cn.sowell.dataserver.model.dict.service.impl.DictionaryServiceImpl;
 import cn.sowell.dataserver.model.modules.pojo.ModuleMeta;
 import cn.sowell.dataserver.model.modules.service.ModulesService;
 import cn.sowell.dataserver.model.tmpl.pojo.TemplateSelectionColumn;
@@ -47,6 +48,9 @@ public class AdminSelectionTemplateController {
 
 	@Resource
 	SelectionTemplateService stmplService;
+	
+	@Resource(name="dictionaryServiceImpl")
+	DictionaryService  dictionaryService;
 	
 	static Logger logger = Logger.getLogger(AdminSelectionTemplateController.class);
 	
@@ -170,6 +174,7 @@ public class AdminSelectionTemplateController {
 						column.setSpecialField(src.getString("specField"));
 					}else{
 						column.setFieldId(src.getInteger("fieldId"));
+						column.setViewOption(dictionaryService.getField(src.getInteger("fieldId")).getType()); 
 					}
 					column.setOrder(i++);
 					columns.add(column);

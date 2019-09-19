@@ -1231,7 +1231,7 @@ define(function(require, exports, module) {
 			'relselect' : function() {
 				var pa = _param;
 
-				var menuid = pa.menuid ? pa.menuid : mainmenuid;
+				var menuid = pa.menuid ? pa.menuid : pa.mainmenuid;
 
 				var $container = $('<span class="cpf-refselect-input-container cpf-field-input">');
 
@@ -1243,6 +1243,14 @@ define(function(require, exports, module) {
 
 				function setValue(value, $thumb) {
 					$thumb.html("");
+					
+					if(!pa.refgroupid){
+						$thumb.append(value.substring(32));
+						$container.removeClass("cpf-refselect-input-container");
+						$thumb.removeClass("cpf-refselect-input-thumb");
+						return;
+					}
+					
 					var $i;
 
 					$i = $('<i  class="open-detail-dialog" group-id > '

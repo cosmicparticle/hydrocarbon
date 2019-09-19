@@ -685,10 +685,13 @@ public class AdminModulesController {
 		TemplateGroup tmplGroup = null;
 		TemplateListTemplate ltmpl = null;
 		TemplateSelectionTemplate stmpl = stmplService.getTemplate(stmplId);
+
 		if (stmpl == null) {// 说明stmplId 对应的是 select temp。有可能是 temp goroup
 			tmplGroup = tmplGroupService.getTemplate(stmplId);
 			ltmpl = ltmplService.getTemplate(tmplGroup.getListTemplateId());
 			moduleName = tmplGroup.getModule();
+		}else {
+			moduleName=stmpl.getModule();//主要为了处理跨级点选
 		}
 
 		// 获得查询池

@@ -29,6 +29,7 @@ import cn.sowell.datacenter.admin.controller.tmpl.CommonTemplateActionConsumer.C
 import cn.sowell.datacenter.admin.controller.tmpl.ListTemplateFormater.Handlers;
 import cn.sowell.datacenter.model.config.service.ConfigureService;
 import cn.sowell.dataserver.model.dict.service.DictionaryService;
+import cn.sowell.dataserver.model.dict.service.impl.DictionaryServiceImpl;
 import cn.sowell.dataserver.model.modules.pojo.ModuleMeta;
 import cn.sowell.dataserver.model.modules.service.ModulesService;
 import cn.sowell.dataserver.model.tmpl.pojo.TemplateGroup;
@@ -61,6 +62,9 @@ public class AdminListTemplateController {
 	
 	@Resource
 	CommonTemplateActionConsumer actionConsumer;
+	
+	@Resource(name="dictionaryServiceImpl")
+	DictionaryService  dictionaryService;
 	
 	@RequestMapping("/list/{moduleName}")
 	public String list(Model model, @PathVariable String moduleName){
@@ -191,7 +195,7 @@ public class AdminListTemplateController {
 			}
 		});
 		TemplateListTemplate tmpl = ListTemplateFormater.generateLtmplData(
-				jReq
+				jReq,dictionaryService
 				,TemplateListTemplate::new,
 				TemplateListColumn::new,
 				TemplateListCriteria::new,

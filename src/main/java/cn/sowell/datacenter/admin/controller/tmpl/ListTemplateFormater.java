@@ -11,6 +11,7 @@ import com.alibaba.fastjson.JSONObject;
 
 import cn.sowell.copframe.dao.utils.UserUtils;
 import cn.sowell.copframe.dto.ajax.JsonRequest;
+import cn.sowell.dataserver.model.dict.service.DictionaryService;
 import cn.sowell.dataserver.model.tmpl.pojo.AbstractListColumn;
 import cn.sowell.dataserver.model.tmpl.pojo.AbstractListCriteria;
 import cn.sowell.dataserver.model.tmpl.pojo.AbstractListTemplate;
@@ -80,7 +81,7 @@ public class ListTemplateFormater {
 			COL extends AbstractListColumn, 
 			CRI extends AbstractListCriteria> 
 		T generateLtmplData(
-				JsonRequest jReq, 
+				JsonRequest jReq,DictionaryService dictionaryService,
 				Supplier<T> tmplSupplier, 
 				Supplier<COL> colSupplier, 
 				Supplier<CRI> criSupplier,
@@ -109,6 +110,7 @@ public class ListTemplateFormater {
 						column.setSpecialField(src.getString("specField"));
 					}else{
 						column.setFieldId(src.getInteger("fieldId"));
+						column.setViewOption(dictionaryService.getField(src.getInteger("fieldId")).getType()); 
 					}
 					column.setOrder(i++);
 					columns.add(column);

@@ -31,6 +31,7 @@ import cn.sowell.datacenter.admin.controller.tmpl.ListTemplateFormater.Handlers;
 import cn.sowell.datacenter.common.choose.ChooseTablePage;
 import cn.sowell.datacenter.model.config.service.ConfigureService;
 import cn.sowell.dataserver.model.dict.service.DictionaryService;
+import cn.sowell.dataserver.model.dict.service.impl.DictionaryServiceImpl;
 import cn.sowell.dataserver.model.modules.pojo.ModuleMeta;
 import cn.sowell.dataserver.model.modules.service.ModulesService;
 import cn.sowell.dataserver.model.tmpl.pojo.TemplateStatColumn;
@@ -54,6 +55,9 @@ public class AdminStatListTemplateController {
 	
 	@Resource
 	DictionaryService dictService;
+	
+	@Resource(name="dictionaryServiceImpl")
+	DictionaryService dictionaryService;
 	
 	static Logger logger = Logger.getLogger(AdminStatListTemplateController.class);
 	
@@ -116,7 +120,7 @@ public class AdminStatListTemplateController {
 			criteria.setFilterOccasion(item.getInteger("filterOccasion"));
 		});
 		TemplateStatList tmpl = ListTemplateFormater.generateLtmplData(
-				jReq, 
+				jReq, dictionaryService,
 				TemplateStatList::new, 
 				TemplateStatColumn::new, 
 				TemplateStatCriteria::new,

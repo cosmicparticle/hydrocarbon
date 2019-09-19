@@ -248,7 +248,15 @@
 											</c:if>
 										</c:when>
 										<c:otherwise>
-											${column.fieldAvailable? parser.smap[column.fieldKey] : '' }
+											<c:choose>
+												<c:when
+													test="${column.viewOption == 'relselect' || column.viewOption == 'refselect'}">
+																${column.fieldAvailable? parser.smap[column.fieldKey].substring(32) : '' }
+												</c:when>
+												<c:otherwise>
+														${column.fieldAvailable? parser.smap[column.fieldKey] : '' }
+												</c:otherwise>
+											</c:choose>
 										</c:otherwise>
 									</c:choose>
 								</td>
