@@ -189,6 +189,10 @@ public class AdminModulesController {
 		model.addAttribute("hidenCriteriaDesc", hidenCriteriaDesc);
 		model.addAttribute("menu", menu);
 		model.addAttribute("criteria", view.getCriteria());
+//		Map<String,String> map=view.getParsers().iterator().next().getSmap();
+//		String a=map.get("领用部门");
+//		String b=view.getParsers().iterator().next().getSmap().get("名称");
+//		a=a+b;
 		model.addAttribute("moduleWritable", mService.getModuleEntityWritable(menu.getTemplateModule()));
 
 		return AdminConstants.JSP_MODULES + "/modules_list_tmpl.jsp";
