@@ -293,7 +293,7 @@ define(function(require, exports, module){
 				$select.empty();
 				var set = new Set();
 				set.add('text');
-				var types = require('utils').merge(set, field && map.selectableType[field.type]);
+				var types = require('utils').merge(set, field && map.selectableType[field.criteriaType]);
 				if(types){
 					types.forEach(function(type){
 						$select.append($('<option value="' + type + '">' + map.inputTypeTitleMap[type] + '</option>'))

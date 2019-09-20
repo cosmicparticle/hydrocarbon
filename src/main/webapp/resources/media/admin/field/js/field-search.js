@@ -87,6 +87,7 @@ define(function(require1, exports, module){
 									name		: thisField.name,
 									cname		: thisField.cname,
 									type		: thisField.type,
+									criteriaType : thisField.criteriaType,
 									c_id		: thisComposite.c_id,
 									c_name		: thisComposite.name,
 									c_cname		: thisComposite.cname,
