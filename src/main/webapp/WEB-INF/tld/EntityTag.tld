@@ -8,7 +8,7 @@
 	<uri>/tld/EntityTag</uri>
 	<tag>
 		<name>Criteria</name>
-		<tag-class>cn.sowell.datacenter.common.jstl.EntityTag</tag-class>
+		<tag-class>cho.carbon.hc.hydrocarbon.common.jstl.EntityTag</tag-class>
 		<body-content>empty</body-content>
 		<attribute>
 			<name>viewCriteia</name>

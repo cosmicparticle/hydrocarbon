@@ -9,7 +9,7 @@
 		<param-name>contextConfigLocation</param-name>
 		<!-- 加载所有spring-开头的xml文件 -->
 		<param-value>
-			classpath*:spring-config/spring-datacenter-context.xml
+			classpath*:spring-config/spring-hydrocarbon-context.xml
 		</param-value>
 	</context-param>
 
@@ -24,7 +24,7 @@
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
-			<param-value>classpath*:spring-config/spring-datacenter-mvc.xml</param-value>
+			<param-value>classpath*:spring-config/spring-hydrocarbon-mvc.xml</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>

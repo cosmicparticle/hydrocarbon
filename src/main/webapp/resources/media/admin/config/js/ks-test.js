@@ -180,7 +180,7 @@ define(function(require, exports, module){
 		
 		function tokenHeaderSetter(token){
 			return function(headers){
-				headers['datacenter-token'] = token;
+				headers['hydrocarbon-token'] = token;
 			}
 		}
 		

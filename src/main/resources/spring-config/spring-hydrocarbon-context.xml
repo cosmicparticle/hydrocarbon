@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:task="http://www.springframework.org/schema/task" xmlns:jaxws="http://cxf.apache.org/jaxws"
+	xmlns:jaxrs="http://cxf.apache.org/jaxrs"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc 
+		http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd 
+		http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans-4.3.xsd 
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd
+        http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.3.xsd
+		http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd
+		http://cxf.apache.org/jaxrs http://cxf.apache.org/schemas/jaxrs.xsd">
+		
+	<import resource="spring-core.xml"/>
+	<import resource="spring-dao.xml"/>
+	<!--  
+	<import resource="classpath*:carbon-spring-redis.xml"/> 
+	-->
+
+	<context:component-scan base-package="cho.carbon" />
+	<context:component-scan base-package="com.zhsq" />
+	
+
+
+	<!-- dao自动扫描 -->
+	<context:component-scan base-package="cho.carbon.hc.hydrocarbon.model.*.dao.impl" />
+	<!-- serivce自动扫描 -->
+	<context:component-scan base-package="cho.carbon.hc.hydrocarbon.model.*.service.impl" />
+
+
+	<!-- dao自动扫描 -->
+	<context:component-scan base-package="cho.carbon.hc.dataserver.model.*.dao.impl" />
+	<!-- serivce自动扫描 -->
+	<context:component-scan base-package="cho.carbon.hc.dataserver.model.*.service.impl" />
+	
+	<context:component-scan base-package="cho.carbon.hc.hydrocarbon.common.jstl" />
+
+	<!-- 默认访问权限的获取service -->
+	<bean id="confAuthenService" class="cho.carbon.hc.hydrocarbon.model.config.service.impl.ConfigAuthencationServiceImpl" />
+
+	<context:component-scan base-package="cho.carbon.hc.dataserver.model.*.manager.impl" />
+	
+	<context:component-scan base-package="cho.carbon.hc.dataserver.model.tmpl.duplicator.impl" />
+
+	<!-- <bean class="cho.carbon.hc.dataserver.model.tmpl.strategy.TemplateUpdateStrategyFactory">
+		<constructor-arg>
+			<map>
+				<entry key="cho.carbon.hc.hydrocarbon.model.modules.pojo.ModuleImportTemplate" 
+				value="cho.carbon.hc.hydrocarbon.model.tmpl.strategy.ModuleImportTemplateStrategy" />
+			</map>
+		</constructor-arg>
+	</bean> -->
+
+	<bean id="dBFusionConfigContextFactory" class="cho.carbon.hc.entityResolver.config.DBFusionConfigContextFactory">
+		<property name="sessionFactory" ref="sessionFactory" />
+		<property name="fieldService" ref="dictionaryServiceImpl" />
+		<property name="userCodeService" ref="adminUserService" />
+	</bean>
+	<bean id="dBModuleConfigMediator" class="cho.carbon.hc.entityResolver.config.DBModuleConfigMediator">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
+	<!-- 查询条件转换器 -->
+	<bean class="cho.carbon.hc.dataserver.model.modules.bean.criteriaConveter.CriteriaConverterFactoryImpl" >
+		<property name="extendConverters">
+			<list>
+				<bean class="cho.carbon.hc.dataserver.model.modules.bean.criteriaConveter.UserRelationExistCriteriaConverter"></bean>
+			</list>
+		</property>
+	</bean>
+		
+	<bean
+		class="cn.sowell.copframe.spring.propTranslator.PropertyValueTranslatorSet">
+		<property name="translatorSet">
+			<set>
+				<bean
+					class="cn.sowell.copframe.spring.propTranslator.translator.DatePropertyValueTranlator" />
+			</set>
+		</property>
+	</bean>
+
+	<bean class="cn.sowell.copframe.dao.utils.NormalOperateDaoImpl" />
+	
+	<bean class="cho.carbon.hc.dataserver.model.dict.validator.ModuleCachableMetaSupportorImpl" />
+
+	
+
+	<task:annotation-driven /> <!-- 定时器开关 -->
+	<bean class="cho.carbon.hc.hydrocarbon.model.modules.bean.PeopleExportHandlerTask" />
+
+	<jaxws:server id="ModelReLoadService" address="/modelReLoadService"
+		serviceClass="cho.carbon.service.ModelReLoadService">
+		<jaxws:serviceBean>
+			<bean class="cho.carbon.service.impl.ModelReLoadServiceImpl"></bean>
+		</jaxws:serviceBean>
+		<jaxws:properties>
+			<entry key="mtom-enabled" value="true" />
+		</jaxws:properties>
+	</jaxws:server>
+	
+	<bean name="hydrocarbonReloadServiceImpl" class="cho.carbon.hc.hydrocarbon.ws.impl.HydrocarbonReloadServiceImpl" />
+	
+	<jaxws:server address="/configReloadService" serviceClass="cho.carbon.hc.hydrocarbon.ws.HydrocarbonReloadService">
+		<jaxws:serviceBean>
+			<ref bean="hydrocarbonReloadServiceImpl"/>
+		</jaxws:serviceBean>
+	</jaxws:server>
+
+	<bean class="cn.sowell.copframe.spring.file.FileUtils">
+		<constructor-arg value="${upload_path}" />
+		<constructor-arg value="${upload_uri}" />
+	</bean>
+
+	<bean class="cn.sowell.copframe.spring.CPFSpringContextLoader" />
+	
+	<bean class="cn.sowell.copframe.spring.file.FilePublisher" >
+		<property name="fileUtils">
+			<bean class="cn.sowell.copframe.spring.file.FileUtils" >
+				<constructor-arg value="${file_publish_path}" />
+				<!-- 这个要与web.xml中的servlet一致 -->
+				<constructor-arg value="/download-files/" />
+			</bean>
+		</property>
+	</bean>
+
+
+	<import resource="spring-security.xml" />
+	
+	<bean class="cho.carbon.hc.hydrocarbon.common.jstl.CriteriaInputRendererFactory" >
+		<property name="renderers">
+			<list>
+				<bean class="cho.carbon.hc.hydrocarbon.common.jstl.render.TextInputRenderer" />
+				<bean class="cho.carbon.hc.hydrocarbon.common.jstl.render.SelectInputRenderer" />
+				<bean class="cho.carbon.hc.hydrocarbon.common.jstl.render.DateInputRenderer" />
+				<bean class="cho.carbon.hc.hydrocarbon.common.jstl.render.LabelInputRenderer" />
+				<bean class="cho.carbon.hc.hydrocarbon.common.jstl.render.RelationExistionInputRenderer" />
+				<bean class="cho.carbon.hc.hydrocarbon.common.jstl.render.DateRangeInputRenderer" />
+				<bean class="cho.carbon.hc.hydrocarbon.common.jstl.render.RangeInputRenderer" />
+				<bean class="cho.carbon.hc.hydrocarbon.common.jstl.render.NumberInputRenderer" />
+			</list>
+		</property>
+	</bean>
+
+</beans>

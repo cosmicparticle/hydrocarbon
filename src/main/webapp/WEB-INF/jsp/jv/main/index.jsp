@@ -12,7 +12,7 @@
 		<div class="navbar">
 	        <div class="navbar-inner">
 	             <div class="navbar-header pull-left">
-	                 <a href="admin/logout" class="datacenter-logo">	                   
+	                 <a href="admin/logout" class="hydrocarbon-logo">	                   
 	                  <fmt:message key="theme.logo" bundle="${logo}"/>
 	                 </a>
 	             </div>

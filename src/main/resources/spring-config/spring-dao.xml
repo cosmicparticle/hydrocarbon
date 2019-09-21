@@ -23,8 +23,8 @@
         <property name="dataSource" ref="dataSource" /> 
         <property name="packagesToScan">
             <list>
-            	<value>cn.sowell.datacenter.model.*.pojo</value>
-            	<value>cn.sowell.dataserver.model.*.pojo</value>
+            	<value>cho.carbon.hc.hydrocarbon.model.*.pojo</value>
+            	<value>cho.carbon.hc.dataserver.model.*.pojo</value>
             	<value>cho.carbon.extface.dto</value>
             	<value>cho.carbon.*.extface.dto</value>
         	</list>
@@ -78,10 +78,10 @@
     <!-- 通用事务的AOP配置， -->
 	<aop:config>
 		<aop:pointcut id="interceptorPointCuts"
-			expression="(execution(* cn.sowell.datacenter.model.*.service.impl.*.*(..)))
+			expression="(execution(* cho.carbon.hc.hydrocarbon.model.*.service.impl.*.*(..)))
 			" />
 		<aop:pointcut id="interceptorPointCuts1"
-			expression="(execution(* cn.sowell.dataserver.model.*.service.impl.*.*(..)))
+			expression="(execution(* cho.carbon.hc.dataserver.model.*.service.impl.*.*(..)))
 			" />
 		<aop:advisor advice-ref="commonAdvice" pointcut-ref="interceptorPointCuts" />
 		<aop:advisor advice-ref="commonAdvice" pointcut-ref="interceptorPointCuts1" />

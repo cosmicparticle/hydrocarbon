@@ -425,13 +425,13 @@ nav{
     height: 50px;
 }
 
-.datacenter-logo {
+.hydrocarbon-logo {
 	padding-left: 20px;
     font-size: 20px;
     color: #ffffff;
     text-decoration: none;
 }
-.datacenter-logo:hover {
+.hydrocarbon-logo:hover {
 	text-decoration: none;
 	color:#ffffff;
 }

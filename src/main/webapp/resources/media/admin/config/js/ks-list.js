@@ -139,7 +139,7 @@ define(function(require, exports, module){
 								var API_PREFIX = 'api2/ks/c/';
 								if(path){
 									Ajax.ajax(API_PREFIX + path, params, undefined, {
-										headersHandler	: function(headers){headers['datacenter-token'] = ksTestContext.getStatus('token')}
+										headersHandler	: function(headers){headers['hydrocarbon-token'] = ksTestContext.getStatus('token')}
 									}).done(function(data){
 										if(data.result){
 											Dialog.notice('请求成功', 'success');

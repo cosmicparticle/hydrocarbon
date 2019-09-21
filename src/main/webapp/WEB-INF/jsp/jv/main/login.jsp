@@ -135,8 +135,8 @@
 		    	    	</c:if>  
 	    	    	</div> 
         			<div class="loginbox-info">
-            			<input type="text" name="datacenter-jv-username" id="username" placeholder="用户名"/>
-            			<input type="password" name="datacenter-jv-password" id="password" placeholder="密码"/>
+            			<input type="text" name="hydrocarbon-jv-username" id="username" placeholder="用户名"/>
+            			<input type="password" name="hydrocarbon-jv-password" id="password" placeholder="密码"/>
         			</div>
         			<div class="loginbox-submit">
             			<input type="submit" value="登录" id="submit">
@@ -172,7 +172,7 @@
 							json = $.parseJSON(json);
 						}
 						if(json.status === 'suc' && json.token){
-							localStorage.setItem('datacenter-jv-token', json.token);
+							localStorage.setItem('hydrocarbon-jv-token', json.token);
 							location.href = '${basePath }jv/main/redirect/' + json.token;
 						}else if(json.status === 'error'){
 							$('.warn-wrap').html(

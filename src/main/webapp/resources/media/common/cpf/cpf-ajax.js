@@ -6,8 +6,8 @@ define(function(require, exports, module){
 		utils = require('utils')
 		;
 	//用于从LocalStorage中获得token，并在ajax请求时传递到后台
-	var AJAX_LOCAL_STORAGE_TOKEN_KEY = 'datacenter-jv-token';
-	var AJAX_HEADER_TOKEN_KEY = 'datacenter-token';
+	var AJAX_LOCAL_STORAGE_TOKEN_KEY = 'hydrocarbon-jv-token';
+	var AJAX_HEADER_TOKEN_KEY = 'hydrocarbon-token';
 	
 	$CPF.addDefaultParam({
 		//是否在ajax请求时检测返回session状态
