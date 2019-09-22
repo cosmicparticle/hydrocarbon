@@ -7,8 +7,8 @@ import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
-import cn.sowell.copframe.dao.utils.NormalOperateDao;
-import cn.sowell.copframe.utils.CollectionUtils;
+import cho.carbon.hc.copframe.dao.utils.NormalOperateDao;
+import cho.carbon.hc.copframe.utils.CollectionUtils;
 
 public class CollectionUpdateStrategy<T> {
 	

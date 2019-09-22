@@ -24,7 +24,7 @@
     	<property name="customArgumentResolvers">
       		<list>
         		<!-- PageInfo参数的解析器 -->
-        		<bean class="cn.sowell.copframe.dto.page.PageInfoArgumentResolver" />
+        		<bean class="cho.carbon.hc.copframe.dto.page.PageInfoArgumentResolver" />
         		<!-- 构造参数map的解析器 -->
         		<bean class="cho.carbon.hc.hydrocarbon.common.RequestParameterMapCompositeResolver" />
         		<!-- 获得api请求的用户 -->
@@ -35,11 +35,11 @@
     	<property name="messageConverters">
         	<list>
         		<!-- 支持在application/json请求下，将请求主体转换为JsonRequest对象 -->
-				<bean class="cn.sowell.copframe.messageConverter.JsonRequestConverter" />
+				<bean class="cho.carbon.hc.copframe.messageConverter.JsonRequestConverter" />
 				<!-- 支持在application/xml请求下，将请求主体转换为XmlRequest对象 -->
-				<bean class="cn.sowell.copframe.messageConverter.XmlRequestConverter" />
+				<bean class="cho.carbon.hc.copframe.messageConverter.XmlRequestConverter" />
         		<!-- 用于将返回的Json字符串转化编码 -->
-				<bean class="cn.sowell.copframe.messageConverter.JsonStringConverter">
+				<bean class="cho.carbon.hc.copframe.messageConverter.JsonStringConverter">
 					<property name="supportedMediaTypes">    
 						<list>    
 							<value>application/json;charset=UTF-8</value>
@@ -47,11 +47,11 @@
 					</property>    
 				</bean>
 				<!-- 用于将返回的jsonReponse对象写到响应正文中 -->
-				<bean class="cn.sowell.copframe.messageConverter.ResponseJsonConverter"  />
+				<bean class="cho.carbon.hc.copframe.messageConverter.ResponseJsonConverter"  />
 				<!-- 用于将返回的xmlReponse对象写到响应正文中 -->
-				<bean class="cn.sowell.copframe.messageConverter.XMLResponseConverter"  />
+				<bean class="cho.carbon.hc.copframe.messageConverter.XMLResponseConverter"  />
 				<!-- 用于将返回的AjaxPageResponse转换成JSON并写到响应正文中 -->
-				<bean class="cn.sowell.copframe.messageConverter.AjaxPageResponseConverter"  />
+				<bean class="cho.carbon.hc.copframe.messageConverter.AjaxPageResponseConverter"  />
 				<!-- 用于将返回的纯字符串转换编码 -->
 				<bean class="org.springframework.http.converter.StringHttpMessageConverter">
 					<constructor-arg value="UTF-8" /> 
@@ -84,7 +84,7 @@
 	
 	<!-- 装载全局Controller的异常处理，这个类将所有异常显示到控制台，并且将异常信息返回到客户端 -->
 	<bean class="cho.carbon.hc.hydrocarbon.common.HydrocarbonControllerExceptionHandler" />
-    <bean class="cn.sowell.copframe.ControllerExceptionHandler" />
+    <bean class="cho.carbon.hc.copframe.ControllerExceptionHandler" />
 	
 	<!-- 对模型视图名称的解析，即在模型视图名称添加前后缀 -->
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">

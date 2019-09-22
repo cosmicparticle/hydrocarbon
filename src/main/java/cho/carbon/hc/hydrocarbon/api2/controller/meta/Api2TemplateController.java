@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import cho.carbon.hc.copframe.dto.ajax.JSONObjectResponse;
+import cho.carbon.hc.copframe.dto.ajax.ResponseJSON;
 import cho.carbon.hc.dataserver.model.modules.service.ModulesService;
 import cho.carbon.hc.dataserver.model.tmpl.pojo.TemplateDetailFieldGroup;
 import cho.carbon.hc.dataserver.model.tmpl.pojo.TemplateTreeTemplate;
@@ -19,8 +21,6 @@ import cho.carbon.hc.hydrocarbon.model.api2.service.TemplateJsonParseService;
 import cho.carbon.hc.hydrocarbon.model.config.bean.ValidateDetailParamter;
 import cho.carbon.hc.hydrocarbon.model.config.bean.ValidateDetailResult;
 import cho.carbon.hc.hydrocarbon.model.config.service.AuthorityService;
-import cn.sowell.copframe.dto.ajax.JSONObjectResponse;
-import cn.sowell.copframe.dto.ajax.ResponseJSON;
 
 @RestController
 @RequestMapping(Api2Constants.URI_TMPL)

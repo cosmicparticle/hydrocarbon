@@ -57,6 +57,16 @@ import org.springframework.util.Assert;
 import cho.carbon.entity.entity.Entity;
 import cho.carbon.hc.FusionContext;
 import cho.carbon.hc.HCFusionContext;
+import cho.carbon.hc.copframe.common.UserIdentifier;
+import cho.carbon.hc.copframe.dao.utils.NormalOperateDao;
+import cho.carbon.hc.copframe.utils.CollectionUtils;
+import cho.carbon.hc.copframe.utils.FormatUtils;
+import cho.carbon.hc.copframe.utils.PoiUtils;
+import cho.carbon.hc.copframe.utils.TextUtils;
+import cho.carbon.hc.copframe.utils.excel.CellTypeUtils;
+import cho.carbon.hc.copframe.web.poll.Message;
+import cho.carbon.hc.copframe.web.poll.MessagesSequence;
+import cho.carbon.hc.copframe.web.poll.WorkProgress;
 import cho.carbon.hc.dataserver.model.dict.pojo.DictionaryComposite;
 import cho.carbon.hc.dataserver.model.dict.pojo.DictionaryField;
 import cho.carbon.hc.dataserver.model.dict.pojo.DictionaryOption;
@@ -80,16 +90,6 @@ import cho.carbon.hc.hydrocarbon.model.modules.service.ModulesImportService;
 import cho.carbon.panel.Integration;
 import cho.carbon.panel.IntegrationMsg;
 import cho.carbon.panel.PanelFactory;
-import cn.sowell.copframe.common.UserIdentifier;
-import cn.sowell.copframe.dao.utils.NormalOperateDao;
-import cn.sowell.copframe.utils.CollectionUtils;
-import cn.sowell.copframe.utils.FormatUtils;
-import cn.sowell.copframe.utils.PoiUtils;
-import cn.sowell.copframe.utils.TextUtils;
-import cn.sowell.copframe.utils.excel.CellTypeUtils;
-import cn.sowell.copframe.web.poll.Message;
-import cn.sowell.copframe.web.poll.MessagesSequence;
-import cn.sowell.copframe.web.poll.WorkProgress;
 
 @Service
 public class ModulesImportServiceImpl implements ModulesImportService {

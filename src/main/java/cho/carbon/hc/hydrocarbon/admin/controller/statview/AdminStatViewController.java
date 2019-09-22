@@ -14,6 +14,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import cho.carbon.hc.copframe.common.UserIdentifier;
+import cho.carbon.hc.copframe.dao.utils.UserUtils;
+import cho.carbon.hc.copframe.dto.ajax.AjaxPageResponse;
+import cho.carbon.hc.copframe.dto.page.PageInfo;
+import cho.carbon.hc.copframe.utils.CollectionUtils;
+import cho.carbon.hc.copframe.utils.FormatUtils;
+import cho.carbon.hc.copframe.utils.TextUtils;
 import cho.carbon.hc.dataserver.model.modules.pojo.ModuleMeta;
 import cho.carbon.hc.dataserver.model.modules.service.ModulesService;
 import cho.carbon.hc.dataserver.model.modules.service.view.StatListTemplateEntityView;
@@ -26,13 +33,6 @@ import cho.carbon.hc.dataserver.model.tmpl.service.StatListTemplateService;
 import cho.carbon.hc.hydrocarbon.admin.controller.AdminConstants;
 import cho.carbon.hc.hydrocarbon.model.config.pojo.SideMenuLevel2Menu;
 import cho.carbon.hc.hydrocarbon.model.config.service.AuthorityService;
-import cn.sowell.copframe.common.UserIdentifier;
-import cn.sowell.copframe.dao.utils.UserUtils;
-import cn.sowell.copframe.dto.ajax.AjaxPageResponse;
-import cn.sowell.copframe.dto.page.PageInfo;
-import cn.sowell.copframe.utils.CollectionUtils;
-import cn.sowell.copframe.utils.FormatUtils;
-import cn.sowell.copframe.utils.TextUtils;
 
 @Controller
 @RequestMapping(AdminConstants.URI_STAT + "/view")

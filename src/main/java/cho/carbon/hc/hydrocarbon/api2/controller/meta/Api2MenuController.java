@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.alibaba.fastjson.JSON;
 
+import cho.carbon.hc.copframe.dto.ajax.JSONObjectResponse;
+import cho.carbon.hc.copframe.dto.ajax.ResponseJSON;
 import cho.carbon.hc.hydrocarbon.api2.controller.Api2Constants;
 import cho.carbon.hc.hydrocarbon.common.ApiUser;
 import cho.carbon.hc.hydrocarbon.model.api2.service.MetaJsonService;
@@ -22,8 +24,6 @@ import cho.carbon.hc.hydrocarbon.model.config.service.AuthorityService;
 import cho.carbon.hc.hydrocarbon.model.config.service.ConfigureService;
 import cho.carbon.hc.hydrocarbon.model.config.service.NonAuthorityException;
 import cho.carbon.hc.hydrocarbon.model.config.service.SideMenuService;
-import cn.sowell.copframe.dto.ajax.JSONObjectResponse;
-import cn.sowell.copframe.dto.ajax.ResponseJSON;
 
 @RestController
 @RequestMapping(Api2Constants.URI_META + "/menu")

@@ -11,9 +11,9 @@
 	<properties>
 		<version.kie>7.10.0.Final</version.kie>
 		<version.carbon-core>0.43</version.carbon-core>
-		<version.dataserver>1.47</version.dataserver>
+		<version.dataserver>1.48</version.dataserver>
 		<version.cpfweb>0.2.14</version.cpfweb>
-		<version.cpfutils>0.3.23</version.cpfutils>
+		<version.cpfutils>0.3.24</version.cpfutils>
 		<version.cpfspring>0.3.21</version.cpfspring>
 		<version.abcbizz>2.1.15</version.abcbizz>
 		<version.authbiz>0.0.21</version.authbiz>
@@ -39,40 +39,35 @@
 		</dependency>
 		  -->
 		<dependency>
-			<groupId>cn.sowell.copframe</groupId>
+			<groupId>cho.carbon.hc.copframe</groupId>
 			<artifactId>cpf-web</artifactId>
 			<version>${version.cpfweb}</version>
 			<exclusions>
 				<exclusion>
-					<groupId>cn.sowell.copframe</groupId>
+					<groupId>cho.carbon.hc.copframe</groupId>
 					<artifactId>cpf-spring</artifactId>
 				</exclusion>
 				<exclusion>
-					<groupId>cn.sowell.copframe</groupId>
+					<groupId>cho.carbon.hc.copframe</groupId>
 					<artifactId>cpf-dao</artifactId>
 				</exclusion>
 			</exclusions>
 		</dependency>
 		<dependency>
-			<groupId>cn.sowell.copframe</groupId>
+			<groupId>cho.carbon.hc.copframe</groupId>
 			<artifactId>cpf-utils</artifactId>
 			<version>${version.cpfutils}</version>
 		</dependency>
 		<dependency>
-			<groupId>cn.sowell.copframe</groupId>
+			<groupId>cho.carbon.hc.copframe</groupId>
 			<artifactId>cpf-spring</artifactId>
 			<version>${version.cpfspring}</version>
 			<exclusions>
 				<exclusion>
-					<groupId>cn.sowell.copframe</groupId>
+					<groupId>cho.carbon.hc.copframe</groupId>
 					<artifactId>cpf-utils</artifactId>
 				</exclusion>
 			</exclusions>
-		</dependency>
-		<dependency>
-			<groupId>cn.sowell.copframe</groupId>
-			<artifactId>cpf-excel</artifactId>
-			<version>0.1</version>
 		</dependency>
 		<dependency>
 			<groupId>cho.carbon.hc</groupId>
@@ -80,7 +75,7 @@
 			<version>${version.dataserver}</version>
 			<exclusions>
 				<exclusion>
-					<groupId>cn.sowell.copframe</groupId>
+					<groupId>cho.carbon.hc.copframe</groupId>
 					<artifactId>cpf-spring</artifactId>
 				</exclusion>
 				<exclusion>
@@ -119,17 +114,7 @@
 			<artifactId>bizz</artifactId>
 			<version>${version.abcbizz}</version>
 		</dependency> -->
-		<!-- <dependency>
-			<groupId>cn.sowell.copframe</groupId>
-			<artifactId>cpf-jedica</artifactId>
-			<version>0.0.3</version>
-			<exclusions>
-				<exclusion>
-					<groupId>org.springframework</groupId>
-					<artifactId>spring</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency> -->
+	
 		<!-- https://mvnrepository.com/artifact/org.springframework.data/spring-data-redis -->
 		<!-- https://mvnrepository.com/artifact/javax.servlet.jsp/javax.servlet.jsp-api -->
 	<dependency>
@@ -297,11 +282,6 @@
 	        <name>rdc-releases</name>
 	        <url>https://repo.rdc.aliyun.com/repository/78687-release-z5GPTo/</url>
 	    </repository>
-		<!-- <repository>
-			<id>nexus</id>
-			<name>nexus</name>
-			<url>http://139.196.123.44:32108/repository/nexus-group/</url>
-		</repository> -->
 	</repositories>
 	<build>
 		<finalName>hydrocarbon</finalName>

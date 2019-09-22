@@ -62,26 +62,26 @@
 	</bean>
 
 	<bean
-		class="cn.sowell.copframe.spring.propTranslator.PropertyValueTranslatorSet">
+		class="cho.carbon.hc.copframe.spring.propTranslator.PropertyValueTranslatorSet">
 		<property name="translatorSet">
 			<set>
 				<bean
-					class="cn.sowell.copframe.spring.propTranslator.translator.DatePropertyValueTranlator" />
+					class="cho.carbon.hc.copframe.spring.propTranslator.translator.DatePropertyValueTranlator" />
 			</set>
 		</property>
 	</bean>
 
 	<bean
-		class="cn.sowell.copframe.spring.propTranslator.PropertyValueTranslatorSet">
+		class="cho.carbon.hc.copframe.spring.propTranslator.PropertyValueTranslatorSet">
 		<property name="translatorSet">
 			<set>
 				<bean
-					class="cn.sowell.copframe.spring.propTranslator.translator.DatePropertyValueTranlator" />
+					class="cho.carbon.hc.copframe.spring.propTranslator.translator.DatePropertyValueTranlator" />
 			</set>
 		</property>
 	</bean>
 
-	<bean class="cn.sowell.copframe.dao.utils.NormalOperateDaoImpl" />
+	<bean class="cho.carbon.hc.copframe.dao.utils.NormalOperateDaoImpl" />
 
 	<bean class="cho.carbon.hc.dataserver.model.dict.validator.ModuleCachableMetaSupportorImpl" />
 
@@ -107,11 +107,11 @@
 	</jaxws:server>
 
 
-	<bean class="cn.sowell.copframe.spring.CPFSpringContextLoader" />
+	<bean class="cho.carbon.hc.copframe.spring.CPFSpringContextLoader" />
 	
-	<bean class="cn.sowell.copframe.spring.file.FilePublisher" >
+	<bean class="cho.carbon.hc.copframe.spring.file.FilePublisher" >
 		<property name="fileUtils">
-			<bean class="cn.sowell.copframe.spring.file.FileUtils" >
+			<bean class="cho.carbon.hc.copframe.spring.file.FileUtils" >
 				<constructor-arg value="${file_publish_path}" />
 				<!-- 这个要与web.xml中的servlet一致 -->
 				<constructor-arg value="/download-files/" />

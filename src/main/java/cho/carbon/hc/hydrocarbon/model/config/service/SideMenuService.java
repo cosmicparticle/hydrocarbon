@@ -4,10 +4,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import cho.carbon.hc.copframe.common.UserIdentifier;
 import cho.carbon.hc.hydrocarbon.model.config.pojo.SideMenuBlock;
 import cho.carbon.hc.hydrocarbon.model.config.pojo.SideMenuLevel1Menu;
 import cho.carbon.hc.hydrocarbon.model.config.pojo.SideMenuLevel2Menu;
-import cn.sowell.copframe.common.UserIdentifier;
 
 public interface SideMenuService {
 	SideMenuLevel2Menu getLevel2Menu(Long menuId);

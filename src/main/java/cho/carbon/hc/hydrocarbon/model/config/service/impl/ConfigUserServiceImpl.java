@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
+import cho.carbon.hc.copframe.spring.properties.PropertyPlaceholder;
 import cho.carbon.hc.dataserver.model.abc.service.EntityQueryParameter;
 import cho.carbon.hc.dataserver.model.abc.service.ModuleEntityService;
 import cho.carbon.hc.dataserver.model.modules.service.ModulesService;
@@ -17,7 +18,6 @@ import cho.carbon.hc.entityResolver.FusionContextConfigFactory;
 import cho.carbon.hc.hydrocarbon.model.admin.pojo.ABCUser;
 import cho.carbon.hc.hydrocarbon.model.config.service.ConfigUserService;
 import cho.carbon.hc.hydrocarbon.model.config.service.NonAuthorityException;
-import cn.sowell.copframe.spring.properties.PropertyPlaceholder;
 
 @Service
 public class ConfigUserServiceImpl implements ConfigUserService {

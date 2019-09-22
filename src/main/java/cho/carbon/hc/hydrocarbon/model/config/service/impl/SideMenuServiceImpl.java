@@ -20,6 +20,11 @@ import com.google.common.collect.Lists;
 
 import cho.carbon.auth.pojo.AuthorityVO;
 import cho.carbon.auth.service.ServiceFactory;
+import cho.carbon.hc.copframe.common.UserIdentifier;
+import cho.carbon.hc.copframe.dao.utils.NormalOperateDao;
+import cho.carbon.hc.copframe.dao.utils.UserUtils;
+import cho.carbon.hc.copframe.utils.CollectionUtils;
+import cho.carbon.hc.copframe.utils.TextUtils;
 import cho.carbon.hc.dataserver.model.modules.pojo.ModuleMeta;
 import cho.carbon.hc.dataserver.model.modules.service.ModulesService;
 import cho.carbon.hc.dataserver.model.statview.service.StatViewService;
@@ -35,11 +40,6 @@ import cho.carbon.hc.hydrocarbon.model.config.pojo.SideMenuLevel2Menu;
 import cho.carbon.hc.hydrocarbon.model.config.service.AuthorityService;
 import cho.carbon.hc.hydrocarbon.model.config.service.CustomPageService;
 import cho.carbon.hc.hydrocarbon.model.config.service.SideMenuService;
-import cn.sowell.copframe.common.UserIdentifier;
-import cn.sowell.copframe.dao.utils.NormalOperateDao;
-import cn.sowell.copframe.dao.utils.UserUtils;
-import cn.sowell.copframe.utils.CollectionUtils;
-import cn.sowell.copframe.utils.TextUtils;
 
 @Service
 public class SideMenuServiceImpl implements SideMenuService, InitializingBean{

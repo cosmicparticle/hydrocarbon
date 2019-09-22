@@ -18,12 +18,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import cho.carbon.hc.copframe.dto.ajax.AjaxPageResponse;
+import cho.carbon.hc.copframe.dto.page.PageInfo;
 import cho.carbon.hc.hydrocarbon.admin.controller.AdminConstants;
 import cho.carbon.hc.hydrocarbon.model.demo.criteria.DemoCriteria;
 import cho.carbon.hc.hydrocarbon.model.demo.pojo.PlainDemo;
 import cho.carbon.hc.hydrocarbon.model.demo.service.DemoService;
-import cn.sowell.copframe.dto.ajax.AjaxPageResponse;
-import cn.sowell.copframe.dto.page.PageInfo;
 
 @Controller
 @RequestMapping("/admin/demo")

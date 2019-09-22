@@ -6,11 +6,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import cho.carbon.hc.copframe.dto.ajax.JSONObjectResponse;
+import cho.carbon.hc.copframe.dto.ajax.ResponseJSON;
 import cho.carbon.hc.hydrocarbon.api2.controller.Api2Constants;
 import cho.carbon.hc.hydrocarbon.common.ApiUser;
 import cho.carbon.hc.hydrocarbon.model.admin.service.AdminUserService;
-import cn.sowell.copframe.dto.ajax.JSONObjectResponse;
-import cn.sowell.copframe.dto.ajax.ResponseJSON;
 
 @RestController
 @RequestMapping(Api2Constants.URI_BASE + "/auth")

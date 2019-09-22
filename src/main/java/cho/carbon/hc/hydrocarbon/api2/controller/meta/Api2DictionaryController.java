@@ -13,15 +13,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.alibaba.fastjson.JSONObject;
 
+import cho.carbon.hc.copframe.dto.ajax.JSONObjectResponse;
+import cho.carbon.hc.copframe.dto.ajax.ResponseJSON;
+import cho.carbon.hc.copframe.utils.TextUtils;
 import cho.carbon.hc.dataserver.model.dict.pojo.DictionaryOption;
 import cho.carbon.hc.dataserver.model.dict.pojo.OptionItem;
 import cho.carbon.hc.dataserver.model.dict.service.DictionaryService;
 import cho.carbon.hc.hydrocarbon.api2.controller.Api2Constants;
 import cho.carbon.hc.hydrocarbon.common.ApiUser;
 import cho.carbon.hc.hydrocarbon.model.config.service.AuthorityService;
-import cn.sowell.copframe.dto.ajax.JSONObjectResponse;
-import cn.sowell.copframe.dto.ajax.ResponseJSON;
-import cn.sowell.copframe.utils.TextUtils;
 
 @RestController
 @RequestMapping(Api2Constants.URI_META + "/dict")

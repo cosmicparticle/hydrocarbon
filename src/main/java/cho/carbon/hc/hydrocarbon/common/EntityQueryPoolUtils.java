@@ -2,9 +2,9 @@ package cho.carbon.hc.hydrocarbon.common;
 
 import javax.servlet.http.HttpSession;
 
+import cho.carbon.hc.copframe.common.UserIdentifier;
 import cho.carbon.hc.dataserver.model.modules.service.view.EntityQueryPool;
 import cho.carbon.hc.hydrocarbon.SessionKey;
-import cn.sowell.copframe.common.UserIdentifier;
 
 public class EntityQueryPoolUtils {
 	public static EntityQueryPool getEntityQueryPool(HttpSession session, UserIdentifier user) {

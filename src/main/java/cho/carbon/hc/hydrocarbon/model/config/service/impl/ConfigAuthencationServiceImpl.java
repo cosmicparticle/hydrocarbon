@@ -5,11 +5,11 @@ import javax.annotation.Resource;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
+import cho.carbon.hc.copframe.spring.properties.PropertyPlaceholder;
+import cho.carbon.hc.copframe.utils.TimelinenessWrapper;
 import cho.carbon.hc.hydrocarbon.model.config.dao.ConfigureDao;
 import cho.carbon.hc.hydrocarbon.model.config.pojo.AuthencationConfig;
 import cho.carbon.hc.hydrocarbon.model.config.service.ConfigAuthencationService;
-import cn.sowell.copframe.spring.properties.PropertyPlaceholder;
-import cn.sowell.copframe.utils.TimelinenessWrapper;
 
 public class ConfigAuthencationServiceImpl implements ConfigAuthencationService{
 	@Resource

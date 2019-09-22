@@ -16,8 +16,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import cho.carbon.hc.copframe.common.UserIdentifier;
 import cho.carbon.hc.hydrocarbon.HydrocarbonConstants;
-import cn.sowell.copframe.common.UserIdentifier;
 
 
 @Entity

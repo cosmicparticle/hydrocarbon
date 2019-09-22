@@ -12,7 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import cn.sowell.copframe.utils.TextUtils;
+import cho.carbon.hc.copframe.utils.TextUtils;
 
 @Entity
 @Table(name="t_sa_config_sidemenu_block")

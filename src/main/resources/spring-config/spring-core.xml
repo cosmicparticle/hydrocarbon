@@ -10,10 +10,10 @@
 	     http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd">
 
 	<!-- 默认日期时间格式 -->
-	<bean id="dateFormat" class="cn.sowell.copframe.utils.date.CommonDateFormat" />
+	<bean id="dateFormat" class="cho.carbon.hc.copframe.utils.date.CommonDateFormat" />
 	
 	<!-- 加载jdbc.properties配置文件 -->
-    <bean id="propConfig" class="cn.sowell.copframe.spring.properties.PropertyPlaceholder">
+    <bean id="propConfig" class="cho.carbon.hc.copframe.spring.properties.PropertyPlaceholder">
 		<property name="order" value="1" />
 		<property name="ignoreUnresolvablePlaceholders" value="true" />
 		<property name="locations">

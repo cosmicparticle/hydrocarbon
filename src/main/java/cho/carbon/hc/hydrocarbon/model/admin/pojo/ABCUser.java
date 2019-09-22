@@ -8,8 +8,8 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import cho.carbon.auth.pojo.UserInfo;
-import cn.sowell.copframe.common.UserIdentifier;
-import cn.sowell.copframe.utils.CollectionUtils;
+import cho.carbon.hc.copframe.common.UserIdentifier;
+import cho.carbon.hc.copframe.utils.CollectionUtils;
 
 public class ABCUser implements UserDetails, UserIdentifier{
 

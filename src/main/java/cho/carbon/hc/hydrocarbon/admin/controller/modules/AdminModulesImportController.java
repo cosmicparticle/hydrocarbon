@@ -34,6 +34,18 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
+import cho.carbon.hc.copframe.common.UserIdentifier;
+import cho.carbon.hc.copframe.dao.utils.UserUtils;
+import cho.carbon.hc.copframe.dto.ajax.JSONObjectResponse;
+import cho.carbon.hc.copframe.dto.ajax.JsonRequest;
+import cho.carbon.hc.copframe.dto.ajax.PollStatusResponse;
+import cho.carbon.hc.copframe.dto.ajax.ResponseJSON;
+import cho.carbon.hc.copframe.spring.file.FileUtils;
+import cho.carbon.hc.copframe.utils.CollectionUtils;
+import cho.carbon.hc.copframe.utils.TextUtils;
+import cho.carbon.hc.copframe.web.poll.ProgressPollableThread;
+import cho.carbon.hc.copframe.web.poll.ProgressPollableThreadFactory;
+import cho.carbon.hc.copframe.web.poll.WorkProgress;
 import cho.carbon.hc.dataserver.model.modules.pojo.ModuleMeta;
 import cho.carbon.hc.dataserver.model.modules.service.ModulesService;
 import cho.carbon.hc.entityResolver.EntityConstants;
@@ -45,18 +57,6 @@ import cho.carbon.hc.hydrocarbon.model.modules.pojo.ImportTemplateCriteria;
 import cho.carbon.hc.hydrocarbon.model.modules.pojo.ModuleImportTemplate;
 import cho.carbon.hc.hydrocarbon.model.modules.pojo.ModuleImportTemplateField;
 import cho.carbon.hc.hydrocarbon.model.modules.service.ModulesImportService;
-import cn.sowell.copframe.common.UserIdentifier;
-import cn.sowell.copframe.dao.utils.UserUtils;
-import cn.sowell.copframe.dto.ajax.JSONObjectResponse;
-import cn.sowell.copframe.dto.ajax.JsonRequest;
-import cn.sowell.copframe.dto.ajax.PollStatusResponse;
-import cn.sowell.copframe.dto.ajax.ResponseJSON;
-import cn.sowell.copframe.spring.file.FileUtils;
-import cn.sowell.copframe.utils.CollectionUtils;
-import cn.sowell.copframe.utils.TextUtils;
-import cn.sowell.copframe.web.poll.ProgressPollableThread;
-import cn.sowell.copframe.web.poll.ProgressPollableThreadFactory;
-import cn.sowell.copframe.web.poll.WorkProgress;
 
 @Controller
 @RequestMapping(AdminConstants.URI_MODULES + "/import")

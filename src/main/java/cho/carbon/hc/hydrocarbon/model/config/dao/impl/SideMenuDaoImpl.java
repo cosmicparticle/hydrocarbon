@@ -12,12 +12,12 @@ import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Order;
 import org.springframework.stereotype.Repository;
 
+import cho.carbon.hc.copframe.dao.deferedQuery.HibernateRefrectResultTransformer;
+import cho.carbon.hc.copframe.utils.CollectionUtils;
 import cho.carbon.hc.hydrocarbon.model.config.dao.SideMenuDao;
 import cho.carbon.hc.hydrocarbon.model.config.pojo.SideMenuBlock;
 import cho.carbon.hc.hydrocarbon.model.config.pojo.SideMenuLevel1Menu;
 import cho.carbon.hc.hydrocarbon.model.config.pojo.SideMenuLevel2Menu;
-import cn.sowell.copframe.dao.deferedQuery.HibernateRefrectResultTransformer;
-import cn.sowell.copframe.utils.CollectionUtils;
 
 @Repository
 public class SideMenuDaoImpl implements SideMenuDao {

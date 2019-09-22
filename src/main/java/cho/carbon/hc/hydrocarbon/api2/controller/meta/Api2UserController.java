@@ -10,10 +10,10 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 
+import cho.carbon.hc.copframe.dto.ajax.JSONObjectResponse;
 import cho.carbon.hc.hydrocarbon.api2.controller.Api2Constants;
 import cho.carbon.hc.hydrocarbon.common.ApiUser;
 import cho.carbon.hc.hydrocarbon.model.config.service.ConfigUserService;
-import cn.sowell.copframe.dto.ajax.JSONObjectResponse;
 
 @RestController
 @RequestMapping(Api2Constants.URI_META + "/user")

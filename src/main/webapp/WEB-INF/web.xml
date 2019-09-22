@@ -35,7 +35,7 @@
 	
 	<servlet>
 		<servlet-name>FileDownloadServlet</servlet-name>
-		<servlet-class>cn.sowell.copframe.spring.file.FilePublishServlet</servlet-class>
+		<servlet-class>cho.carbon.hc.copframe.spring.file.FilePublishServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>FileDownloadServlet</servlet-name>

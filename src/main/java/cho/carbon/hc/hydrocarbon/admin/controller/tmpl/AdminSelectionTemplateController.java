@@ -19,6 +19,10 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
+import cho.carbon.hc.copframe.dao.utils.UserUtils;
+import cho.carbon.hc.copframe.dto.ajax.JSONObjectResponse;
+import cho.carbon.hc.copframe.dto.ajax.JsonRequest;
+import cho.carbon.hc.copframe.dto.ajax.ResponseJSON;
 import cho.carbon.hc.dataserver.model.dict.pojo.DictionaryComposite;
 import cho.carbon.hc.dataserver.model.dict.service.DictionaryService;
 import cho.carbon.hc.dataserver.model.dict.service.impl.DictionaryServiceImpl;
@@ -30,10 +34,6 @@ import cho.carbon.hc.dataserver.model.tmpl.pojo.TemplateSelectionTemplate;
 import cho.carbon.hc.dataserver.model.tmpl.service.SelectionTemplateService;
 import cho.carbon.hc.entityResolver.Composite;
 import cho.carbon.hc.hydrocarbon.admin.controller.AdminConstants;
-import cn.sowell.copframe.dao.utils.UserUtils;
-import cn.sowell.copframe.dto.ajax.JSONObjectResponse;
-import cn.sowell.copframe.dto.ajax.JsonRequest;
-import cn.sowell.copframe.dto.ajax.ResponseJSON;
 
 @Controller
 @RequestMapping(AdminConstants.URI_TMPL + "/stmpl")

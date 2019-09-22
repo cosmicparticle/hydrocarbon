@@ -21,6 +21,11 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
+import cho.carbon.hc.copframe.dto.ajax.JSONObjectResponse;
+import cho.carbon.hc.copframe.dto.ajax.JsonRequest;
+import cho.carbon.hc.copframe.dto.ajax.ResponseJSON;
+import cho.carbon.hc.copframe.utils.CollectionUtils;
+import cho.carbon.hc.copframe.utils.TextUtils;
 import cho.carbon.hc.dataserver.model.karuiserv.pojo.KaruiServ;
 import cho.carbon.hc.dataserver.model.karuiserv.service.KaruiServService;
 import cho.carbon.hc.dataserver.model.tmpl.pojo.TemplateDetailField;
@@ -35,11 +40,6 @@ import cho.carbon.hc.entityResolver.config.abst.Module;
 import cho.carbon.hc.hydrocarbon.admin.controller.AdminConstants;
 import cho.carbon.hc.hydrocarbon.model.api2.service.MetaJsonService;
 import cho.carbon.hc.hydrocarbon.model.config.service.ConfigureService;
-import cn.sowell.copframe.dto.ajax.JSONObjectResponse;
-import cn.sowell.copframe.dto.ajax.JsonRequest;
-import cn.sowell.copframe.dto.ajax.ResponseJSON;
-import cn.sowell.copframe.utils.CollectionUtils;
-import cn.sowell.copframe.utils.TextUtils;
 
 @Controller
 @RequestMapping(AdminConstants.URI_CONFIG + "/ks")

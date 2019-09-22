@@ -6,11 +6,11 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import cho.carbon.hc.copframe.dto.page.PageInfo;
 import cho.carbon.hc.hydrocarbon.model.demo.criteria.DemoCriteria;
 import cho.carbon.hc.hydrocarbon.model.demo.dao.DemoDao;
 import cho.carbon.hc.hydrocarbon.model.demo.pojo.PlainDemo;
 import cho.carbon.hc.hydrocarbon.model.demo.service.DemoService;
-import cn.sowell.copframe.dto.page.PageInfo;
 
 @Service
 public class DemoServiceImpl implements DemoService{

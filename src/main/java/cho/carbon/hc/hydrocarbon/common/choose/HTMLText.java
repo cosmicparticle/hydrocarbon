@@ -1,6 +1,6 @@
 package cho.carbon.hc.hydrocarbon.common.choose;
 
-import cn.sowell.copframe.utils.FormatUtils;
+import cho.carbon.hc.copframe.utils.FormatUtils;
 
 public class HTMLText implements HTMLElement{
 

@@ -11,13 +11,13 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Component;
 import org.springframework.ui.Model;
 
+import cho.carbon.hc.copframe.utils.FormatUtils;
+import cho.carbon.hc.copframe.utils.TextUtils;
+import cho.carbon.hc.copframe.utils.date.FrameDateFormat;
 import cho.carbon.hc.dataserver.model.tmpl.pojo.Cachable;
 import cho.carbon.hc.dataserver.model.tmpl.service.OpenTemplateService;
 import cho.carbon.hc.hydrocarbon.admin.controller.AdminConstants;
 import cho.carbon.hc.hydrocarbon.common.choose.ChooseTablePage;
-import cn.sowell.copframe.utils.FormatUtils;
-import cn.sowell.copframe.utils.TextUtils;
-import cn.sowell.copframe.utils.date.FrameDateFormat;
 
 @Component
 public class CommonTemplateActionConsumer {

@@ -15,6 +15,9 @@ import com.google.common.collect.Lists;
 
 import cho.carbon.auth.pojo.AuthorityVO;
 import cho.carbon.auth.service.ServiceFactory;
+import cho.carbon.hc.copframe.dao.utils.UserUtils;
+import cho.carbon.hc.copframe.utils.CollectionUtils;
+import cho.carbon.hc.copframe.utils.TextUtils;
 import cho.carbon.hc.dataserver.model.karuiserv.pojo.KaruiServ;
 import cho.carbon.hc.dataserver.model.tmpl.pojo.TemplateDetailFieldGroup;
 import cho.carbon.hc.dataserver.model.tmpl.pojo.TemplateDetailTemplate;
@@ -38,9 +41,6 @@ import cho.carbon.hc.hydrocarbon.model.config.service.ConfigUserService;
 import cho.carbon.hc.hydrocarbon.model.config.service.ConfigureService;
 import cho.carbon.hc.hydrocarbon.model.config.service.NonAuthorityException;
 import cho.carbon.hc.hydrocarbon.model.config.service.SideMenuService;
-import cn.sowell.copframe.dao.utils.UserUtils;
-import cn.sowell.copframe.utils.CollectionUtils;
-import cn.sowell.copframe.utils.TextUtils;
 
 @Service
 public class AuthorityServiceImpl implements AuthorityService{

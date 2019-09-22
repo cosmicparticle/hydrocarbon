@@ -16,7 +16,7 @@
 		</authentication-provider>
 	</authentication-manager>
 	<beans:bean id="webexpressionHandler" class="org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler" />
-	<beans:bean id="cpfInvalidSessionStrategy" class="cn.sowell.copframe.web.CpfInvalidSessionStrategy" />
+	<beans:bean id="cpfInvalidSessionStrategy" class="cho.carbon.hc.copframe.web.CpfInvalidSessionStrategy" />
 	<!-- 拦截管理界面请求 -->
 	<http pattern="/admin/login" security="none" />
 	<http pattern="/admin/**" use-expressions="true" auto-config="true" authentication-manager-ref="authenticationManager">

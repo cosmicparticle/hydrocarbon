@@ -8,11 +8,11 @@ import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
 
+import cho.carbon.hc.copframe.dao.deferedQuery.DeferedParamQuery;
 import cho.carbon.hc.hydrocarbon.model.modules.dao.ModulesImportDao;
 import cho.carbon.hc.hydrocarbon.model.modules.pojo.ImportTemplateCriteria;
 import cho.carbon.hc.hydrocarbon.model.modules.pojo.ModuleImportTemplate;
 import cho.carbon.hc.hydrocarbon.model.modules.pojo.ModuleImportTemplateField;
-import cn.sowell.copframe.dao.deferedQuery.DeferedParamQuery;
 
 @Repository
 public class ModulesImportDaoImpl implements ModulesImportDao{

@@ -10,12 +10,12 @@ import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
 
+import cho.carbon.hc.copframe.utils.TextUtils;
 import cho.carbon.hc.entityResolver.UserCodeService;
 import cho.carbon.hc.hydrocarbon.SessionKey;
 import cho.carbon.hc.hydrocarbon.model.admin.service.AdminUserService;
 import cho.carbon.hc.hydrocarbon.model.admin.service.impl.AdminUserServiceImpl.Token;
 import cho.carbon.hc.hydrocarbon.model.config.service.NonAuthorityException;
-import cn.sowell.copframe.utils.TextUtils;
 
 public class ApiUserResolver implements HandlerMethodArgumentResolver{
 

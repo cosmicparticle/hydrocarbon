@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import cho.carbon.hc.copframe.common.UserIdentifier;
+import cho.carbon.hc.copframe.dao.utils.UserUtils;
 import cho.carbon.hc.hydrocarbon.admin.controller.AdminConstants;
 import cho.carbon.hc.hydrocarbon.model.config.pojo.SideMenuBlock;
 import cho.carbon.hc.hydrocarbon.model.config.pojo.SideMenuLevel1Menu;
@@ -24,8 +26,6 @@ import cho.carbon.hc.hydrocarbon.model.config.service.ConfigAuthencationService;
 import cho.carbon.hc.hydrocarbon.model.config.service.ConfigureService;
 import cho.carbon.hc.hydrocarbon.model.config.service.NonAuthorityException;
 import cho.carbon.hc.hydrocarbon.model.config.service.SideMenuService;
-import cn.sowell.copframe.common.UserIdentifier;
-import cn.sowell.copframe.dao.utils.UserUtils;
 
 @Controller
 @RequestMapping("/admin")

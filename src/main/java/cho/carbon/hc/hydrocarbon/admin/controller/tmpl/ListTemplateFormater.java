@@ -9,12 +9,12 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
+import cho.carbon.hc.copframe.dao.utils.UserUtils;
+import cho.carbon.hc.copframe.dto.ajax.JsonRequest;
 import cho.carbon.hc.dataserver.model.dict.service.DictionaryService;
 import cho.carbon.hc.dataserver.model.tmpl.pojo.AbstractListColumn;
 import cho.carbon.hc.dataserver.model.tmpl.pojo.AbstractListCriteria;
 import cho.carbon.hc.dataserver.model.tmpl.pojo.AbstractListTemplate;
-import cn.sowell.copframe.dao.utils.UserUtils;
-import cn.sowell.copframe.dto.ajax.JsonRequest;
 
 public class ListTemplateFormater {
 	

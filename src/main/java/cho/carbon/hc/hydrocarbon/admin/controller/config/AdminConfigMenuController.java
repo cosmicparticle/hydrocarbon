@@ -19,6 +19,11 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
+import cho.carbon.hc.copframe.dto.ajax.JSONObjectResponse;
+import cho.carbon.hc.copframe.dto.ajax.JsonRequest;
+import cho.carbon.hc.copframe.dto.ajax.ResponseJSON;
+import cho.carbon.hc.copframe.utils.CollectionUtils;
+import cho.carbon.hc.copframe.utils.JsonUtils;
 import cho.carbon.hc.dataserver.model.statview.service.StatViewService;
 import cho.carbon.hc.dataserver.model.tmpl.param.StatModuleDetail;
 import cho.carbon.hc.dataserver.model.tmpl.pojo.TemplateGroup;
@@ -36,11 +41,6 @@ import cho.carbon.hc.hydrocarbon.model.config.service.AuthorityService;
 import cho.carbon.hc.hydrocarbon.model.config.service.ConfigureService;
 import cho.carbon.hc.hydrocarbon.model.config.service.CustomPageService;
 import cho.carbon.hc.hydrocarbon.model.config.service.SideMenuService;
-import cn.sowell.copframe.dto.ajax.JSONObjectResponse;
-import cn.sowell.copframe.dto.ajax.JsonRequest;
-import cn.sowell.copframe.dto.ajax.ResponseJSON;
-import cn.sowell.copframe.utils.CollectionUtils;
-import cn.sowell.copframe.utils.JsonUtils;
 
 @Controller
 @RequestMapping(AdminConstants.URI_CONFIG + "/menu")

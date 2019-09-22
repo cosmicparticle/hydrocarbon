@@ -18,6 +18,11 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
+import cho.carbon.hc.copframe.dto.ajax.AjaxPageResponse;
+import cho.carbon.hc.copframe.dto.ajax.JSONObjectResponse;
+import cho.carbon.hc.copframe.dto.ajax.JsonRequest;
+import cho.carbon.hc.copframe.dto.ajax.ResponseJSON;
+import cho.carbon.hc.copframe.utils.TextUtils;
 import cho.carbon.hc.dataserver.model.modules.pojo.ModuleMeta;
 import cho.carbon.hc.dataserver.model.modules.service.ModulesService;
 import cho.carbon.hc.dataserver.model.tmpl.pojo.TemplateTreeNode;
@@ -30,11 +35,6 @@ import cho.carbon.hc.entityResolver.config.ModuleConfigStructure;
 import cho.carbon.hc.hydrocarbon.admin.controller.AdminConstants;
 import cho.carbon.hc.hydrocarbon.admin.controller.tmpl.CommonTemplateActionConsumer.ChooseRequestParam;
 import cho.carbon.hc.hydrocarbon.admin.controller.tmpl.ListTemplateFormater.Handlers;
-import cn.sowell.copframe.dto.ajax.AjaxPageResponse;
-import cn.sowell.copframe.dto.ajax.JSONObjectResponse;
-import cn.sowell.copframe.dto.ajax.JsonRequest;
-import cn.sowell.copframe.dto.ajax.ResponseJSON;
-import cn.sowell.copframe.utils.TextUtils;
 
 @Controller
 @RequestMapping(AdminConstants.URI_TMPL + "/tree")

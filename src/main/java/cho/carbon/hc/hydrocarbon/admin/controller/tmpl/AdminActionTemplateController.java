@@ -17,6 +17,12 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
+import cho.carbon.hc.copframe.dao.utils.UserUtils;
+import cho.carbon.hc.copframe.dto.ajax.AjaxPageResponse;
+import cho.carbon.hc.copframe.dto.ajax.JSONObjectResponse;
+import cho.carbon.hc.copframe.dto.ajax.JsonRequest;
+import cho.carbon.hc.copframe.dto.ajax.ResponseJSON;
+import cho.carbon.hc.copframe.utils.CollectionUtils;
 import cho.carbon.hc.dataserver.model.modules.pojo.ModuleMeta;
 import cho.carbon.hc.dataserver.model.modules.service.ModulesService;
 import cho.carbon.hc.dataserver.model.modules.service.ViewDataService;
@@ -30,12 +36,6 @@ import cho.carbon.hc.dataserver.model.tmpl.pojo.TemplateGroup;
 import cho.carbon.hc.dataserver.model.tmpl.service.ActionTemplateService;
 import cho.carbon.hc.hydrocarbon.admin.controller.AdminConstants;
 import cho.carbon.hc.hydrocarbon.model.config.service.ConfigureService;
-import cn.sowell.copframe.dao.utils.UserUtils;
-import cn.sowell.copframe.dto.ajax.AjaxPageResponse;
-import cn.sowell.copframe.dto.ajax.JSONObjectResponse;
-import cn.sowell.copframe.dto.ajax.JsonRequest;
-import cn.sowell.copframe.dto.ajax.ResponseJSON;
-import cn.sowell.copframe.utils.CollectionUtils;
 
 @Controller
 @RequestMapping(AdminConstants.URI_TMPL + "/atmpl")

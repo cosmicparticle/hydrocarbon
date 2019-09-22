@@ -11,6 +11,9 @@ import org.springframework.stereotype.Service;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
+import cho.carbon.hc.copframe.dao.utils.NormalOperateDao;
+import cho.carbon.hc.copframe.utils.CollectionUtils;
+import cho.carbon.hc.copframe.utils.FormatUtils;
 import cho.carbon.hc.dataserver.model.tmpl.pojo.TemplateGroup;
 import cho.carbon.hc.dataserver.model.tmpl.service.TemplateGroupService;
 import cho.carbon.hc.entityResolver.FusionContextConfig;
@@ -23,9 +26,6 @@ import cho.carbon.hc.hydrocarbon.model.config.pojo.SystemConfig;
 import cho.carbon.hc.hydrocarbon.model.config.service.ConfigureService;
 import cho.carbon.meta.struc.er.Struc;
 import cho.carbon.meta.struc.er.StrucContainer;
-import cn.sowell.copframe.dao.utils.NormalOperateDao;
-import cn.sowell.copframe.utils.CollectionUtils;
-import cn.sowell.copframe.utils.FormatUtils;
 
 @Service
 public class ConfigureServiceImpl implements ConfigureService{

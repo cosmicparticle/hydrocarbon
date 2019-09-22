@@ -5,7 +5,7 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import cn.sowell.copframe.utils.TextUtils;
+import cho.carbon.hc.copframe.utils.TextUtils;
 
 /*@ContextConfiguration(locations = "classpath*:spring-config/spring-junit.xml")
 @RunWith(SpringJUnit4ClassRunner.class)*/

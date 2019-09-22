@@ -22,13 +22,13 @@ import org.apache.poi.xssf.usermodel.XSSFColor;
 import org.apache.poi.xssf.usermodel.XSSFFont;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import cho.carbon.hc.copframe.utils.TextUtils;
 import cho.carbon.hc.dataserver.model.tmpl.pojo.TemplateDetailField;
 import cho.carbon.hc.dataserver.model.tmpl.pojo.TemplateDetailFieldGroup;
 import cho.carbon.hc.dataserver.model.tmpl.pojo.TemplateDetailTemplate;
 import cho.carbon.hc.entityResolver.EntityConstants;
 import cho.carbon.hc.entityResolver.ModuleEntityPropertyParser;
 import cho.carbon.hc.entityResolver.impl.ArrayItemPropertyParser;
-import cn.sowell.copframe.utils.TextUtils;
 
 public class EntityExportWriter{
 

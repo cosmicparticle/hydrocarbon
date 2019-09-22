@@ -14,6 +14,7 @@ import org.springframework.util.Assert;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
+import cho.carbon.hc.copframe.utils.TextUtils;
 import cho.carbon.hc.dataserver.model.dict.pojo.DictionaryComposite;
 import cho.carbon.hc.dataserver.model.modules.pojo.EntityVersionItem;
 import cho.carbon.hc.dataserver.model.tmpl.pojo.TemplateDetailField;
@@ -28,7 +29,6 @@ import cho.carbon.hc.entityResolver.impl.RelSelectionEntityPropertyParser;
 import cho.carbon.hc.hydrocarbon.model.modules.bean.EntityArrayItemDetail;
 import cho.carbon.hc.hydrocarbon.model.modules.bean.EntityDetail;
 import cho.carbon.hc.hydrocarbon.model.modules.service.EntityConvertService;
-import cn.sowell.copframe.utils.TextUtils;
 
 @Service
 public class EntityConvertServiceImpl implements EntityConvertService{

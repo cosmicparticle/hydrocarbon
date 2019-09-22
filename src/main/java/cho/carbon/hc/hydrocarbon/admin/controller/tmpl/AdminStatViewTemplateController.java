@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import cho.carbon.hc.copframe.dto.ajax.AjaxPageResponse;
+import cho.carbon.hc.copframe.utils.CollectionUtils;
 import cho.carbon.hc.dataserver.model.modules.pojo.ModuleMeta;
 import cho.carbon.hc.dataserver.model.modules.service.ModulesService;
 import cho.carbon.hc.dataserver.model.statview.service.StatViewService;
@@ -21,8 +23,6 @@ import cho.carbon.hc.dataserver.model.tmpl.pojo.TemplateStatList;
 import cho.carbon.hc.dataserver.model.tmpl.pojo.TemplateStatView;
 import cho.carbon.hc.dataserver.model.tmpl.service.StatListTemplateService;
 import cho.carbon.hc.hydrocarbon.admin.controller.AdminConstants;
-import cn.sowell.copframe.dto.ajax.AjaxPageResponse;
-import cn.sowell.copframe.utils.CollectionUtils;
 
 @Controller
 @RequestMapping(AdminConstants.URI_TMPL + "/stat/vtmpl")

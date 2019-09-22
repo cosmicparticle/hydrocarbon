@@ -21,6 +21,14 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
 import cho.carbon.auth.pojo.AuthorityVO;
+import cho.carbon.hc.copframe.common.UserIdentifier;
+import cho.carbon.hc.copframe.dao.utils.UserUtils;
+import cho.carbon.hc.copframe.dto.ajax.AjaxPageResponse;
+import cho.carbon.hc.copframe.dto.ajax.JSONObjectResponse;
+import cho.carbon.hc.copframe.dto.ajax.JsonRequest;
+import cho.carbon.hc.copframe.dto.ajax.ResponseJSON;
+import cho.carbon.hc.copframe.dto.page.PageInfo;
+import cho.carbon.hc.copframe.utils.CollectionUtils;
 import cho.carbon.hc.dataserver.model.modules.service.ModulesService;
 import cho.carbon.hc.dataserver.model.statview.service.StatViewService;
 import cho.carbon.hc.dataserver.model.tmpl.param.StatModuleDetail;
@@ -38,14 +46,6 @@ import cho.carbon.hc.hydrocarbon.model.config.service.AuthorityService;
 import cho.carbon.hc.hydrocarbon.model.config.service.ConfigureService;
 import cho.carbon.hc.hydrocarbon.model.config.service.SideMenuService;
 import cho.carbon.hc.hydrocarbon.ws.HydrocarbonReloadService;
-import cn.sowell.copframe.common.UserIdentifier;
-import cn.sowell.copframe.dao.utils.UserUtils;
-import cn.sowell.copframe.dto.ajax.AjaxPageResponse;
-import cn.sowell.copframe.dto.ajax.JSONObjectResponse;
-import cn.sowell.copframe.dto.ajax.JsonRequest;
-import cn.sowell.copframe.dto.ajax.ResponseJSON;
-import cn.sowell.copframe.dto.page.PageInfo;
-import cn.sowell.copframe.utils.CollectionUtils;
 
 @Controller 
 @RequestMapping(AdminConstants.URI_CONFIG + "/sidemenu")

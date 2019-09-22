@@ -20,6 +20,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 
+import cho.carbon.hc.copframe.dao.utils.UserUtils;
+import cho.carbon.hc.copframe.dto.ajax.AjaxPageResponse;
+import cho.carbon.hc.copframe.dto.ajax.JSONObjectResponse;
+import cho.carbon.hc.copframe.dto.ajax.NoticeType;
+import cho.carbon.hc.copframe.dto.ajax.ResponseJSON;
+import cho.carbon.hc.copframe.dto.page.PageInfo;
+import cho.carbon.hc.copframe.utils.FormatUtils;
+import cho.carbon.hc.copframe.utils.TextUtils;
 import cho.carbon.hc.dataserver.model.abc.service.EntitiesQueryParameter;
 import cho.carbon.hc.dataserver.model.abc.service.EntityQueryParameter;
 import cho.carbon.hc.dataserver.model.abc.service.ModuleEntityService;
@@ -44,14 +52,6 @@ import cho.carbon.hc.hydrocarbon.common.RequestParameterMapComposite;
 import cho.carbon.hc.hydrocarbon.model.admin.pojo.ABCUser;
 import cho.carbon.hc.hydrocarbon.model.config.service.ConfigUserService;
 import cho.carbon.hc.hydrocarbon.model.modules.service.ExportService;
-import cn.sowell.copframe.dao.utils.UserUtils;
-import cn.sowell.copframe.dto.ajax.AjaxPageResponse;
-import cn.sowell.copframe.dto.ajax.JSONObjectResponse;
-import cn.sowell.copframe.dto.ajax.NoticeType;
-import cn.sowell.copframe.dto.ajax.ResponseJSON;
-import cn.sowell.copframe.dto.page.PageInfo;
-import cn.sowell.copframe.utils.FormatUtils;
-import cn.sowell.copframe.utils.TextUtils;
 
 @Controller
 @RequestMapping(AdminConstants.URI_CONFIG + "/user")

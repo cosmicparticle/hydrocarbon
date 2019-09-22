@@ -4,12 +4,12 @@ import java.util.Date;
 
 import javax.annotation.Resource;
 
+import cho.carbon.hc.copframe.dao.utils.NormalOperateDao;
 import cho.carbon.hc.dataserver.model.tmpl.strategy.NormalDaoSetUpdateStrategy;
 import cho.carbon.hc.dataserver.model.tmpl.strategy.TemplateUpdateStrategy;
 import cho.carbon.hc.hydrocarbon.model.modules.pojo.ModuleImportTemplate;
 import cho.carbon.hc.hydrocarbon.model.modules.pojo.ModuleImportTemplateField;
 import cho.carbon.hc.hydrocarbon.model.modules.service.ModulesImportService;
-import cn.sowell.copframe.dao.utils.NormalOperateDao;
 
 public class ModuleImportTemplateStrategy implements TemplateUpdateStrategy<ModuleImportTemplate>{
 

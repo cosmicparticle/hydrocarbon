@@ -19,7 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.MultipartResolver;
 
-import cn.sowell.copframe.spring.file.FileHaunt;
+import cho.carbon.hc.copframe.spring.file.FileHaunt;
 
 public class RequestParameterMapCompositeResolver implements HandlerMethodArgumentResolver{
 

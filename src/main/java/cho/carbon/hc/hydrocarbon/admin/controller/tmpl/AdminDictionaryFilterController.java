@@ -17,6 +17,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import cho.carbon.hc.copframe.dto.ajax.AjaxPageResponse;
+import cho.carbon.hc.copframe.utils.CollectionUtils;
+import cho.carbon.hc.copframe.utils.FormatUtils;
+import cho.carbon.hc.copframe.utils.TextUtils;
+import cho.carbon.hc.copframe.utils.date.FrameDateFormat;
 import cho.carbon.hc.dataserver.model.modules.pojo.ModuleMeta;
 import cho.carbon.hc.dataserver.model.modules.service.ModulesService;
 import cho.carbon.hc.dataserver.model.tmpl.pojo.TemplateDictionaryFilter;
@@ -25,11 +30,6 @@ import cho.carbon.hc.dataserver.model.tmpl.service.DictionaryFilterService;
 import cho.carbon.hc.hydrocarbon.admin.controller.AdminConstants;
 import cho.carbon.hc.hydrocarbon.common.choose.ChooseTablePage;
 import cho.carbon.hc.hydrocarbon.model.config.service.ConfigureService;
-import cn.sowell.copframe.dto.ajax.AjaxPageResponse;
-import cn.sowell.copframe.utils.CollectionUtils;
-import cn.sowell.copframe.utils.FormatUtils;
-import cn.sowell.copframe.utils.TextUtils;
-import cn.sowell.copframe.utils.date.FrameDateFormat;
 
 @Controller
 @RequestMapping(AdminConstants.URI_TMPL + "/dictfilter")

@@ -13,11 +13,11 @@ import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Order;
 import org.springframework.stereotype.Repository;
 
+import cho.carbon.hc.copframe.utils.CollectionUtils;
 import cho.carbon.hc.hydrocarbon.model.config.dao.ConfigureDao;
 import cho.carbon.hc.hydrocarbon.model.config.pojo.AuthencationConfig;
 import cho.carbon.hc.hydrocarbon.model.config.pojo.ConfigModule;
 import cho.carbon.hc.hydrocarbon.model.config.pojo.SystemConfig;
-import cn.sowell.copframe.utils.CollectionUtils;
 
 @Repository
 public class ConfigureDaoImpl implements ConfigureDao{

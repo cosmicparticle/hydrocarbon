@@ -15,15 +15,15 @@ import org.springframework.util.Assert;
 
 import cho.carbon.auth.pojo.UserInfo;
 import cho.carbon.auth.service.ServiceFactory;
+import cho.carbon.hc.copframe.common.UserIdentifier;
+import cho.carbon.hc.copframe.dao.utils.UserUtils;
+import cho.carbon.hc.copframe.utils.TextUtils;
 import cho.carbon.hc.dataserver.model.modules.bean.criteriaConveter.UserRelationExistCriteriaConverter.UserCodeSupplier;
 import cho.carbon.hc.entityResolver.UserCodeService;
 import cho.carbon.hc.hydrocarbon.common.UserWithToken;
 import cho.carbon.hc.hydrocarbon.model.admin.dao.AdminUserDao;
 import cho.carbon.hc.hydrocarbon.model.admin.pojo.ABCUser;
 import cho.carbon.hc.hydrocarbon.model.admin.service.AdminUserService;
-import cn.sowell.copframe.common.UserIdentifier;
-import cn.sowell.copframe.dao.utils.UserUtils;
-import cn.sowell.copframe.utils.TextUtils;
 
 @Service("adminUserService")
 public class AdminUserServiceImpl implements AdminUserService, UserCodeService, UserCodeSupplier{
