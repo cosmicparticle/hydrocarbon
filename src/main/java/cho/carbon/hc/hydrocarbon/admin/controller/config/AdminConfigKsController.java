@@ -63,8 +63,7 @@ public class AdminConfigKsController {
 	@Resource
 	ListTemplateService ltmplService;
 	
-	@Resource
-	StatListTemplateService statLtmplService;
+
 	
 	@Resource
 	DetailTemplateService dtmplService;
@@ -139,11 +138,10 @@ public class AdminConfigKsController {
 		List<Module> modules = configService.getEnabledModules();
 		Set<String> moduleNames = CollectionUtils.toSet(modules, Module::getName);
 		Map<String, List<TemplateListTemplate>> ltmplMap = ltmplService.queryByModuleNames(moduleNames);
-		//补充统计模块的list
-		Map<String, List<TemplateStatList>> statLtmplMap = statLtmplService.queryByModuleNames(moduleNames);
+
 		
 		Map<String, List<TemplateDetailTemplate>> dtmplMap = dtmplService.queryByModuleNames(moduleNames);
-		JSONArray jModules = toModulesJson(modules, ltmplMap,statLtmplMap, dtmplMap);
+		JSONArray jModules = toModulesJson(modules, ltmplMap, dtmplMap);
 		jRes.put("modules", jModules);
 		return jRes;
 	}
@@ -195,7 +193,7 @@ public class AdminConfigKsController {
 	
 	
 
-	private JSONArray toModulesJson(List<Module> modules, Map<String, List<TemplateListTemplate>> ltmplMap,Map<String, List<TemplateStatList>> statLtmplMap,
+	private JSONArray toModulesJson(List<Module> modules, Map<String, List<TemplateListTemplate>> ltmplMap,
 			Map<String, List<TemplateDetailTemplate>> dtmplMap) {
 		JSONArray jModules = new JSONArray();
 		for (Module module : modules) {
@@ -216,13 +214,13 @@ public class AdminConfigKsController {
 				}
 			}
 			
-			List<TemplateStatList> statltmpls = statLtmplMap.get(module.getName());
-			if(statltmpls != null) {
-				for (TemplateStatList ltmpl : statltmpls) {
-					JSONObject ltmplJson = toListTemplateJson(ltmpl);
-					jLtmpls.add(ltmplJson);
-				}
-			}
+//			List<TemplateStatList> statltmpls = statLtmplMap.get(module.getName());
+//			if(statltmpls != null) {
+//				for (TemplateStatList ltmpl : statltmpls) {
+//					JSONObject ltmplJson = toListTemplateJson(ltmpl);
+//					jLtmpls.add(ltmplJson);
+//				}
+//			}
 			
 			JSONArray jDtmpls = new JSONArray();
 			jModule.put("dtmpls", jDtmpls);

@@ -66,6 +66,7 @@
 											</div>
 										</div>
 									</div> 
+									<!-- 
 									<div class="row">
 										<div class="col-lg-6">
 											<div class="form-group"> 
@@ -83,6 +84,7 @@
 											</div>
 										</div>
 									</div> 
+									 -->
 								</div>
 							</div>
 						</form>
