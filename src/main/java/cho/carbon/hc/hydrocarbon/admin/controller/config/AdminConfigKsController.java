@@ -28,14 +28,19 @@ import cho.carbon.hc.copframe.utils.CollectionUtils;
 import cho.carbon.hc.copframe.utils.TextUtils;
 import cho.carbon.hc.dataserver.model.karuiserv.pojo.KaruiServ;
 import cho.carbon.hc.dataserver.model.karuiserv.service.KaruiServService;
+import cho.carbon.hc.dataserver.model.tmpl.manager.StatListTemplateManager;
 import cho.carbon.hc.dataserver.model.tmpl.pojo.TemplateDetailField;
 import cho.carbon.hc.dataserver.model.tmpl.pojo.TemplateDetailFieldGroup;
 import cho.carbon.hc.dataserver.model.tmpl.pojo.TemplateDetailTemplate;
 import cho.carbon.hc.dataserver.model.tmpl.pojo.TemplateListColumn;
 import cho.carbon.hc.dataserver.model.tmpl.pojo.TemplateListCriteria;
 import cho.carbon.hc.dataserver.model.tmpl.pojo.TemplateListTemplate;
+import cho.carbon.hc.dataserver.model.tmpl.pojo.TemplateStatColumn;
+import cho.carbon.hc.dataserver.model.tmpl.pojo.TemplateStatCriteria;
+import cho.carbon.hc.dataserver.model.tmpl.pojo.TemplateStatList;
 import cho.carbon.hc.dataserver.model.tmpl.service.DetailTemplateService;
 import cho.carbon.hc.dataserver.model.tmpl.service.ListTemplateService;
+import cho.carbon.hc.dataserver.model.tmpl.service.StatListTemplateService;
 import cho.carbon.hc.entityResolver.config.abst.Module;
 import cho.carbon.hc.hydrocarbon.admin.controller.AdminConstants;
 import cho.carbon.hc.hydrocarbon.model.api2.service.MetaJsonService;
@@ -57,6 +62,9 @@ public class AdminConfigKsController {
 	
 	@Resource
 	ListTemplateService ltmplService;
+	
+	@Resource
+	StatListTemplateService statLtmplService;
 	
 	@Resource
 	DetailTemplateService dtmplService;
@@ -131,8 +139,11 @@ public class AdminConfigKsController {
 		List<Module> modules = configService.getEnabledModules();
 		Set<String> moduleNames = CollectionUtils.toSet(modules, Module::getName);
 		Map<String, List<TemplateListTemplate>> ltmplMap = ltmplService.queryByModuleNames(moduleNames);
+		//补充统计模块的list
+		Map<String, List<TemplateStatList>> statLtmplMap = statLtmplService.queryByModuleNames(moduleNames);
+		
 		Map<String, List<TemplateDetailTemplate>> dtmplMap = dtmplService.queryByModuleNames(moduleNames);
-		JSONArray jModules = toModulesJson(modules, ltmplMap, dtmplMap);
+		JSONArray jModules = toModulesJson(modules, ltmplMap,statLtmplMap, dtmplMap);
 		jRes.put("modules", jModules);
 		return jRes;
 	}
@@ -184,7 +195,7 @@ public class AdminConfigKsController {
 	
 	
 
-	private JSONArray toModulesJson(List<Module> modules, Map<String, List<TemplateListTemplate>> ltmplMap,
+	private JSONArray toModulesJson(List<Module> modules, Map<String, List<TemplateListTemplate>> ltmplMap,Map<String, List<TemplateStatList>> statLtmplMap,
 			Map<String, List<TemplateDetailTemplate>> dtmplMap) {
 		JSONArray jModules = new JSONArray();
 		for (Module module : modules) {
@@ -200,6 +211,14 @@ public class AdminConfigKsController {
 			List<TemplateListTemplate> ltmpls = ltmplMap.get(module.getName());
 			if(ltmpls != null) {
 				for (TemplateListTemplate ltmpl : ltmpls) {
+					JSONObject ltmplJson = toListTemplateJson(ltmpl);
+					jLtmpls.add(ltmplJson);
+				}
+			}
+			
+			List<TemplateStatList> statltmpls = statLtmplMap.get(module.getName());
+			if(statltmpls != null) {
+				for (TemplateStatList ltmpl : statltmpls) {
 					JSONObject ltmplJson = toListTemplateJson(ltmpl);
 					jLtmpls.add(ltmplJson);
 				}
@@ -237,6 +256,38 @@ public class AdminConfigKsController {
 			}
 		}
 		for (TemplateListCriteria criteria : ltmpl.getCriterias()) {
+			if(criteria.getFieldAvailable()) {
+				JSONObject jCriteria = new JSONObject();
+				jCriterias.add(jCriteria);
+				jCriteria.put("id", criteria.getId());
+				jCriteria.put("title", criteria.getTitle());
+				jCriteria.put("fieldId", criteria.getFieldId());
+				jCriteria.put("inputType", criteria.getInputType());
+				jCriteria.put("defaultValue", criteria.getDefaultValue());
+				jCriteria.put("queryShow", criteria.getQueryShow());
+			}
+		}
+		return jLtmpl;
+	}
+	
+	private JSONObject toListTemplateJson(TemplateStatList ltmpl) {
+		JSONObject jLtmpl = new JSONObject();
+		jLtmpl.put("id", ltmpl.getId());
+		jLtmpl.put("title", ltmpl.getTitle());
+		JSONArray jColumns = new JSONArray();
+		jLtmpl.put("columns", jColumns);
+		JSONArray jCriterias = new JSONArray();
+		jLtmpl.put("criterias", jCriterias);
+		for (TemplateStatColumn column : ltmpl.getColumns()) {
+			if(column.getFieldAvailable()) {
+				JSONObject jColumn = new JSONObject();
+				jColumns.add(jColumn);
+				jColumn.put("id", column.getId());
+				jColumn.put("title", column.getTitle());
+				jColumn.put("fieldId", column.getFieldId());
+			}
+		}
+		for (TemplateStatCriteria criteria : ltmpl.getCriterias()) {
 			if(criteria.getFieldAvailable()) {
 				JSONObject jCriteria = new JSONObject();
 				jCriterias.add(jCriteria);

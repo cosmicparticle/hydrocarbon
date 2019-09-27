@@ -19,6 +19,8 @@ import cho.carbon.hc.copframe.utils.CollectionUtils;
 import cho.carbon.hc.dataserver.model.modules.pojo.ModuleMeta;
 import cho.carbon.hc.dataserver.model.modules.service.ModulesService;
 import cho.carbon.hc.dataserver.model.statview.service.StatViewService;
+import cho.carbon.hc.dataserver.model.tmpl.manager.DetailTemplateManager;
+import cho.carbon.hc.dataserver.model.tmpl.pojo.TemplateDetailTemplate;
 import cho.carbon.hc.dataserver.model.tmpl.pojo.TemplateStatList;
 import cho.carbon.hc.dataserver.model.tmpl.pojo.TemplateStatView;
 import cho.carbon.hc.dataserver.model.tmpl.service.StatListTemplateService;
@@ -37,6 +39,9 @@ public class AdminStatViewTemplateController {
 	
 	@Resource
 	StatListTemplateService lService;
+	
+	@Resource
+	DetailTemplateManager dManager;
 	
 	static Logger logger = Logger.getLogger(AdminStatViewTemplateController.class);
 	
@@ -69,9 +74,15 @@ public class AdminStatViewTemplateController {
 			ModuleMeta module = mService.getStatModule(vtmpl.getModule());
 			if(module != null) {
 				TemplateStatList statListTemplate = lService.getTemplate(vtmpl.getStatListTemplateId());
+				TemplateDetailTemplate statDetailTmplId=null;
+				if(vtmpl.getStatDetailTmplId()!=null) {
+					 statDetailTmplId = dManager.get(vtmpl.getStatDetailTmplId());
+				}
+				
 				model.addAttribute("module", module);
 				model.addAttribute("vtmpl", vtmpl);
 				model.addAttribute("statListTemplate", statListTemplate);
+				model.addAttribute("statDetailTmplId", statDetailTmplId);
 				return AdminConstants.JSP_TMPL_STATVIEW + "/stat_vtmpl_update.jsp";
 			}
 		}

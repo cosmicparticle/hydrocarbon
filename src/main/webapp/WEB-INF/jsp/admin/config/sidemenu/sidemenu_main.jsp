@@ -139,6 +139,7 @@
 											<span class="module-title">${module.title }</span>
 											<span class="level-operate">
 												<a title="列表模板" href="admin/tmpl/stat/ltmpl/list/${module.name }" class="tab" target="${module.name }_stat_ltmpl_list"><i class="iconfont icon-tools"></i></a>
+												<a title="详情模板" href="admin/tmpl/dtmpl/list/${module.name }" class="tab" target="${module.name }_dtmpl_list"><i class="iconfont icon-detail"></i></a>
 												<a title="统计视图模板" href="admin/tmpl/stat/vtmpl/list/${module.name }" class="tab" target="${module.name }_stat_tmpl_group_list"><i class="iconfont icon-group"></i></a>
 											</span>
 										</div>

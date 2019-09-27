@@ -66,6 +66,23 @@
 											</div>
 										</div>
 									</div> 
+									<div class="row">
+										<div class="col-lg-6">
+											<div class="form-group"> 
+												<label class="col-lg-4 control-label" for="name">详情模板</label>
+												<div class="col-lg-8">
+													<a 
+														class="form-control"
+														href="admin/tmpl/dtmpl/choose/${module.name }" 
+														title="选择详情模板"
+														choose-key="choose-dtmpl" 
+														crn-choose-dtmpl="title" 
+														>${statDetailTmplId != null? statDetailTmplId.title: '选择详情模板' }</a>
+													<input type="hidden" crn-choose-dtmpl="id" name="statDetailTmplId" value="${vtmpl.statDetailTmplId }" />
+												</div>
+											</div>
+										</div>
+									</div> 
 								</div>
 							</div>
 						</form>
