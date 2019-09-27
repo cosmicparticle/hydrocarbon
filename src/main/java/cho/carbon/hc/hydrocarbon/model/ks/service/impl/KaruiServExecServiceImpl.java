@@ -36,8 +36,10 @@ import cho.carbon.hc.entityResolver.CEntityPropertyParser;
 import cho.carbon.hc.entityResolver.EntityConstants;
 import cho.carbon.hc.entityResolver.ModuleEntityPropertyParser;
 import cho.carbon.hc.hydrocarbon.common.ApiUser;
+import cho.carbon.hc.hydrocarbon.common.EntityFusionRunner;
 import cho.carbon.hc.hydrocarbon.common.EntityQueryPoolUtils;
 import cho.carbon.hc.hydrocarbon.model.ks.service.KaruiServExecService;
+import cho.carbon.panel.IntegrationMsg;
 
 @Service
 public class KaruiServExecServiceImpl implements KaruiServExecService {
@@ -124,10 +126,10 @@ public class KaruiServExecServiceImpl implements KaruiServExecService {
 					}
 				}
 			}
-			String code = entityService.mergeEntity(param,
+			IntegrationMsg msg = entityService.mergeEntity(param,
 					ks.getRequestJsonMetaResolver().resolve(matcher.getParameters().get("JSONENTITY")));
-
-			if (code != null) {// 执行查询
+			String code = msg.getCode();
+			if (msg.success()) {// 执行查询
 				if (ks.getResponseMeta() == null) {// 若果没有定义需要返回的entity信息，直接返回 code
 					JSONObject jResult = new JSONObject();
 					jResult.put("code", code);
@@ -146,6 +148,12 @@ public class KaruiServExecServiceImpl implements KaruiServExecService {
 					}
 				}
 				return ks.getResponseJsonMetaResolver().resolve(entity);
+			} else {
+				JSONObject jResult = new JSONObject();
+				jResult.put("code", code);
+				jResult.put("refuseMsg", EntityFusionRunner.getFuseMsgStr(msg));
+				jResult.put("refuseMsg", EntityFusionRunner.getErrorMsgStr(msg));
+				return jResult;
 			}
 		}
 		return null;

@@ -1,6 +1,7 @@
 package cho.carbon.hc.hydrocarbon.admin.controller.modules;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
@@ -83,6 +84,7 @@ import cho.carbon.hc.entityResolver.impl.EntityPropertyParser;
 import cho.carbon.hc.entityResolver.impl.RelSelectionEntityPropertyParser;
 import cho.carbon.hc.hydrocarbon.SessionKey;
 import cho.carbon.hc.hydrocarbon.admin.controller.AdminConstants;
+import cho.carbon.hc.hydrocarbon.common.EntityFusionRunner;
 import cho.carbon.hc.hydrocarbon.common.EntityQueryPoolUtils;
 import cho.carbon.hc.hydrocarbon.common.RequestParameterMapComposite;
 import cho.carbon.hc.hydrocarbon.model.config.pojo.SideMenuLevel2Menu;
@@ -90,6 +92,8 @@ import cho.carbon.hc.hydrocarbon.model.config.service.AuthorityService;
 import cho.carbon.hc.hydrocarbon.model.config.service.NonAuthorityException;
 import cho.carbon.hc.hydrocarbon.model.config.service.SideMenuService;
 import cho.carbon.hc.hydrocarbon.model.modules.service.ExportService;
+import cho.carbon.message.Message;
+import cho.carbon.panel.IntegrationMsg;
 
 @Controller
 @RequestMapping(AdminConstants.URI_MODULES + "/curd")
@@ -189,10 +193,10 @@ public class AdminModulesController {
 		model.addAttribute("hidenCriteriaDesc", hidenCriteriaDesc);
 		model.addAttribute("menu", menu);
 		model.addAttribute("criteria", view.getCriteria());
-//		Map<String,String> map=view.getParsers().iterator().next().getSmap();
-//		String a=map.get("领用部门");
-//		String b=view.getParsers().iterator().next().getSmap().get("名称");
-//		a=a+b;
+		// Map<String,String> map=view.getParsers().iterator().next().getSmap();
+		// String a=map.get("领用部门");
+		// String b=view.getParsers().iterator().next().getSmap().get("名称");
+		// a=a+b;
 		model.addAttribute("moduleWritable", mService.getModuleEntityWritable(menu.getTemplateModule()));
 
 		return AdminConstants.JSP_MODULES + "/modules_list_tmpl.jsp";
@@ -320,10 +324,10 @@ public class AdminModulesController {
 		model.addAttribute("menu", menu);
 		return toDetail(code, tmplGroup, versionCode, model);
 	}
-	
-	
-	@RequestMapping("/detail/{menuId}/{groupId}/{code}")//此处后续要增加权限控制，因为会导致一个菜单权限查询所有的实体详情
-	public String detail(@PathVariable String code, @PathVariable Long menuId, @PathVariable Long groupId, String versionCode, Model model) {
+
+	@RequestMapping("/detail/{menuId}/{groupId}/{code}") // 此处后续要增加权限控制，因为会导致一个菜单权限查询所有的实体详情
+	public String detail(@PathVariable String code, @PathVariable Long menuId, @PathVariable Long groupId,
+			String versionCode, Model model) {
 		SideMenuLevel2Menu menu = authService.validateL2MenuAccessable(menuId);
 		TemplateGroup tmplGroup = tmplGroupService.getTemplate(groupId);
 		model.addAttribute("menu", menu);
@@ -506,14 +510,9 @@ public class AdminModulesController {
 			TemplateGroup tmplGroup = tmplGroupService.getTemplate(tmplGroupId);
 			param.setArrayItemCriterias(
 					arrayItemFilterService.getArrayItemFilterCriterias(tmplGroup.getDetailTemplateId(), user));
-			if (Boolean.TRUE.equals(fuseMode)) {
-				entityService.fuseEntity(param, entityMap);
-				// mService.fuseEntity(moduleName, entityMap, user);
-			} else {
-				entityService.mergeEntity(param, entityMap);
-				// mService.mergeEntity(moduleName, entityMap, user);
-			}
-			return AjaxPageResponse.CLOSE_AND_REFRESH_PAGE("保存成功", "entity_list_" + menuId);
+			
+			return EntityFusionRunner.running(fuseMode, entityMap, param,entityService,menuId);
+			
 		} catch (Exception e) {
 			logger.error("保存时发生错误", e);
 			return AjaxPageResponse.FAILD("保存失败");
@@ -545,12 +544,7 @@ public class AdminModulesController {
 			TemplateGroup tmplGroup = tmplGroupService.getTemplate(nodeTemplate.getTemplateGroupId());
 			param.setArrayItemCriterias(
 					arrayItemFilterService.getArrayItemFilterCriterias(tmplGroup.getDetailTemplateId(), user));
-			if (Boolean.TRUE.equals(fuseMode)) {
-				entityService.fuseEntity(param, entityMap);
-			} else {
-				entityService.mergeEntity(param, entityMap);
-			}
-			return AjaxPageResponse.CLOSE_AND_REFRESH_PAGE("保存成功", "entity_list_" + menuId);
+			return EntityFusionRunner.running(fuseMode, entityMap, param,entityService,menuId);
 		} catch (Exception e) {
 			logger.error("保存时发生错误", e);
 			return AjaxPageResponse.FAILD("保存失败");
@@ -694,8 +688,8 @@ public class AdminModulesController {
 			tmplGroup = tmplGroupService.getTemplate(stmplId);
 			ltmpl = ltmplService.getTemplate(tmplGroup.getListTemplateId());
 			moduleName = tmplGroup.getModule();
-		}else {
-			moduleName=stmpl.getModule();//主要为了处理跨级点选
+		} else {
+			moduleName = stmpl.getModule();// 主要为了处理跨级点选
 		}
 
 		// 获得查询池
@@ -852,25 +846,18 @@ public class AdminModulesController {
 		try {
 			entityMap.remove(AdminConstants.KEY_FUSE_MODE);
 			UserIdentifier user = UserUtils.getCurrentUser();
-			String entityCode = null;
+			
 			EntityQueryParameter param = new EntityQueryParameter(moduleName, user);
-			if (Boolean.TRUE.equals(fuseMode)) {
-				entityCode = entityService.fuseEntity(param, entityMap);
-			} else {
-				entityCode = entityService.mergeEntity(param, entityMap);
-			}
-			if (TextUtils.hasText(entityCode)) {
-				jRes.put("entityCode", entityCode);
-				jRes.setStatus("suc");
-			} else {
-				jRes.setStatus("unknow-entity-code");
-			}
+			
+			EntityFusionRunner.running(fuseMode, jRes, entityMap, param,entityService);
 		} catch (Exception e) {
 			logger.error("保存时发生错误", e);
 			jRes.setStatus("error");
 		}
 		return jRes;
 	}
+
+	
 
 	@ResponseBody
 	@RequestMapping("/load_entities/{menuId}/{stmplId}")

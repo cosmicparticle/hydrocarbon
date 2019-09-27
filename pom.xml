@@ -1,16 +1,17 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-  	<groupId>cho.carbon.hc</groupId>
-  	<artifactId>hydrocarbon</artifactId>
+	<groupId>cho.carbon.hc</groupId>
+	<artifactId>hydrocarbon</artifactId>
 	<packaging>war</packaging>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>hydrocarbon Maven Webapp</name>
 	<url>http://maven.apache.org</url>
-	
+
 	<properties>
 		<version.kie>7.10.0.Final</version.kie>
-		<version.carbon-core>0.43</version.carbon-core>
+		<version.carbon-core>0.54</version.carbon-core>
 		<version.dataserver>1.48</version.dataserver>
 		<version.cpfweb>0.2.14</version.cpfweb>
 		<version.cpfutils>0.3.24</version.cpfutils>
@@ -18,26 +19,24 @@
 		<version.abcbizz>2.1.15</version.abcbizz>
 		<version.authbiz>0.0.21</version.authbiz>
 		<version.jgdj>1.2</version.jgdj>
-	<!-- 	<version.eln1>0.0.2</version.eln1> -->
+		<version.elnV1>0.7</version.elnV1>
 		<version.xfjd>0.1.83</version.xfjd>
-		<cxf.version>3.2.2</cxf.version> 
+		<cxf.version>3.2.2</cxf.version>
 	</properties>
-	 
-	  
+
+
 	<dependencies>
-<!--
-		<dependency>
-			<groupId>cho.carbon.biz</groupId>
-			<artifactId>eln1</artifactId>
-			<version>${version.eln1}</version>
-			<exclusions>
-				<exclusion>
-					<groupId>cho.carbon</groupId>
-					<artifactId>carbon-core</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-		  -->
+		<dependency> 
+		<groupId>cho.carbon.biz</groupId> 
+		<artifactId>elnV1</artifactId> 
+			<version>${version.elnV1}</version> 
+			<exclusions> 
+			<exclusion> 
+			<groupId>cho.carbon</groupId> 
+			<artifactId>carbon-core</artifactId>
+			 </exclusion>
+			  </exclusions>
+			   </dependency>
 		<dependency>
 			<groupId>cho.carbon.hc.copframe</groupId>
 			<artifactId>cpf-web</artifactId>
@@ -89,41 +88,24 @@
 			<artifactId>carbon-core</artifactId>
 			<version>${version.carbon-core}</version>
 		</dependency>
-		
-		
-<!-- 		<dependency>
-			<groupId>com.abc.biz</groupId>
-			<artifactId>authbiz</artifactId>
-			<version>${version.authbiz}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.zhsq.biz</groupId>
-			<artifactId>xfjd</artifactId>
-			<version>${version.xfjd}</version>
-		</dependency> -->
-			<!--	
-		
- <dependency>
-			<groupId>com.abc.biz</groupId>
-			<artifactId>jgdj</artifactId>
-			<version>${version.jgdj}</version>
-		</dependency>
-		
-		 <dependency>
-			<groupId>com.abc</groupId>
-			<artifactId>bizz</artifactId>
-			<version>${version.abcbizz}</version>
-		</dependency> -->
-	
+
+
+		<!-- <dependency> <groupId>com.abc.biz</groupId> <artifactId>authbiz</artifactId> 
+			<version>${version.authbiz}</version> </dependency> <dependency> <groupId>com.zhsq.biz</groupId> 
+			<artifactId>xfjd</artifactId> <version>${version.xfjd}</version> </dependency> -->
+		<!-- <dependency> <groupId>com.abc.biz</groupId> <artifactId>jgdj</artifactId> 
+			<version>${version.jgdj}</version> </dependency> <dependency> <groupId>com.abc</groupId> 
+			<artifactId>bizz</artifactId> <version>${version.abcbizz}</version> </dependency> -->
+
 		<!-- https://mvnrepository.com/artifact/org.springframework.data/spring-data-redis -->
 		<!-- https://mvnrepository.com/artifact/javax.servlet.jsp/javax.servlet.jsp-api -->
-	<dependency>
-		<groupId>javax.servlet.jsp</groupId>
-		<artifactId>javax.servlet.jsp-api</artifactId>
-		<version>2.3.1</version>
-		<scope>provided</scope>
-	</dependency>
-			
+		<dependency>
+			<groupId>javax.servlet.jsp</groupId>
+			<artifactId>javax.servlet.jsp-api</artifactId>
+			<version>2.3.1</version>
+			<scope>provided</scope>
+		</dependency>
+
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
@@ -196,12 +178,12 @@
 			<version>${version.kie}</version>
 		</dependency>
 		<dependency>
-		    <groupId>org.jbpm</groupId>
-		    <artifactId>jbpm-bpmn2</artifactId>
-		    <version>${version.kie}</version>
+			<groupId>org.jbpm</groupId>
+			<artifactId>jbpm-bpmn2</artifactId>
+			<version>${version.kie}</version>
 		</dependency>
 		<!-- kie end -->
-		
+
 		<!-- CXF start -->
 		<dependency>
 			<groupId>org.apache.cxf</groupId>
@@ -239,12 +221,12 @@
 			<artifactId>jaxen</artifactId>
 			<version>1.1.6</version>
 		</dependency>
-		
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-core</artifactId>
-            <version>2.7</version>
-        </dependency>
+
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-core</artifactId>
+			<version>2.7</version>
+		</dependency>
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
@@ -256,10 +238,10 @@
 			<version>2.4.2</version>
 		</dependency>
 		<dependency>
-				<groupId>org.lz4</groupId>
-				<artifactId>lz4-java</artifactId>
-				<version>1.4.1</version>
-			</dependency>
+			<groupId>org.lz4</groupId>
+			<artifactId>lz4-java</artifactId>
+			<version>1.4.1</version>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.data</groupId>
 			<artifactId>spring-data-redis</artifactId>
@@ -278,10 +260,10 @@
 	</dependencies>
 	<repositories>
 		<repository>
-	        <id>rdc-releases</id>
-	        <name>rdc-releases</name>
-	        <url>https://repo.rdc.aliyun.com/repository/78687-release-z5GPTo/</url>
-	    </repository>
+			<id>rdc-releases</id>
+			<name>rdc-releases</name>
+			<url>https://repo.rdc.aliyun.com/repository/105761-release-56eS37/</url>
+		</repository>
 	</repositories>
 	<build>
 		<finalName>hydrocarbon</finalName>
@@ -295,8 +277,15 @@
 					<target>1.8</target>
 					<encoding>UTF-8</encoding>
 				</configuration>
-			</plugin> 
+			</plugin>
 		</plugins>
-		
+
 	</build>
+	<distributionManagement>
+        <repository>
+	        <id>rdc-releases</id>
+	        <url>https://repo.rdc.aliyun.com/repository/105761-release-56eS37/</url>
+	    </repository>
+    </distributionManagement>
+
 </project>
