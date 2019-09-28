@@ -12,10 +12,10 @@
 	<properties>
 		<version.kie>7.10.0.Final</version.kie>
 		<version.carbon-core>0.54</version.carbon-core>
-		<version.dataserver>1.48</version.dataserver>
-		<version.cpfweb>0.2.14</version.cpfweb>
-		<version.cpfutils>0.3.24</version.cpfutils>
-		<version.cpfspring>0.3.21</version.cpfspring>
+		<version.dataserver>1.49</version.dataserver>
+		<version.cpfweb>1.0</version.cpfweb>
+		<version.cpfutils>1.0</version.cpfutils>
+		<version.cpfspring>1.0</version.cpfspring>
 		<version.abcbizz>2.1.15</version.abcbizz>
 		<version.authbiz>0.0.21</version.authbiz>
 		<version.jgdj>1.2</version.jgdj>

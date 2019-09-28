@@ -4,7 +4,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv=X-UA-Compatible content="IE=edge,chrome=1">
 
-<link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_546680_8578e8gyp3a.css">
+<link rel="stylesheet" type="text/css" href="media/common/plugins/iconfont/iconfont-common-temp.css">
+<link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_1439435_zq5t438umms.css">
 
 <!--Basic Styles-->
 <!-- <link href="media/admin/plugins/typeahead/dist/examples.css" rel="stylesheet" /> -->
