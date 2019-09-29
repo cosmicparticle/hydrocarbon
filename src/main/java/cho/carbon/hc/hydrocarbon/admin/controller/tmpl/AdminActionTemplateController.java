@@ -174,6 +174,7 @@ public class AdminActionTemplateController {
 												if(jField != null) {
 													TemplateActionArrayEntityField eField = new TemplateActionArrayEntityField();
 													eField.setId(jField.getLong("id"));
+													eField.setFieldId(field.getFieldId());
 													eField.setTmplFieldId(field.getId());
 													eField.setActionArrayEntityId(entity.getId());
 													eField.setValue(jField.getString("value"));
