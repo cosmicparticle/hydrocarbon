@@ -6,7 +6,7 @@
 <c:set var="ltmpl" value="${view.selectionTemplate }" />
 <div id="selections-${RES_STAMP}" class="detail modules-selection">
 	<div class="page-body">
-		<form class="form-inline"  action="admin/tmpl/atmpl/open_selection/${stmpl.id}">
+		<form class="form-inline"  action="admin/config/user/open_selection/${stmpl.id}">
 			<input type="hidden" id="tmplId" name="tmplId" value="${stmpl.id }" />
 			<c:if test="${not empty stmpl.criterias }">
 				<c:forEach var="criteriaItem" items="${stmpl.criterias }">

@@ -98,6 +98,7 @@
 
 		ModulesEntityList.init({
 			$page : $page,
+			type : '${type}',
 			menuId : '${menu.id}',
 			moduleName : '${moduleName}',
 			queryKey : '${query.key}',

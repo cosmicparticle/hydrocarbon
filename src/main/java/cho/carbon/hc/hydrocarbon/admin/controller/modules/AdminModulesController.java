@@ -1,7 +1,6 @@
 package cho.carbon.hc.hydrocarbon.admin.controller.modules;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
@@ -80,7 +79,6 @@ import cho.carbon.hc.entityResolver.FusionContextConfig;
 import cho.carbon.hc.entityResolver.FusionContextConfigFactory;
 import cho.carbon.hc.entityResolver.ModuleEntityPropertyParser;
 import cho.carbon.hc.entityResolver.impl.ABCNodeProxy;
-import cho.carbon.hc.entityResolver.impl.EntityPropertyParser;
 import cho.carbon.hc.entityResolver.impl.RelSelectionEntityPropertyParser;
 import cho.carbon.hc.hydrocarbon.SessionKey;
 import cho.carbon.hc.hydrocarbon.admin.controller.AdminConstants;
@@ -92,8 +90,6 @@ import cho.carbon.hc.hydrocarbon.model.config.service.AuthorityService;
 import cho.carbon.hc.hydrocarbon.model.config.service.NonAuthorityException;
 import cho.carbon.hc.hydrocarbon.model.config.service.SideMenuService;
 import cho.carbon.hc.hydrocarbon.model.modules.service.ExportService;
-import cho.carbon.message.Message;
-import cho.carbon.panel.IntegrationMsg;
 
 @Controller
 @RequestMapping(AdminConstants.URI_MODULES + "/curd")
@@ -677,6 +673,9 @@ public class AdminModulesController {
 		return aNodeRelationSelection(nodeTemplate.getModuleName(), stmplId, session, exists, pageInfo, model, request);
 	}
 
+	/**
+	 * 操作的地方也有类似选择要改
+	 */
 	private String aNodeRelationSelection(String pmoduleName, Long stmplId, HttpSession session, String exists,
 			PageInfo pageInfo, Model model, HttpServletRequest request) {
 		String moduleName = pmoduleName;
@@ -684,7 +683,7 @@ public class AdminModulesController {
 		TemplateListTemplate ltmpl = null;
 		TemplateSelectionTemplate stmpl = stmplService.getTemplate(stmplId);
 
-		if (stmpl == null) {// 说明stmplId 对应的是 select temp。有可能是 temp goroup
+		if (stmpl == null) {// 说明stmplId 对应的不是 select temp。有可能是 temp group
 			tmplGroup = tmplGroupService.getTemplate(stmplId);
 			ltmpl = ltmplService.getTemplate(tmplGroup.getListTemplateId());
 			moduleName = tmplGroup.getModule();
@@ -721,6 +720,7 @@ public class AdminModulesController {
 		pageInfo.setCount(query.getCount());
 		model.addAttribute("pageInfo", pageInfo);
 		return AdminConstants.JSP_MODULES + "/modules_rel_selection.jsp";
+		
 	}
 
 	/*

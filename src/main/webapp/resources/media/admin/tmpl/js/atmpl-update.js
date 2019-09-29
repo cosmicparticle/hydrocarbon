@@ -289,7 +289,7 @@ define(function(require, exports, module){
 										}
 									});
 									
-									require('dialog').openDialog('admin/tmpl/atmpl/open_selection/' + stmplId, 
+									require('dialog').openDialog('admin/tmpl/atmpl/rel_selection/' + stmplId, 
 											undefined, undefined, {
 										reqParam	: {
 											exists	: existCodes.join()

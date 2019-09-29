@@ -50,7 +50,7 @@ define(function(require, exports, module){
 					require('modules/js/modules-rel-selection').init({
 						$page		: $page,
 						uriData		: {
-							type		: 'entity',
+							type		: param.type?param.type:'entity',
 							menuId		: param.menuId,
 							stmplId		: param.stmpl.id
 						}
