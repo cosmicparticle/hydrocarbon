@@ -31,7 +31,12 @@ import cho.carbon.hc.dataserver.model.karuiserv.service.KaruiServService;
 import cho.carbon.hc.dataserver.model.modules.service.view.EntityQuery;
 import cho.carbon.hc.dataserver.model.modules.service.view.EntityQueryPool;
 import cho.carbon.hc.dataserver.model.modules.service.view.PagedEntityList;
+import cho.carbon.hc.dataserver.model.tmpl.pojo.ArrayEntityProxy;
+import cho.carbon.hc.dataserver.model.tmpl.pojo.TemplateActionTemplate;
+import cho.carbon.hc.dataserver.model.tmpl.pojo.TemplateGroupAction;
+import cho.carbon.hc.dataserver.model.tmpl.service.ActionTemplateService;
 import cho.carbon.hc.dataserver.model.tmpl.service.ArrayItemFilterService;
+import cho.carbon.hc.dataserver.model.tmpl.service.TemplateGroupService;
 import cho.carbon.hc.entityResolver.CEntityPropertyParser;
 import cho.carbon.hc.entityResolver.EntityConstants;
 import cho.carbon.hc.entityResolver.ModuleEntityPropertyParser;
@@ -56,6 +61,12 @@ public class KaruiServExecServiceImpl implements KaruiServExecService {
 	ArrayItemFilterService arrayItemFilterService;
 
 	AntPathMatcher antPathMatcher = new AntPathMatcher();
+	
+	@Resource
+	TemplateGroupService tmplGroupService;
+	
+	@Resource
+	ActionTemplateService atmplService;
 
 	@Override
 	public KaruiServMatcher match(String path, Map<String, String> parameters, String prefix) {
@@ -126,8 +137,20 @@ public class KaruiServExecServiceImpl implements KaruiServExecService {
 					}
 				}
 			}
-			IntegrationMsg msg = entityService.mergeEntity(param,
-					ks.getRequestJsonMetaResolver().resolve(matcher.getParameters().get("JSONENTITY")));
+
+			Map<String, Object> entityMap = ks.getRequestJsonMetaResolver()
+					.resolve(matcher.getParameters().get("JSONENTITY"));
+			
+			Long actionId=ks.getActionTemplateId();
+			
+			if (actionId != null) {
+				ArrayEntityProxy.setLocalUser(user);
+				TemplateActionTemplate atmpl = ks.getActionTemplate();
+//				validateGroupAction(groupAction, menu, "");
+				entityMap = atmplService.coverActionFields(atmpl, entityMap);
+			}
+			IntegrationMsg msg = entityService.mergeEntity(param, entityMap);
+
 			String code = msg.getCode();
 			if (msg.success()) {// 执行查询
 				if (ks.getResponseMeta() == null) {// 若果没有定义需要返回的entity信息，直接返回 code

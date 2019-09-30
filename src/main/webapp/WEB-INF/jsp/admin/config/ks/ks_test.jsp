@@ -33,7 +33,7 @@
 					</div>
 				</div>
 				
-				<div class="widget">
+				<div class="widget" on-prepare="requestparam-widget" >
 					<div class="widget-header">
 						<span class="widget-caption">请求参数</span>
 					</div>
@@ -79,7 +79,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="row">
+						<div class="row" on-prepare="requestparam-body-widget" >
 							<div class="form-group col-lg-12">
 								<label class="col-lg-12">请求参数体</label>
 								<div class="col-lg-12">
@@ -90,7 +90,7 @@
 					</div>
 				</div>
 				
-				<div class="widget">
+				<div class="widget" on-prepare="requestpost-widget">
 					<div class="widget-header">
 						<span class="widget-caption">提交实体数据</span>
 					</div>

@@ -28,18 +28,22 @@
 						<div class="row">
 							<div class="form-group col-lg-6">
 								<label class="control-label">轻服务类型</label>
-								<select class="form-control" on-prepare="type ; originKs:type" on-change="changeType"></select>
+								<select ${ksId!=null ? "disabled" :""} class="form-control" on-prepare="type ; originKs:type" on-change="changeType"></select>
 							</div>
 							<div class="form-group col-lg-6">
 								<label class="control-label">选择模块</label>
-								<select class="form-control" on-prepare="module ; originKs,modules:originKs.module" on-change="changeModule">
+								<select  class="form-control" on-prepare="module ; originKs,modules:originKs.module" on-change="changeModule">
 								</select>
 							</div>
 						</div>
 						<div class="row">
-							<div class="form-group col-lg-6">
+							<div class="form-group col-lg-6 ltmpl">
 								<label class="control-label">列表模板</label>
 								<select class="form-control cpf-select2"  on-prepare="ltmpl ; originKs,modules:originKs.listTemplateId" on-change="changeLtmpl"></select>
+							</div>
+							<div class="form-group col-lg-6 atmpl">
+								<label class="control-label">操作模板</label>
+								<select class="form-control cpf-select2"  on-prepare="atmpl ; originKs,modules:originKs.actionTemplateId" on-change="changeAtmpl"></select>
 							</div>
 							<div class="form-group col-lg-6">
 								<label class="control-label">详情模板</label>

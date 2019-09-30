@@ -61,6 +61,12 @@ public class AdminUserServiceImpl implements AdminUserService, UserCodeService, 
 	}
 	
 	@Override
+	public UserIdentifier getUser() {
+		UserIdentifier user = UserUtils.getCurrentUser();
+		return user;
+	}
+	
+
 	public String getUserCode() {
 		UserIdentifier user = UserUtils.getCurrentUser();
 		if(user != null) {
@@ -69,8 +75,7 @@ public class AdminUserServiceImpl implements AdminUserService, UserCodeService, 
 			return threadUserCode.get();
 		}
 	}
-
-
+	
 	@Override
 	public String renderToken(String domain, String username, String password) {
 		if(!username.isEmpty() && !password.isEmpty()) {

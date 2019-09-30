@@ -25,6 +25,7 @@ define(function(require, exports, module){
 			modules			: null,
 			selectedModule	: null,
 			selectedLtmpl	: null,
+			selectedAtmpl	: null,
 			selectedDtmpl	: null,
 			initDtmplSetted	: false,
 			originKs		: null,
@@ -41,8 +42,9 @@ define(function(require, exports, module){
 		
 		context
 			.bind('modules', [renderModules, renderOriginKs])
-			.bind('selectedModule', [renderLtmpls, renderDtmpls])
+			.bind('selectedModule', [renderLtmpls, renderAtmpls, renderDtmpls])
 			.bind('selectedLtmpl', afterSelectLtmpl)
+			.bind('selectedAtmpl', afterSelectAtmpl)
 			.bind('selectedDtmpl', afterSelectDtmpl)
 			.bind('originKs', [renderOriginKs])
 			.bind('tmplMap', [renderOriginKs])
@@ -139,6 +141,19 @@ define(function(require, exports, module){
 		}
 		
 		/**
+		 * 根据已经选择的模块渲染操作模板选项
+		 */
+		function renderAtmpls(){
+			var selectedModule = context.getStatus('selectedModule');
+			if(selectedModule){
+				var atmpls = selectedModule.atmpls;
+				var selectedAtmpl = context.getStatus('selectedAtmpl') || {};
+				var $atmpl = context.getDom('atmpl'); 
+				initSelect2($atmpl, convertNormalOptions(atmpls || []), selectedAtmpl.id || '');
+			}
+		}
+		
+		/**
 		 * 根据已经选择的模块渲染详情模板选项
 		 */
 		function renderDtmpls(){
@@ -158,6 +173,10 @@ define(function(require, exports, module){
 			}else{
 				$btnAddCriteria.attr('disabled', 'disabled');
 			}
+		}
+		
+		function afterSelectAtmpl(){
+			
 		}
 		
 		function afterSelectDtmpl(){
@@ -281,6 +300,7 @@ define(function(require, exports, module){
 					type			: context.getDom('type').val(),
 					module			: context.getDom('module').val(),
 					detailTemplateId: context.getDom('dtmpl').val(),
+					actionTemplateId: context.getDom('atmpl').val(),
 					listTemplateId	: context.getDom('ltmpl').val(),
 					responseMeta	: JSON.stringify(context.getStatus('resSource')),
 					requestPostMeta	: JSON.stringify(context.getStatus('postSource')),
@@ -343,12 +363,17 @@ define(function(require, exports, module){
 		function setKsType(){
 			var $this=$(this);
 			var type = context.getStatus('ksType');
+			
 			if(type === 'multi-query' || type === 'single-query'){
 				$this["0"].domMap["post-tree-view"].closest(".requestpost").addClass("hidden");
 				$this["0"].domMap["post-tree-view"].closest(".requestpost").prev(".requestparam").removeClass("hidden");
+				$this["0"].domMap["atmpl"].closest(".atmpl").addClass("hidden");
+				$this["0"].domMap["ltmpl"].closest(".ltmpl").removeClass("hidden");
 			}else{
 				$this["0"].domMap["post-tree-view"].closest(".requestpost").removeClass("hidden");
 				$this["0"].domMap["post-tree-view"].closest(".requestpost").prev(".requestparam").addClass("hidden");
+				$this["0"].domMap["atmpl"].closest(".atmpl").removeClass("hidden");
+				$this["0"].domMap["ltmpl"].closest(".ltmpl").addClass("hidden");
 			}
 		}
 		
@@ -383,6 +408,20 @@ define(function(require, exports, module){
 						var originKs = context.getStatus('originKs');
 						if(originKs && originKs.listTemplateId == this.value){
 							context.setStatus('initLtmplSetted', true);
+						}
+					}
+				},
+				changeAtmpl	: function(){
+					var option = $(this).select2('data')[0];
+					if(option && option.data){
+						context.setStatus('selectedAtmpl', option.data);
+					}else{
+						context.setStatus('selectedAtmpl', null);
+					}
+					if(!context.getStatus('initAtmplSetted')){
+						var originKs = context.getStatus('originKs');
+						if(originKs && originKs.actionTemplateId == this.value){
+							context.setStatus('initAtmplSetted', true);
 						}
 					}
 				},

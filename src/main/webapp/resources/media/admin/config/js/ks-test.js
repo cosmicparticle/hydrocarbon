@@ -66,6 +66,16 @@ define(function(require, exports, module){
 				if(ks.type === 'multi-query'){
 					context.getDom('page-widge').show();
 				}
+				if(ks.type === 'multi-query' || ks.type ==='single-query' ){
+					context.getDom('requestparam-widget').show();
+					context.getDom('requestparam-body-widget').show();
+					context.getDom('requestpost-widget').hide();
+				}else{
+					context.getDom('requestparam-widget').hide();
+					context.getDom('requestparam-body-widget').hide();
+					context.getDom('requestpost-widget').show();
+				}
+				
 				if(tmplMap){
 					tmplMap['ks-criterias'].replaceIn($page, {ks}, {
 						//修改参数表单时的回调
