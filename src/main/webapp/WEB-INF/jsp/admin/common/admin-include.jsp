@@ -5,7 +5,7 @@
 <meta http-equiv=X-UA-Compatible content="IE=edge,chrome=1">
 
 <link rel="stylesheet" type="text/css" href="media/common/plugins/iconfont/iconfont-common-temp.css">
-<link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_1439435_zq5t438umms.css">
+<link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_1439435_n0edakynpds.css">
 
 <!--Basic Styles-->
 <!-- <link href="media/admin/plugins/typeahead/dist/examples.css" rel="stylesheet" /> -->

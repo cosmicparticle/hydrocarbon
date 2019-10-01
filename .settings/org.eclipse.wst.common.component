@@ -4,13 +4,7 @@
         <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
-        <dependent-module archiveName="cpf-utils-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/cpf-utils/cpf-utils">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
-        <dependent-module archiveName="cpf-spring-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/cpf-spring/cpf-spring">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
-        <dependent-module archiveName="dataserver-1.50.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/dataserver/dataserver">
+        <dependent-module archiveName="dataserver-1.51.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/dataserver/dataserver">
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <dependent-module archiveName="entityResolver-2.75.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/entityResolver/entityResolver">

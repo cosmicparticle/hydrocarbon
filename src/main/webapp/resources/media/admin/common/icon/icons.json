@@ -16,6 +16,7 @@
 			,{"clazz": "bell"}
 			,{"clazz": "bell-o"}
 			,{"clazz": "bolt"}
+			,{"clazz": "random"}
 			,{"className" : "cross"}
 		]
 	}
