@@ -105,8 +105,8 @@
 	                <ul class="nav sidebar-menu">
 	                	<li class="open first">
 	                		<a href="#">
-	                			<i class="menu-icon glyphicon glyphicon-home"></i>
-	                			<span class="menu-text">主页面</span>
+	                			<i class="menu-iconfont  icon-carbon-welcome"></i>
+	                			<span class="menu-text">欢迎页面</span>
 	                		</a>
 	                	</li>
 	            		<jsp:include page="sidebar_menu.jsp" />
@@ -119,8 +119,8 @@
 								<div class="nav-tabs-wrap">	
 									<ul class="nav nav-tabs" id="main-tab-title-container">
 										<li class="active main-tab-title">
-										    <a data-toggle="tab" href="#cpf-home-tab">
-												主页
+										     <a style='font-weight: 700;' data-toggle="tab" href="#cpf-home-tab">
+												WELCOME
 										    </a>
 										</li>
 									</ul>

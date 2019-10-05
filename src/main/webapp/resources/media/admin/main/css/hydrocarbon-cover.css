@@ -112,6 +112,27 @@
 .nav .open>a, .nav .open>a:hover, .nav .open>a:focus {
 	border-color: #25325A;
 }
+
+.page-sidebar .sidebar-menu a .menu-iconfont {
+	display: inline-block;
+    vertical-align: middle;
+    font-weight: normal;
+    font-style: normal;
+    margin-left: 16px;
+    margin-right: 16px;
+    margin-bottom: -10px;
+    font-family: "iconfont" !important;
+}
+
+.menu-iconfont:before {
+	display: inline-block;
+    height: 26px;
+    line-height: 26px;
+    text-align: center;
+    width: 26px;
+    font-size: 26px;
+}
+
 .page-sidebar .sidebar-menu a .menu-icon {
 	display: inline-block;
     vertical-align: middle;

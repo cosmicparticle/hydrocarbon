@@ -4,7 +4,7 @@
 <sec:authorize access="hasAuthority('${configAuth }')">
 	<li>
 		<a href="#" class="menu-dropdown">
-			<i class="menu-icon fa fa-desktop"></i>
+			<i class="menu-iconfont icon-hydrocarbon-menupage1"></i>
 			<span class="menu-text">系统配置</span>
 		</a>
 		<ul class="submenu">
