@@ -57,11 +57,11 @@ public class ConfigureServiceImpl implements ConfigureService{
 	public List<Module> getSiblingModules(String moduleName) {
 		Module sourceModule = fFactory.getModule(moduleName);
 		
-		Struc node = StrucContainer.findStruc(FormatUtils.toInteger(sourceModule.getMappingId()));
+		Struc node = StrucContainer.findStruc(FormatUtils.toInteger(sourceModule.getStrucId()));
 		String abcattr = node.getItemCode();
 		return getEnabledModules().stream().filter(module->{
-			if(module.getMappingId() != null) {
-				Struc abcNode = StrucContainer.findStruc(FormatUtils.toInteger(module.getMappingId()));
+			if(module.getStrucId() != null) {
+				Struc abcNode = StrucContainer.findStruc(FormatUtils.toInteger(module.getStrucId()));
 				return abcattr.equals(abcNode.getItemCode());
 			}
 			return false;

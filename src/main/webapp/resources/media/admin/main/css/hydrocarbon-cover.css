@@ -47,8 +47,8 @@
 .page-sidebar .sidebar-menu>li>a {
 	border-top: 1px solid #25325A;
 	color: #ffffff;
-	height: 40px;
-	line-height: 40px;
+	height: 60px;
+	line-height: 60px;
 	/* overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap; */
@@ -120,7 +120,7 @@
     font-style: normal;
     margin-left: 16px;
     margin-right: 16px;
-    margin-bottom: -10px;
+    margin-bottom: -20px;
     font-family: "iconfont" !important;
 }
 
@@ -130,7 +130,7 @@
     line-height: 26px;
     text-align: center;
     width: 26px;
-    font-size: 26px;
+    font-size: 35px;
 }
 
 .page-sidebar .sidebar-menu a .menu-icon {
@@ -140,6 +140,9 @@
     font-style: normal;
     margin-left: 16px;
     margin-right: 16px;
+}
+.page-sidebar .sidebar-menu a .menu-text {
+    font-size: 15px;
 }
 .page-sidebar.menu-compact .sidebar-menu a .menu-icon{
 	margin-left: 3px;
@@ -659,12 +662,12 @@ input.search-input:hover {
 }
 .page-sidebar .sidebar-menu>li>a {
     display: flex;
-    height: auto;
+    height: 60px;
     flex-direction: row;
     align-items: center;
 }
 .page-sidebar .sidebar-menu>li>a .menu-text {
-    line-height: 30px;
+    line-height: 60px;
     min-height: 40px;
     vertical-align: middle;
     margin-top: 5px;

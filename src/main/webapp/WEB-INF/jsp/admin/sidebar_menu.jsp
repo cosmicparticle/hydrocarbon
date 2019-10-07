@@ -10,7 +10,7 @@
 		<ul class="submenu">
 			<li>
 				<a class="tab" href="admin/config/menu/index" target="sidemenu" title="功能列表管理">
-		   			<span class="menu-text">功能列表管理</span>
+		   			<span class="menu-text">功能管理</span>
 		   		</a>
 			</li>
 			<li>
@@ -26,7 +26,7 @@
 	<c:if test="${l1disables[menu.id] != true }">
 		<li l1-menu-id="${menu.id }">
 			<a href="#" class="menu-dropdown">
-			    <i class="menu-icon fa fa-bookmark"></i>
+			    <i class="menu-iconfont icon-carbon-menu"></i>
 			    <span class="menu-text">${menu.title }</span>
 			</a>
 			
