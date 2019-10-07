@@ -93,6 +93,7 @@ public class AdminStatViewController {
 			model.addAttribute("ltmpl", ltmpl);
 			criteria.setStatListTemplate(ltmpl);
 			StatListTemplateEntityView view = statViewService.stat(criteria);
+			model.addAttribute("vtmpl", vtmpl);
 			model.addAttribute("view", view);
 			model.addAttribute("criteria", criteria);
 			model.addAttribute("disabledColIds", CollectionUtils.toChain(criteria.getDisabledColumnIds()));

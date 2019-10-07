@@ -85,6 +85,37 @@
 										</div>
 									</div> 
 									 -->
+									 
+									 <div class="row">
+										<div class="form-group"> 
+											<div class="col-lg-12"> 
+												<label class="col-lg-2 control-label" for="name">列表功能按钮</label>
+												<div class="col-lg-10">
+													<label class="col-lg-4 col-xs-3 form-control-static">
+														<input id="showViewcolsButton" 
+															type="checkbox" 
+															class="checkbox-slider colored-blue" value='' name='hideViewcolsButton'
+															${vtmpl.hideViewcolsButton == 1? '': 'checked="checked"' }>
+														<span class="text">显示列按钮</span>
+													</label>
+													<label class="col-lg-4 col-xs-3 form-control-static">
+														<input id="showRestatButton" value='' name='hideRestatButton'
+															type="checkbox" class="checkbox-slider colored-success" 
+															${vtmpl.hideRestatButton == 1? '': 'checked="checked"' }>
+														<span class="text">重新统计按钮</span>
+													</label>
+													<label class="col-lg-4 col-xs-3 form-control-static">
+														<input id="showExportButton" value='' name='hideExportButton'
+															type="checkbox" 
+															class="checkbox-slider colored-darkorange" 
+															${vtmpl.hideExportButton == 1? '': 'checked="checked"' }>
+														<span class="text">导出按钮</span>
+													</label>
+												</div>
+											</div>
+										</div>
+									</div>
+									 
 								</div>
 							</div>
 						</form>
@@ -100,6 +131,19 @@
 		$('#save', $page).click(function(){
 			Dialog.confirm('确认提交？', function(yes){
 				if(yes){
+				if(!$('#showViewcolsButton',$page).prop('checked')){
+					$('#showViewcolsButton',$page).prop("checked",true);
+					$('#showViewcolsButton',$page).val(1);
+				}
+				if(!$('#showRestatButton',$page).prop('checked')){
+					$('#showRestatButton',$page).prop("checked",true);
+					$('#showRestatButton',$page).val(1);
+				}
+				if(!$('#showExportButton',$page).prop('checked')){
+					$('#showExportButton',$page).prop("checked",true);
+					$('#showExportButton',$page).val(1);
+				}
+									
 					$('form', $page).submit();
 				}
 			})
