@@ -108,7 +108,7 @@ public class AdminStatViewController {
 		SideMenuLevel2Menu menu = authService.validateL2MenuAccessable(menuId);
 		if(menu.getStatViewId() != null) {
 			TemplateStatView vtmpl = statViewService.getTemplate(menu.getStatViewId());
-			if(vtmpl != null) {
+			if(vtmpl != null && (vtmpl.getHideRestatButton()==null || vtmpl.getHideRestatButton()!=1)) {
 				UserIdentifier user = UserUtils.getCurrentUser();
 				try {
 					statViewService.recalc(vtmpl.getModule(), user );
