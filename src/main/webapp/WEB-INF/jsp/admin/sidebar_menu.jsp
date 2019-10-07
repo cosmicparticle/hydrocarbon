@@ -26,7 +26,7 @@
 	<c:if test="${l1disables[menu.id] != true }">
 		<li l1-menu-id="${menu.id }">
 			<a href="#" class="menu-dropdown">
-			    <i class="menu-iconfont icon-carbon-menu"></i>
+			    <i class="menu-iconfont icon-carbon-menu1"></i>
 			    <span class="menu-text">${menu.title }</span>
 			</a>
 			
