@@ -6,7 +6,7 @@
 
 <link rel="stylesheet" type="text/css" href="media/common/plugins/iconfont/iconfont-common-temp.css">
 <link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_1439435_n0edakynpds.css">
-<link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_1443618_wbus36rp0gb.css">
+<link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_1443618_evzso7qlvou.css">
 
 <!--Basic Styles-->
 <!-- <link href="media/admin/plugins/typeahead/dist/examples.css" rel="stylesheet" /> -->
