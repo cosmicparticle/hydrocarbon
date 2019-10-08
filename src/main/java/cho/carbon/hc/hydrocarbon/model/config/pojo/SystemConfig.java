@@ -10,7 +10,7 @@ import javax.persistence.Table;
 import com.alibaba.fastjson.annotation.JSONField;;
 
 @Entity
-@Table(name="t_sa_config_system")
+@Table(name="t_ca_config_system")
 public class SystemConfig {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)

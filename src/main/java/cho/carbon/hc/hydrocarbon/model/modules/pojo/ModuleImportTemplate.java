@@ -10,7 +10,7 @@ import cho.carbon.hc.dataserver.model.tmpl.pojo.Cachable;
 
 
 @Entity
-@Table(name="t_sa_import_tmpl")
+@Table(name="t_ca_import_tmpl")
 public class ModuleImportTemplate extends Cachable{
 	
 	@Transient

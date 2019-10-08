@@ -9,7 +9,7 @@ import javax.persistence.Table;
 
 
 @Entity
-@Table(name="t_sb_config_module")
+@Table(name="t_cb_config_module")
 public class ConfigModule {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)

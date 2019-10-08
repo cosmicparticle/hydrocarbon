@@ -15,7 +15,7 @@ import javax.persistence.Transient;
 import cho.carbon.hc.copframe.utils.TextUtils;
 
 @Entity
-@Table(name="t_sa_config_sidemenu_block")
+@Table(name="t_ca_config_sidemenu_block")
 public class SideMenuBlock {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

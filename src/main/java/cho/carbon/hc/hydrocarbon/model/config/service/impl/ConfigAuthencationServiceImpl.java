@@ -31,9 +31,9 @@ public class ConfigAuthencationServiceImpl implements ConfigAuthencationService{
 		AuthencationConfig authen = defAuthen.getObject(()->{
 			return configDao.getAdminDefaultAuthen(configId);
 		});
-		Assert.notNull(authen, "根据id[" + configId + "]没有找到ConfigAuthencation对象，请检查数据库内t_sa_auth_config表内是否有配置");
-		Assert.hasText(authen.getAdminConfigAuthen(), "t_sa_auth_config表内配置的管理权限(admin_config_authen)不能为空");
-		Assert.hasText(authen.getAdminDefaultAuthen(), "t_sa_auth_config表内配置的管理权限(admin_default_authen)不能为空");
+		Assert.notNull(authen, "根据id[" + configId + "]没有找到ConfigAuthencation对象，请检查数据库内t_ca_auth_config表内是否有配置");
+		Assert.hasText(authen.getAdminConfigAuthen(), "t_ca_auth_config表内配置的管理权限(admin_config_authen)不能为空");
+		Assert.hasText(authen.getAdminDefaultAuthen(), "t_ca_auth_config表内配置的管理权限(admin_default_authen)不能为空");
 		return authen;
 	}
 	

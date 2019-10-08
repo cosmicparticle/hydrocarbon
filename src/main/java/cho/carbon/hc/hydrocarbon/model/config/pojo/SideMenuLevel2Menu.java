@@ -14,7 +14,7 @@ import javax.persistence.Transient;
 import com.alibaba.fastjson.annotation.JSONField;
 
 @Entity
-@Table(name="t_sa_config_sidemenu_level2")
+@Table(name="t_ca_config_sidemenu_level2")
 public class SideMenuLevel2Menu {
 	
 	@Id

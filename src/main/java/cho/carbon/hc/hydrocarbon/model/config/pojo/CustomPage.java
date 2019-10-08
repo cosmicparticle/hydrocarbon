@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="t_sa_config_custom_page")
+@Table(name="t_ca_config_custom_page")
 public class CustomPage {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

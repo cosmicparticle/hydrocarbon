@@ -9,7 +9,7 @@
 			<a class="refresh" title="刷新" href="#" on-click="refreshPage">
 				<i class="glyphicon glyphicon-refresh"></i>
 			</a>
-			<a confirm="确认重载系统数据？" href="admin/config/sidemenu/reload" >
+			<a confirm="确认重载系统数据？" title="重新加载" href="admin/config/sidemenu/reload" >
 				<i class="fa fa-bolt"></i>
 			</a>
 			<a title="版块模式" href="javascript:;" on-click="toggleBlocks" >

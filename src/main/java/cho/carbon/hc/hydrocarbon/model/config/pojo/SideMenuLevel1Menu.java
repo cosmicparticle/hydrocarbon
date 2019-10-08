@@ -16,7 +16,7 @@ import javax.persistence.Transient;
 import com.alibaba.fastjson.annotation.JSONField;
 
 @Entity
-@Table(name="t_sa_config_sidemenu_level1")
+@Table(name="t_ca_config_sidemenu_level1")
 public class SideMenuLevel1Menu {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)

@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="t_sa_auth_config")
+@Table(name="t_ca_auth_config")
 public class AuthencationConfig {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)

@@ -42,9 +42,9 @@ public class SideMenuDaoImpl implements SideMenuDao {
 				"		g.c_module tmpl_module," +
 				"		m.c_title tmpl_module_title " +
 				"	FROM" +
-				"		t_sa_config_sidemenu_level2 l2" +
-				"		LEFT JOIN t_sa_tmpl_group g ON l2.tmplgroup_id = g.id" +
-				"		LEFT JOIN t_sb_config_module m ON g.c_module = m.c_name" +
+				"		t_ca_config_sidemenu_level2 l2" +
+				"		LEFT JOIN t_ca_tmpl_group g ON l2.tmplgroup_id = g.id" +
+				"		LEFT JOIN t_cb_config_module m ON g.c_module = m.c_name" +
 				"	where l2.id = :level2Id";
 		SQLQuery query = sFactory.getCurrentSession().createSQLQuery(sql);
 		query.setLong("level2Id", menuId);
