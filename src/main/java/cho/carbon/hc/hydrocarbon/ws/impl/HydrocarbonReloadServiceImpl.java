@@ -13,6 +13,7 @@ import cho.carbon.hc.entityResolver.config.DBFusionConfigContextFactory;
 import cho.carbon.hc.entityResolver.config.ModuleConfigureMediator;
 import cho.carbon.hc.hydrocarbon.model.config.service.SideMenuService;
 import cho.carbon.hc.hydrocarbon.ws.HydrocarbonReloadService;
+import cho.carbon.service.impl.ModelReLoadServiceImpl;
 
 @WebService(endpointInterface="cho.carbon.hc.hydrocarbon.ws.HydrocarbonReloadService")
 public class HydrocarbonReloadServiceImpl implements HydrocarbonReloadService, InitializingBean{
@@ -42,12 +43,17 @@ public class HydrocarbonReloadServiceImpl implements HydrocarbonReloadService, I
 	@Override
 	public String syncModule() {
 		logger.info("接口通知模块数据刷新");
+		
+		// 先 加载 carbon core 元数据
+		new ModelReLoadServiceImpl().reload();
+		
 		ksService.reloadCache();
 		menuService.reloadMenuMap();
 		fService.refreshFields();
 		moduleMediator.refresh();
 		fFactory.sync();
 		tService.clearCache();
+		
 		return "200";
 	}
 	
