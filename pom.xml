@@ -12,7 +12,7 @@
 	<properties>
 		<version.kie>7.10.0.Final</version.kie>
 		<version.carbon-core>0.68</version.carbon-core>
-		<version.dataserver>1.53</version.dataserver>
+		<version.dataserver>1.66</version.dataserver>
 		<version.cpfweb>1.0</version.cpfweb>
 		<version.cpfutils>1.0</version.cpfutils>
 		<version.cpfspring>1.0</version.cpfspring>
@@ -70,6 +70,7 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
+		 
 		<dependency>
 			<groupId>cho.carbon.hc</groupId>
 			<artifactId>dataserver</artifactId>
@@ -85,6 +86,7 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
+		
 		<dependency>
 			<groupId>cho.carbon</groupId>
 			<artifactId>carbon-core</artifactId>
