@@ -1,5 +1,6 @@
 package cho.carbon.hc.hydrocarbon.admin.controller.config;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -53,6 +54,7 @@ import cho.carbon.hc.hydrocarbon.common.UserWithToken;
 import cho.carbon.hc.hydrocarbon.model.admin.service.AdminUserService;
 import cho.carbon.hc.hydrocarbon.model.api2.service.MetaJsonService;
 import cho.carbon.hc.hydrocarbon.model.config.service.ConfigureService;
+import cho.carbon.meta.vo.ModuleVO;
 
 @Controller
 @RequestMapping(AdminConstants.URI_CONFIG + "/ks")
@@ -144,8 +146,8 @@ public class AdminConfigKsController {
 	@RequestMapping("/modules")
 	public ResponseJSON getModules() {
 		JSONObjectResponse jRes = new JSONObjectResponse();
-		List<Module> modules = configService.getEnabledModules();
-		Set<String> moduleNames = CollectionUtils.toSet(modules, Module::getName);
+		Collection<ModuleVO> modules = configService.getEnabledModules();
+		Set<String> moduleNames = CollectionUtils.toSet(modules, ModuleVO::getName);
 		Map<String, List<TemplateListTemplate>> ltmplMap = ltmplService.queryByModuleNames(moduleNames);
 		Map<String, List<TemplateActionTemplate>> atmplMap = atmplService.queryByModuleNames(moduleNames);
 		Map<String, List<TemplateDetailTemplate>> dtmplMap = dtmplService.queryByModuleNames(moduleNames);
@@ -199,10 +201,10 @@ public class AdminConfigKsController {
 		return doMultiReq(ksIdsStr, ksIds -> ksService.toggleDisabled(ksIds, "disable".equals(toDisabled)));
 	}
 
-	private JSONArray toModulesJson(List<Module> modules, Map<String, List<TemplateListTemplate>> ltmplMap,
+	private JSONArray toModulesJson(Collection<ModuleVO> modules, Map<String, List<TemplateListTemplate>> ltmplMap,
 			Map<String, List<TemplateActionTemplate>> atmplMap, Map<String, List<TemplateDetailTemplate>> dtmplMap) {
 		JSONArray jModules = new JSONArray();
-		for (Module module : modules) {
+		for (ModuleVO module : modules) {
 			JSONObject jModule = new JSONObject();
 			jModule.put("name", module.getName());
 			jModule.put("title", module.getTitle());

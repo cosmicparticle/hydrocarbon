@@ -1,5 +1,6 @@
 package cho.carbon.hc.hydrocarbon.model.config.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -26,6 +27,7 @@ import cho.carbon.hc.hydrocarbon.model.config.pojo.SystemConfig;
 import cho.carbon.hc.hydrocarbon.model.config.service.ConfigureService;
 import cho.carbon.meta.struc.er.Struc;
 import cho.carbon.meta.struc.er.StrucContainer;
+import cho.carbon.meta.vo.ModuleVO;
 
 @Service
 public class ConfigureServiceImpl implements ConfigureService{
@@ -46,17 +48,13 @@ public class ConfigureServiceImpl implements ConfigureService{
 	FusionContextConfigFactory fFactory;
 	
 	@Override
-	public List<Module> getEnabledModules(){
-		QueryModuleCriteria criteria = new QueryModuleCriteria();
-		criteria.setFilterDisabled(true);
-		List<Module> modules = moduleConfigMediator.queryModules(criteria);
-		return modules;
+	public List<ModuleVO> getEnabledModules(){
+		return new ArrayList<ModuleVO>(fFactory.getALLModule());
 	}
 	
 	@Override
-	public List<Module> getSiblingModules(String moduleName) {
-		Module sourceModule = fFactory.getModule(moduleName);
-		
+	public List<ModuleVO> getSiblingModules(String moduleName) {
+		ModuleVO sourceModule = fFactory.getModule(moduleName);
 		Struc node = StrucContainer.findStruc(FormatUtils.toInteger(sourceModule.getStrucId()));
 		String abcattr = node.getItemCode();
 		return getEnabledModules().stream().filter(module->{

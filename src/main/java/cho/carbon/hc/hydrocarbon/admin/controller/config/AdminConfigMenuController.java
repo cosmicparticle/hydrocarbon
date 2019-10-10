@@ -41,6 +41,7 @@ import cho.carbon.hc.hydrocarbon.model.config.service.AuthorityService;
 import cho.carbon.hc.hydrocarbon.model.config.service.ConfigureService;
 import cho.carbon.hc.hydrocarbon.model.config.service.CustomPageService;
 import cho.carbon.hc.hydrocarbon.model.config.service.SideMenuService;
+import cho.carbon.meta.vo.ModuleVO;
 
 @Controller
 @RequestMapping(AdminConstants.URI_CONFIG + "/menu")
@@ -117,12 +118,12 @@ public class AdminConfigMenuController {
 	@RequestMapping("/modules")
 	public ResponseJSON getAllModules() {
 		JSONObjectResponse jRes = new JSONObjectResponse();
-		List<Module> modules = configService.getEnabledModules();
-		Set<String> moduleNames = CollectionUtils.toSet(modules, Module::getName);
+		List<ModuleVO> modules = configService.getEnabledModules();
+		Set<String> moduleNames = CollectionUtils.toSet(modules, ModuleVO::getName);
 		Map<String, List<TemplateGroup>> tmplGroupsMap = tmplGroupService.queryModuleGroups(moduleNames);
 		Map<String, StatModuleDetail> statDetailMap = statViewService.getStatModuleDetail(moduleNames);
 		JSONArray jModules = new JSONArray();
-		for (Module module : modules) {
+		for (ModuleVO module : modules) {
 			JSONObject jModule = (JSONObject) JSON.toJSON(module);
 			jModules.add(jModule);
 			if(statDetailMap.containsKey(module.getName())) {

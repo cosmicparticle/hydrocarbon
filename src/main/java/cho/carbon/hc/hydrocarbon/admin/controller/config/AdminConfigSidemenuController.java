@@ -46,6 +46,7 @@ import cho.carbon.hc.hydrocarbon.model.config.service.AuthorityService;
 import cho.carbon.hc.hydrocarbon.model.config.service.ConfigureService;
 import cho.carbon.hc.hydrocarbon.model.config.service.SideMenuService;
 import cho.carbon.hc.hydrocarbon.ws.HydrocarbonReloadService;
+import cho.carbon.meta.vo.ModuleVO;
 
 @Controller 
 @RequestMapping(AdminConstants.URI_CONFIG + "/sidemenu")
@@ -77,8 +78,8 @@ public class AdminConfigSidemenuController {
 	public String main(Model model) {
 		UserIdentifier user = UserUtils.getCurrentUser();
 		List<SideMenuLevel1Menu> menus = menuService.getSideMenuLevelMenus(user);
-		List<Module> modules = configService.getEnabledModules();
-		Set<String> moduleNames = CollectionUtils.toSet(modules, Module::getName);
+		List<ModuleVO> modules = configService.getEnabledModules();
+		Set<String> moduleNames = CollectionUtils.toSet(modules, ModuleVO::getName);
 		Map<String, List<TemplateGroup>> tmplGroupsMap = tmplGroupService.queryModuleGroups(moduleNames);
 		Map<Long, String[]> level1AuthorityDescriptionMap = menuService.getMenu1AuthNameMap(CollectionUtils.toSet(menus, SideMenuLevel1Menu::getId));
 		

@@ -5,16 +5,16 @@ import java.util.List;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
-import cho.carbon.hc.entityResolver.config.abst.Module;
 import cho.carbon.hc.hydrocarbon.model.config.pojo.SystemConfig;
+import cho.carbon.meta.vo.ModuleVO;
 
 public interface ConfigureService {
 
 	JSONObject getModuleConfigJson();
 
-	List<Module> getEnabledModules();
+	List<ModuleVO> getEnabledModules();
 
-	List<Module> getSiblingModules(String moduleName);
+	List<ModuleVO> getSiblingModules(String moduleName);
 
 	JSONArray getSiblingModulesJson(String moduleName);
 
