@@ -314,7 +314,7 @@ public class AdminDetailTemplateController {
 									JSONObject jField = (JSONObject) ele1;
 									TemplateDetailField field = new TemplateDetailField();
 									field.setId(jField.getLong("id"));
-									field.setFieldId(jField.getInteger("fieldId"));
+									field.setFieldId(jField.getString("fieldId"));
 									field.setTitle(jField.getString("title"));
 									field.setViewValue(jField.getString("viewVal"));
 									Boolean dbcol = jField.getBoolean("dbcol");

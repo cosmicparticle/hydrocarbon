@@ -1,15 +1,15 @@
 package cho.carbon.hc.hydrocarbon.model.modules.bean;
 
 public class EntityImportDictionaryField {
-	private Integer id;
+	private String id;
 	private String name;
 	private String pattern;
 	private String type;
 	private Integer casLevel;
-	public Integer getId() {
+	public String getId() {
 		return id;
 	}
-	public void setId(Integer id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	public String getName() {

@@ -154,7 +154,7 @@ public class AdminSelectionTemplateController {
 			tmpl.setId(json.getLong("tmplId"));
 			tmpl.setTitle(json.getString("title"));
 			tmpl.setDefaultPageSize(json.getInteger("defPageSize"));
-			tmpl.setDefaultOrderFieldId(json.getInteger("defOrderFieldId"));
+			tmpl.setDefaultOrderFieldId(json.getString("defOrderFieldId"));
 			tmpl.setDefaultOrderDirection(json.getString("defOrderDir"));
 			tmpl.setCreateUserCode((String) UserUtils.getCurrentUser().getId());
 			tmpl.setModule(json.getString("module"));
@@ -173,8 +173,8 @@ public class AdminSelectionTemplateController {
 					if(src.getString("specField") != null){
 						column.setSpecialField(src.getString("specField"));
 					}else{
-						column.setFieldId(src.getInteger("fieldId"));
-						column.setViewOption(dictionaryService.getField(src.getInteger("fieldId")).getType()); 
+						column.setFieldId(src.getString("fieldId"));
+						column.setViewOption(dictionaryService.getField(src.getString("fieldId")).getType()); 
 					}
 					column.setOrder(i++);
 					columns.add(column);
@@ -194,7 +194,7 @@ public class AdminSelectionTemplateController {
 					criteria.setTitle(item.getString("title"));
 					criteria.setOrder(order++);
 					if(item.getBooleanValue("fieldAvailable")) {
-						criteria.setFieldId(item.getInteger("fieldId"));
+						criteria.setFieldId(item.getString("fieldId"));
 						criteria.setRelationLabel(item.getString("relationLabel"));
 						//条件需要显示
 						criteria.setComparator(item.getString("comparator"));

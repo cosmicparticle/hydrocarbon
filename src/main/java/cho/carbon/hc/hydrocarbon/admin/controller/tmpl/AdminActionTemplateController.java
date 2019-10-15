@@ -180,7 +180,7 @@ public class AdminActionTemplateController {
 									JSONObject jField = (JSONObject) ele1;
 									TemplateActionField field = new TemplateActionField();
 									field.setId(jField.getLong("id"));
-									field.setFieldId(jField.getInteger("fieldId"));
+									field.setFieldId(jField.getString("fieldId"));
 									field.setTitle(jField.getString("title"));
 									field.setViewValue(jField.getString("viewVal"));
 									Boolean dbcol = jField.getBoolean("dbcol");

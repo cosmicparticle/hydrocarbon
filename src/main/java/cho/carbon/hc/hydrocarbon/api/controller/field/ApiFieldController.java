@@ -34,9 +34,9 @@ public class ApiFieldController {
 	
 	@ResponseBody
 	@RequestMapping("/options")
-	public ResponseJSON getOptions(@RequestParam Set<Integer> fieldIds, ApiUser user) {
+	public ResponseJSON getOptions(@RequestParam Set<String> fieldIds, ApiUser user) {
 		JSONObjectResponse res = new JSONObjectResponse();
-		Map<Integer, List<OptionItem>> optionsMap = dictService.getOptionsMap(fieldIds);
+		Map<String, List<OptionItem>> optionsMap = dictService.getOptionsMap(fieldIds);
 		JSONObject map = new JSONObject();
 		String keyPrefix = "field_";
 		optionsMap.forEach((fieldId, options)->{

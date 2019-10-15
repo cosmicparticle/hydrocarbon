@@ -24,7 +24,7 @@ public class ModuleImportTemplateField {
 	private String title;
 	
 	@Column(name="field_id")
-	private Integer fieldId;
+	private String fieldId;
 	
 	@Column(name="composite_id")
 	private Integer compositeId;
@@ -78,10 +78,10 @@ public class ModuleImportTemplateField {
 	public void setFieldIndex(Integer fieldIndex) {
 		this.fieldIndex = fieldIndex;
 	}
-	public Integer getFieldId() {
+	public String getFieldId() {
 		return fieldId;
 	}
-	public void setFieldId(Integer fieldId) {
+	public void setFieldId(String fieldId) {
 		this.fieldId = fieldId;
 	}
 	public Integer getCompositeId() {
