@@ -86,6 +86,8 @@ public interface AdminConstants {
 	
 	final String JSP_TMPL_DETAIL = JSP_TMPL + "/dtmpl";
 	
+	final String JSP_TMPL_JUMP = JSP_TMPL + "/jtmpl";
+	
 	final String JSP_TMPL_GROUP = JSP_TMPL + "/group";
 	
 	final String JSP_TMPL_SELECTION = JSP_TMPL + "/stmpl";

@@ -135,7 +135,7 @@ div.Z-loginbox>div.loginbox-submit {
 		<div class="Z-login-container">
 			<div class="Z-loginbox">
 				<div class="loginbox-logo">
-					<img src="media/admin/main/image/hydrocarbon.png" />
+					<img src="media/admin/main/image/login.png" />
 					<%-- <img src="<fmt:message key='theme.logoPhoto' bundle='${logo}'/>" /> --%>
             		<%--  <h1><fmt:message key='theme.logo' bundle='${logo}'/></h1> --%>
 				</div>

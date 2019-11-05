@@ -26,15 +26,7 @@
 					test="${fn:length(blocks) > 0 ||  sysConfig.showBlocksAnyway == 1}">
 
 					<ul>
-						<li class=""><div>
-								<a class="open-link"
-									href="http://localhost:8080/carbonmodel/admin/">项目编辑</a>
-								<div class="dropdown-icon">
-									<i class="fa fa-caret-down"></i>
-								</div>
-							</div>
-							<ul>
-							</ul></li>
+						
 						<c:forEach items="${blocks }" var="theBlock">
 							<li class="${theBlock == block? 'current': ''}">
 								<div>

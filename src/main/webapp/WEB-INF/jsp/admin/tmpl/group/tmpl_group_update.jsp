@@ -119,7 +119,7 @@
 													<a 
 														class="form-control"
 														href="admin/tmpl/dtmpl/choose/${module.name }" 
-														title="选择列表模板"
+														title="选择详情模板"
 														choose-key="choose-dtmpl" 
 														crn-choose-dtmpl="title" >${group.detailTemplateId != null? group.detailTemplateTitle: '选择详情模板' }</a>
 													<input type="hidden" crn-choose-dtmpl="id" name="detailTemplateId" value="${group.detailTemplateId }" />
