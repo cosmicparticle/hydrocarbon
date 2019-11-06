@@ -6,7 +6,7 @@ define(function(require, exports, module){
 		Poll = require('poll');
 	
 	
-	//导出的全局句柄
+	// 导出的全局句柄
 	var exportHandler = Poll.global('modules-list');
 	
 	
@@ -44,7 +44,7 @@ define(function(require, exports, module){
 		var $btnExport = $('#do-export', $page),
 			$btnBreak = $('#do-break', $page),
 			$btnDownload = $('#do-download', $page);
-		//页面一开始加载时的初始化表单参数
+		// 页面一开始加载时的初始化表单参数
 		
 		var initParam = {};
 		Utils.botByDom($page.getLocatePage().getContent(), 'cpf-page-inited', function(){
@@ -57,7 +57,7 @@ define(function(require, exports, module){
 		
 		var $exportProgress = $('#export-progress', $page);
 		
-		//先将当前页面添加到订阅者中
+		// 先将当前页面添加到订阅者中
 		var subscriber = exportHandler.addSubscriber({
 			key					: menuId,
 			startupURL			: 'admin/modules/export/start/' + menuId,
@@ -108,11 +108,11 @@ define(function(require, exports, module){
 			$exportProgress.find('.progress-bar').attr('aria-valuenow', percent).css('width', percent);
 		}
 		
-		//如果全局句柄当前没有在执行导出，那么根据从后台获得的参数来构造一次导入事件
-		//判断当前session是否有导出工作正在处理
+		// 如果全局句柄当前没有在执行导出，那么根据从后台获得的参数来构造一次导入事件
+		// 判断当前session是否有导出工作正在处理
 		if(sessionExportStatus.uuid ){
 			if(exportHandler.getStatus() != 'working'){
-				//当前没有正在轮询的订阅者
+				// 当前没有正在轮询的订阅者
 				Ajax.ajax('admin/modules/export/work/' + sessionExportStatus.uuid).done(function(work){
 					if(work.menuId == menuId){
 						if(work.scope === 'current'){
@@ -123,11 +123,11 @@ define(function(require, exports, module){
 							$exportAll.prop('checked', true).trigger('change');
 						}
 						$withDetail.prop('checked', work.withDetail == 'true').trigger('change');
-						//menu对应
+						// menu对应
 						subscriber.pollWith(work.uuid);
 					}else{
-						//menu不对应
-						//创建空回调的订阅者
+						// menu不对应
+						// 创建空回调的订阅者
 						var workingSubscriber = exportHandler.addSubscriber({
 							startupURL			: 'admin/modules/export/start/' + work.menuId,
 							progressURL			: 'admin/modules/export/status',
@@ -136,7 +136,7 @@ define(function(require, exports, module){
 								menuId		: work.menuId
 							},
 						});
-						//启动空回调的轮询
+						// 启动空回调的轮询
 						workingSubscriber.pollWith(work.uuid);
 					}
 					startPolling();
@@ -162,7 +162,7 @@ define(function(require, exports, module){
 			}
 			
 		});
-		//轮询处理对象
+		// 轮询处理对象
 		$page.getLocatePage().getEventCallbacks(['beforeClose', 'beforeLoad'], 'unique', function(callbacks){
 			callbacks.add(function(e){
 				if(exportHandler && exportHandler.getWorkingSubscriber() == subscriber){
@@ -221,16 +221,20 @@ define(function(require, exports, module){
 		}
 		
 		var $actionButtons = $('button.action-button', $page);
+		var $jumpButtons = $('button.jump-button', $page);
 		var $btnDelete = $('#btn-delete', $page);
 		var $table = $('table', $page).on('row-selected-change', function(e, $checkedRows){
 			if($checkedRows.length === 0){
 				$actionButtons.attr('disabled', 'disabled');
+				$jumpButtons.attr('disabled', 'disabled');
 				$btnDelete.attr('disabled', 'disabled');
 			}else{
 				$actionButtons.removeAttr('disabled');
+				$jumpButtons.removeAttr('disabled');
 				$btnDelete.removeAttr('disabled');
 				if($checkedRows.length > 1){
 					$actionButtons.filter('[data-multiple="0"]').attr('disabled', 'disabled');
+					$jumpButtons.filter('[data-multiple="0"]').attr('disabled', 'disabled');
 				}
 			}
 		});
@@ -270,6 +274,39 @@ define(function(require, exports, module){
 			}
 		}
 		
+		function doJump(jumpId, jumpTitle){
+			var codes = [];
+			var checkedRowGetter = $table.data('checkedRowGetter');
+			if(typeof checkedRowGetter === 'function'){
+				var $rows = checkedRowGetter();
+				if($rows){
+					$rows.each(function(){
+						codes.push($(this).attr('data-code'));
+					});
+				}
+			}
+			var url = null;
+			var confirm = '';
+			url = 'admin/modules/curd/do_jump/' + menuId + '/' + jumpId;
+			confirm = '确定执行跳转【' + jumpTitle + '】？共选择了' + codes.length + '项';
+			if(jumpId){
+				require('dialog').confirm(confirm, function(yes){
+					if(yes){
+						require('ajax').ajax(url, {
+							codes	: codes.join()
+						}, function(data){
+							if(data.status === 'suc'){
+								window.open(data.url);  
+								}else{
+									require('dialog').notice(data.error, 'error');
+								};
+							});
+					}
+				});
+				
+			}
+		}
+		
 		$btnDelete.click(function(e){
 			e.preventDefault();
 			doAction('delete');
@@ -279,7 +316,11 @@ define(function(require, exports, module){
 			e.preventDefault();
 			doAction($this.attr('data-id'), $this.attr('title'));
 		})
-		
+		$jumpButtons.click(function(e){
+			var $this = $(this);
+			e.preventDefault();
+			doJump($this.attr('data-id'), $this.attr('title'));
+		})
 		
 	}
 });

@@ -194,6 +194,18 @@
 						</button>
 					</c:if>
 				</c:forEach>
+				<c:forEach items="${tmplGroup.jumps }" var="jump">
+					<c:if test="${jump.face == 'list' }">
+						<button class="btn btn-azure shiny jump-button"
+							data-id="${jump.id }" data-multiple="${jump.multiple }"
+							title="${jump.title }" disabled="disabled">
+							<c:if test="${!empty jump.iconClass }">
+								<i class="${jump.iconClass }"></i>
+							</c:if>
+							${jump.title }
+						</button>
+					</c:if>
+				</c:forEach>
 			</div>
 		</form>
 		<div class="row list-area">

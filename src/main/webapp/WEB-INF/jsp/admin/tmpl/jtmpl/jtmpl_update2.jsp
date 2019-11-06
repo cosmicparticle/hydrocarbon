@@ -1,6 +1,13 @@
 <%@ page language="java" contentType="text/html;charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/jsp/common/base_empty.jsp"%>
+<c:set var="title">
+	<c:choose>
+		<c:when test="${jtmpl != null }">修改${module.title }跳转模板-${jtmpl.title }</c:when>
+		<c:otherwise>创建跳转模板</c:otherwise>
+	</c:choose>
+</c:set>
+<title>${title }</title>
 <div id="jtmpl-edit-${RES_STAMP }" class="jtmpl-edit">
 	<div class="float-operate-area">
 		<div class="operate-area-cover"></div>
@@ -34,7 +41,7 @@
 						</div>
 						<div class="row">
 							<div class="form-group col-lg-6">
-								<label class="control-label">url</label> <input
+								<label class="control-label">路径</label> <input
 									class="form-control" type="text"
 									on-prepare="path ; originKs:path" name="url"
 									data-bv-notempty="true" data-bv-notempty-message="url必填" />
@@ -64,28 +71,29 @@
 						</div>
 					</div>
 				</div>
-				<div class="widget">
+				<div class="widget requestparam">
 					<div class="widget-header">
-						<span class="widget-caption"> 返回数据配置 </span>
-						<div class="widget-buttons">
-							<a href="#" on-click="switchResEditorView" prefix='res'
-								title="切换树形视图/代码视图"> <i class="iconfont icon-view"
-								style="font-size: 22px;"></i>
-							</a>
-						</div>
+						<span class="widget-caption"> 请求参数配置 </span>
 						<div class="widget-buttons buttons-bordered">
-							<a href="#" on-click="toggleExpand" title="全屏/还原"> <i
-								class="fa fa-expand" style="font-size: 22px;"></i>
-							</a>
+							<input disabled="disabled" type="button"
+								class="btn btn-blue btn-xs" on-prepare="btn-add-param"
+								on-click="addParam" value="添加" />
 						</div>
 					</div>
 					<div class="widget-body">
-						<div class="row" on-prepare="res-tree-view"></div>
-						<div class="row" on-prepare="res-code-view">
-							<div class="form-group col-lg-12">
-								<pre on-prepare="res-editor"
-									style="height: 300px; font-size: 17px;"></pre>
-							</div>
+						<div class="">
+							<table class="table table-hover table-bordered">
+								<thead>
+									<tr>
+										<th>参数类型</th>
+										<th>参数名</th>
+										<th>对应字段</th>
+										<th>操作</th>
+									</tr>
+								</thead>
+								<tbody on-prepare="jump-param-rows;">
+								</tbody>
+							</table>
 						</div>
 					</div>
 				</div>
@@ -95,7 +103,7 @@
 	</div>
 </div>
 <script>
-	seajs.use([ 'config/js/jtmpl-edit' ], function(KsEdit) {
+	seajs.use([ 'config/js/jtmpl-edit' ], function(JtmplEdit) {
 		var $page = $('#jump-edit-${RES_STAMP}');
 		JtempEdit.init({
 			$page : $page,

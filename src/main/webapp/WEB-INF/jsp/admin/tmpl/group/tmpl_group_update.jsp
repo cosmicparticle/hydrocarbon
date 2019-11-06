@@ -55,6 +55,39 @@
 			</td>
 		</tr>
 	</script>
+	<script type="jquery/tmpl" id="tmpl-jump">
+		<tr>
+			<td>\${index + 1 }</td>
+			<td><input class="jump-title" type="text" value="\${title }" /></td>
+			{{if multiple}}
+				<td>
+					<select class="multiple">
+						<option value="0">单选</option>
+					</select>
+				</td>
+			{{else}}
+				<td>
+					<label>
+                        <input class="outgoing" type="checkbox" class="colored-blue">
+                        <span class="text"></span>
+                    </label>
+				</td>
+			{{/if}}
+			<td>
+				<div class="btn-icon-selector" data-icon="">
+					{{if iconClass !== ''}}
+						<i class="\${iconClass}"></i>
+					{{/if}}
+				</div>
+			</td>
+			<td>
+				<a class="btn btn-danger btn-xs delete">
+					<i class="fa fa-trash-o"></i>
+					删除
+				</a>
+			</td>
+		</tr>
+	</script>
 	<div class="float-operate-area">
 		<div class="operate-area-cover"></div>
 		<a id="save" class="btn-save" title="保存"><i class="fa fa-check-square"></i></a>
@@ -300,6 +333,35 @@
 									</table>
 								</div>
 							</div>
+							<div class="widget">
+								<div class="widget-header">
+									<span class="widget-caption">列表跳转按钮</span>
+									<div class="widget-buttons">
+										<div id="list-jump-select" class="chooser">
+										</div>
+									</div>
+								</div>
+								<div class="widget-body">
+									<table class="table table-condensed">
+										<thead>
+											<tr>
+												<th>序号</th>
+												<th>按钮文字</th>
+												<th>
+													多选选项
+													<span 
+														title=""
+														class="badge badge-darkorange badge-helper"></span>	
+												</th>
+												<th>图标</th>
+												<th>操作</th>
+											</tr>
+										</thead>
+										<tbody id="list-jumps">
+										</tbody>
+									</table>
+								</div>
+							</div>
 							<div class="widget field-group">
 								<div class="widget-header">
 									<span class="widget-caption"> <span class="group-title">默认字段</span>
@@ -418,14 +480,19 @@
 		var actions = [];
 		var tmplActions = [];
 		var atmpls = [];
+		var jtmpls = [];
 		try{
 			premisesJson = Utils.parseJSON('${premisesJson}') || [];
 			tmplActions = Utils.parseJSON('${tmplActions}') || [];
+			tmplJumps = Utils.parseJSON('${tmplJumps}') || [];
 			atmpls = Utils.parseJSON('${atmpls}') || [];
+			jtmpls = Utils.parseJSON('${jtmpls}') || [];
 		}catch(e){console.log(e)}
 		TmplGroupUpdate.init($page, '${module.name}', premisesJson, {
 			tmplActions	: tmplActions,
-			atmpls		: atmpls
+			tmplJumps	: tmplJumps,
+			atmpls		: atmpls,
+			jtmpls		: jtmpls
 		});
 	});
 </script>

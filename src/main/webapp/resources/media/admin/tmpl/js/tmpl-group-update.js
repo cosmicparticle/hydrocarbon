@@ -70,6 +70,7 @@ define(function(require, exports, module) {
 				});
 
 		var $C = require('common/chooser/chooser.js');
+		var $JC = require('common/chooser/jumpChooser.js');
 		var actionsSortParam = {
 			helper : 'clone',
 			cursor : 'move',
@@ -80,13 +81,31 @@ define(function(require, exports, module) {
 				refreshActionIndex(this);
 			}
 		};
+		var jumpsSortParam = {
+				helper : 'clone',
+				cursor : 'move',
+				opacity : 0.5,
+				tolerance : 'pointer',
+				distance : 5,
+				update : function() {
+					refreshJumpIndex(this);
+				}
+			};
 		var $listActions = $('#list-actions', $page).sortable(actionsSortParam), $detailActions = $(
 				'#detail-actions', $page).sortable(actionsSortParam);
-
+		var $listJumps = $('#list-jumps', $page).sortable(jumpsSortParam);
 		var listChooser = $C('#list-action-select', $page).chooser({
 			list : data.atmpls,
 			onSelected : function(item, tmplAction) {
 				appendAction(item, $listActions, tmplAction, true);
+				item.hide();
+			}
+		});
+		
+		var listJumpChooser = $JC('#list-jump-select', $page).chooser({
+			list : data.jtmpls,
+			onSelected : function(item, tmplJump) {
+				appendJump(item, $listJumps, tmplJump, true);
 				item.hide();
 			}
 		});
@@ -98,7 +117,33 @@ define(function(require, exports, module) {
 				item.hide();
 			}
 		});
-		
+		var $tmplJump = $('#tmpl-jump', $page);
+		function appendJump(item, $jumpsBody, tmplJump, multiple) {
+			var data = item.data;
+			var $row = $tmplJump.tmpl({
+				index : $jumpsBody.children('tr').length,
+				title : (tmplJump && tmplJump.title) || data.title,
+				multiple : multiple || false,
+				iconClass: (tmplJump && tmplJump.iconClass) || ''
+			});
+			$row.data('jump-item', item);
+			var $multiCheckbox = $row.find('label.multi-checkbox :checkbox'), $multiTransaction = $row
+					.find('label.multi-transactional');
+			var $outgoing = $row.find(':checkbox.outgoing');
+			$multiCheckbox.change(function() {
+				var checked = $(this).prop('checked');
+				$multiTransaction.toggleClass('show', checked);
+			});
+			if(tmplJump && tmplJump.outgoing === 1){
+				$outgoing.prop('checked', true);
+			}
+			$row.find('a.delete').click(function() {
+				$row.remove();
+				item.show();
+				refreshActionIndex($jumpsBody);
+			});
+			$jumpsBody.append($row);
+		}
 		
 		var $tmplAction = $('#tmpl-action', $page);
 		function appendAction(item, $actionsBody, tmplAction, multiple) {
@@ -129,6 +174,12 @@ define(function(require, exports, module) {
 		}
 		function refreshActionIndex($actionsBody) {
 			$($actionsBody).children('tr').each(function(i) {
+				$(this).children('td').eq(0).text(i + 1);
+			});
+		}
+		
+		function refreshJumpIndex($jumpsBody) {
+			$($jumpsBody).children('tr').each(function(i) {
 				$(this).children('td').eq(0).text(i + 1);
 			});
 		}
@@ -243,6 +294,31 @@ define(function(require, exports, module) {
 					var lactionsCount = $listActions.children('tr').each(appendActions('list', 0)).length;
 					$detailActions.children('tr').each(appendActions('detail', lactionsCount));
 					
+					function appendJumps(face, indexStart){
+						return function(index){
+							var $row = $(this);
+							var data = $row.data('jump-item').data;
+							var id = data.cache.dataId || '';
+							var title = $row.find('input.jump-title').val();
+							var jtmplId = data.id;
+
+							var multiple = $row.find('select.multiple').val() || 0;
+							var iconClass = $row.find('.btn-icon-selector>i').attr('class') || '';
+							var outgoing = $row.find(':checkbox.outgoing').prop('checked')? 1: 0;
+							
+							var jumpName = 'jumps[' + (indexStart + index) + ']';
+							formData.append(jumpName + '.id', id);
+							formData.append(jumpName + '.title', title);
+							formData.append(jumpName + '.multiple', multiple);
+							formData.append(jumpName + '.iconClass', iconClass);
+							formData.append(jumpName + '.outgoing', outgoing);
+							formData.append(jumpName + '.jtmplId', jtmplId);
+							formData.append(jumpName + '.order', index);
+							formData.append(jumpName + '.face', face);
+						}
+					}
+					var ljumpsCount = $listJumps.children('tr').each(appendJumps('list', 0)).length;
+					
 				});
 		
 		function initChooserSelect(tmplAction){
@@ -253,12 +329,29 @@ define(function(require, exports, module) {
 			}, tmplAction];
 		}
 		
+		
+		
 		for(var i = 0; i < data.tmplActions.length; i++){
 			var tmplAction = data.tmplActions[i];
 			if(tmplAction.face === 'list'){
 				listChooser.chooser('select', initChooserSelect(tmplAction));
 			}else if(tmplAction.face === 'detail'){
 				detailChooser.chooser('select',initChooserSelect(tmplAction));
+			}
+		}
+		
+		function initChooserJumpSelect(tmplJump){
+			return [function(item){
+				return item.id === tmplJump.jtmplId
+			}, function(item){
+				item.cache.dataId = tmplJump.id;
+			}, tmplJump];
+		}
+		
+		for(var i = 0; i < data.tmplJumps.length; i++){
+			var tmplJump = data.tmplJumps[i];
+			if(tmplJump.face === 'list'){
+				listJumpChooser.chooser('select', initChooserJumpSelect(tmplJump));
 			}
 		}
 		

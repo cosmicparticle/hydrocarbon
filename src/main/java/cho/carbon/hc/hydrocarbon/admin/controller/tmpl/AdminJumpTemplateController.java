@@ -5,9 +5,11 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -71,9 +73,9 @@ public class AdminJumpTemplateController {
 	@RequestMapping("/list/{moduleName}")
 	public String list(Model model, @PathVariable String moduleName) {
 		ModuleMeta moduleMeta = mService.getModule(moduleName);
-		List<TemplateJumpTemplate> tmplList = jtmplService.queryAll(moduleName);
+		List<TemplateJumpTemplate> jtmplList = jtmplService.queryAll(moduleName);
 		model.addAttribute("modulesJson", configService.getSiblingModulesJson(moduleName));
-		model.addAttribute("tmplList", tmplList);
+		model.addAttribute("jtmplList", jtmplList);
 		model.addAttribute("module", moduleMeta);
 		return AdminConstants.JSP_TMPL_JUMP + "/jtmpl_list.jsp";
 	}
@@ -86,31 +88,49 @@ public class AdminJumpTemplateController {
 
 	
 
+//	@ResponseBody
+//	@RequestMapping("/save")
+//	public ResponseJSON saveTmpl(@RequestBody JsonRequest jReq) {
+//		JSONObjectResponse jRes = new JSONObjectResponse();
+//		TemplateJumpTemplate data = parseToTmplData(jReq.getJsonObject());
+//		try {
+//			Long dtmplId = jtmplService.merge(data);
+//			jRes.put("dtmplId", dtmplId);
+//			jRes.setStatus("suc");
+//		} catch (Exception e) {
+//			logger.error("保存模板时发生错误", e);
+//			jRes.setStatus("error");
+//		}
+//		return jRes;
+//	}
+	
 	@ResponseBody
 	@RequestMapping("/save")
-	public ResponseJSON saveTmpl(@RequestBody JsonRequest jReq) {
-		JSONObjectResponse jRes = new JSONObjectResponse();
-		TemplateJumpTemplate data = parseToTmplData(jReq.getJsonObject());
+	public AjaxPageResponse save(TemplateJumpTemplate group) {
+		Assert.hasText(group.getModule());
 		try {
-			Long dtmplId = jtmplService.merge(data);
-			jRes.put("dtmplId", dtmplId);
-			jRes.setStatus("suc");
-		} catch (Exception e) {
-			logger.error("保存模板时发生错误", e);
-			jRes.setStatus("error");
+			jtmplService.merge(group);
+			return AjaxPageResponse.CLOSE_AND_REFRESH_PAGE("保存成功", group.getModule() + "_jtmpl_list");
+		}catch (Exception e) {
+			logger.error("保存失败", e);
+			if(e instanceof ConstraintViolationException) {
+				if("module_key_unique".equalsIgnoreCase(((ConstraintViolationException) e).getConstraintName())) {
+					return AjaxPageResponse.FAILD("Key值重复， 保存失败");
+				}
+			}
+			return AjaxPageResponse.FAILD("保存失败");
 		}
-		return jRes;
 	}
 
 	@RequestMapping("/update/{tmplId}")
 	public String update(@PathVariable Long tmplId, Model model) {
-		TemplateJumpTemplate tmpl = jtmplService.getTemplate(tmplId);
-		JSONObject tmplJson = (JSONObject) JSON.toJSON(tmpl);
-		ModuleMeta moduleMeta = mService.getModule(tmpl.getModule());
+		TemplateJumpTemplate jtmpl = jtmplService.getTemplate(tmplId);
+		JSONObject tmplJson = (JSONObject) JSON.toJSON(jtmpl);
+		ModuleMeta moduleMeta = mService.getModule(jtmpl.getModule());
 		model.addAttribute("module", moduleMeta);
-		model.addAttribute("tmpl", tmpl);
+		model.addAttribute("jtmpl", jtmpl);
 		model.addAttribute("tmplJson", tmplJson);
-		return AdminConstants.JSP_TMPL_JUMP + "/dtmpl_update.jsp";
+		return AdminConstants.JSP_TMPL_JUMP + "/jtmpl_update.jsp";
 	}
 
 	

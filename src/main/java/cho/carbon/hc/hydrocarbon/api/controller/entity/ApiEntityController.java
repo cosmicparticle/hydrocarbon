@@ -52,6 +52,7 @@ import cho.carbon.hc.dataserver.model.tmpl.pojo.TemplateDetailFieldGroup;
 import cho.carbon.hc.dataserver.model.tmpl.pojo.TemplateDetailTemplate;
 import cho.carbon.hc.dataserver.model.tmpl.pojo.TemplateGroup;
 import cho.carbon.hc.dataserver.model.tmpl.pojo.TemplateGroupAction;
+import cho.carbon.hc.dataserver.model.tmpl.pojo.TemplateGroupJump;
 import cho.carbon.hc.dataserver.model.tmpl.pojo.TemplateListColumn;
 import cho.carbon.hc.dataserver.model.tmpl.pojo.TemplateListTemplate;
 import cho.carbon.hc.dataserver.model.tmpl.pojo.TemplateSelectionTemplate;
@@ -166,6 +167,7 @@ public class ApiEntityController {
 		res.put("pageInfo", view.getCriteria().getPageInfo());
 		res.put("criterias", toCriterias(view, criteria));
 		res.put("actions", toActions(tmplGroup.getActions(), TemplateGroupAction.ACTION_FACE_LIST));
+		res.put("actions", toJumps(tmplGroup.getJumps(), TemplateGroupJump.JUMP_FACE_LIST));
 		res.put("buttons", toHideButtons(tmplGroup));
 		return res;
 	}
@@ -200,6 +202,28 @@ public class ApiEntityController {
 			});
 		}
 		return aActions;
+	}
+	
+	private JSONArray toJumps(List<TemplateGroupJump> jumps, String actionFace) {
+		JSONArray jJumps = new JSONArray();
+		if (jumps != null) {
+			Stream<TemplateGroupJump> stream = jumps.stream();
+			;
+			if (actionFace != null) {
+				stream = jumps.stream().filter(action -> actionFace.equals(action.getFace()));
+			}
+			stream.forEach(action -> {
+				JSONObject jJump = new JSONObject();
+				jJump.put("id", action.getId());
+				jJump.put("title", action.getTitle());
+				jJump.put("iconClass", action.getIconClass());
+				jJump.put("outgoing", action.getOutgoing());
+				jJump.put("order", action.getOrder());
+				jJump.put("multiple", action.getMultiple());
+				jJumps.add(jJump);
+			});
+		}
+		return jJumps;
 	}
 
 	private JSONObject toProgressJson(WorkProgress progress) {

@@ -29,7 +29,9 @@ import cho.carbon.hc.dataserver.model.modules.service.ModulesService;
 import cho.carbon.hc.dataserver.model.tmpl.pojo.ArrayEntityProxy;
 import cho.carbon.hc.dataserver.model.tmpl.pojo.TemplateActionTemplate;
 import cho.carbon.hc.dataserver.model.tmpl.pojo.TemplateGroup;
+import cho.carbon.hc.dataserver.model.tmpl.pojo.TemplateJumpTemplate;
 import cho.carbon.hc.dataserver.model.tmpl.service.ActionTemplateService;
+import cho.carbon.hc.dataserver.model.tmpl.service.JumpTemplateService;
 import cho.carbon.hc.dataserver.model.tmpl.service.TemplateGroupService;
 import cho.carbon.hc.hydrocarbon.admin.controller.AdminConstants;
 import cho.carbon.hc.hydrocarbon.admin.controller.tmpl.CommonTemplateActionConsumer.ChooseRequestParam;
@@ -45,6 +47,9 @@ public class AdminTemplateGroupController {
 	
 	@Resource
 	ActionTemplateService atmplService;
+	
+	@Resource
+	JumpTemplateService jtmplService;
 	
 	@Resource
 	ModulesService  mService;
@@ -76,6 +81,7 @@ public class AdminTemplateGroupController {
 		if(moduleName != null) {
 			model.addAttribute("module", moduleMeta);
 			model.addAttribute("atmpls", toActionListJson(atmplService.queryAll(moduleName)));
+			model.addAttribute("jtmpls", toJumpListJson(jtmplService.queryAll(moduleName)));
 			model.addAttribute("moduleWritable", mService.getModuleEntityWritable(moduleName));
 			return AdminConstants.JSP_TMPL_GROUP + "/tmpl_group_update.jsp";
 		}
@@ -91,7 +97,9 @@ public class AdminTemplateGroupController {
 			model.addAttribute("group", group);
 			model.addAttribute("premisesJson", JSON.toJSON(group.getPremises()));
 			model.addAttribute("tmplActions", JSON.toJSON(group.getActions()));
+			model.addAttribute("tmplJumps", JSON.toJSON(group.getJumps()));
 			model.addAttribute("atmpls", toActionListJson(atmplService.queryAll(group.getModule())));
+			model.addAttribute("jtmpls", toJumpListJson(jtmplService.queryAll(group.getModule())));
 			model.addAttribute("moduleWritable", mService.getModuleEntityWritable(group.getModule()));
 			return AdminConstants.JSP_TMPL_GROUP + "/tmpl_group_update.jsp";
 		}
@@ -109,6 +117,19 @@ public class AdminTemplateGroupController {
 			}
 		}
 		return aActions;
+	}
+	
+	private JSONArray toJumpListJson(List<TemplateJumpTemplate> jumps) {
+		JSONArray jJumps = new JSONArray();
+		if(jumps != null) {
+			for (TemplateJumpTemplate jump : jumps) {
+				JSONObject jAction = new JSONObject();
+				jAction.put("id", jump.getId());
+				jAction.put("title", jump.getTitle());
+				jJumps.add(jAction);
+			}
+		}
+		return jJumps;
 	}
 
 	@ResponseBody

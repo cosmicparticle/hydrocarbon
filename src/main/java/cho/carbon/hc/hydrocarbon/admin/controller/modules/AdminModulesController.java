@@ -39,6 +39,7 @@ import cho.carbon.hc.dataserver.model.abc.service.EntitiesQueryParameter;
 import cho.carbon.hc.dataserver.model.abc.service.EntityQueryParameter;
 import cho.carbon.hc.dataserver.model.abc.service.ModuleEntityService;
 import cho.carbon.hc.dataserver.model.dict.pojo.DictionaryComposite;
+import cho.carbon.hc.dataserver.model.dict.pojo.DictionaryOption;
 import cho.carbon.hc.dataserver.model.dict.service.DictionaryService;
 import cho.carbon.hc.dataserver.model.modules.pojo.EntityVersionItem;
 import cho.carbon.hc.dataserver.model.modules.pojo.ModuleMeta;
@@ -59,7 +60,9 @@ import cho.carbon.hc.dataserver.model.tmpl.pojo.TemplateDetailFieldGroup;
 import cho.carbon.hc.dataserver.model.tmpl.pojo.TemplateDetailTemplate;
 import cho.carbon.hc.dataserver.model.tmpl.pojo.TemplateGroup;
 import cho.carbon.hc.dataserver.model.tmpl.pojo.TemplateGroupAction;
+import cho.carbon.hc.dataserver.model.tmpl.pojo.TemplateGroupJump;
 import cho.carbon.hc.dataserver.model.tmpl.pojo.TemplateGroupPremise;
+import cho.carbon.hc.dataserver.model.tmpl.pojo.TemplateJumpTemplate;
 import cho.carbon.hc.dataserver.model.tmpl.pojo.TemplateListCriteria;
 import cho.carbon.hc.dataserver.model.tmpl.pojo.TemplateListTemplate;
 import cho.carbon.hc.dataserver.model.tmpl.pojo.TemplateSelectionTemplate;
@@ -68,6 +71,7 @@ import cho.carbon.hc.dataserver.model.tmpl.pojo.TemplateTreeTemplate;
 import cho.carbon.hc.dataserver.model.tmpl.service.ActionTemplateService;
 import cho.carbon.hc.dataserver.model.tmpl.service.ArrayItemFilterService;
 import cho.carbon.hc.dataserver.model.tmpl.service.DetailTemplateService;
+import cho.carbon.hc.dataserver.model.tmpl.service.JumpTemplateService;
 import cho.carbon.hc.dataserver.model.tmpl.service.ListCriteriaFactory;
 import cho.carbon.hc.dataserver.model.tmpl.service.ListTemplateService;
 import cho.carbon.hc.dataserver.model.tmpl.service.SelectionTemplateService;
@@ -118,6 +122,9 @@ public class AdminModulesController {
 
 	@Resource
 	ActionTemplateService atmplService;
+	
+	@Resource
+	JumpTemplateService jtmplService;
 
 	@Resource
 	TreeTemplateService treeService;
@@ -951,10 +958,10 @@ public class AdminModulesController {
 			return (AjaxPageResponse) vRes;
 		}
 		Set<String> codes = (Set<String>) vRes;
-		TemplateActionTemplate atmpl = atmplService.getTemplate(groupAction.getAtmplId());
-		if (atmpl != null) {
+		TemplateActionTemplate action = atmplService.getTemplate(groupAction.getAtmplId());
+		if (action != null) {
 			try {
-				int sucs = atmplService.doAction(atmpl, codes,
+				int sucs = atmplService.doAction(action, codes,
 						TemplateGroupAction.ACTION_MULTIPLE_TRANSACTION.equals(groupAction.getMultiple()),
 						UserUtils.getCurrentUser());
 				return AjaxPageResponse.REFRESH_LOCAL("执行结束, 共成功处理" + sucs + "个实体");
@@ -966,6 +973,38 @@ public class AdminModulesController {
 			return AjaxPageResponse.FAILD("操作不存在");
 		}
 
+	}
+	
+
+	@SuppressWarnings("unchecked")
+	@ResponseBody
+	@RequestMapping("/do_jump/{menuId}/{jumpId}")
+	public ResponseJSON doJump(@PathVariable Long menuId, @PathVariable Long jumpId,
+			@RequestParam(name = "codes") String codeStr) {
+		SideMenuLevel2Menu menu = authService.validateL2MenuAccessable(menuId);
+		ArrayEntityProxy.setLocalUser(UserUtils.getCurrentUser());
+		TemplateGroupJump groupJump = tmplGroupService.getTempateGroupJump(jumpId);
+		Object vRes = validateGroupJump(groupJump, menu, codeStr);
+		JSONObjectResponse jRes = new JSONObjectResponse();
+		
+		if (vRes instanceof AjaxPageResponse) {
+			jRes.put("error","跳转失败");
+			return jRes;
+		}
+		Set<String> codes = (Set<String>) vRes;
+		TemplateJumpTemplate jtmpl = jtmplService.getTemplate(groupJump.getJtmplId());
+		if (jtmpl != null) {
+			try {
+				jRes.setStatus("suc");
+				jRes.put( "url", jtmpl.getUrl()+"?proGramCode="+codes.iterator().next());
+				return jRes;
+			} catch (Exception e) {
+				logger.error("操作失败", e);
+				return jRes;
+			}
+		} else {
+			return jRes;
+		}
 	}
 
 	public static Object validateGroupAction(TemplateGroupAction groupAction, SideMenuLevel2Menu menu, String codes) {
@@ -990,6 +1029,30 @@ public class AdminModulesController {
 
 	}
 
+	
+	public static Object validateGroupJump(TemplateGroupJump groupJump, SideMenuLevel2Menu menu, String codes) {
+		if (!groupJump.getGroupId().equals(menu.getTemplateGroupId())) {
+			throw new NonAuthorityException("二级菜单[id=" + menu.getId() + "]对应的模板组合[id=" + menu.getTemplateGroupId()
+					+ "]与操作[id=" + groupJump.getId() + "]对应的模板组合[id=" + groupJump.getGroupId() + "]不一致");
+		}
+		if (!codes.isEmpty()) {
+			Set<String> codeSet = collectCode(codes);
+			if (!codeSet.isEmpty()) {
+				if (codeSet.size() > 1) {
+					if (TemplateGroupAction.ACTION_MULTIPLE_SINGLE.equals(groupJump.getMultiple())
+							|| TemplateGroupAction.ACTION_FACE_DETAIL.equals(groupJump.getFace())) {
+						// 操作要单选，那么不能处理多个code
+						return AjaxPageResponse.FAILD("该操作只能处理一个编码");
+					}
+				}
+				return codeSet;
+			}
+		}
+		return AjaxPageResponse.FAILD("没有传入编码参数");
+
+	}
+
+	
 	private static Set<String> collectCode(String codes) {
 		Set<String> codeSet = new LinkedHashSet<>();
 		for (String code : codes.split(",")) {

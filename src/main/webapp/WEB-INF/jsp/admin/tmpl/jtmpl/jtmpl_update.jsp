@@ -10,53 +10,32 @@
 <title>${title }</title>
 <link type="text/css" rel="stylesheet"
 	href="media/admin/tmpl/css/tmpl-group-update.css" />
-<div id="tmpl-group-update-${jtmpl.id }" class="tmpl-group-update">
-	<script type="jquery/tmpl" id="tmpl-field">
-		<div class="form-group field-item field-id="\${fieldId}" data-id="\${id}">
-			<label class="control-label field-title">\${title}</label>
-			<div class="field-value">
-				<span class="field-view"></span>
-			</div>
-			<div class="operate-buttons">
-				<a class="remove-field" title="删除字段"><i class="fa fa-trash-o"></i></a>
-			</div>
-		</div>
-	</script>
-	<script type="jquery/tmpl" id="tmpl-action">
-		<tr>
-			<td>\${index + 1 }</td>
-			<td><input class="action-title" type="text" value="\${title }" /></td>
-			{{if multiple}}
-				<td>
-					<select class="multiple">
-						<option value="2">事务型多选</option>
-						<option value="1">多选</option>
-						<option value="0">单选</option>
-					</select>
-				</td>
-			{{else}}
-				<td>
-					<label>
-                        <input class="outgoing" type="checkbox" class="colored-blue">
-                        <span class="text"></span>
-                    </label>
-				</td>
-			{{/if}}
-			<td>
-				<div class="btn-icon-selector" data-icon="">
-					{{if iconClass !== ''}}
-						<i class="\${iconClass}"></i>
-					{{/if}}
-				</div>
-			</td>
-			<td>
-				<a class="btn btn-danger btn-xs delete">
-					<i class="fa fa-trash-o"></i>
-					删除
-				</a>
-			</td>
-		</tr>
-	</script>
+<div id="jtmpl-update-${jtmpl.id }" class="jtmpl-update">
+	<script type="jquery/tmpl" id="ks-criteria-row">
+	<tr on-render="">
+		<td>
+			<select on-change="do:setCriteria('source', criteria)" on-render="do:initCriteriaValue('source', criteria.source, criteria)">
+				<!-- <option value="path-var">路径参数</option> -->
+				<option value="param">请求参数</option>
+			</select>
+		</td>
+		<td class="form-group">
+				<input class="form-control" type="text" on-change="do:setCriteria('name', criteria)" value="${criteria.name || ''}" 
+				name="${criteria.uuid}"  />
+		</td>
+		<td>
+			<select class="form-control" on-change="do:setCriteria('ltmplFieldId', criteria)" on-render="do:initCriteriaValue('ltmplFieldId', criteria.ltmplFieldId, criteria)">
+				{{each(i, field) ltmplCriteraFields}}
+					<option value="${field.id}">${field.title}</option>
+				{{/each}}
+			</select>
+		</td>
+		<td>
+			<a class="btn btn-danger btn-xs" on-click="do:removeCriteria(criteria)">移除</a>
+		</td>
+	</tr>
+</script>
+	
 	<div class="float-operate-area">
 		<div class="operate-area-cover"></div>
 		<a id="save" class="btn-save" title="保存"><i
@@ -88,7 +67,7 @@
 								</div>
 								<div class="widget-body">
 									<input type="hidden" name="id" value="${jtmpl.id }" /> <input
-										type="hidden" name="module" value="${module.name }" /> 
+										type="hidden" name="module" value="${module.name }" />
 									<div class="row">
 										<div class="col-lg-6">
 											<div class="form-group">
@@ -104,21 +83,10 @@
 									<div class="row">
 										<div class="col-lg-6">
 											<div class="form-group">
-												<label class="col-lg-4 control-label" for="name">URL</label>
+												<label class="col-lg-4 control-label" for="name">路径</label>
 												<div class="col-lg-8">
-													<input type="text"  class="form-control"
-														name="url" value="${jtmpl.url }" />
-												</div>
-											</div>
-									</div>
-									</div>
-									<div class="row">
-										<div class="col-lg-6">
-											<div class="form-group">
-												<label class="col-lg-4 control-label" for="name">默认编码</label>
-												<div class="col-lg-8">
-													<input type="text" class="form-control" name="defualtCode"
-														value="${jtmpl.defualtCode }" />
+													<input type="text" class="form-control" name="url"
+														value="${jtmpl.url }" />
 												</div>
 											</div>
 										</div>
@@ -131,13 +99,41 @@
 													<a class="form-control"
 														href="admin/tmpl/dtmpl/choose/${module.name }"
 														title="选择详情模板" choose-key="choose-dtmpl"
-														crn-choose-dtmpl="title">${jtmpl.detailTemplateId != null? group.detailTemplateTitle: '选择详情模板' }</a>
+														crn-choose-dtmpl="title">${jtmpl.detailTemplateId != null? jtmpl.detailTemplateTitle: '选择详情模板' }</a>
 													<input type="hidden" crn-choose-dtmpl="id"
 														name="detailTemplateId" value="${jtmpl.detailTemplateId }" />
 												</div>
 											</div>
 										</div>
 									</div>
+
+									<div class="widget requestparam">
+										<div class="widget-header">
+											<span class="widget-caption"> 跳转参数配置 </span>
+											<div class="widget-buttons buttons-bordered">
+												<input disabled="disabled" type="button"
+													class="btn btn-blue btn-xs" on-prepare="btn-add-param"
+													on-click="addParam" value="添加" />
+											</div>
+										</div>
+										<div class="widget-body">
+											<div class="">
+												<table class="table table-hover table-bordered">
+													<thead>
+														<tr>
+															<th>参数类型</th>
+															<th>参数名</th>
+															<th>对应字段</th>
+															<th>操作</th>
+														</tr>
+													</thead>
+													<tbody on-prepare="jump-param-rows;">
+													</tbody>
+												</table>
+											</div>
+										</div>
+									</div>
+
 								</div>
 							</div>
 						</form>
@@ -148,9 +144,9 @@
 	</div>
 </div>
 <script>
-	seajs.use([ 'tmpl/js/tmpl-group-update', 'utils' ], function(
-			TmplGroupUpdate, Utils) {
-		var $page = $('#tmpl-group-update-${jtmpl.id }');
+	seajs.use([ 'tmpl/js/jtmpl-update', 'utils' ], function(JtmplUpdate,
+			Utils) {
+		var $page = $('#jtmpl-update-${jtmpl.id }');
 		console.log($page);
 		var premisesJson = [];
 		var actions = [];
@@ -163,7 +159,7 @@
 		} catch (e) {
 			console.log(e)
 		}
-		TmplGroupUpdate.init($page, '${module.name}', premisesJson, {
+		JtmplUpdate.init($page, '${module.name}', premisesJson, {
 			tmplActions : tmplActions,
 			atmpls : atmpls
 		});
