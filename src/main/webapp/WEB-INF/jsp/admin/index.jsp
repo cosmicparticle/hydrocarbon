@@ -5,8 +5,8 @@
 <html>
 <head>
 <title><fmt:message key="theme.logo" bundle="${logo}" /></title>
-<link rel="icon" href="favicon.ico" type="image/x-icon" />
-<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+<!-- <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />s -->
+
 <jsp:include page="/WEB-INF/jsp/admin/common/admin-include.jsp"></jsp:include>
 </head>
 <body>

@@ -137,12 +137,12 @@ div.Z-loginbox>div.loginbox-submit {
 				<div class="loginbox-logo">
 					<img src="media/admin/main/image/login.png" />
 					<%-- <img src="<fmt:message key='theme.logoPhoto' bundle='${logo}'/>" /> --%>
-            		<%--  <h1><fmt:message key='theme.logo' bundle='${logo}'/></h1> --%>
+            		  <h1><fmt:message key='theme.logo' bundle='${logo}'/></h1> 
 				</div>
 				<div class="warn-warp">
 					<c:if test="${error != null }">
 						<p class="login-warn">
-							<img src="media/common/ydd/image/login-warn.png" />
+							<img src="media/common/image/login-warn.png" />
 							${errorMap[error] }
 						</p>
 					</c:if>

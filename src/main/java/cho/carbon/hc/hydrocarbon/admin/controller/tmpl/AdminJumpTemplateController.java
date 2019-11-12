@@ -11,7 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -21,7 +20,6 @@ import com.alibaba.fastjson.JSONObject;
 
 import cho.carbon.hc.copframe.dto.ajax.AjaxPageResponse;
 import cho.carbon.hc.copframe.dto.ajax.JSONObjectResponse;
-import cho.carbon.hc.copframe.dto.ajax.JsonRequest;
 import cho.carbon.hc.copframe.dto.ajax.ResponseJSON;
 import cho.carbon.hc.copframe.utils.date.FrameDateFormat;
 import cho.carbon.hc.dataserver.model.dict.service.DictionaryService;
@@ -76,6 +74,7 @@ public class AdminJumpTemplateController {
 		List<TemplateJumpTemplate> jtmplList = jtmplService.queryAll(moduleName);
 		model.addAttribute("modulesJson", configService.getSiblingModulesJson(moduleName));
 		model.addAttribute("jtmplList", jtmplList);
+		
 		model.addAttribute("module", moduleMeta);
 		return AdminConstants.JSP_TMPL_JUMP + "/jtmpl_list.jsp";
 	}
@@ -129,6 +128,7 @@ public class AdminJumpTemplateController {
 		ModuleMeta moduleMeta = mService.getModule(jtmpl.getModule());
 		model.addAttribute("module", moduleMeta);
 		model.addAttribute("jtmpl", jtmpl);
+		model.addAttribute("params", JSON.toJSON(jtmpl.getJtmplParams()));
 		model.addAttribute("tmplJson", tmplJson);
 		return AdminConstants.JSP_TMPL_JUMP + "/jtmpl_update.jsp";
 	}
@@ -169,19 +169,19 @@ public class AdminJumpTemplateController {
 
 	@ResponseBody
 	@RequestMapping("/load_jtmpls/{moduleName}")
-	public ResponseJSON loadDetailTemplates(@PathVariable String moduleName, Long dtmplId) {
+	public ResponseJSON loadJumpTemplates(@PathVariable String moduleName, Long jtmplId) {
 		JSONObjectResponse jRes = new JSONObjectResponse();
 		try {
 			List<TemplateJumpTemplate> tmplList = jtmplService.queryAll(moduleName);
 			if (tmplList != null) {
 				JSONArray jDtmpls = new JSONArray();
 				tmplList.forEach((tmpl) -> {
-					JSONObject jDtmpl = new JSONObject();
-					jDtmpl.put("id", tmpl.getId());
-					jDtmpl.put("title", tmpl.getTitle());
-					jDtmpls.add(jDtmpl);
+					JSONObject jJtmpl = new JSONObject();
+					jJtmpl.put("id", tmpl.getId());
+					jJtmpl.put("title", tmpl.getTitle());
+					jDtmpls.add(jJtmpl);
 				});
-				jRes.put("dtmpls", jDtmpls);
+				jRes.put("jtmpls", jDtmpls);
 				jRes.setStatus("suc");
 			}
 

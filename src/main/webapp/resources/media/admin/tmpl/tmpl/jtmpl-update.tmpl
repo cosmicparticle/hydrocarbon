@@ -1,0 +1,21 @@
+<script  id="jtmpl-param-row">
+	<tr on-render="">
+		<td>
+			<select class="param-type form-control" >
+				<!-- <option value="path-var">路径参数</option> -->	
+				<option value="param">请求参数</option>
+			</select>
+		</td>
+		<td >
+				<input class="param-name form-control" type="text"  value="${param.name || ''}" />
+		</td>
+		<td>
+			<input class="param-fieldId" type="hidden"  type="text"  value="${param.fieldId || ''}" />
+			${param.fieldTitle}
+			<input class="param-id" type="hidden"  type="text"  value="${param.id || ''}" />
+		</td>
+		<td>
+			<a class="btn btn-danger btn-xs" on-click="do:removeParam(param)">移除</a>
+		</td>
+	</tr>
+</script>

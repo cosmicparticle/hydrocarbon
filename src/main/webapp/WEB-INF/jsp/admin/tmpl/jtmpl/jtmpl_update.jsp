@@ -11,31 +11,8 @@
 <link type="text/css" rel="stylesheet"
 	href="media/admin/tmpl/css/tmpl-group-update.css" />
 <div id="jtmpl-update-${jtmpl.id }" class="jtmpl-update">
-	<script type="jquery/tmpl" id="ks-criteria-row">
-	<tr on-render="">
-		<td>
-			<select on-change="do:setCriteria('source', criteria)" on-render="do:initCriteriaValue('source', criteria.source, criteria)">
-				<!-- <option value="path-var">路径参数</option> -->
-				<option value="param">请求参数</option>
-			</select>
-		</td>
-		<td class="form-group">
-				<input class="form-control" type="text" on-change="do:setCriteria('name', criteria)" value="${criteria.name || ''}" 
-				name="${criteria.uuid}"  />
-		</td>
-		<td>
-			<select class="form-control" on-change="do:setCriteria('ltmplFieldId', criteria)" on-render="do:initCriteriaValue('ltmplFieldId', criteria.ltmplFieldId, criteria)">
-				{{each(i, field) ltmplCriteraFields}}
-					<option value="${field.id}">${field.title}</option>
-				{{/each}}
-			</select>
-		</td>
-		<td>
-			<a class="btn btn-danger btn-xs" on-click="do:removeCriteria(criteria)">移除</a>
-		</td>
-	</tr>
-</script>
-	
+
+
 	<div class="float-operate-area">
 		<div class="operate-area-cover"></div>
 		<a id="save" class="btn-save" title="保存"><i
@@ -69,10 +46,10 @@
 									<input type="hidden" name="id" value="${jtmpl.id }" /> <input
 										type="hidden" name="module" value="${module.name }" />
 									<div class="row">
-										<div class="col-lg-6">
+										<div class="col-lg-10">
 											<div class="form-group">
-												<label class="col-lg-4 control-label" for="name">名称</label>
-												<div class="col-lg-8">
+												<label class="col-lg-2 control-label" for="name">名称</label>
+												<div class="col-lg-6">
 													<input type="text" data-bv-notempty="true"
 														data-bv-notempty-message="跳转模板名称必填" class="form-control"
 														name="title" value="${jtmpl.title }" />
@@ -81,57 +58,47 @@
 										</div>
 									</div>
 									<div class="row">
-										<div class="col-lg-6">
+										<div class="col-lg-10">
 											<div class="form-group">
-												<label class="col-lg-4 control-label" for="name">路径</label>
-												<div class="col-lg-8">
-													<input type="text" class="form-control" name="url"
-														value="${jtmpl.url }" />
+												<label class="col-lg-2 control-label" for="name">路径</label>
+												<div class="col-lg-10">
+													<input type="text" class="form-control" name="path"
+														value="${jtmpl.path }" />
 												</div>
 											</div>
 										</div>
 									</div>
-									<div class="row">
-										<div class="col-lg-6">
-											<div class="form-group">
-												<label class="col-lg-4 control-label" for="name">详情模板</label>
-												<div class="col-lg-8">
-													<a class="form-control"
-														href="admin/tmpl/dtmpl/choose/${module.name }"
-														title="选择详情模板" choose-key="choose-dtmpl"
-														crn-choose-dtmpl="title">${jtmpl.detailTemplateId != null? jtmpl.detailTemplateTitle: '选择详情模板' }</a>
-													<input type="hidden" crn-choose-dtmpl="id"
-														name="detailTemplateId" value="${jtmpl.detailTemplateId }" />
-												</div>
-											</div>
-										</div>
-									</div>
+								</div>
+							</div>
+							<div class="widget ">
+								<div class="widget-header">
+									<span class="widget-caption"> 跳转参数配置 </span>
 
-									<div class="widget requestparam">
-										<div class="widget-header">
-											<span class="widget-caption"> 跳转参数配置 </span>
-											<div class="widget-buttons buttons-bordered">
-												<input disabled="disabled" type="button"
-													class="btn btn-blue btn-xs" on-prepare="btn-add-param"
-													on-click="addParam" value="添加" />
-											</div>
+									<div class="widget-buttons">
+										<div class="input-icon field-search">
+											<span class="search-input-wrapper"> <input type="text"
+												class="search-text-input form-control input-xs glyphicon-search-input"
+												autocomplete="off" placeholder="输入添加的字段名">
+											</span> <i class="glyphicon glyphicon-search blue"></i> <i
+												title="选择字段"
+												class="glyphicon glyphicon-th blue field-picker-button"></i>
 										</div>
-										<div class="widget-body">
-											<div class="">
-												<table class="table table-hover table-bordered">
-													<thead>
-														<tr>
-															<th>参数类型</th>
-															<th>参数名</th>
-															<th>对应字段</th>
-															<th>操作</th>
-														</tr>
-													</thead>
-													<tbody on-prepare="jump-param-rows;">
-													</tbody>
-												</table>
-											</div>
-										</div>
+									</div>
+								</div>
+								<div class="widget-body form-group">
+									<div class="">
+										<table class="table table-hover table-bordered">
+											<thead>
+												<tr>
+													<th>参数类型</th>
+													<th>参数名</th>
+													<th>对应字段</th>
+													<th>操作</th>
+												</tr>
+											</thead>
+											<tbody id="jtmpl-param-rows" on-prepare="jtmpl-param-rows;">
+											</tbody>
+										</table>
 									</div>
 
 								</div>
@@ -144,25 +111,19 @@
 	</div>
 </div>
 <script>
-	seajs.use([ 'tmpl/js/jtmpl-update', 'utils' ], function(JtmplUpdate,
-			Utils) {
-		var $page = $('#jtmpl-update-${jtmpl.id }');
-		console.log($page);
-		var premisesJson = [];
-		var actions = [];
-		var tmplActions = [];
-		var atmpls = [];
-		try {
-			premisesJson = Utils.parseJSON('${premisesJson}') || [];
-			tmplActions = Utils.parseJSON('${tmplActions}') || [];
-			atmpls = Utils.parseJSON('${atmpls}') || [];
-		} catch (e) {
-			console.log(e)
-		}
-		JtmplUpdate.init($page, '${module.name}', premisesJson, {
-			tmplActions : tmplActions,
-			atmpls : atmpls
-		});
-	});
+	seajs.use([ 'tmpl/js/jtmpl-update', 'utils' ],
+			function(JtmplUpdate, Utils) {
+				var $page = $('#jtmpl-update-${jtmpl.id }');
+				console.log($page);
+				var params = [];
+				try {
+					params = Utils.parseJSON('${params}') || [];
+				} catch (e) {
+					console.log(e)
+				}
+				JtmplUpdate.init($page, '${module.name}', {
+					params : params
+				});
+			});
 </script>
 <div></div>

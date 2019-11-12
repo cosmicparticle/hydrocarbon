@@ -19,6 +19,8 @@
 		
 	<import resource="spring-core.xml"/>
 	<import resource="spring-dao.xml"/>
+	
+	<import resource="classpath*:carbon-imservice-spring-client.xml"/>
 	<!--  
 	<import resource="classpath*:carbon-spring-redis.xml"/> 
 	-->

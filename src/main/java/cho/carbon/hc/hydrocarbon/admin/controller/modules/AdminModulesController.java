@@ -62,6 +62,7 @@ import cho.carbon.hc.dataserver.model.tmpl.pojo.TemplateGroup;
 import cho.carbon.hc.dataserver.model.tmpl.pojo.TemplateGroupAction;
 import cho.carbon.hc.dataserver.model.tmpl.pojo.TemplateGroupJump;
 import cho.carbon.hc.dataserver.model.tmpl.pojo.TemplateGroupPremise;
+import cho.carbon.hc.dataserver.model.tmpl.pojo.TemplateJumpParam;
 import cho.carbon.hc.dataserver.model.tmpl.pojo.TemplateJumpTemplate;
 import cho.carbon.hc.dataserver.model.tmpl.pojo.TemplateListCriteria;
 import cho.carbon.hc.dataserver.model.tmpl.pojo.TemplateListTemplate;
@@ -94,6 +95,7 @@ import cho.carbon.hc.hydrocarbon.model.config.service.AuthorityService;
 import cho.carbon.hc.hydrocarbon.model.config.service.NonAuthorityException;
 import cho.carbon.hc.hydrocarbon.model.config.service.SideMenuService;
 import cho.carbon.hc.hydrocarbon.model.modules.service.ExportService;
+import cho.carbon.meta.enun.AttributeValueType;
 
 @Controller
 @RequestMapping(AdminConstants.URI_MODULES + "/curd")
@@ -122,7 +124,7 @@ public class AdminModulesController {
 
 	@Resource
 	ActionTemplateService atmplService;
-	
+
 	@Resource
 	JumpTemplateService jtmplService;
 
@@ -513,9 +515,9 @@ public class AdminModulesController {
 			TemplateGroup tmplGroup = tmplGroupService.getTemplate(tmplGroupId);
 			param.setArrayItemCriterias(
 					arrayItemFilterService.getArrayItemFilterCriterias(tmplGroup.getDetailTemplateId(), user));
-			
-			return EntityFusionRunner.running(fuseMode, entityMap, param,entityService,menuId);
-			
+
+			return EntityFusionRunner.running(fuseMode, entityMap, param, entityService, menuId);
+
 		} catch (Exception e) {
 			logger.error("保存时发生错误", e);
 			return AjaxPageResponse.FAILD("保存失败");
@@ -547,7 +549,7 @@ public class AdminModulesController {
 			TemplateGroup tmplGroup = tmplGroupService.getTemplate(nodeTemplate.getTemplateGroupId());
 			param.setArrayItemCriterias(
 					arrayItemFilterService.getArrayItemFilterCriterias(tmplGroup.getDetailTemplateId(), user));
-			return EntityFusionRunner.running(fuseMode, entityMap, param,entityService,menuId);
+			return EntityFusionRunner.running(fuseMode, entityMap, param, entityService, menuId);
 		} catch (Exception e) {
 			logger.error("保存时发生错误", e);
 			return AjaxPageResponse.FAILD("保存失败");
@@ -727,7 +729,7 @@ public class AdminModulesController {
 		pageInfo.setCount(query.getCount());
 		model.addAttribute("pageInfo", pageInfo);
 		return AdminConstants.JSP_MODULES + "/modules_rel_selection.jsp";
-		
+
 	}
 
 	/*
@@ -853,18 +855,16 @@ public class AdminModulesController {
 		try {
 			entityMap.remove(AdminConstants.KEY_FUSE_MODE);
 			UserIdentifier user = UserUtils.getCurrentUser();
-			
+
 			EntityQueryParameter param = new EntityQueryParameter(moduleName, user);
-			
-			EntityFusionRunner.running(fuseMode, jRes, entityMap, param,entityService);
+
+			EntityFusionRunner.running(fuseMode, jRes, entityMap, param, entityService);
 		} catch (Exception e) {
 			logger.error("保存时发生错误", e);
 			jRes.setStatus("error");
 		}
 		return jRes;
 	}
-
-	
 
 	@ResponseBody
 	@RequestMapping("/load_entities/{menuId}/{stmplId}")
@@ -974,7 +974,6 @@ public class AdminModulesController {
 		}
 
 	}
-	
 
 	@SuppressWarnings("unchecked")
 	@ResponseBody
@@ -982,21 +981,28 @@ public class AdminModulesController {
 	public ResponseJSON doJump(@PathVariable Long menuId, @PathVariable Long jumpId,
 			@RequestParam(name = "codes") String codeStr) {
 		SideMenuLevel2Menu menu = authService.validateL2MenuAccessable(menuId);
-		ArrayEntityProxy.setLocalUser(UserUtils.getCurrentUser());
+		UserIdentifier user = UserUtils.getCurrentUser();
+		ArrayEntityProxy.setLocalUser(user);
 		TemplateGroupJump groupJump = tmplGroupService.getTempateGroupJump(jumpId);
 		Object vRes = validateGroupJump(groupJump, menu, codeStr);
 		JSONObjectResponse jRes = new JSONObjectResponse();
-		
+
 		if (vRes instanceof AjaxPageResponse) {
 			jRes.put("error","跳转失败");
 			return jRes;
 		}
+		
 		Set<String> codes = (Set<String>) vRes;
 		TemplateJumpTemplate jtmpl = jtmplService.getTemplate(groupJump.getJtmplId());
+		
 		if (jtmpl != null) {
 			try {
+				TemplateGroup tmplGroup = tmplGroupService.getTemplate(groupJump.getGroupId());
+				ModuleMeta moduleMeta = mService.getModule(tmplGroup.getModule());
+				EntityQueryParameter queryParam = new EntityQueryParameter(moduleMeta.getName(), codes.iterator().next(), user);
+				ModuleEntityPropertyParser entity = entityService.getEntityParser(queryParam);
 				jRes.setStatus("suc");
-				jRes.put( "url", jtmpl.getUrl()+"?proGramCode="+codes.iterator().next());
+				jRes.put( "url", buildUrl(jtmpl,entity));
 				return jRes;
 			} catch (Exception e) {
 				logger.error("操作失败", e);
@@ -1005,6 +1011,24 @@ public class AdminModulesController {
 		} else {
 			return jRes;
 		}
+	}
+
+	private Object buildUrl(TemplateJumpTemplate jtmpl, ModuleEntityPropertyParser entity) {
+		List<TemplateJumpParam> params = jtmpl.getJtmplParams();
+		StringBuffer sb=new StringBuffer();
+		sb.append(jtmpl.getPath());
+		if(!jtmpl.getPath().trim().endsWith("?")) {
+			sb.append("?");
+		}
+		if(params!=null) {
+			for(TemplateJumpParam param:params) {
+				sb.append(param.getName());
+				sb.append("=");
+				sb.append(entity.getProperty(param.getFieldTitle(), AttributeValueType.STRING));
+				sb.append("&");
+			}
+		}
+		return sb.toString();
 	}
 
 	public static Object validateGroupAction(TemplateGroupAction groupAction, SideMenuLevel2Menu menu, String codes) {
@@ -1029,7 +1053,6 @@ public class AdminModulesController {
 
 	}
 
-	
 	public static Object validateGroupJump(TemplateGroupJump groupJump, SideMenuLevel2Menu menu, String codes) {
 		if (!groupJump.getGroupId().equals(menu.getTemplateGroupId())) {
 			throw new NonAuthorityException("二级菜单[id=" + menu.getId() + "]对应的模板组合[id=" + menu.getTemplateGroupId()
@@ -1052,7 +1075,6 @@ public class AdminModulesController {
 
 	}
 
-	
 	private static Set<String> collectCode(String codes) {
 		Set<String> codeSet = new LinkedHashSet<>();
 		for (String code : codes.split(",")) {
