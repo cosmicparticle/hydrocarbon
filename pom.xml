@@ -11,14 +11,14 @@
 
 	<properties>
 		<version.kie>7.10.0.Final</version.kie>
-		<version.carbon-core>0.86</version.carbon-core>
-		<version.hydrocarbon-server>1.69</version.hydrocarbon-server>
+		<version.carbon-core>0.87</version.carbon-core>
+		<version.hydrocarbon-server>1.70</version.hydrocarbon-server>
 		<version.cpfweb>1.0</version.cpfweb>
 		<version.cpfutils>1.0</version.cpfutils>
 		<version.cpfspring>1.0</version.cpfspring>
 		<version.abcbizz>2.1.15</version.abcbizz>
 		<version.authbiz>0.0.21</version.authbiz>
-		<version.carbon-thinking>0.9</version.carbon-thinking>
+		<version.carbon-thinking>0.13</version.carbon-thinking>
 		<version.jgdj>1.2</version.jgdj>
 		<version.elnV1>0.9</version.elnV1>
 		<version.xfjd>0.1.83</version.xfjd>
