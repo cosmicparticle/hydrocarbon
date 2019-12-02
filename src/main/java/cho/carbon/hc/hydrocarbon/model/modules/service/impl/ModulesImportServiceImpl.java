@@ -54,9 +54,8 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
+import cho.carbon.context.hc.HCFusionContext;
 import cho.carbon.entity.entity.Entity;
-import cho.carbon.hc.FusionContext;
-import cho.carbon.hc.HCFusionContext;
 import cho.carbon.hc.copframe.common.UserIdentifier;
 import cho.carbon.hc.copframe.dao.utils.NormalOperateDao;
 import cho.carbon.hc.copframe.utils.CollectionUtils;
@@ -135,7 +134,7 @@ public class ModulesImportServiceImpl implements ModulesImportService {
 		progress.appendMessage("开始导入");
 		Integration integration = PanelFactory.getIntegration();
 		HCFusionContext context = config.getCurrentContext(user);
-		context.setSource(FusionContext.SOURCE_COMMON);
+		context.setSource(HCFusionContext.SOURCE_COMMON);
 		while(true){
 			if(progress.isBreaked()){
 				progress.getLogger().warn("导入中断");
