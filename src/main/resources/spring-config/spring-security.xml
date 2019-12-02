@@ -8,11 +8,11 @@
 	http://www.springframework.org/schema/security/spring-security.xsd"
 	>
 
-	<debug />
+
 	<!-- 处理管理系统登录之后的认证对象 -->
 	<authentication-manager alias="authenticationManager" id="authenticationManager" erase-credentials="false">
 		<authentication-provider user-service-ref="adminUserService">
-			<password-encoder hash="md5" />
+			
 		</authentication-provider>
 	</authentication-manager>
 	<beans:bean id="webexpressionHandler" class="org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler" />
