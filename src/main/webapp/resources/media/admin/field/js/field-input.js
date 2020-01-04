@@ -1149,7 +1149,7 @@ define(function(require, exports, module) {
 								);
 						
 					} else {
-						$i=$('<i  class="open-detail-dialog" group-id > ' + value.substring(32) + ' <i/>');
+						$i=$('<i  class="open-detail-dialog" group-id > ' + value.split('@')[1] + ' <i/>');
 						$i.attr('code',value.substring(0, 32));
 						$thumb.append($i);
 						$i.click(
@@ -1245,7 +1245,7 @@ define(function(require, exports, module) {
 					$thumb.html("");
 					
 					if(!pa.refgroupid){
-						$thumb.append(value.substring(32));
+						$thumb.append(value.split('@R@')[1]);
 						$container.removeClass("cpf-refselect-input-container");
 						$thumb.removeClass("cpf-refselect-input-thumb");
 						return;
@@ -1254,8 +1254,8 @@ define(function(require, exports, module) {
 					var $i;
 
 					$i = $('<i  class="open-detail-dialog" group-id > '
-							+ value.substring(32) + ' <i/>');
-					$i.attr('code', value.substring(0, 32));
+							+ value.split('@R@')[1] + ' <i/>');
+					$i.attr('code', value.split('@R@')[0]);
 					$thumb.append($i);
 					$i.click(function() {
 						var $this = $(this);

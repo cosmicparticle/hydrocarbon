@@ -371,7 +371,7 @@ public class Api2EntityCurdController {
 
 	@RequestMapping({ "/detail/{validateSign:\\d+}/{code}", "/detail/{validateSign:user}/*" })
 	public ResponseJSON detail(@PathVariable String validateSign, @PathVariable(required = false) String code,
-			String versionCode, Long nodeId, Long fieldGroupId, Long dtmplId, ApiUser user) {
+			Long versionCode, Long nodeId, Long fieldGroupId, Long dtmplId, ApiUser user) {
 		ValidateDetailParamter vparam = new ValidateDetailParamter(validateSign, user);
 		vparam.setCode(code).setNodeId(nodeId).setFieldGroupId(fieldGroupId).setDetailTemplateId(dtmplId);
 		// 检测用户的权限

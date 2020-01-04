@@ -361,7 +361,7 @@ public class ApiEntityController {
 	@ResponseBody
 	@RequestMapping("/detail/{menuId}/{code}")
 	public ResponseJSON detail(@PathVariable Long menuId, @PathVariable String code,
-			@RequestParam(required = false) String versionCode, ApiUser user) {
+			@RequestParam(required = false) Long versionCode, ApiUser user) {
 		JSONObjectResponse res = new JSONObjectResponse();
 
 		SideMenuLevel2Menu menu = authService.validateUserL2MenuAccessable(user, menuId);
@@ -411,10 +411,10 @@ public class ApiEntityController {
 		return res;
 	}
 
-	private JSONArray toHistoryItems(List<EntityVersionItem> historyItems, String versionCode) {
+	private JSONArray toHistoryItems(List<EntityVersionItem> historyItems, Long versionCode) {
 		JSONArray aHistoryItems = new JSONArray();
 		if (historyItems != null) {
-			boolean hasCurrentId = TextUtils.hasText(versionCode);
+			boolean hasCurrentId = (versionCode!=null);
 			for (EntityVersionItem historyItem : historyItems) {
 				JSONObject jHistoryItem = new JSONObject();
 				aHistoryItems.add(jHistoryItem);

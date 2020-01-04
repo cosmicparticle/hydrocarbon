@@ -90,7 +90,7 @@ public class Api2EntityExportController {
 	public ResponseJSON detail(
 				@PathVariable String validateSign, 
 				@PathVariable(required=false) String entityCode,
-				String versionCode,
+				Long versionCode,
 				Long nodeId,
 				Long fieldGroupId,
 				Long dtmplId,

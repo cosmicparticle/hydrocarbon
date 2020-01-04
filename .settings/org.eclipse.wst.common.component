@@ -4,10 +4,10 @@
         <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
-        <dependent-module archiveName="hydrocarbon-server-1.70.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/hydrocarbon-server/hydrocarbon-server">
+        <dependent-module archiveName="hydrocarbon-server-1.71.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/hydrocarbon-server/hydrocarbon-server">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="entityResolver-2.76.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/entityResolver/entityResolver">
+        <dependent-module archiveName="entityResolver-2.77.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/entityResolver/entityResolver">
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <property name="java-output-path" value="/hydrocarbon/target/classes"/>

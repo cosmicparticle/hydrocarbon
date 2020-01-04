@@ -143,7 +143,7 @@
 		ModulesDetail.init(
 				$page,
 				'${entity.code}',
-				{type, menuId: '${menu.id}', nodeId} ,
+				{type, menuId:'${menu.id}', nodeId} ,
 				'${versionCode}');
 		
 	});

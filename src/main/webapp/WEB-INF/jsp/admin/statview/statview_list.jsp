@@ -218,7 +218,7 @@
 											<c:choose>
 												<c:when
 													test="${column.viewOption == 'relselect' || column.viewOption == 'refselect'}">
-																${column.fieldAvailable? parser.smap[column.fieldKey].substring(32) : '' }
+																${column.fieldAvailable? parser.smap[column.fieldKey].value.split('@R@')[1] : '' }
 												</c:when>
 												<c:otherwise>
 														${column.fieldAvailable? parser.smap[column.fieldKey] : '' }

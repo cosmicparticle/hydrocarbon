@@ -30,7 +30,8 @@
 						<a href="#" title="添加版块" on-click="addBlock"><i id="add-block" class="fa fa-plus-square"></i></a>
 					</div>
 				</div>
-				<div class="widget-body block-container">
+				<div class="widget-body block-container" style="height: 400px;"
+				>
 					<ol class="dd-list" id="block-container">
 						<style target="blocks"></style>
 					</ol>

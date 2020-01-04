@@ -11,7 +11,7 @@
 
 	<properties>
 		<version.kie>7.10.0.Final</version.kie>
-		<version.carbon-core>0.97</version.carbon-core>
+		<version.carbon-core>1.0.121</version.carbon-core>
 		<version.hydrocarbon-server>1.71</version.hydrocarbon-server>
 		<version.cpfweb>1.1</version.cpfweb>
 		<version.cpfutils>1.1</version.cpfutils>

@@ -87,7 +87,7 @@ public class AdminConfigUserController {
 	
 	@RequestMapping({"/detail", "/detail/"})
 	public String detail(Long dtmplId, 
-			String versionCode, Model model) {
+			Long versionCode, Model model) {
 		ABCUser user = UserUtils.getCurrentUser(ABCUser.class);
 		if(user != null) {
 			TemplateDetailTemplate dtmpl = userService.getUserDetailTemplate(dtmplId);
@@ -274,7 +274,7 @@ public class AdminConfigUserController {
 	@RequestMapping("/export_detail/{dtmplId}")
 	public ResponseJSON exportDetail(
 			@PathVariable Long dtmplId,
-			String versionCode) {
+			Long versionCode) {
 		JSONObjectResponse jRes = new JSONObjectResponse();
 		TemplateDetailTemplate dtmpl = userService.getUserDetailTemplate(dtmplId);
 		ABCUser user = UserUtils.getCurrentUser(ABCUser.class);

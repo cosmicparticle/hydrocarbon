@@ -323,7 +323,7 @@ public class AdminModulesController {
 	}
 
 	@RequestMapping("/detail/{menuId}/{code}")
-	public String detail(@PathVariable String code, @PathVariable Long menuId, String versionCode, Model model) {
+	public String detail(@PathVariable String code, @PathVariable Long menuId, Long versionCode, Model model) {
 		SideMenuLevel2Menu menu = authService.validateL2MenuAccessable(menuId);
 		TemplateGroup tmplGroup = tmplGroupService.getTemplate(menu.getTemplateGroupId());
 		model.addAttribute("menu", menu);
@@ -332,7 +332,7 @@ public class AdminModulesController {
 
 	@RequestMapping("/detail/{menuId}/{groupId}/{code}") // 此处后续要增加权限控制，因为会导致一个菜单权限查询所有的实体详情
 	public String detail(@PathVariable String code, @PathVariable Long menuId, @PathVariable Long groupId,
-			String versionCode, Model model) {
+			Long versionCode, Model model) {
 		SideMenuLevel2Menu menu = authService.validateL2MenuAccessable(menuId);
 		TemplateGroup tmplGroup = tmplGroupService.getTemplate(groupId);
 		model.addAttribute("menu", menu);
@@ -341,7 +341,7 @@ public class AdminModulesController {
 
 	@RequestMapping("/node_detail/{menuId}/{nodeId}/{code}")
 	public String nodeDetail(@PathVariable Long menuId, @PathVariable Long nodeId, @PathVariable String code,
-			String versionCode, Model model) {
+			Long versionCode, Model model) {
 		SideMenuLevel2Menu menu = authService.validateL2MenuAccessable(menuId);
 		TemplateTreeNode nodeTemplate = treeService.getNodeTemplate(menu.getTemplateModule(), nodeId);
 		Long tmplGroupId = nodeTemplate.getTemplateGroupId();
@@ -351,7 +351,7 @@ public class AdminModulesController {
 		return toDetail(code, tmplGroup, versionCode, model);
 	}
 
-	private String toDetail(String code, TemplateGroup tmplGroup, String versionCode, Model model) {
+	private String toDetail(String code, TemplateGroup tmplGroup, Long versionCode, Model model) {
 
 		String moduleName = tmplGroup.getModule();
 		ModuleMeta moduleMeta = mService.getModule(moduleName);

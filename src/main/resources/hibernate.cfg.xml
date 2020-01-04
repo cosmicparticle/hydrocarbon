@@ -12,4 +12,5 @@
 		<property name="current_session_context_class">org.springframework.orm.hibernate5.SpringSessionContext</property>
 		<property name="show_sql">true</property>
     </session-factory>
+   
 </hibernate-configuration>

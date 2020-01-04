@@ -3,6 +3,8 @@ package cho.carbon.hy.hydrocarbon.test.ks;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.http.converter.HttpMessageConverter;
+
 import cho.carbon.auth.pojo.UserInfo;
 import cho.carbon.hc.dataserver.model.karuiserv.match.KaruiServMatcher;
 import cho.carbon.hc.hydrocarbon.common.ApiUser;
@@ -16,6 +18,7 @@ public class TestKsExecService {
 	
 	//@Test
 	public void test() {
+		
 		String path = "/get_people/123456138009021234";
 		Map<String, String> parameters = new HashMap<>();
 		KaruiServMatcher matcher = ksExecService.match(path, parameters,"");
