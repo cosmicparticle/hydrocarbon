@@ -4,6 +4,9 @@
         <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
+        <dependent-module archiveName="cpf-utils-1.1.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/cpf-utils/cpf-utils">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <dependent-module archiveName="hydrocarbon-server-1.71.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/hydrocarbon-server/hydrocarbon-server">
             <dependency-type>uses</dependency-type>
         </dependent-module>

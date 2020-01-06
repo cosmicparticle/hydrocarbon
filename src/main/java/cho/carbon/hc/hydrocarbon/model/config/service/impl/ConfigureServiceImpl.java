@@ -26,7 +26,7 @@ import cho.carbon.hc.hydrocarbon.model.config.dao.ConfigureDao;
 import cho.carbon.hc.hydrocarbon.model.config.pojo.SystemConfig;
 import cho.carbon.hc.hydrocarbon.model.config.service.ConfigureService;
 import cho.carbon.meta.struc.er.Struc;
-import cho.carbon.meta.struc.er.StrucContainer;
+import cho.carbon.meta.struc.er.StrucContainerFacade;
 import cho.carbon.meta.vo.ModuleVO;
 
 @Service
@@ -55,11 +55,11 @@ public class ConfigureServiceImpl implements ConfigureService{
 	@Override
 	public List<ModuleVO> getSiblingModules(String moduleName) {
 		ModuleVO sourceModule = fFactory.getModule(moduleName);
-		Struc node = StrucContainer.findStruc(FormatUtils.toInteger(sourceModule.getStrucId()));
+		Struc node = StrucContainerFacade.findStruc(FormatUtils.toInteger(sourceModule.getStrucId()));
 		String abcattr = node.getItemCode();
 		return getEnabledModules().stream().filter(module->{
 			if(module.getStrucId() != null) {
-				Struc abcNode = StrucContainer.findStruc(FormatUtils.toInteger(module.getStrucId()));
+				Struc abcNode = StrucContainerFacade.findStruc(FormatUtils.toInteger(module.getStrucId()));
 				return abcattr.equals(abcNode.getItemCode());
 			}
 			return false;
