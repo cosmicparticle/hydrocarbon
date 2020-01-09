@@ -163,6 +163,18 @@ define(function(require, exports, module) {
 			'textarea' : function() {
 				var $ta = $('<textarea></textarea>');
 				setNormalAttrs($ta);
+				$ta.on('mouseover', function() {
+					var cssText = $ta.attr("style") + ";height:100px !important;";
+					$ta.css("cssText",cssText);
+//					$ta.css("width","164px");
+				});
+
+				$ta.on('mouseout', function() {
+					var cssText = $ta.attr("style") + ";height:34px !important;";
+					$ta.css("cssText",cssText);
+//					$ta.css("width","164px");
+				});
+
 				if (param.value) {
 					$ta.val(param.value);
 				}
@@ -1093,22 +1105,29 @@ define(function(require, exports, module) {
 				var $container = $('<span class="cpf-refselect-input-container cpf-field-input">');
 
 				var $thumb = $('<span class="cpf-refselect-input-thumb">');
-				
+
 				var $operates = $('<span class="cpf-refselect-input-operates">')
-				.append(
-						$('<i class="fa fa-times">').click(
-								
-								function() {
-									var $this = $(this);
-									$this.closest('span .cpf-refselect-input-thumb');
-									require('dialog').confirm(
-											'是否移除该引用？', function(yes) {
-												if (yes) {
-													setValue("", $thumb);
-												}
-											});
-								}));
-				
+						.append(
+								$('<i class="fa fa-times">')
+										.click(
+
+												function() {
+													var $this = $(this);
+													$this
+															.closest('span .cpf-refselect-input-thumb');
+													require('dialog')
+															.confirm(
+																	'是否移除该引用？',
+																	function(
+																			yes) {
+																		if (yes) {
+																			setValue(
+																					"",
+																					$thumb);
+																		}
+																	});
+												}));
+
 				setValue(pa.value, $thumb);
 				$container.append($thumb);
 				var $page = $container;
@@ -1121,61 +1140,59 @@ define(function(require, exports, module) {
 					var $i;
 					$thumb.append($code);
 					if (!value) {
-						$i=$('<i group-id class="open-select-dialog"> <i/> ');
+						$i = $('<i group-id class="open-select-dialog"> <i/> ');
+						$thumb.append($i);
+						$i
+								.click(function() {
+									var $this = $(this);
+									var existCodes = [];
+									var fields = [ pa.refcognitiontitle,
+											pa.refshowtitle ];
+									Dialog
+											.openDialog(
+													"admin/modules/curd/rel_selection/"
+															+ menuid + '/'
+															+ pa.refgroupid,
+													undefined,
+													undefined,
+													{
+														width : 1000,
+														height : 400,
+														onSubmit : function(
+																entitiesLoader) {
+															appendRelValue(
+																	entitiesLoader,
+																	fields,
+																	$this
+																			.closest('span .cpf-refselect-input-thumb'));
+														}
+													});
+
+								});
+
+					} else {
+						$i = $('<i  class="open-detail-dialog" group-id > '
+								+ value.split('@')[1] + ' <i/>');
+						$i.attr('code', value.substring(0, 32));
 						$thumb.append($i);
 						$i.click(function() {
 							var $this = $(this);
 							var existCodes = [];
 							var fields = [ pa.refcognitiontitle,
 									pa.refshowtitle ];
-							Dialog.openDialog(
-											"admin/modules/curd/rel_selection/"
-													+ menuid + '/'
-													+ pa.refgroupid,
-											undefined,
-											undefined,
-											{
-												width : 1000,
-												height : 400,
-												onSubmit : function(entitiesLoader) {
-													appendRelValue(
-															entitiesLoader,
-															fields,
-															$this.closest('span .cpf-refselect-input-thumb'));
-												}
-											});
+							Dialog.openDialog("admin/modules/curd/detail/"
+									+ menuid + '/' + pa.refgroupid + '/'
+									+ $this.attr("code"), undefined, undefined,
+									{
+										width : 1000,
+										height : 500
+									});
 
-						}
-								);
-						
-					} else {
-						$i=$('<i  class="open-detail-dialog" group-id > ' + value.split('@')[1] + ' <i/>');
-						$i.attr('code',value.substring(0, 32));
-						$thumb.append($i);
-						$i.click(
-								function() {
-									var $this = $(this);
-									var existCodes = [];
-									var fields = [ pa.refcognitiontitle,
-											pa.refshowtitle ];
-									Dialog.openDialog(
-													"admin/modules/curd/detail/"
-															+ menuid + '/'+pa.refgroupid+'/'
-															+ $this.attr("code"),
-													undefined,
-													undefined,
-													{
-														width : 1000,
-														height : 500
-													});
-
-								});
+						});
 						$thumb.append($operates);
 					}
-					
-				}
 
-				
+				}
 
 				function appendRelValue(entitiesLoader, fields, $span) {
 
@@ -1190,10 +1207,7 @@ define(function(require, exports, module) {
 										}
 									});
 				}
-				
-				
 
-				
 				$container.funcMap = {
 					setDisabled : function(toDisabled) {
 						if (toDisabled) {
@@ -1212,16 +1226,16 @@ define(function(require, exports, module) {
 						} else {
 							$container.removeClass('ref-readonly');
 							if (!pa.value) {
-								setValue("",$thumb);
+								setValue("", $thumb);
 							}
 						}
 					},
 					getSubmitData : function() {
 						return $container.val();
 					}
-					
+
 				};
-				
+
 				if (param.readonly === true) {
 					$container.funcMap.setReadonly(true);
 				}
@@ -1243,14 +1257,14 @@ define(function(require, exports, module) {
 
 				function setValue(value, $thumb) {
 					$thumb.html("");
-					
-					if(!pa.refgroupid){
+
+					if (!pa.refgroupid) {
 						$thumb.append(value.split('@R@')[1]);
 						$container.removeClass("cpf-refselect-input-container");
 						$thumb.removeClass("cpf-refselect-input-thumb");
 						return;
 					}
-					
+
 					var $i;
 
 					$i = $('<i  class="open-detail-dialog" group-id > '
@@ -1273,7 +1287,7 @@ define(function(require, exports, module) {
 
 				$container.funcMap = {
 					setDisabled : function(toDisabled) {
-						
+
 					},
 					setReadonly : function(toReadonly) {
 						if (toReadonly != false) {
@@ -1284,19 +1298,18 @@ define(function(require, exports, module) {
 						} else {
 							$container.removeClass('ref-readonly');
 							if (!pa.value) {
-								setValue("",$thumb);
+								setValue("", $thumb);
 							}
 						}
 					},
 					getSubmitData : function() {
 						return $container.val();
 					}
-					
+
 				};
-				
-				//不管三七二十一，都是只读
+
+				// 不管三七二十一，都是只读
 				$container.funcMap.setReadonly(true);
-				
 
 				return $container;
 			}
@@ -1541,7 +1554,8 @@ define(function(require, exports, module) {
 		}
 	}
 
-	$.extend(
+	$
+			.extend(
 					FieldInput,
 					{
 						globalOptionsCacheTimeLineMap : {},
