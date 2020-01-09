@@ -7,10 +7,10 @@
         <dependent-module archiveName="cpf-utils-1.1.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/cpf-utils/cpf-utils">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="hydrocarbon-server-1.71.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/hydrocarbon-server/hydrocarbon-server">
+        <dependent-module archiveName="hydrocarbon-server-0.1.1.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/hydrocarbon-server/hydrocarbon-server">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="entityResolver-2.77.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/entityResolver/entityResolver">
+        <dependent-module archiveName="entityResolver-0.1.1.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/entityResolver/entityResolver">
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <property name="java-output-path" value="/hydrocarbon/target/classes"/>

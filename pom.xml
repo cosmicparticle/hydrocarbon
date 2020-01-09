@@ -5,14 +5,14 @@
 	<groupId>cho.carbon.hc</groupId>
 	<artifactId>hydrocarbon</artifactId>
 	<packaging>war</packaging>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.1</version>
 	<name>hydrocarbon Maven Webapp</name>
 	<url>http://maven.apache.org</url>
 
 	<properties>
 		<version.kie>7.10.0.Final</version.kie>
 		<version.carbon-core>1.0.126</version.carbon-core>
-		<version.hydrocarbon-server>1.71</version.hydrocarbon-server>
+		<version.hydrocarbon-server>0.1.1</version.hydrocarbon-server>
 		<version.cpfweb>1.1</version.cpfweb>
 		<version.cpfutils>1.1</version.cpfutils>
 		<version.cpfspring>1.1</version.cpfspring>
