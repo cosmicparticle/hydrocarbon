@@ -81,7 +81,8 @@ public class AdminUserServiceImpl implements AdminUserService, UserCodeService, 
 		if(!username.isEmpty() && !password.isEmpty()) {
 			ABCUser user = loadUserByUsername(username);
 			if(user != null) {
-				String md5 = TextUtils.md5Encode(password, null);
+				//spring 升级 5.2.1后，需要增加 密码编码前缀
+				String md5 = "{MD5}"+TextUtils.md5Encode(password, null);
 				if(md5.equals(user.getPassword())) {
 					//校验成功
 					Token token = allotToken(domain, user);
