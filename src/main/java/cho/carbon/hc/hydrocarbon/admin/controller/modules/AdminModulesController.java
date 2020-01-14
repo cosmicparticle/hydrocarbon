@@ -880,10 +880,12 @@ public class AdminModulesController {
 			param.setEntityCodes(codeSet);
 			param.setRelationName(stmpl.getRelationName());
 			parsers = entityService.queryRelationEntityParsers(param);
-		} else {
+		} else {// 作为 groupId 使用
 			Map<String, ModuleEntityPropertyParser> parserss = new HashMap<>();
 			TemplateGroup tmplGroup = tmplGroupService.getTemplate(stmplId);
-			parserss.put(codes, getEntity(codes, tmplGroup));
+			for(String c:codeSet) {
+				parserss.put(c, getEntity(c, tmplGroup));
+			}
 			parsers = parserss;
 		}
 

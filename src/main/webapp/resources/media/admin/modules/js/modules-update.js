@@ -267,6 +267,31 @@ define(function(require, exports, module){
 			});
 			
 		});
+		
+		$('.open-select-dialog[tmplgroup-id]', $page).click(function(){
+			var $this = $(this);
+			var stmplId = $this.attr('tmplgroup-id');
+			var existCodes = []; 
+			$this.closest('table').find('.value-row').each(function(){
+				var entityCode = $(this).find(':hidden.entity-code').val();
+				if(entityCode){
+					existCodes.push(entityCode);
+				}
+			});
+			
+			Dialog.openDialog(uriGenerator.stmpl(stmplId), 
+					undefined, undefined, {
+				reqParam	: {
+					exists	: existCodes.join()
+				},
+				width		: 1000,
+				height		: 400,
+				onSubmit	: function(entitiesLoader){
+					appendEntityToArrayTable(entitiesLoader, $this.closest('table'));
+				}
+			});
+			
+		});
 
 		$('.open-select-dialog[ttmpl-id]', $page).click(function(){
 			var $this = $(this);
@@ -283,6 +308,8 @@ define(function(require, exports, module){
 			}
 
 		});
+		
+
 		
 		function setFieldValue(entity, $row){
 			var $codeInput = $('<input type="hidden" class="entity-code" />');
