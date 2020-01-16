@@ -1259,7 +1259,14 @@ define(function(require, exports, module) {
 					$thumb.html("");
 
 					if (!pa.refgroupid) {
-						$thumb.append(value.split('@R@')[1]);
+						let va1=value;
+						let va0=null;
+						 
+						if(value !=null && typeof(value) != undefined && value.indexOf("@R@") != -1){
+							va1=value.split('@R@')[1];
+							va0=value.split('@R@')[0];
+						}
+						$thumb.append(va1);
 						$container.removeClass("cpf-refselect-input-container");
 						$thumb.removeClass("cpf-refselect-input-thumb");
 						return;
@@ -1268,8 +1275,8 @@ define(function(require, exports, module) {
 					var $i;
 
 					$i = $('<i  class="open-detail-dialog" group-id > '
-							+ value.split('@R@')[1] + ' <i/>');
-					$i.attr('code', value.split('@R@')[0]);
+							+ va1 + ' <i/>');
+					$i.attr('code', va0==null?va1:va0);
 					$thumb.append($i);
 					$i.click(function() {
 						var $this = $(this);

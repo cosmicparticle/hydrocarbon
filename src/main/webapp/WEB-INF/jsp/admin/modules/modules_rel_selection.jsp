@@ -36,16 +36,15 @@
 								</c:forEach>
 							</c:when>
 							<c:otherwise>
-								<c:forEach items="${stmpl.columns }"
-								var="column">
-								<th
-									class="${column.fieldAvailable? '': 'col-field-unavailable' }"
-									title="${column.fieldAvailable? '': '无效字段'}">${column.title }</th>
-							</c:forEach>
+								<c:forEach items="${stmpl.columns }" var="column">
+									<th
+										class="${column.fieldAvailable? '': 'col-field-unavailable' }"
+										title="${column.fieldAvailable? '': '无效字段'}">${column.title }</th>
+								</c:forEach>
 							</c:otherwise>
 						</c:choose>
 
-							
+
 					</tr>
 				</thead>
 				<tbody>
@@ -69,7 +68,11 @@
 					{{if column.specialField === 'number'}}
 						\${rowNumber }
 					{{else}}
-						\${entity.cellMap[column.id] || ''}
+						{{if entity.cellMap[column.id]!=null}}
+							\${ entity.cellMap[column.id].indexOf('@R@') <= 0 ? entity.cellMap[column.id]:(entity.cellMap[column.id].split('@R@')[1] || '') }
+						{{else}}
+							\${ '222'}
+						{{/if}}
 					{{/if}}
 				</td>
 			{{/each}}
@@ -92,7 +95,7 @@
 		var $page = $('#selections-${RES_STAMP}');
 		var stmpl = $.parseJSON($('#stmpl-json', $page).html());
 		var ltmpl;
-		if($('#ltmpl-json', $page).html()!=""){
+		if ($('#ltmpl-json', $page).html() != "") {
 			ltmpl = $.parseJSON($('#ltmpl-json', $page).html());
 		}
 
