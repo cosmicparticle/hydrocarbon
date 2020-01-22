@@ -1,6 +1,7 @@
 package cho.carbon.hc.hydrocarbon.admin.controller.modules;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
@@ -875,18 +876,20 @@ public class AdminModulesController {
 		TemplateSelectionTemplate stmpl = stmplService.getTemplate(stmplId);
 		Map<String, ? extends CEntityPropertyParser> parsers;
 		Set<String> codeSet = TextUtils.split(codes, ",", HashSet<String>::new, c -> c);
+		Set<String> fieldSet = TextUtils.split(fields, ",", HashSet<String>::new, f -> f);
 		if (stmpl != null) {
 			EntitiesQueryParameter param = new EntitiesQueryParameter(stmpl.getModule(), UserUtils.getCurrentUser());
 			param.setEntityCodes(codeSet);
 			param.setRelationName(stmpl.getRelationName());
 			parsers = entityService.queryRelationEntityParsers(param);
 		} else {// 作为 groupId 使用
-			Map<String, ModuleEntityPropertyParser> parserss = new HashMap<>();
+//			Map<String, ModuleEntityPropertyParser> parserss = new HashMap<>();
 			TemplateGroup tmplGroup = tmplGroupService.getTemplate(stmplId);
-			for(String c:codeSet) {
-				parserss.put(c, getEntity(c, tmplGroup));
-			}
-			parsers = parserss;
+			EntitiesQueryParameter param = new EntitiesQueryParameter(tmplGroup.getModule(), UserUtils.getCurrentUser());
+			param.setEntityCodes(codeSet);
+			param.setRelationName(fieldSet.iterator().next().split("\\.")[0]);
+			parsers = entityService.queryRelationEntityParsers(param);
+//			parsers = parserss;
 		}
 
 		/*
@@ -894,7 +897,7 @@ public class AdminModulesController {
 		 * stmpl.getModule(), stmpl.getRelationName(), TextUtils.split(codes, ",",
 		 * HashSet<String>::new, c->c), UserUtils.getCurrentUser()) ;
 		 */
-		JSONObject entities = toEntitiesJson(parsers, TextUtils.split(fields, ",", HashSet<String>::new, f -> f));
+		JSONObject entities = toEntitiesJson(parsers,fieldSet );
 		jRes.put("entities", entities);
 		jRes.setStatus("suc");
 		return jRes;
@@ -941,6 +944,29 @@ public class AdminModulesController {
 				entities.put(parser.getCode(), entity);
 				for (String fieldName : fieldNames) {
 					entity.put(fieldName, parser.getFormatedProperty(fieldName));
+				}
+			});
+		}
+		return entities;
+	}
+	
+	
+/**
+ * 
+ * @param parsers
+ * @param fieldNameMap:key relationNodeName.fieldName,value fieldName
+ * @return
+ */
+	public static JSONObject toEntitiesJson(Map<String, ? extends CEntityPropertyParser> parsers,
+			Map<String,String> fieldNameMap) {
+		JSONObject entities = new JSONObject();
+		if (parsers != null && fieldNameMap != null) {
+			parsers.forEach((code, parser) -> {
+				JSONObject entity = new JSONObject();
+				entity.put(ABCNodeProxy.CODE_PROPERTY_NAME_NORMAL, parser.getCode());
+				entities.put(parser.getCode(), entity);
+				for (String key : fieldNameMap.keySet()) {
+					entity.put(key, parser.getFormatedProperty(fieldNameMap.get(key)));
 				}
 			});
 		}
