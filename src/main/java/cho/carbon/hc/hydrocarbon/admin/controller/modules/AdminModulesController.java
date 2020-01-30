@@ -877,19 +877,25 @@ public class AdminModulesController {
 		Map<String, ? extends CEntityPropertyParser> parsers;
 		Set<String> codeSet = TextUtils.split(codes, ",", HashSet<String>::new, c -> c);
 		Set<String> fieldSet = TextUtils.split(fields, ",", HashSet<String>::new, f -> f);
+		JSONObject entities;
 		if (stmpl != null) {
 			EntitiesQueryParameter param = new EntitiesQueryParameter(stmpl.getModule(), UserUtils.getCurrentUser());
 			param.setEntityCodes(codeSet);
 			param.setRelationName(stmpl.getRelationName());
 			parsers = entityService.queryRelationEntityParsers(param);
+			entities = toEntitiesJson(parsers,fieldSet );
 		} else {// 作为 groupId 使用
-//			Map<String, ModuleEntityPropertyParser> parserss = new HashMap<>();
+			Map<String, ModuleEntityPropertyParser> parserss = new HashMap<>();
 			TemplateGroup tmplGroup = tmplGroupService.getTemplate(stmplId);
-			EntitiesQueryParameter param = new EntitiesQueryParameter(tmplGroup.getModule(), UserUtils.getCurrentUser());
-			param.setEntityCodes(codeSet);
-			param.setRelationName(fieldSet.iterator().next().split("\\.")[0]);
-			parsers = entityService.queryRelationEntityParsers(param);
-//			parsers = parserss;
+			for(String c:codeSet) {
+				parserss.put(c, getEntity(c, tmplGroup));
+			}
+			parsers = parserss;
+			Map<String,String> fieldMap = new HashMap<>();
+			fieldSet.forEach(k->{
+				fieldMap.put(k, k.split("\\.")[1]);
+			});
+			entities = toEntitiesJson(parsers,fieldMap );
 		}
 
 		/*
@@ -897,7 +903,7 @@ public class AdminModulesController {
 		 * stmpl.getModule(), stmpl.getRelationName(), TextUtils.split(codes, ",",
 		 * HashSet<String>::new, c->c), UserUtils.getCurrentUser()) ;
 		 */
-		JSONObject entities = toEntitiesJson(parsers,fieldSet );
+		
 		jRes.put("entities", entities);
 		jRes.setStatus("suc");
 		return jRes;
