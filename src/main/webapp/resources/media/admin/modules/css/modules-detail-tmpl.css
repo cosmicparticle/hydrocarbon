@@ -743,6 +743,20 @@ div#action-list>a:hover{
 	text-align: center;
 }
 
+.entity-update-page span.array-item-detail.fa.fa-book{
+	background-color: #57b5e3;
+	display: inline-block;
+	font-size: 12px;
+	width: 20px;
+	height: 20px;
+	line-height: 22px;
+	border-radius: 1em;
+	color: #fff;
+	cursor: pointer;
+	font-weight: normal;
+	text-align: center;
+}
+
 .entity-update-page span.array-item-update.fa.fa-edit:hover {
 	opacity: 0.7;
 }

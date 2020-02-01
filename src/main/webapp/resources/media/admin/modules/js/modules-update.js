@@ -27,7 +27,7 @@ define(function(require, exports, module){
 							return 'admin/modules/curd/load_rabc_entities/' + menuId + '/' + uriData.relationCompositeId;
 						},
 						entityDetail		: function(fieldGroupId, entityCode){
-							return 'admin/modules/curd/rabc_detail/' +menuId + '/' + fieldGroupId + '/' + entityCode;
+							return 'admin/modules/curd/rabc_detail/' +menuId + '/' + fieldGroupId ;//  + '/' + entityCode
 						}
 					}
 				case 'node':
@@ -43,7 +43,7 @@ define(function(require, exports, module){
 						load_rabc_entities	: function(relationCompositeId){
 							return 'admin/modules/curd/node_load_rabc_entities/' + menuId + '/' + nodeId + '/' + uriData.relationCompositeId;
 						},
-						entityDetail		: function(fieldGroupId, entityCode){
+						entityDetail : function(fieldGroupId, entityCode){
 							return 'admin/modules/curd/node_rabc_detail/' + menuId + '/' + nodeId + '/' + fieldGroupId + '/' + entityCode;
 						}
 					}
@@ -164,11 +164,11 @@ define(function(require, exports, module){
 			});
 		}
 		
-		$page.on('click', '.array-item-detail', function(){
-			var entityCode = $(this).closest('tr').find('.entity-code').val();
-			require('tab').openInTab(uriGenerator.entityDetail(entityCode), 
-					'module_detail_' + entityCode);
-		});
+//		$page.on('click', '.array-item-detail', function(){
+//			var entityCode = $(this).closest('tr').find('.entity-code').val();
+//			require('tab').openInTab(uriGenerator.entityDetail(entityCode), 
+//					'module_detail_' + entityCode);
+//		});
 		
 		$page.on('click', '.array-item-remove', function(){
 			var $row = $(this).closest('tr');
@@ -185,6 +185,23 @@ define(function(require, exports, module){
 			var entityCode = $row.find('.entity-code').val();
 			var fieldGroupId = $row.closest('.field-group').attr('field-group-id');
 			require('dialog').openDialog(uriGenerator.rdtmpl(fieldGroupId), 
+					undefined, undefined, {
+				reqParam	: {entityCode: entityCode},
+				width		: 1100,
+				height		: 500,
+				events:	{
+					afterSave	: function(entitiesLoader){
+						updateEntityToArray(entitiesLoader, $row);
+						this.close();
+					}
+				}
+			});
+		});
+		$page.on('click', '.array-item-detail', function(){
+			var $row = $(this).closest('tr');
+			var entityCode = $row.find('.entity-code').val();
+			var fieldGroupId = $row.closest('.field-group').attr('field-group-id');
+			require('dialog').openDialog(uriGenerator.entityDetail(fieldGroupId), 
 					undefined, undefined, {
 				reqParam	: {entityCode: entityCode},
 				width		: 1100,
@@ -391,6 +408,9 @@ define(function(require, exports, module){
 			var $rowOperator = $('<td>');
 			if(withData && $table.closest('.field-group').attr('rabc-unupdatable') !== 'true'){
 				$rowOperator.append('<span class="array-item-update fa fa-edit" title="编辑当前行"></span>');
+			}
+			if(withData && $table.closest('.field-group').attr('rabc-undetailable') !== 'true'){
+				$rowOperator.append('<span class="array-item-detail fa fa-book" title="查看当前行">d</span>');
 			}
 			$rowOperator.append('<span class="array-item-remove" title="移除当前行">×</span>');
 			$dataRow.append($rowOperator);

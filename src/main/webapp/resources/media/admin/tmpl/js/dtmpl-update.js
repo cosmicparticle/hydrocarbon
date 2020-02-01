@@ -471,6 +471,7 @@ define(function(require1, exports, module){
 							rabcTemplateGroupTitle	: group.rabcTemplateGroupTitle,
 							rabcUncreatable			: group.rabcUncreatable,
 							rabcUnupdatable			: group.rabcUnupdatable,
+							rabcUndetailable		: group.rabcUndetailable,
 							arrayItemFilterId		: group.arrayItemFilterId
 					}
 					if(group.rabcTreeNodes){
@@ -487,12 +488,14 @@ define(function(require1, exports, module){
 			 */
 			function bindRelTemplateGroup($dialog, thisFieldGroupConfigData){
 				var $rabcCreatableCheckbox = $('.rabccreatable-checkbox', $dialog),
-					$rabcUpdatableCheckbox = $('.rabcupdatable-checkbox', $dialog);
+					$rabcUpdatableCheckbox = $('.rabcupdatable-checkbox', $dialog),
+			       $rabcDetailableCheckbox = $('.rabcdetailable-checkbox', $dialog);
 				
 				//切换关联模板组合的控件显示状态
 				function toggleRabcControls(toShow){
 					$rabcCreatableCheckbox.prop('checked', true).closest('.form-group').toggle(toShow);
 					$rabcUpdatableCheckbox.prop('checked', true).closest('.form-group').toggle(toShow);
+					$rabcDetailableCheckbox.prop('checked', true).closest('.form-group').toggle(toShow);
 				}
 				//绑定选择模板组合后的回调
 				var $chooseTemplateGroupButton = $('a.choose-tmplgroup', $dialog).on('CpfAfterChoose', function(e, tmplGroupTitle, tmplGroup){
@@ -627,6 +630,7 @@ define(function(require1, exports, module){
 						rabcTreeNodeIds	: $('.selectable-nodes', $dialogPage).val(),
 						rabcUncreatable	: $('.rabccreatable-checkbox', $dialogPage).prop('checked')? null: 1,
 						rabcUnupdatable	: $('.rabcupdatable-checkbox', $dialogPage).prop('checked')? null: 1,
+						rabcUndetailable	: $('.rabcdetailable-checkbox', $dialogPage).prop('checked')? null: 1,
 					}
 				});
 			}
@@ -650,6 +654,7 @@ define(function(require1, exports, module){
 					configData.rabcTemplateGroupTitle = null;
 					configData.rabcUncreatable = null;
 					configData.rabcUnupdatable = null;
+					configData.rabcUndetailable=null;
 				}
 				validateFieldGroupConfigData(configData);
 				Object.assign(this, configData);
@@ -845,6 +850,7 @@ define(function(require1, exports, module){
 					unallowedCreate	: null,
 					rabcUncreatable	: null,
 					rabcUnupdatable	: null,
+					rabcUndetailable : null,
 					arrayItemFilterId	: null
 				}).appendTo($groupContainer);
 				//绑定字段组内字段的拖动动作
@@ -1164,6 +1170,7 @@ define(function(require1, exports, module){
 							unallowedCreate	: null,
 							rabcUncreatable	: null,
 							rabcUnupdatable	: null,
+							rabcUndetailable	: null,
 							arrayItemFilterId	: null
 							}, group))
 						.appendTo($groupContainer);

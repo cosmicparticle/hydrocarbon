@@ -43,6 +43,10 @@
 	         	            <input type="checkbox" class="rabc-unupdatable colored-blue checked-false" \${rabcUnupdatable==1?'checked="checked"':''}>
 	         	            <span class="text"></span>
 	         	         </label>
+						<label title="是否显示弹出详情按钮">
+	         	            <input type="checkbox" class="rabc-undetailable colored-blue checked-false" \${rabcUndetailable==1?'checked="checked"':''}>
+	         	            <span class="text"></span>
+	         	         </label>
 	             	</div>
 				</c:if>
 				<div class="widget-buttons filter-arrayitem-control buttons-bordered" style="display:none" >

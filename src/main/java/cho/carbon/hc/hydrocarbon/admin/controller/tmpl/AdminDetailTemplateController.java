@@ -288,6 +288,7 @@ public class AdminDetailTemplateController {
 						group.setRabcTemplateGroupId(jGroup.getLong("rabcTemplateGroupId"));
 						group.setRabcUncreatable(jGroup.getInteger("rabcUncreatable"));
 						group.setRabcUnupdatable(jGroup.getInteger("rabcUnupdatable"));
+						group.setRabcUndetailable(jGroup.getInteger("rabcUndetailable"));
 						group.setArrayItemFilterId(jGroup.getLong("arrayItemFilterId"));
 						group.setSelectionTemplateId(jGroup.getLong("selectionTemplateId"));
 						group.setUnallowedCreate(

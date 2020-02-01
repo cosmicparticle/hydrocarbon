@@ -777,6 +777,27 @@ public class AdminModulesController {
 		return aRabcCreate(mainTmplGroup, fieldGroupId, entityCode, model);
 	}
 
+	@RequestMapping("/rabc_detail/{menuId}/{fieldGroupId}")
+	public String rabcDetail(@PathVariable Long menuId, @PathVariable Long fieldGroupId,  String entityCode,
+			 Model model) {
+		SideMenuLevel2Menu menu = authService.validateL2MenuAccessable(menuId);
+		TemplateGroup mainTmplGroup = tmplGroupService.getTemplate(menu.getTemplateGroupId());
+		TemplateDetailTemplate mainDtmpl = dtmplService.getTemplate(mainTmplGroup.getDetailTemplateId());
+		TemplateGroup tmplGroup=null;
+		if (mainDtmpl != null) {
+			TemplateDetailFieldGroup fieldGroup = mainDtmpl.getGroups().stream()
+					.filter(fg -> fieldGroupId.equals(fg.getId())).findFirst().get();
+
+			Long relationTemplateGroupId = fieldGroup.getRabcTemplateGroupId();
+
+			if (relationTemplateGroupId != null) {
+				 tmplGroup = tmplGroupService.getTemplate(relationTemplateGroupId);
+			}
+		}
+		model.addAttribute("menu", menu);
+		return toDetail(entityCode, tmplGroup, null, model);
+	}
+
 	@RequestMapping("/node_rabc_create/{mainMenuId}/{nodeId}/{fieldGroupId}")
 	public String rabcCreate(@PathVariable Long mainMenuId, @PathVariable Long fieldGroupId, @PathVariable Long nodeId,
 			String entityCode, Model model) {
@@ -784,6 +805,7 @@ public class AdminModulesController {
 		model.addAttribute("mainMenu", mainMenu);
 		TemplateTreeNode nodeTemplate = treeService.getNodeTemplate(mainMenu.getTemplateModule(), nodeId);
 		TemplateGroup mainTmplGroup = tmplGroupService.getTemplate(nodeTemplate.getTemplateGroupId());
+
 		return aRabcCreate(mainTmplGroup, fieldGroupId, entityCode, model);
 	}
 
@@ -883,19 +905,19 @@ public class AdminModulesController {
 			param.setEntityCodes(codeSet);
 			param.setRelationName(stmpl.getRelationName());
 			parsers = entityService.queryRelationEntityParsers(param);
-			entities = toEntitiesJson(parsers,fieldSet );
+			entities = toEntitiesJson(parsers, fieldSet);
 		} else {// 作为 groupId 使用
 			Map<String, ModuleEntityPropertyParser> parserss = new HashMap<>();
 			TemplateGroup tmplGroup = tmplGroupService.getTemplate(stmplId);
-			for(String c:codeSet) {
+			for (String c : codeSet) {
 				parserss.put(c, getEntity(c, tmplGroup));
 			}
 			parsers = parserss;
-			Map<String,String> fieldMap = new HashMap<>();
-			fieldSet.forEach(k->{
+			Map<String, String> fieldMap = new HashMap<>();
+			fieldSet.forEach(k -> {
 				fieldMap.put(k, k.split("\\.")[1]);
 			});
-			entities = toEntitiesJson(parsers,fieldMap );
+			entities = toEntitiesJson(parsers, fieldMap);
 		}
 
 		/*
@@ -903,7 +925,7 @@ public class AdminModulesController {
 		 * stmpl.getModule(), stmpl.getRelationName(), TextUtils.split(codes, ",",
 		 * HashSet<String>::new, c->c), UserUtils.getCurrentUser()) ;
 		 */
-		
+
 		jRes.put("entities", entities);
 		jRes.setStatus("suc");
 		return jRes;
@@ -955,16 +977,15 @@ public class AdminModulesController {
 		}
 		return entities;
 	}
-	
-	
-/**
- * 
- * @param parsers
- * @param fieldNameMap:key relationNodeName.fieldName,value fieldName
- * @return
- */
+
+	/**
+	 * 
+	 * @param parsers
+	 * @param fieldNameMap:key relationNodeName.fieldName,value fieldName
+	 * @return
+	 */
 	public static JSONObject toEntitiesJson(Map<String, ? extends CEntityPropertyParser> parsers,
-			Map<String,String> fieldNameMap) {
+			Map<String, String> fieldNameMap) {
 		JSONObject entities = new JSONObject();
 		if (parsers != null && fieldNameMap != null) {
 			parsers.forEach((code, parser) -> {
@@ -1022,21 +1043,22 @@ public class AdminModulesController {
 		JSONObjectResponse jRes = new JSONObjectResponse();
 
 		if (vRes instanceof AjaxPageResponse) {
-			jRes.put("error","跳转失败");
+			jRes.put("error", "跳转失败");
 			return jRes;
 		}
-		
+
 		Set<String> codes = (Set<String>) vRes;
 		TemplateJumpTemplate jtmpl = jtmplService.getTemplate(groupJump.getJtmplId());
-		
+
 		if (jtmpl != null) {
 			try {
 				TemplateGroup tmplGroup = tmplGroupService.getTemplate(groupJump.getGroupId());
 				ModuleMeta moduleMeta = mService.getModule(tmplGroup.getModule());
-				EntityQueryParameter queryParam = new EntityQueryParameter(moduleMeta.getName(), codes.iterator().next(), user);
+				EntityQueryParameter queryParam = new EntityQueryParameter(moduleMeta.getName(),
+						codes.iterator().next(), user);
 				ModuleEntityPropertyParser entity = entityService.getEntityParser(queryParam);
 				jRes.setStatus("suc");
-				jRes.put( "url", buildUrl(jtmpl,entity));
+				jRes.put("url", buildUrl(jtmpl, entity));
 				return jRes;
 			} catch (Exception e) {
 				logger.error("操作失败", e);
@@ -1049,13 +1071,13 @@ public class AdminModulesController {
 
 	private Object buildUrl(TemplateJumpTemplate jtmpl, ModuleEntityPropertyParser entity) {
 		List<TemplateJumpParam> params = jtmpl.getJtmplParams();
-		StringBuffer sb=new StringBuffer();
+		StringBuffer sb = new StringBuffer();
 		sb.append(jtmpl.getPath());
-		if(!jtmpl.getPath().trim().endsWith("?")) {
+		if (!jtmpl.getPath().trim().endsWith("?")) {
 			sb.append("?");
 		}
-		if(params!=null) {
-			for(TemplateJumpParam param:params) {
+		if (params != null) {
+			for (TemplateJumpParam param : params) {
 				sb.append(param.getName());
 				sb.append("=");
 				sb.append(entity.getProperty(param.getFieldTitle(), AttributeValueType.STRING));

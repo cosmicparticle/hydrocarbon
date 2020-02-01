@@ -17,6 +17,9 @@ define(function(require, exports, module){
 						},
 						exportDetail	: function(){
 							return 'admin/modules/export/export_detail/' + uriData.menuId + '/' + entityCode
+						},
+						entityDetail		: function(fieldGroupId){
+							return 'admin/modules/curd/rabc_detail/' + uriData.menuId + '/' + fieldGroupId ;//  + '/' + entityCode
 						}
 					}
 				case 'node':
@@ -93,6 +96,24 @@ define(function(require, exports, module){
 			var verCode = $(this).closest('dd').attr('data-versionCode');
 			$page.getLocatePage().loadContent(uriGenerator.detail(), null, {versionCode:verCode, dtmplId: uriData.dtmplId});
 			
+		});
+		
+		$page.on('click', '.array-item-detail', function(){
+			var $row = $(this).closest('tr');
+			var entityCode = $row.find('.entity-code').val();
+			var fieldGroupId = $row.closest('.field-group').attr('field-group-id');
+			require('dialog').openDialog(uriGenerator.entityDetail(fieldGroupId), 
+					undefined, undefined, {
+				reqParam	: {entityCode: entityCode},
+				width		: 1100,
+				height		: 500,
+				events:	{
+					afterSave	: function(entitiesLoader){
+						updateEntityToArray(entitiesLoader, $row);
+						this.close();
+					}
+				}
+			});
 		});
 		
 		function appendHistory(history){
