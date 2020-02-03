@@ -6,16 +6,16 @@
 	xmlns:task="http://www.springframework.org/schema/task" xmlns:jaxws="http://cxf.apache.org/jaxws"
 	xmlns:jaxrs="http://cxf.apache.org/jaxrs"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc 
-		http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd 
+		https://www.springframework.org/schema/mvc/spring-mvc.xsd 
 		http://www.springframework.org/schema/beans 
-		http://www.springframework.org/schema/beans/spring-beans-4.3.xsd 
+		https://www.springframework.org/schema/beans/spring-beans.xsd 
 		http://www.springframework.org/schema/context 
-		http://www.springframework.org/schema/context/spring-context-4.3.xsd
-		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
-        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd
-        http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.3.xsd
-		http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd
-		http://cxf.apache.org/jaxrs http://cxf.apache.org/schemas/jaxrs.xsd">
+		https://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-ao.xsd
+        http://www.springframework.org/schema/tx https://www.springframework.org/schema/tx/spring-tx.xsd
+        http://www.springframework.org/schema/task https://www.springframework.org/schema/task/spring-task.xsd
+		http://cxf.apache.org/jaxws https://cxf.apache.org/schemas/jaxws.xsd
+		http://cxf.apache.org/jaxrs https://cxf.apache.org/schemas/jaxrs.xsd">
 		
 	<import resource="spring-core.xml"/>
 	<import resource="spring-dao.xml"/>
