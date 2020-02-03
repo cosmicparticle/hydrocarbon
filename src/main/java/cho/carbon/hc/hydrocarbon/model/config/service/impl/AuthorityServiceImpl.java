@@ -86,7 +86,7 @@ public class AuthorityServiceImpl implements AuthorityService{
 				return block;
 			}
 			//只有当用户至少包含菜单的其中一个权限时，才能验证成功
-			if(!userAuthorities.stream()
+			if(!block.getAuthoritySet().isEmpty() && !userAuthorities.stream()
 					.filter(auth->block.getAuthoritySet().contains(auth))
 					.findFirst().isPresent()) {
 				throw new NonAuthorityException(block.getAuthoritySet(), userAuthorities);
