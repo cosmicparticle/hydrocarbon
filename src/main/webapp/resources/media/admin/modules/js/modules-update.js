@@ -410,7 +410,7 @@ define(function(require, exports, module){
 				$rowOperator.append('<span class="array-item-update fa fa-edit" title="编辑当前行"></span>');
 			}
 			if(withData && $table.closest('.field-group').attr('rabc-undetailable') !== 'true'){
-				$rowOperator.append('<span class="array-item-detail fa fa-book" title="查看当前行">d</span>');
+				$rowOperator.append('<span class="array-item-detail fa fa-book" title="查看详情"></span>');
 			}
 			$rowOperator.append('<span class="array-item-remove" title="移除当前行">×</span>');
 			$dataRow.append($rowOperator);
