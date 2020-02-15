@@ -915,7 +915,12 @@ public class AdminModulesController {
 			parsers = parserss;
 			Map<String, String> fieldMap = new HashMap<>();
 			fieldSet.forEach(k -> {
-				fieldMap.put(k, k.split("\\.")[1]);
+				if(k.contains(".")) {
+					fieldMap.put(k, k.split("\\.")[1]);
+				}else {
+					fieldMap.put(k, k);
+				}
+				
 			});
 			entities = toEntitiesJson(parsers, fieldMap);
 		}

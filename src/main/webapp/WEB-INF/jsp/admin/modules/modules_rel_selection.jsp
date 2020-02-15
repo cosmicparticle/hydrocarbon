@@ -71,7 +71,7 @@
 						{{if entity.cellMap[column.id]!=null}}
 							\${ entity.cellMap[column.id].indexOf('@R@') <= 0 ? entity.cellMap[column.id]:(entity.cellMap[column.id].split('@R@')[1] || '') }
 						{{else}}
-							\${ '222'}
+							\${ ''}
 						{{/if}}
 					{{/if}}
 				</td>

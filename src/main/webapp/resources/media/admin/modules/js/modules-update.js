@@ -394,6 +394,7 @@ define(function(require, exports, module){
 						.attr('fInp-fieldkey', $title.attr('fInp-fieldkey'))
 						.attr('fname-full', $title.attr('fname-full'))
 						.attr('fInp-value', $title.attr('fInp-value'))
+						.attr('fInp-menuid', $title.attr('fInp-menuid')).attr('fInp-mainmenuid', $title.attr('fInp-mainmenuid'))
 						.attr('fInp-readonly', readonly).attr('fInp-refgroupid',$title.attr('fInp-refgroupid'))
 						.appendTo($('<span class="field-value"></span>').appendTo($td));
 					if($title.attr('fInp-optset')){

@@ -174,6 +174,9 @@
 																fInp-type="${field.type }"
 																fInp-optkey="${field.optionGroupKey }"
 																fInp-fieldkey="${module.name }@${field.fieldName }"
+																fInp-mainmenuid="${mainMenu.id }"
+																fInp-menuid="${menu.id }"
+																fInp-refgroupid="${field.refGroupId }"
 																fInp-access="${field.additionAccess}">${field.title }</th>
 														</c:forEach>
 														<th width="20px"><c:if
@@ -251,8 +254,8 @@
 																		fInp-value="${fieldValue }"
 																		fInp-optkey="${tmplField.optionGroupKey }"
 																		fInp-fieldkey="${module.name }@${tmplField.fieldName }"
-																		fInp-readonly="${fieldReadonly }">
-																			<span class="dtmpl-field-validates"> <c:if
+																		fInp-readonly="${fieldReadonly }"> <span
+																			class="dtmpl-field-validates"> <c:if
 																					test="${fn:contains(tmplField.validators, 'required')}">
 																					<i validate-name="required"></i>
 																				</c:if>
@@ -261,11 +264,10 @@
 																</span>
 																</td>
 															</c:forEach>
-																<td>
-																<c:if test="${fieldGroup.rabcTemplateGroupId != null && fieldGroup.rabcUndetailable != 1 }">
+															<td><c:if
+																	test="${fieldGroup.rabcTemplateGroupId != null && fieldGroup.rabcUndetailable != 1 }">
 																	<span class="array-item-detail fa fa-book" title="查看详情"></span>
-																</c:if> 
-																<c:if test="${fieldGroup.composite.access == '写' }">
+																</c:if> <c:if test="${fieldGroup.composite.access == '写' }">
 																	<c:if
 																		test="${fieldGroup.rabcTemplateGroupId != null && fieldGroup.rabcUnupdatable != 1 }">
 																		<span class="array-item-update fa fa-edit"

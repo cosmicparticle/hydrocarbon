@@ -1100,7 +1100,7 @@ define(function(require, exports, module) {
 			'refselect' : function() {
 				var pa = _param;
 
-				var menuid = pa.menuid ? pa.menuid : mainmenuid;
+				var menuid = pa.menuid ? pa.menuid :  pa.mainmenuid;
 
 				var $container = $('<span class="cpf-refselect-input-container cpf-field-input">');
 
@@ -1136,7 +1136,16 @@ define(function(require, exports, module) {
 					$thumb.html("");
 					var $code = $('<input   type="hidden" />');
 					setNormalAttrs($code);
-					$code.val(value.substring(0, 32));
+					
+					let va1=value;
+					let va0=null;
+					
+					if(value !=null && typeof(value) != undefined && value.indexOf("@R@") != -1){
+						va1=value.split('@R@')[1];
+						va0=value.split('@R@')[0];
+					}
+					
+					$code.val(va0==null?va1:va0);
 					var $i;
 					$thumb.append($code);
 					if (!value) {
@@ -1172,8 +1181,8 @@ define(function(require, exports, module) {
 
 					} else {
 						$i = $('<i  class="open-detail-dialog" group-id > '
-								+ value.split('@')[1] + ' <i/>');
-						$i.attr('code', value.substring(0, 32));
+								+ va1 + ' <i/>');
+						$i.attr('code', va0==null?va1:va0);
 						$thumb.append($i);
 						$i.click(function() {
 							var $this = $(this);
@@ -1201,7 +1210,7 @@ define(function(require, exports, module) {
 									function(entities) {
 										console.log(entities);
 										if (entitiesLoader.codes.length > 0) {
-											var value = entitiesLoader.codes[0]
+											var value = entitiesLoader.codes[0]+'@R@'
 													+ entities[entitiesLoader.codes[0]][fields[1]];
 											setValue(value, $span);
 										}
@@ -1257,15 +1266,17 @@ define(function(require, exports, module) {
 
 				function setValue(value, $thumb) {
 					$thumb.html("");
+					
+					let va1=value;
+					let va0=null;
+					 
+					if(value !=null && typeof(value) != undefined && value.indexOf("@R@") != -1){
+						va1=value.split('@R@')[1];
+						va0=value.split('@R@')[0];
+					}
 
 					if (!pa.refgroupid) {
-						let va1=value;
-						let va0=null;
-						 
-						if(value !=null && typeof(value) != undefined && value.indexOf("@R@") != -1){
-							va1=value.split('@R@')[1];
-							va0=value.split('@R@')[0];
-						}
+						
 						$thumb.append(va1);
 						$container.removeClass("cpf-refselect-input-container");
 						$thumb.removeClass("cpf-refselect-input-thumb");
