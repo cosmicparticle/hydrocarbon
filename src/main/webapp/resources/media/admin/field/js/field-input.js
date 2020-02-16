@@ -14,7 +14,7 @@ define(function(require, exports, module) {
 			// select ： 单选下拉框
 			// preselect ：单选可编辑下拉框
 			// multiselect : 多选下拉框
-			// caseelect : 级联下拉框
+			// caselect : 级联下拉框
 			// checkbox : 多选
 			// radio : 单选
 			// date : 日期选择

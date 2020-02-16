@@ -101,7 +101,7 @@
 		</div>
 	</script>
 	<script type="jquery/tmpl" id="tmpl-field-array-title">
-		<th data-id="\${id}" field-id="\${fieldId}" 
+		<th data-id="\${id}" field-id="\${fieldId}" refGroupId="\${refGroupId}" pointModuleName="\${pointModuleName}"
 			class="\${fieldAvailable? '': 'field-unavailable'}"
 			title="\${fieldAvailable? fieldOriginTitle: '无效字段' }">
 			<span>\${title }</span>
@@ -112,6 +112,7 @@
 				<a class="recover-array-field" title="恢复默认名称">
 					<i class="iconfont icon-recover"></i>
 				</a>
+				<a  class="field-refmodule-a \${pointModuleName? pointModuleName : 'hide' } " title="\${refGroupTitle? '已选组合:'+refGroupTitle: '选择组合'}"  ><i class="icon iconfont icon-group"></i></a>
 			</div>
 		</th>
 	</script>

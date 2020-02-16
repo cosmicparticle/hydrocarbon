@@ -367,7 +367,7 @@
 			}
 		]
 	},
-	"caseelect"		: {
+	"caselect"		: {
 		"comparators"		: [
 			{
 				"title"	: "为",
