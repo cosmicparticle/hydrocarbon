@@ -775,6 +775,8 @@ define(function(require1, exports, module){
 							group.fields.push({
 								id		: $th.attr('data-id'),
 								fieldId	: $th.attr('field-id'),
+								pointModuleName	: $th.attr('pointModuleName'),
+								refGroupId	: $th.attr('refGroupId'),
 								title	: $th.children('span').text(),
 								viewVal	: 'XXX'
 							});
@@ -1130,6 +1132,28 @@ define(function(require1, exports, module){
 						$title.text(fieldTitle);
 					}
 				});
+			});
+			
+			//选择模板组合
+			bindPageEvent('click', '.array-field-refmodule-a i', function(e){
+				var $field  = $(this).closest('th');
+				//请求打开选择模板组合对话框
+				var pointMName=$field.data('field-data').pointModuleName;
+				var $current = $(this);
+				Dialog.openDialog("admin/tmpl/group/choose/"+pointMName, 
+						"选择关联模板", undefined, {
+					undefined,
+					width		: 1000,
+					height		: 400,
+					onSubmit	: function(data){
+						if(data && data[0]){
+							$field.attr('refGroupId',data[0].id);
+							$field.attr('pointModuleName',pointMName);
+							$current.attr('title','已选组合:'+data[0].title);
+						}
+					}
+				});
+				
 			});
 			
 			//删除字段组

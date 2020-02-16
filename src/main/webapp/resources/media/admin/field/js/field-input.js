@@ -1133,9 +1133,16 @@ define(function(require, exports, module) {
 				var $page = $container;
 
 				function setValue(value, $thumb) {
+					var inputName=null;
+					$thumb.find('input[type="hidden"]').each(function(){
+						inputName=$(this).attr('name');
+					});
+					
 					$thumb.html("");
 					var $code = $('<input   type="hidden" />');
+					$code.attr('name',inputName);
 					setNormalAttrs($code);
+					
 					
 					let va1=value;
 					let va0=null;
@@ -1145,7 +1152,7 @@ define(function(require, exports, module) {
 						va0=value.split('@R@')[0];
 					}
 					
-					$code.val(va0==null?va1:va0);
+					$code.val(va0);
 					var $i;
 					$thumb.append($code);
 					if (!value) {
@@ -1182,7 +1189,7 @@ define(function(require, exports, module) {
 					} else {
 						$i = $('<i  class="open-detail-dialog" group-id > '
 								+ va1 + ' <i/>');
-						$i.attr('code', va0==null?va1:va0);
+						$i.attr('code', va0);
 						$thumb.append($i);
 						$i.click(function() {
 							var $this = $(this);

@@ -27,7 +27,10 @@ define(function(require, exports, module){
 							return 'admin/modules/curd/load_rabc_entities/' + menuId + '/' + uriData.relationCompositeId;
 						},
 						entityDetail		: function(fieldGroupId, entityCode){
-							return 'admin/modules/curd/rabc_detail/' +menuId + '/' + fieldGroupId ;//  + '/' + entityCode
+							return 'admin/modules/curd/rabc_detail/' +menuId + '/' + fieldGroupId ;// +
+																									// '/'
+																									// +
+																									// entityCode
 						}
 					}
 				case 'node':
@@ -108,7 +111,7 @@ define(function(require, exports, module){
 			}
 		});
 		$('form', $page).on('cpf-submit', function(e, formData){
-			//绑定部分自定义字段控件的表单值
+			// 绑定部分自定义字段控件的表单值
 			bindEmptyMultipleSelectValue(e.target, formData);
 			FieldInput.bindSubmitData(e.target, formData);
 			if(typeof fuseMode === 'boolean'){
@@ -164,11 +167,11 @@ define(function(require, exports, module){
 			});
 		}
 		
-//		$page.on('click', '.array-item-detail', function(){
-//			var entityCode = $(this).closest('tr').find('.entity-code').val();
-//			require('tab').openInTab(uriGenerator.entityDetail(entityCode), 
-//					'module_detail_' + entityCode);
-//		});
+// $page.on('click', '.array-item-detail', function(){
+// var entityCode = $(this).closest('tr').find('.entity-code').val();
+// require('tab').openInTab(uriGenerator.entityDetail(entityCode),
+// 'module_detail_' + entityCode);
+// });
 		
 		$page.on('click', '.array-item-remove', function(){
 			var $row = $(this).closest('tr');
@@ -396,6 +399,8 @@ define(function(require, exports, module){
 						.attr('fInp-value', $title.attr('fInp-value'))
 						.attr('fInp-menuid', $title.attr('fInp-menuid')).attr('fInp-mainmenuid', $title.attr('fInp-mainmenuid'))
 						.attr('fInp-readonly', readonly).attr('fInp-refgroupid',$title.attr('fInp-refgroupid'))
+						.attr('fInp-refCognitionTitle',$title.attr('fInp-refCognitionTitle'))
+						.attr('fInp-refShowTitle',$title.attr('fInp-refShowTitle'))
 						.appendTo($('<span class="field-value"></span>').appendTo($td));
 					if($title.attr('fInp-optset')){
 						$fieldInput.attr('fInp-optset', $title.attr('fInp-optset'));
@@ -529,11 +534,11 @@ define(function(require, exports, module){
 				var param = paramGetter($this);
 				var fInp = new FieldInput(param);
 				var $sames = $page.find('.field-value[value-field-name="' + param.name + '"]');
-				//字段与模板组合默认字段相同时，禁用字段编辑
+				// 字段与模板组合默认字段相同时，禁用字段编辑
 				if($sames.filter('.premises-container *').length > 0){
 					fInp.setDisabled();
 				}
-				//fieldName相同的字段，将其统一
+				// fieldName相同的字段，将其统一
 				$sames.not('.premises-container *').each(function(){
 					var otherInput = $(this).find('.field-input').data('field-input');
 					if(otherInput){

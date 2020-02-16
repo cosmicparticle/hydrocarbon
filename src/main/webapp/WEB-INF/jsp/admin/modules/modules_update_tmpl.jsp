@@ -129,8 +129,7 @@
 														fInp-fieldkey="${module.name }@${tmplField.fieldName }"
 														fInp-readonly="${fieldReadonly}"
 														fInp-refCognitionTitle="${tmplField.refCognitionTitle }"
-														fInp-refShowTitle="${tmplField.refShowTitle }">
-													</span>
+														fInp-refShowTitle="${tmplField.refShowTitle }"> </span>
 												</div>
 											</div>
 										</c:forEach>
@@ -177,7 +176,9 @@
 																fInp-mainmenuid="${mainMenu.id }"
 																fInp-menuid="${menu.id }"
 																fInp-refgroupid="${field.refGroupId }"
-																fInp-access="${field.additionAccess}">${field.title }</th>
+																fInp-access="${field.additionAccess}"
+																fInp-refCognitionTitle="${field.refCognitionTitle }"
+																fInp-refShowTitle="${field.refShowTitle }">${field.title }</th>
 														</c:forEach>
 														<th width="20px"><c:if
 																test="${!(fieldGroup.composite.access == '读' || fieldGroup.composite.access == '补' && fn:length(entity.arrayMap[fieldGroup.composite.name]) > 0 ) }">
