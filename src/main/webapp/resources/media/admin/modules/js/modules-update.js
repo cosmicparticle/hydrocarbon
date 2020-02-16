@@ -373,7 +373,7 @@ define(function(require, exports, module){
 			}
 		});
 		
-		
+	
 		function addRow($table, withData){
 			var $tbody = $table.children('tbody');
 			var $titleRow = $table.find('.title-row');
