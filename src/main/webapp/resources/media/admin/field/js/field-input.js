@@ -1150,9 +1150,9 @@ define(function(require, exports, module) {
 					if(value !=null && typeof(value) != undefined && value.indexOf("@R@") != -1){
 						va1=value.split('@R@')[1];
 						va0=value.split('@R@')[0];
+						$code.val(va0);
 					}
-					
-					$code.val(va0);
+
 					var $i;
 					$thumb.append($code);
 					if (!value) {
@@ -1294,7 +1294,7 @@ define(function(require, exports, module) {
 
 					$i = $('<i  class="open-detail-dialog" group-id > '
 							+ va1 + ' <i/>');
-					$i.attr('code', va0==null?va1:va0);
+					$i.attr('code', va0);
 					$thumb.append($i);
 					$i.click(function() {
 						var $this = $(this);
