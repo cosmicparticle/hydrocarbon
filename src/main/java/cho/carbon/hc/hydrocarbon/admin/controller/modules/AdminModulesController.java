@@ -904,6 +904,7 @@ public class AdminModulesController {
 			EntitiesQueryParameter param = new EntitiesQueryParameter(stmpl.getModule(), UserUtils.getCurrentUser());
 			param.setEntityCodes(codeSet);
 			param.setRelationName(stmpl.getRelationName());
+			param.setOrderColumn(stmpl.getOrderColumn());
 			parsers = entityService.queryRelationEntityParsers(param);
 			entities = toEntitiesJson(parsers, fieldSet);
 		} else {// 作为 groupId 使用
