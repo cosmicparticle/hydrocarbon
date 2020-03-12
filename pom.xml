@@ -11,14 +11,15 @@
 
 	<properties>
 		<version.kie>7.10.0.Final</version.kie>
-		<version.carbon-core>1.0.128-SNAPSHOT</version.carbon-core>
-		<version.hydrocarbon-server>0.1.8</version.hydrocarbon-server>
+		<version.carbon-core>1.0.129-SNAPSHOT</version.carbon-core>
+		<version.hydrocarbon-server>0.1.9</version.hydrocarbon-server>
 		<version.cpfweb>1.1</version.cpfweb>
 		<version.cpfutils>1.1</version.cpfutils>
 		<version.cpfspring>1.1</version.cpfspring>
+		<version.employment>0.0.2</version.employment>
 		<version.elnV1>0.15</version.elnV1>
-		<version.carbon-thinking>0.25-SNAPSHOT</version.carbon-thinking>
-		<!-- <version.abcbizz>2.1.15</version.abcbizz> <version.authbiz>0.0.21</version.authbiz> 
+		<version.carbon-thinking>0.26-SNAPSHOT</version.carbon-thinking>
+		 <!--<version.abcbizz>2.1.15</version.abcbizz> <version.authbiz>0.0.21</version.authbiz> 
 			<version.jgdj>1.2</version.jgdj> <version.xfjd>0.1.83</version.xfjd> -->
 		<cxf.version>3.2.2</cxf.version>
 	</properties>
@@ -37,6 +38,10 @@
 				<exclusion>
 					<groupId>cho.carbon.hc.copframe</groupId>
 					<artifactId>cpf-dao</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>mysql</groupId>
+					<artifactId>mysql-connector-java</artifactId>
 				</exclusion>
 			</exclusions>
 		</dependency>
@@ -83,7 +88,13 @@
 			<artifactId>carbon-thinking</artifactId>
 			<version>${version.carbon-thinking}</version>
 		</dependency>
-		<!-- <dependency> <groupId>cho.carbon.biz</groupId> <artifactId>elnV1</artifactId> 
+			<!--<dependency>
+			<groupId>cho.carbon.edu</groupId>
+			<artifactId>employment</artifactId>
+			<version>${version.employment}</version>
+		</dependency>
+	
+		 <dependency> <groupId>cho.carbon.biz</groupId> <artifactId>elnV1</artifactId> 
 			<version>${version.elnV1}</version> <exclusions> <exclusion> <groupId>cho.carbon</groupId> 
 			<artifactId>carbon-core</artifactId> </exclusion> </exclusions> </dependency> 
 			<dependency> <groupId>com.abc.biz</groupId> <artifactId>authbiz</artifactId> 
