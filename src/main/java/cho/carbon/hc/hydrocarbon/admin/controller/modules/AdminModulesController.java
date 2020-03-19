@@ -36,9 +36,6 @@ import cho.carbon.hc.copframe.utils.CollectionUtils;
 import cho.carbon.hc.copframe.utils.TextUtils;
 import cho.carbon.hc.copframe.utils.date.FrameDateFormat;
 import cho.carbon.hc.copframe.web.poll.WorkProgress;
-import cho.carbon.hc.dataserver.model.abc.service.EntitiesQueryParameter;
-import cho.carbon.hc.dataserver.model.abc.service.EntityQueryParameter;
-import cho.carbon.hc.dataserver.model.abc.service.ModuleEntityService;
 import cho.carbon.hc.dataserver.model.dict.pojo.DictionaryComposite;
 import cho.carbon.hc.dataserver.model.dict.pojo.DictionaryOption;
 import cho.carbon.hc.dataserver.model.dict.service.DictionaryService;
@@ -54,6 +51,10 @@ import cho.carbon.hc.dataserver.model.modules.service.view.ListTemplateEntityVie
 import cho.carbon.hc.dataserver.model.modules.service.view.ListTemplateEntityViewCriteria;
 import cho.carbon.hc.dataserver.model.modules.service.view.PagedEntityList;
 import cho.carbon.hc.dataserver.model.modules.service.view.TreeNodeContext;
+import cho.carbon.hc.dataserver.model.service.EntitiesQueryParameter;
+import cho.carbon.hc.dataserver.model.service.EntityFusionRunner;
+import cho.carbon.hc.dataserver.model.service.EntityQueryParameter;
+import cho.carbon.hc.dataserver.model.service.ModuleEntityService;
 import cho.carbon.hc.dataserver.model.tmpl.manager.TreeTemplateManager.TreeRelationComposite;
 import cho.carbon.hc.dataserver.model.tmpl.pojo.ArrayEntityProxy;
 import cho.carbon.hc.dataserver.model.tmpl.pojo.TemplateActionTemplate;
@@ -88,7 +89,6 @@ import cho.carbon.hc.entityResolver.impl.ABCNodeProxy;
 import cho.carbon.hc.entityResolver.impl.RelSelectionEntityPropertyParser;
 import cho.carbon.hc.hydrocarbon.SessionKey;
 import cho.carbon.hc.hydrocarbon.admin.controller.AdminConstants;
-import cho.carbon.hc.hydrocarbon.common.EntityFusionRunner;
 import cho.carbon.hc.hydrocarbon.common.EntityQueryPoolUtils;
 import cho.carbon.hc.hydrocarbon.common.RequestParameterMapComposite;
 import cho.carbon.hc.hydrocarbon.model.config.pojo.SideMenuLevel2Menu;
@@ -1025,7 +1025,13 @@ public class AdminModulesController {
 				int sucs = atmplService.doAction(action, codes,
 						TemplateGroupAction.ACTION_MULTIPLE_TRANSACTION.equals(groupAction.getMultiple()),
 						UserUtils.getCurrentUser());
-				return AjaxPageResponse.REFRESH_LOCAL("执行结束, 共成功处理" + sucs + "个实体");
+				if(sucs==0) {
+					return AjaxPageResponse.FAILD("执行失败");
+				}else if(sucs<codes.size()){
+					return AjaxPageResponse.FAILD("执行失败"+ (codes.size()-sucs) + "个实体。"+"处理成功"+ sucs + "个实体");
+				}else {
+					return AjaxPageResponse.REFRESH_LOCAL("执行结束, 共成功处理" + sucs + "个实体");
+				}
 			} catch (Exception e) {
 				logger.error("操作失败", e);
 				return AjaxPageResponse.FAILD("执行失败");

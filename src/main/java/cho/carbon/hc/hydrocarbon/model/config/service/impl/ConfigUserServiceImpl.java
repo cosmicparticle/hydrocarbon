@@ -8,9 +8,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import cho.carbon.hc.copframe.spring.properties.PropertyPlaceholder;
-import cho.carbon.hc.dataserver.model.abc.service.EntityQueryParameter;
-import cho.carbon.hc.dataserver.model.abc.service.ModuleEntityService;
 import cho.carbon.hc.dataserver.model.modules.service.ModulesService;
+import cho.carbon.hc.dataserver.model.service.EntityQueryParameter;
+import cho.carbon.hc.dataserver.model.service.ModuleEntityService;
 import cho.carbon.hc.dataserver.model.tmpl.pojo.TemplateDetailTemplate;
 import cho.carbon.hc.dataserver.model.tmpl.service.DetailTemplateService;
 import cho.carbon.hc.entityResolver.FusionContextConfig;
