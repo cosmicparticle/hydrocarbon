@@ -419,7 +419,7 @@ public class ModulesImportServiceImpl implements ModulesImportService {
 	
 	@Override
 	public Long saveTemplate(ModuleImportTemplate tmpl) {
-		if(tmpl.getId() == null) {
+		if(tmpl.isNew()) {
 			return createTemplate(tmpl);
 		}else {
 			updateTemplate(tmpl);

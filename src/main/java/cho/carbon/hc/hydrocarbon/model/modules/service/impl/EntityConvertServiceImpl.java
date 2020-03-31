@@ -91,7 +91,7 @@ public class EntityConvertServiceImpl implements EntityConvertService{
 			for (EntityVersionItem historyItem : historyItems) {
 				JSONObject jHistoryItem = new JSONObject();
 				aHistoryItems.add(jHistoryItem);
-				jHistoryItem.put("code", historyItem.getCode());
+				jHistoryItem.put("code", String.valueOf(historyItem.getCode()));
 				jHistoryItem.put("userName", historyItem.getUserName());
 				jHistoryItem.put("time", historyItem.getTime());
 				jHistoryItem.put("monthKey", historyItem.getMonthKey());

@@ -37,11 +37,11 @@ public class Api2DictionaryController {
 		JSONObjectResponse res = new JSONObjectResponse();
 		Set<String> fieldIdSet = TextUtils.split(fieldIds, ",");
 		Map<String, List<OptionItem>> optionsMap = dictService.getOptionsMap(fieldIdSet);
-		JSONObject map = new JSONObject();
-		optionsMap.forEach((fieldId, options)->{
-			map.put(String.valueOf(fieldId), options);
-		});
-		res.put("optionsMap", map);
+//		JSONObject map = new JSONObject();
+//		optionsMap.forEach((fieldId, options)->{
+//			map.put(String.valueOf(fieldId), options);
+//		});
+		res.put("optionsMap", optionsMap);
 		return res;
 	}
 	
