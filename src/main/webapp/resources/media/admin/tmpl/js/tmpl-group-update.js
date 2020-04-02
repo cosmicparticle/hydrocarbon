@@ -71,6 +71,7 @@ define(function(require, exports, module) {
 
 		var $C = require('common/chooser/chooser.js');
 		var $JC = require('common/chooser/jumpChooser.js');
+		var $RC = require('common/chooser/ractionChooser.js');
 		var actionsSortParam = {
 			helper : 'clone',
 			cursor : 'move',
@@ -91,9 +92,23 @@ define(function(require, exports, module) {
 					refreshJumpIndex(this);
 				}
 			};
-		var $listActions = $('#list-actions', $page).sortable(actionsSortParam), $detailActions = $(
+		var ractionsSortParam = {
+				helper : 'clone',
+				cursor : 'move',
+				opacity : 0.5,
+				tolerance : 'pointer',
+				distance : 5,
+				update : function() {
+					refreshRActionIndex(this);
+				}
+			};
+		var $listActions = $('#list-actions', $page).sortable(actionsSortParam), 
+		$detailActions = $(
 				'#detail-actions', $page).sortable(actionsSortParam);
 		var $listJumps = $('#list-jumps', $page).sortable(jumpsSortParam);
+		
+		var $listRActions = $('#list-ractions', $page).sortable(ractionsSortParam);
+		
 		var listChooser = $C('#list-action-select', $page).chooser({
 			list : data.atmpls,
 			onSelected : function(item, tmplAction) {
@@ -106,6 +121,14 @@ define(function(require, exports, module) {
 			list : data.jtmpls,
 			onSelected : function(item, tmplJump) {
 				appendJump(item, $listJumps, tmplJump, true);
+				item.hide();
+			}
+		});
+		
+		var listRActionChooser = $RC('#list-raction-select', $page).chooser({
+			list : data.ratmpls,
+			onSelected : function(item, tmplRAction) {
+				appendRAction(item, $listRActions, tmplRAction);
 				item.hide();
 			}
 		});
@@ -145,6 +168,28 @@ define(function(require, exports, module) {
 			$jumpsBody.append($row);
 		}
 		
+		var $tmplRAction = $('#tmpl-raction', $page);
+		function appendRAction(item, $ractionsBody, tmplRAction) {
+			var data = item.data;
+			var $row = $tmplRAction.tmpl({
+				index : $ractionsBody.children('tr').length,
+				title : (tmplRAction && tmplRAction.title) || data.title,
+				iconClass: (tmplRAction && tmplRAction.iconClass) || ''
+			});
+			$row.data('raction-item', item);
+			var $outgoing = $row.find(':checkbox.outgoing');
+			
+			if(tmplRAction && tmplRAction.outgoing === 1){
+				$outgoing.prop('checked', true);
+			}
+			$row.find('a.delete').click(function() {
+				$row.remove();
+				item.show();
+				refreshActionIndex($ractionsBody);
+			});
+			$ractionsBody.append($row);
+		}
+		
 		var $tmplAction = $('#tmpl-action', $page);
 		function appendAction(item, $actionsBody, tmplAction, multiple) {
 			var data = item.data;
@@ -180,6 +225,12 @@ define(function(require, exports, module) {
 		
 		function refreshJumpIndex($jumpsBody) {
 			$($jumpsBody).children('tr').each(function(i) {
+				$(this).children('td').eq(0).text(i + 1);
+			});
+		}
+		
+		function refreshRActionIndex($ractionsBody) {
+			$($ractionsBody).children('tr').each(function(i) {
 				$(this).children('td').eq(0).text(i + 1);
 			});
 		}
@@ -319,6 +370,29 @@ define(function(require, exports, module) {
 					}
 					var ljumpsCount = $listJumps.children('tr').each(appendJumps('list', 0)).length;
 					
+					function appendRActions(face, indexStart){
+						return function(index){
+							var $row = $(this);
+							var data = $row.data('raction-item').data;
+							var id = data.cache.dataId || '';
+							var title = $row.find('input.raction-title').val();
+							var ratmplId = data.id;
+
+							var iconClass = $row.find('.btn-icon-selector>i').attr('class') || '';
+							var outgoing = $row.find(':checkbox.outgoing').prop('checked')? 1: 0;
+							
+							var ractionName = 'ractions[' + (indexStart + index) + ']';
+							formData.append(ractionName + '.id', id);
+							formData.append(ractionName + '.title', title);
+							formData.append(ractionName + '.iconClass', iconClass);
+							formData.append(ractionName + '.outgoing', outgoing);
+							formData.append(ractionName + '.ratmplId', ratmplId);
+							formData.append(ractionName + '.order', index);
+							formData.append(ractionName + '.face', face);
+						}
+					}
+					var lractionsCount = $listRActions.children('tr').each(appendRActions('list', 0)).length;
+					
 				});
 		
 		function initChooserSelect(tmplAction){
@@ -352,6 +426,21 @@ define(function(require, exports, module) {
 			var tmplJump = data.tmplJumps[i];
 			if(tmplJump.face === 'list'){
 				listJumpChooser.chooser('select', initChooserJumpSelect(tmplJump));
+			}
+		}
+		
+		function initChooserRActionSelect(tmplRAction){
+			return [function(item){
+				return item.id === tmplRAction.ratmplId
+			}, function(item){
+				item.cache.dataId = tmplRAction.id;
+			}, tmplRAction];
+		}
+		
+		for(var i = 0; i < data.tmplRActions.length; i++){
+			var tmplRAction = data.tmplRActions[i];
+			if(tmplRAction.face === 'list'){
+				listRActionChooser.chooser('select', initChooserRActionSelect(tmplRAction));
 			}
 		}
 		

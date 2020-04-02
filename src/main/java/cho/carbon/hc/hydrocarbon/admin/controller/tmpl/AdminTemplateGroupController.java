@@ -30,8 +30,10 @@ import cho.carbon.hc.dataserver.model.tmpl.pojo.ArrayEntityProxy;
 import cho.carbon.hc.dataserver.model.tmpl.pojo.TemplateActionTemplate;
 import cho.carbon.hc.dataserver.model.tmpl.pojo.TemplateGroup;
 import cho.carbon.hc.dataserver.model.tmpl.pojo.TemplateJumpTemplate;
+import cho.carbon.hc.dataserver.model.tmpl.pojo.TemplateRActionTemplate;
 import cho.carbon.hc.dataserver.model.tmpl.service.ActionTemplateService;
 import cho.carbon.hc.dataserver.model.tmpl.service.JumpTemplateService;
+import cho.carbon.hc.dataserver.model.tmpl.service.RActionTemplateService;
 import cho.carbon.hc.dataserver.model.tmpl.service.TemplateGroupService;
 import cho.carbon.hc.hydrocarbon.admin.controller.AdminConstants;
 import cho.carbon.hc.hydrocarbon.admin.controller.tmpl.CommonTemplateActionConsumer.ChooseRequestParam;
@@ -41,31 +43,34 @@ import cho.carbon.hc.hydrocarbon.model.config.service.ConfigureService;
 @RequestMapping(AdminConstants.URI_TMPL + "/group")
 @PreAuthorize("hasAuthority(@confAuthenService.getAdminConfigAuthen())")
 public class AdminTemplateGroupController {
-	
+
 	@Resource
 	TemplateGroupService tmplGroupService;
-	
+
 	@Resource
 	ActionTemplateService atmplService;
-	
+
+	@Resource
+	RActionTemplateService ratmplService;
+
 	@Resource
 	JumpTemplateService jtmplService;
-	
+
 	@Resource
-	ModulesService  mService;
-	
+	ModulesService mService;
+
 	@Resource
 	ConfigureService configService;
-	
+
 	@Resource
 	FrameDateFormat dateFormat;
-	
+
 	Logger logger = Logger.getLogger(AdminTemplateGroupController.class);
-	
+
 	@RequestMapping("/list/{module}")
 	public String list(@PathVariable String module, Model model) {
 		ModuleMeta moduleMeta = mService.getModule(module);
-		if(module != null) {
+		if (module != null) {
 			List<TemplateGroup> tmplGroups = tmplGroupService.queryAll(module);
 			model.addAttribute("module", moduleMeta);
 			model.addAttribute("tmplGroups", tmplGroups);
@@ -74,41 +79,44 @@ public class AdminTemplateGroupController {
 		}
 		return null;
 	}
-	
+
 	@RequestMapping("/to_create/{moduleName}")
 	public String toCreate(@PathVariable String moduleName, Model model) {
 		ModuleMeta moduleMeta = mService.getModule(moduleName);
-		if(moduleName != null) {
+		if (moduleName != null) {
 			model.addAttribute("module", moduleMeta);
 			model.addAttribute("atmpls", toActionListJson(atmplService.queryAll(moduleName)));
 			model.addAttribute("jtmpls", toJumpListJson(jtmplService.queryAll(moduleName)));
+			model.addAttribute("ratmpls", toRActionListJson(ratmplService.queryAll(moduleName)));
 			model.addAttribute("moduleWritable", mService.getModuleEntityWritable(moduleName));
 			return AdminConstants.JSP_TMPL_GROUP + "/tmpl_group_update.jsp";
 		}
 		return null;
 	}
-	
+
 	@RequestMapping("/update/{groupId}")
 	public String toUpdate(@PathVariable Long groupId, Model model) {
 		TemplateGroup group = tmplGroupService.getTemplate(groupId);
-		if(group != null) {
+		if (group != null) {
 			ModuleMeta module = mService.getModule(group.getModule());
 			model.addAttribute("module", module);
 			model.addAttribute("group", group);
 			model.addAttribute("premisesJson", JSON.toJSON(group.getPremises()));
 			model.addAttribute("tmplActions", JSON.toJSON(group.getActions()));
 			model.addAttribute("tmplJumps", JSON.toJSON(group.getJumps()));
+			model.addAttribute("tmplRActions", JSON.toJSON(group.getRactions()));
 			model.addAttribute("atmpls", toActionListJson(atmplService.queryAll(group.getModule())));
+			model.addAttribute("ratmpls", toRActionListJson(ratmplService.queryAll(group.getModule())));
 			model.addAttribute("jtmpls", toJumpListJson(jtmplService.queryAll(group.getModule())));
 			model.addAttribute("moduleWritable", mService.getModuleEntityWritable(group.getModule()));
 			return AdminConstants.JSP_TMPL_GROUP + "/tmpl_group_update.jsp";
 		}
 		return null;
 	}
-	
+
 	private JSONArray toActionListJson(List<TemplateActionTemplate> actions) {
 		JSONArray aActions = new JSONArray();
-		if(actions != null) {
+		if (actions != null) {
 			for (TemplateActionTemplate action : actions) {
 				JSONObject jAction = new JSONObject();
 				jAction.put("id", action.getId());
@@ -118,10 +126,23 @@ public class AdminTemplateGroupController {
 		}
 		return aActions;
 	}
-	
+
+	private JSONArray toRActionListJson(List<TemplateRActionTemplate> actions) {
+		JSONArray ractions = new JSONArray();
+		if (ractions != null) {
+			for (TemplateRActionTemplate action : actions) {
+				JSONObject jAction = new JSONObject();
+				jAction.put("id", action.getId());
+				jAction.put("title", action.getTitle());
+				ractions.add(jAction);
+			}
+		}
+		return ractions;
+	}
+
 	private JSONArray toJumpListJson(List<TemplateJumpTemplate> jumps) {
 		JSONArray jJumps = new JSONArray();
-		if(jumps != null) {
+		if (jumps != null) {
 			for (TemplateJumpTemplate jump : jumps) {
 				JSONObject jAction = new JSONObject();
 				jAction.put("id", jump.getId());
@@ -139,18 +160,17 @@ public class AdminTemplateGroupController {
 		try {
 			tmplGroupService.merge(group);
 			return AjaxPageResponse.CLOSE_AND_REFRESH_PAGE("保存成功", group.getModule() + "_tmpl_group_list");
-		}catch (Exception e) {
+		} catch (Exception e) {
 			logger.error("保存失败", e);
-			if(e instanceof ConstraintViolationException) {
-				if("module_key_unique".equalsIgnoreCase(((ConstraintViolationException) e).getConstraintName())) {
+			if (e instanceof ConstraintViolationException) {
+				if ("module_key_unique".equalsIgnoreCase(((ConstraintViolationException) e).getConstraintName())) {
 					return AjaxPageResponse.FAILD("Key值重复， 保存失败");
 				}
 			}
 			return AjaxPageResponse.FAILD("保存失败");
 		}
 	}
-	
-	
+
 	@ResponseBody
 	@RequestMapping("/remove/{groupId}")
 	public AjaxPageResponse remove(@PathVariable Long groupId) {
@@ -162,8 +182,7 @@ public class AdminTemplateGroupController {
 			return AjaxPageResponse.FAILD("删除失败");
 		}
 	}
-	
-	
+
 	@ResponseBody
 	@RequestMapping("/copy/{tmplGroupId}/{targetModuleName}")
 	public ResponseJSON copy(@PathVariable Long tmplGroupId, @PathVariable String targetModuleName) {
@@ -171,7 +190,7 @@ public class AdminTemplateGroupController {
 		try {
 			ArrayEntityProxy.setLocalUser(UserUtils.getCurrentUser());
 			Long newTmplId = tmplGroupService.copy(tmplGroupId, targetModuleName);
-			if(newTmplId != null) {
+			if (newTmplId != null) {
 				jRes.setStatus("suc");
 				jRes.put("newTmplId", newTmplId);
 			}
@@ -180,36 +199,30 @@ public class AdminTemplateGroupController {
 		}
 		return jRes;
 	}
-	
+
 	@Resource
 	CommonTemplateActionConsumer actionConsumer;
-	
+
 	@RequestMapping("/choose/{moduleName}")
 	public String choose(@PathVariable String moduleName, String except, Model model) {
 		return forChoose(moduleName, except, null, model);
 	}
-	
-	
-	private String forChoose(String moduleName, String except, Predicate<TemplateGroup> selectedPredicate, Model model) {
-		return actionConsumer.choose(
-				ChooseRequestParam.create(moduleName, tmplGroupService, model)
-					.setExcept(except)
-					.setSelectedPredicate(selectedPredicate)
-					.setURI(AdminConstants.URI_TMPL + "/tmpl/group/" + moduleName)
-			);
+
+	private String forChoose(String moduleName, String except, Predicate<TemplateGroup> selectedPredicate,
+			Model model) {
+		return actionConsumer.choose(ChooseRequestParam.create(moduleName, tmplGroupService, model).setExcept(except)
+				.setSelectedPredicate(selectedPredicate).setURI(AdminConstants.URI_TMPL + "/tmpl/group/" + moduleName));
 	}
 
 	@RequestMapping("/rabc_relate/{moduleName}/{relationCompositeId}")
-	public String rabcRelate(@PathVariable String moduleName, 
-			@PathVariable Integer relationCompositeId,
-			Long rabcTemplateGroupId,
-			Model model) {
+	public String rabcRelate(@PathVariable String moduleName, @PathVariable Integer relationCompositeId,
+			Long rabcTemplateGroupId, Model model) {
 		ModuleMeta relationCompositeModule = mService.getCompositeRelatedModule(moduleName, relationCompositeId);
-		if(relationCompositeModule != null) {
-			return forChoose(relationCompositeModule.getName(), "", group->group.getId().equals(rabcTemplateGroupId), model);
+		if (relationCompositeModule != null) {
+			return forChoose(relationCompositeModule.getName(), "", group -> group.getId().equals(rabcTemplateGroupId),
+					model);
 		}
 		return null;
 	}
-	
-	
+
 }

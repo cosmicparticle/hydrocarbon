@@ -2,6 +2,7 @@ package cho.carbon.hc.hydrocarbon.api2.controller.entity;
 
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
+import cho.carbon.hc.copframe.dto.ajax.AjaxPageResponse;
 import cho.carbon.hc.copframe.dto.ajax.JSONObjectResponse;
 import cho.carbon.hc.copframe.dto.ajax.ResponseJSON;
 import cho.carbon.hc.copframe.dto.page.PageInfo;
@@ -28,7 +30,9 @@ import cho.carbon.hc.copframe.utils.CollectionUtils;
 import cho.carbon.hc.copframe.utils.FormatUtils;
 import cho.carbon.hc.copframe.utils.JsonUtils;
 import cho.carbon.hc.copframe.utils.TextUtils;
+import cho.carbon.hc.dataserver.model.dict.service.DictionaryService;
 import cho.carbon.hc.dataserver.model.modules.pojo.EntityVersionItem;
+import cho.carbon.hc.dataserver.model.modules.pojo.ModuleMeta;
 import cho.carbon.hc.dataserver.model.modules.service.ModulesService;
 import cho.carbon.hc.dataserver.model.modules.service.view.EntityItem;
 import cho.carbon.hc.dataserver.model.modules.service.view.EntityQuery;
@@ -49,15 +53,21 @@ import cho.carbon.hc.dataserver.model.tmpl.pojo.TemplateDetailFieldGroup;
 import cho.carbon.hc.dataserver.model.tmpl.pojo.TemplateDetailTemplate;
 import cho.carbon.hc.dataserver.model.tmpl.pojo.TemplateGroup;
 import cho.carbon.hc.dataserver.model.tmpl.pojo.TemplateGroupAction;
+import cho.carbon.hc.dataserver.model.tmpl.pojo.TemplateGroupJump;
+import cho.carbon.hc.dataserver.model.tmpl.pojo.TemplateJumpParam;
+import cho.carbon.hc.dataserver.model.tmpl.pojo.TemplateJumpTemplate;
 import cho.carbon.hc.dataserver.model.tmpl.pojo.TemplateListTemplate;
+import cho.carbon.hc.dataserver.model.tmpl.pojo.TemplateRActionTemplate;
 import cho.carbon.hc.dataserver.model.tmpl.pojo.TemplateStatView;
 import cho.carbon.hc.dataserver.model.tmpl.pojo.TemplateTreeNode;
 import cho.carbon.hc.dataserver.model.tmpl.pojo.TemplateTreeTemplate;
 import cho.carbon.hc.dataserver.model.tmpl.service.ActionTemplateService;
 import cho.carbon.hc.dataserver.model.tmpl.service.ArrayItemFilterService;
 import cho.carbon.hc.dataserver.model.tmpl.service.DetailTemplateService;
+import cho.carbon.hc.dataserver.model.tmpl.service.JumpTemplateService;
 import cho.carbon.hc.dataserver.model.tmpl.service.ListCriteriaFactory;
 import cho.carbon.hc.dataserver.model.tmpl.service.ListTemplateService;
+import cho.carbon.hc.dataserver.model.tmpl.service.RActionTemplateService;
 import cho.carbon.hc.dataserver.model.tmpl.service.StatListTemplateService;
 import cho.carbon.hc.dataserver.model.tmpl.service.TemplateGroupService;
 import cho.carbon.hc.dataserver.model.tmpl.service.TreeTemplateService;
@@ -73,12 +83,20 @@ import cho.carbon.hc.hydrocarbon.model.config.bean.ValidateDetailParamter;
 import cho.carbon.hc.hydrocarbon.model.config.bean.ValidateDetailResult;
 import cho.carbon.hc.hydrocarbon.model.config.pojo.SideMenuLevel2Menu;
 import cho.carbon.hc.hydrocarbon.model.config.service.AuthorityService;
+import cho.carbon.hc.hydrocarbon.model.config.service.NonAuthorityException;
+import cho.carbon.hc.hydrocarbon.model.config.service.SideMenuService;
 import cho.carbon.hc.hydrocarbon.model.modules.bean.EntityDetail;
 import cho.carbon.hc.hydrocarbon.model.modules.service.EntityConvertService;
+import cho.carbon.meta.enun.AttributeValueType;
 
 @RestController
 @RequestMapping(Api2Constants.URI_ENTITY + "/curd")
 public class Api2EntityCurdController {
+	@Resource
+	DictionaryService dictService;
+
+	@Resource
+	SideMenuService menuService;
 
 	@Resource
 	AuthorityService authService;
@@ -120,6 +138,9 @@ public class Api2EntityCurdController {
 	ActionTemplateService atmplService;
 
 	@Resource
+	RActionTemplateService ratmplService;
+
+	@Resource
 	DetailTemplateService dtmplService;
 
 	@Resource
@@ -131,13 +152,19 @@ public class Api2EntityCurdController {
 	@Resource
 	StatListTemplateService statListService;
 
+	@Resource
+	JumpTemplateService jtmplService;
+
 	static Logger logger = Logger.getLogger(Api2EntityCurdController.class);
 
-	@RequestMapping("/start_query/{menuId}")
-	public ResponseJSON startQuery(@PathVariable Long menuId, PageInfo pageInfo, HttpServletRequest request,
+	@RequestMapping({ "/start_query/{menuId}", "/start_query/{menuId}/{ratmplId}/{rootCode}" })
+	public ResponseJSON startQuery(@PathVariable Long menuId, @PathVariable(required = false) Long ratmplId,
+			@PathVariable(required = false) String rootCode, PageInfo pageInfo, HttpServletRequest request,
 			String disabledColIds, ApiUser user) {
 		JSONObjectResponse jRes = new JSONObjectResponse();
 		SideMenuLevel2Menu menu = authService.validateUserL2MenuAccessable(user, menuId);
+		
+		TemplateRActionTemplate raction =null;
 
 		if (menu.getStatViewId() != null || menu.getTemplateGroupId() != null) {
 			Map<Long, String> requrestCriteriaMap = lcriteriFacrory.exractTemplateCriteriaMap(request);
@@ -146,14 +173,27 @@ public class Api2EntityCurdController {
 			EntityQueryPool qPool = EntityQueryPoolUtils.getEntityQueryPool(user);
 			// 注册一个查询
 			EntityQuery query = qPool.regist();
-			query.setModuleName(menu.getTemplateModule());
+			
 			query.setPageSize(pageInfo.getPageSize());
-			if (menu.getStatViewId() != null) {
+			if (ratmplId != null) {
+				raction = ratmplService.getTemplate(ratmplId);
+				TemplateRActionTemplate tmpl = ratmplService.getTemplate(ratmplId);
+				TemplateGroup tmplGroup = null;
+				if (tmpl != null) {
+					tmplGroup = tmplGroupService.getTemplate(tmpl.getGroupId());
+				}
+				query.setModuleName(tmplGroup.getModule()).setParentEntityCode(rootCode);
+				ltmpl = ltmplService.getTemplate(tmplGroup.getListTemplateId());
+				query.setTemplateGroup(tmplGroup);
+				query.setRactionTemplate(tmpl);
+			} else if (menu.getStatViewId() != null) {
+				query.setModuleName(menu.getTemplateModule());
 				TemplateStatView statViewTmpl = statViewService.getTemplate(menu.getStatViewId());
 				ltmpl = statListService.getTemplate(statViewTmpl.getStatListTemplateId());
 				Set<Long> disabledColumnIds = TextUtils.splitToLongSet(disabledColIds, ",");
 				query.setStatViewTemplate(statViewTmpl).setStatDisabledColumnIds(disabledColumnIds);
 			} else if (menu.getTemplateGroupId() != null) {
+				query.setModuleName(menu.getTemplateModule());
 				TemplateGroup tmplGroup = tmplGroupService.getTemplate(menu.getTemplateGroupId());
 				ltmpl = ltmplService.getTemplate(tmplGroup.getListTemplateId());
 				// 根据上下文获得节点模板
@@ -165,8 +205,49 @@ public class Api2EntityCurdController {
 			// 传递参数到页面
 			writeListPageAttributes(jRes, query, menu, ltmpl);
 		}
+		if(raction!=null) {
+			jRes.put("ratmplId", ratmplId);
+			jRes.put("rootCode", rootCode);
+			jRes.put("ratmplTitle", raction.getTitle());
+		}
 		return jRes;
 	}
+
+//	@RequestMapping({})
+//	public ResponseJSON startRelationQuery(@PathVariable Long menuId, @PathVariable Long ratmplId,
+//			@PathVariable String recordCode, PageInfo pageInfo, HttpServletRequest request, String disabledColIds,
+//			ApiUser user) {
+//		JSONObjectResponse jRes = new JSONObjectResponse();
+//		SideMenuLevel2Menu menu = authService.validateUserL2MenuAccessable(user, menuId);
+//
+//		// 获得查询池
+//		EntityQueryPool qPool = EntityQueryPoolUtils.getEntityQueryPool(user);
+//		// 注册一个查询
+//		EntityQuery query = qPool.regist();
+//		AbstractListTemplate<?, ?> ltmpl = null;
+//		if (tmplGroup != null) {
+//			Map<Long, String> requrestCriteriaMap = lcriteriFacrory.exractTemplateCriteriaMap(request);
+//
+//			query.setModuleName(tmplGroup.getModule()).setParentEntityCode(recordCode)
+//					.setRelationType(tmpl.getRelationType()).setTemplateGroup(tmplGroup);
+//			query.setPageSize(pageInfo.getPageSize());
+//
+//			ltmpl = ltmplService.getTemplate(tmplGroup.getListTemplateId());
+//			// 根据上下文获得节点模板
+//			// 设置参数
+//			query.setTemplateGroup(tmplGroup);
+//
+//			// 根据传入的条件和约束开始初始化查询对象，但还不获取实体数据
+//			query.prepare(requrestCriteriaMap, applicationContext);
+//
+//		}
+//		// 传递参数到页面
+//		writeListPageAttributes(jRes, query, menu, ltmpl);
+//		jRes.put("ratmplId", ratmplId);
+//		jRes.put("rootCode", recordCode);
+//		return jRes;
+//
+//	}
 
 	private void writeListPageAttributes(JSONObjectResponse jRes, EntityQuery query, SideMenuLevel2Menu menu,
 			AbstractListTemplate<?, ?> ltmpl) {
@@ -278,12 +359,19 @@ public class Api2EntityCurdController {
 		return jRes;
 	}
 
-	@RequestMapping("/remove/{menuId}")
-	public ResponseJSON remove(@PathVariable Long menuId, String codes, ApiUser user) {
+	@RequestMapping({ "/remove/{menuId}", "/remove/{menuId}/{ratmplId}" })
+	public ResponseJSON remove(@PathVariable Long menuId, @PathVariable(required = false) Long ratmplId, String codes,
+			ApiUser user) {
 		JSONObjectResponse jRes = new JSONObjectResponse();
 		SideMenuLevel2Menu menu = authService.validateUserL2MenuAccessable(user, menuId);
 		Set<String> entityCodes = TextUtils.split(codes, ",");
-		EntitiesQueryParameter param = new EntitiesQueryParameter(menu.getTemplateModule(), user);
+		String modi;
+		if (ratmplId != null) {
+			modi = tmplGroupService.getTemplate(ratmplService.getTemplate(ratmplId).getGroupId()).getModule();
+		} else {
+			modi = menu.getTemplateModule();
+		}
+		EntitiesQueryParameter param = new EntitiesQueryParameter(modi, user);
 		param.setEntityCodes(entityCodes);
 		try {
 			entityService.remove(param);
@@ -298,14 +386,16 @@ public class Api2EntityCurdController {
 	@RequestMapping({ "/save/{contextType:normal}/{validateSign:user|\\d+}",
 			"/save/{contextType:normal}/{validateSign:user|\\d+}/*",
 			"/save/{contextType:rabc}/{validateSign:user|\\d+}/{fieldGroupId}",
-			"/save/{contextType:node}/{validateSign:user|\\d+}/{nodeId}" })
+			"/save/{contextType:node}/{validateSign:user|\\d+}/{nodeId}",
+			"/save/{contextType:relation}/{validateSign:user|\\d+}/{ratmplId}/{rootCode}" })
 	public ResponseJSON save(@PathVariable String contextType, @PathVariable String validateSign,
 			@PathVariable(required = false) Long fieldGroupId, @PathVariable(required = false) Long nodeId,
-			Long dtmplId, @RequestParam(value = Api2Constants.KEY_FUSE_MODE, required = false) Boolean fuseMode,
+			@PathVariable(required = false) Long ratmplId, @PathVariable(required = false) Long rootCode, Long dtmplId,
+			@RequestParam(value = Api2Constants.KEY_FUSE_MODE, required = false) Boolean fuseMode,
 			@RequestParam(value = Api2Constants.KEY_ACTION_ID, required = false) Long actionId,
 			RequestParameterMapComposite composite, ApiUser user) {
 		ValidateDetailParamter vparam = new ValidateDetailParamter(validateSign, user);
-		vparam.setNodeId(nodeId).setDetailTemplateId(dtmplId).setFieldGroupId(fieldGroupId);
+		vparam.setNodeId(nodeId).setDetailTemplateId(dtmplId).setFieldGroupId(fieldGroupId).setRatmplId(ratmplId);
 		ValidateDetailResult validateResult = authService.validateDetailAuth(vparam);
 
 		JSONObjectResponse jRes = new JSONObjectResponse();
@@ -323,6 +413,16 @@ public class Api2EntityCurdController {
 			EntityQueryParameter param = new EntityQueryParameter(validateResult.getDetailTemplate().getModule(), user);
 			param.setArrayItemCriterias(arrayItemFilterService
 					.getArrayItemFilterCriterias(validateResult.getDetailTemplate().getId(), user));
+			
+			if(ratmplId!=null) {//添加一个关系吧
+				TemplateRActionTemplate ratmpl = ratmplService.getTemplate(ratmplId);
+				
+				String compName=dictService.getComposite(tmplGroupService.getTemplate(ratmpl.getGroupId()).getModule(), ratmpl.getCompositeId()).getName();
+				entityMap.put(compName+".$$flag$$", true);
+				entityMap.put(compName+"[0].$$label$$", ratmpl.getRelationName());
+				entityMap.put(compName+"[0].唯一编码", rootCode);		
+			}
+			
 			EntityFusionRunner.running(fuseMode, jRes, entityMap, param, entityService);
 		} catch (Exception e) {
 			logger.error("保存实体时出现异常", e);
@@ -369,11 +469,102 @@ public class Api2EntityCurdController {
 		return jRes;
 	}
 
-	@RequestMapping({ "/detail/{validateSign:\\d+}/{code}", "/detail/{validateSign:user}/*" })
+	@RequestMapping("/do_jump/{menuId}/{jumpId}")
+	public ResponseJSON doJump(@PathVariable Long menuId, @PathVariable Long jumpId, String codes, ApiUser user) {
+		authService.validateUserL2MenuAccessable(user, menuId);
+		TemplateGroupJump groupJump = tmplGroupService.getTempateGroupJump(jumpId);
+		Object vRes = validateGroupJump(groupJump, menuId, codes);
+		JSONObjectResponse jRes = new JSONObjectResponse();
+
+		if (vRes instanceof AjaxPageResponse) {
+			jRes.put("error", "跳转失败");
+			return jRes;
+		}
+
+		Set<String> cs = (Set<String>) vRes;
+		TemplateJumpTemplate jtmpl = jtmplService.getTemplate(groupJump.getJtmplId());
+
+		if (jtmpl != null) {
+			try {
+				TemplateGroup tmplGroup = tmplGroupService.getTemplate(groupJump.getGroupId());
+				ModuleMeta moduleMeta = mService.getModule(tmplGroup.getModule());
+				EntityQueryParameter queryParam = new EntityQueryParameter(moduleMeta.getName(), cs.iterator().next(),
+						user);
+				ModuleEntityPropertyParser entity = entityService.getEntityParser(queryParam);
+				jRes.setStatus("suc");
+				jRes.put("url", buildUrl(jtmpl, entity));
+				return jRes;
+			} catch (Exception e) {
+				logger.error("操作失败", e);
+				return jRes;
+			}
+		} else {
+			return jRes;
+		}
+	}
+
+	private Object buildUrl(TemplateJumpTemplate jtmpl, ModuleEntityPropertyParser entity) {
+		List<TemplateJumpParam> params = jtmpl.getJtmplParams();
+		StringBuffer sb = new StringBuffer();
+		sb.append(jtmpl.getPath());
+		if (!jtmpl.getPath().trim().endsWith("?")) {
+			sb.append("?");
+		}
+		if (params != null) {
+			for (TemplateJumpParam param : params) {
+				sb.append(param.getName());
+				sb.append("=");
+				sb.append(entity.getProperty(param.getFieldTitle(), AttributeValueType.STRING));
+				sb.append("&");
+			}
+		}
+		return sb.toString();
+	}
+
+	public Object validateGroupJump(TemplateGroupJump groupJump, Long menuId, String codes) {
+
+		SideMenuLevel2Menu menu = menuService.getLevel2Menu(menuId);
+
+		if (!groupJump.getGroupId().equals(menu.getTemplateGroupId())) {
+			throw new NonAuthorityException("二级菜单[id=" + menu.getId() + "]对应的模板组合[id=" + menu.getTemplateGroupId()
+					+ "]与操作[id=" + groupJump.getId() + "]对应的模板组合[id=" + groupJump.getGroupId() + "]不一致");
+		}
+		if (!codes.isEmpty()) {
+			Set<String> codeSet = collectCode(codes);
+			if (!codeSet.isEmpty()) {
+				if (codeSet.size() > 1) {
+					if (TemplateGroupAction.ACTION_MULTIPLE_SINGLE.equals(groupJump.getMultiple())
+							|| TemplateGroupAction.ACTION_FACE_DETAIL.equals(groupJump.getFace())) {
+						// 操作要单选，那么不能处理多个code
+						return AjaxPageResponse.FAILD("该操作只能处理一个编码");
+					}
+				}
+				return codeSet;
+			}
+		}
+		return AjaxPageResponse.FAILD("没有传入编码参数");
+
+	}
+
+	private static Set<String> collectCode(String codes) {
+		Set<String> codeSet = new LinkedHashSet<>();
+		for (String code : codes.split(",")) {
+			if (!code.isEmpty()) {
+				codeSet.add(code);
+			}
+		}
+		;
+		return codeSet;
+	}
+
+	@RequestMapping({ "/detail/{validateSign:\\d+}/{code}", "/detail/{validateSign:user}/*",
+			"/detail/{validateSign:\\d+}/{ratmplId}/{code}" })
 	public ResponseJSON detail(@PathVariable String validateSign, @PathVariable(required = false) String code,
-			Long versionCode, Long nodeId, Long fieldGroupId, Long dtmplId, ApiUser user) {
+			@PathVariable(required = false) Long ratmplId, Long versionCode, Long nodeId, Long fieldGroupId,
+			Long dtmplId, ApiUser user) {
 		ValidateDetailParamter vparam = new ValidateDetailParamter(validateSign, user);
-		vparam.setCode(code).setNodeId(nodeId).setFieldGroupId(fieldGroupId).setDetailTemplateId(dtmplId);
+		vparam.setCode(code).setNodeId(nodeId).setFieldGroupId(fieldGroupId).setRatmplId(ratmplId)
+				.setDetailTemplateId(dtmplId);
 		// 检测用户的权限
 		ValidateDetailResult vResult = authService.validateDetailAuth(vparam);
 		TemplateDetailTemplate dtmpl = vResult.getDetailTemplate();

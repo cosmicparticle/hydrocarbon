@@ -95,6 +95,7 @@ public interface AdminConstants {
 	final String JSP_TMPL_RELATIONDETAIL = JSP_TMPL + "/rdtmpl";
 	
 	final String JSP_TMPL_ACTION = JSP_TMPL + "/atmpl";
+	final String JSP_TMPL_RACTION = JSP_TMPL + "/ratmpl";
 	
 	final String JSP_TMPL_DICTFILTER = JSP_TMPL + "/dictfilter";
 	

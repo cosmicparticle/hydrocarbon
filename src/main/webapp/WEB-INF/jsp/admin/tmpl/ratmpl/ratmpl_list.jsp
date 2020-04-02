@@ -1,12 +1,8 @@
 <%@ page language="java" contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/jsp/common/base_empty.jsp"%>
-<title>跳转模板（${module.title }）</title>
+<title>关系操作模板（${module.title }）</title>
 <div id="tmpl-ratmpl-list-${module.name }" class="detail">
-	<div>
-		<form action="admin/tmpl/ratmpl/list/${module.name }">
-			
-		</form>
-	</div>
+	
 	<div class="page-header">
 		<div class="header-title">
 			<h1>关系操作模板（${module.title }）</h1>

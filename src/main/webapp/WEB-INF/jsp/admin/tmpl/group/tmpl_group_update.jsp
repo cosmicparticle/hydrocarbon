@@ -88,6 +88,25 @@
 			</td>
 		</tr>
 	</script>
+	<script type="jquery/tmpl" id="tmpl-raction">
+		<tr>
+			<td>\${index + 1 }</td>
+			<td><input class="raction-title" type="text" value="\${title }" /></td>
+			<td>
+				<div class="btn-icon-selector" data-icon="">
+					{{if iconClass !== ''}}
+						<i class="\${iconClass}"></i>
+					{{/if}}
+				</div>
+			</td>
+			<td>
+				<a class="btn btn-danger btn-xs delete">
+					<i class="fa fa-trash-o"></i>
+					删除
+				</a>
+			</td>
+		</tr>
+	</script>
 	<div class="float-operate-area">
 		<div class="operate-area-cover"></div>
 		<a id="save" class="btn-save" title="保存"><i class="fa fa-check-square"></i></a>
@@ -335,6 +354,37 @@
 							</div>
 							<div class="widget">
 								<div class="widget-header">
+									<span class="widget-caption">关系操作按钮</span>
+									<div class="widget-buttons">
+										<div id="list-raction-select" class="chooser">
+										</div>
+									</div>
+								</div>
+								<div class="widget-body">
+									<table class="table table-condensed">
+										<thead>
+											<tr>
+												<th>序号</th>
+												<th>按钮文字</th>
+												<!--
+												<th>
+													多选选项
+													<span 
+														title="“事务型多选”指在选中多个实体进行操作时，只有全部都处理成功才算成功，中间任一实体处理失败都会放弃其他实体的处理"
+														class="badge badge-darkorange badge-helper"></span>	
+												</th>
+												  -->
+												<th>图标</th>
+												<th>操作</th>
+											</tr>
+										</thead>
+										<tbody id="list-ractions">
+										</tbody>
+									</table>
+								</div>
+							</div>
+							<div class="widget">
+								<div class="widget-header">
 									<span class="widget-caption">列表跳转按钮</span>
 									<div class="widget-buttons">
 										<div id="list-jump-select" class="chooser">
@@ -485,13 +535,17 @@
 			premisesJson = Utils.parseJSON('${premisesJson}') || [];
 			tmplActions = Utils.parseJSON('${tmplActions}') || [];
 			tmplJumps = Utils.parseJSON('${tmplJumps}') || [];
+			tmplRActions = Utils.parseJSON('${tmplRActions}') || [];
 			atmpls = Utils.parseJSON('${atmpls}') || [];
+			ratmpls = Utils.parseJSON('${ratmpls}') || [];
 			jtmpls = Utils.parseJSON('${jtmpls}') || [];
 		}catch(e){console.log(e)}
 		TmplGroupUpdate.init($page, '${module.name}', premisesJson, {
 			tmplActions	: tmplActions,
+			tmplRActions	: tmplRActions,
 			tmplJumps	: tmplJumps,
 			atmpls		: atmpls,
+			ratmpls		: ratmpls,
 			jtmpls		: jtmpls
 		});
 	});

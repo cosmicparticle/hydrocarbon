@@ -12,6 +12,7 @@ import cho.carbon.hc.dataserver.model.modules.service.ModulesService;
 import cho.carbon.hc.dataserver.model.tmpl.pojo.TemplateDetailFieldGroup;
 import cho.carbon.hc.dataserver.model.tmpl.pojo.TemplateTreeTemplate;
 import cho.carbon.hc.dataserver.model.tmpl.service.DetailTemplateService;
+import cho.carbon.hc.dataserver.model.tmpl.service.RActionTemplateService;
 import cho.carbon.hc.dataserver.model.tmpl.service.TemplateGroupService;
 import cho.carbon.hc.dataserver.model.tmpl.service.TreeTemplateService;
 import cho.carbon.hc.hydrocarbon.api2.controller.Api2Constants;
@@ -45,25 +46,31 @@ public class Api2TemplateController {
 	
 	@Resource
 	TemplateJsonParseService tJsonService;
+
 	
 	
 	@RequestMapping({
 		"/dtmpl_config/{contextType:normal}/{validateSign:user|\\d+}/*",
 		"/dtmpl_config/{contextType:rabc}/{validateSign:user|\\d+}/{fieldGroupId}",
-		"/dtmpl_config/{contextType:node}/{validateSign:user|\\d+}/{nodeId}"
+		"/dtmpl_config/{contextType:node}/{validateSign:user|\\d+}/{nodeId}",
+		"/dtmpl_config/{contextType:relation}/{validateSign:user|\\d+}/{ratmplId}"
 	})
 	public ResponseJSON detailTemplateConfig(
 			@PathVariable String contextType,
 			@PathVariable String validateSign,
 			@PathVariable(required=false) Long fieldGroupId,
 			@PathVariable(required=false) Long nodeId,
+			@PathVariable(required=false) Long ratmplId,
 			Long dtmplId,
 			ApiUser user) {
 		ValidateDetailParamter vparam = new ValidateDetailParamter(validateSign, user);
+		
+
+		
 		vparam
 			.setNodeId(nodeId)
 			.setDetailTemplateId(dtmplId)
-			.setFieldGroupId(fieldGroupId)
+			.setFieldGroupId(fieldGroupId).setRatmplId(ratmplId);
 			;
 		ValidateDetailResult validateResult = authService.validateDetailAuth(vparam);
 		JSONObjectResponse jRes = new JSONObjectResponse();

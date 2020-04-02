@@ -26,8 +26,6 @@
 	-->
 
 	<context:component-scan base-package="cho.carbon" />
-	<context:component-scan base-package="com.zhsq" />
-	
 
 
 	<!-- dao自动扫描 -->

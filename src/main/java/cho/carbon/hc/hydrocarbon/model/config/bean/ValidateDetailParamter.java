@@ -9,6 +9,7 @@ public class ValidateDetailParamter {
 	private Long nodeId;
 	private Long dtmplId;
 	private Long fieldGroupId;
+	private Long ratmplId;
 	private String contextType;
 	public ValidateDetailParamter(String validateSign, ApiUser user) {
 		this.validateSign = validateSign;
@@ -55,4 +56,13 @@ public class ValidateDetailParamter {
 		this.fieldGroupId = fieldGroupId;
 		return this;
 	}
+	public Long getRatmplId() {
+		return ratmplId;
+	}
+	public ValidateDetailParamter setRatmplId(Long ratmplId) {
+		this.ratmplId = ratmplId;
+		return this;
+	}
+	
+	
 }

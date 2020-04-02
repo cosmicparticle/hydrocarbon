@@ -3,8 +3,8 @@
 <%@ include file="/WEB-INF/jsp/common/base_empty.jsp"%>
 <c:set var="title">
 	<c:choose>
-		<c:when test="${ratmpl != null }">修改${module.title }跳转模板-${ratmpl.title }</c:when>
-		<c:otherwise>创建跳转模板</c:otherwise>
+		<c:when test="${ratmpl != null }">修改${module.title }关系操作模板-${ratmpl.title }</c:when>
+		<c:otherwise>创建关系操作模板</c:otherwise>
 	</c:choose>
 </c:set>
 <title>${title }</title>
@@ -51,58 +51,35 @@
 												<label class="col-lg-2 control-label" for="name">名称</label>
 												<div class="col-lg-6">
 													<input type="text" data-bv-notempty="true"
-														data-bv-notempty-message="跳转模板名称必填" class="form-control"
+														data-bv-notempty-message="名称必填" class="form-control"
 														name="title" value="${ratmpl.title }" />
 												</div>
 											</div>
 										</div>
-									</div>
-									<div class="row">
 										<div class="col-lg-10">
 											<div class="form-group">
-												<label class="col-lg-2 control-label" for="name">路径</label>
-												<div class="col-lg-10">
-													<input type="text" class="form-control" name="path"
-														value="${ratmpl.path }" />
+												<label class="col-lg-2 control-label" for="name">关系类型</label>
+												<div class="col-lg-6">
+													<input type="text" data-bv-notempty="true"
+														data-bv-notempty-message="关系类型必填" class="form-control"
+														name="relationName" value="${ratmpl.relationName }" />
+												</div>
+											</div>
+										</div>
+										<div class="col-lg-10">
+											<div class="form-group">
+												<label class="col-lg-2 control-label" for="name">模板组合</label>
+												<div class="col-lg-6">
+													<input type="text" data-bv-notempty="true"
+														data-bv-notempty-message="模板组合必填" class="form-control"
+														name="groupId" value="${ratmpl.groupId }" />
 												</div>
 											</div>
 										</div>
 									</div>
 								</div>
 							</div>
-							<div class="widget ">
-								<div class="widget-header">
-									<span class="widget-caption"> 跳转参数配置 </span>
-
-									<div class="widget-buttons">
-										<div class="input-icon field-search">
-											<span class="search-input-wrapper"> <input type="text"
-												class="search-text-input form-control input-xs glyphicon-search-input"
-												autocomplete="off" placeholder="输入添加的字段名">
-											</span> <i class="glyphicon glyphicon-search blue"></i> <i
-												title="选择字段"
-												class="glyphicon glyphicon-th blue field-picker-button"></i>
-										</div>
-									</div>
-								</div>
-								<div class="widget-body form-group">
-									<div class="">
-										<table class="table table-hover table-bordered">
-											<thead>
-												<tr>
-													<th>参数类型</th>
-													<th>参数名</th>
-													<th>对应字段</th>
-													<th>操作</th>
-												</tr>
-											</thead>
-											<tbody id="ratmpl-param-rows" on-prepare="ratmpl-param-rows;">
-											</tbody>
-										</table>
-									</div>
-
-								</div>
-							</div>
+							
 						</form>
 					</div>
 				</div>
@@ -115,14 +92,13 @@
 			function(ratmplUpdate, Utils) {
 				var $page = $('#ratmpl-update-${ratmpl.id }');
 				console.log($page);
-				var params = [];
+				
 				try {
-					params = Utils.parseJSON('${params}') || [];
+					
 				} catch (e) {
 					console.log(e)
 				}
-				ratmplUpdate.init($page, '${module.name}', {
-					params : params
+				ratmplUpdate.init($page, '${module.name}', {	
 				});
 			});
 </script>

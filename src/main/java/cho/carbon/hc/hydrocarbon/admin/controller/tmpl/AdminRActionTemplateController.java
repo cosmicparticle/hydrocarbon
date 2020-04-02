@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -46,6 +47,7 @@ import cho.carbon.hc.dataserver.model.tmpl.pojo.TemplateActionField;
 import cho.carbon.hc.dataserver.model.tmpl.pojo.TemplateActionFieldGroup;
 import cho.carbon.hc.dataserver.model.tmpl.pojo.TemplateActionTemplate;
 import cho.carbon.hc.dataserver.model.tmpl.pojo.TemplateGroup;
+import cho.carbon.hc.dataserver.model.tmpl.pojo.TemplateJumpTemplate;
 import cho.carbon.hc.dataserver.model.tmpl.pojo.TemplateListTemplate;
 import cho.carbon.hc.dataserver.model.tmpl.pojo.TemplateRActionTemplate;
 import cho.carbon.hc.dataserver.model.tmpl.pojo.TemplateSelectionTemplate;
@@ -97,45 +99,47 @@ public class AdminRActionTemplateController {
 		Map<Long, List<TemplateGroup>> relatedGroupsMap = ratmplService
 				.getRelatedGroupsMap(CollectionUtils.toSet(tmplList, tmpl -> tmpl.getId()));
 		model.addAttribute("modulesJson", configService.getSiblingModulesJson(moduleName));
-		model.addAttribute("tmplList", tmplList);
+		model.addAttribute("ratmplList", tmplList);
 		model.addAttribute("module", moduleMeta);
 		model.addAttribute("relatedGroupsMap", relatedGroupsMap);
-		return AdminConstants.JSP_TMPL_ACTION + "/ratmpl_list.jsp";
+		return AdminConstants.JSP_TMPL_RACTION + "/ratmpl_list.jsp";
 	}
 
 	@RequestMapping("/to_create/{module}")
 	public String toCreate(@PathVariable String module, Model model) {
 		ModuleMeta moduleMeta = mService.getModule(module);
 		model.addAttribute("module", moduleMeta);
-		return AdminConstants.JSP_TMPL_ACTION + "/ratmpl_update.jsp";
+		return AdminConstants.JSP_TMPL_RACTION + "/ratmpl_update.jsp";
 	}
 
 	@RequestMapping("/update/{tmplId}")
 	public String update(@PathVariable Long tmplId, Model model) {
 		TemplateRActionTemplate tmpl = ratmplService.getTemplate(tmplId);
 		ArrayEntityProxy.setLocalUser(UserUtils.getCurrentUser());
-		JSONObject tmplJson = (JSONObject) JSON.toJSON(tmpl);
+		
 		ModuleMeta moduleMeta = mService.getModule(tmpl.getModule());
 		model.addAttribute("module", moduleMeta);
-		model.addAttribute("tmpl", tmpl);
-		model.addAttribute("tmplJson", tmplJson);
-		return AdminConstants.JSP_TMPL_ACTION + "/atmpl_update.jsp";
+		model.addAttribute("ratmpl", tmpl);
+		return AdminConstants.JSP_TMPL_RACTION + "/ratmpl_update.jsp";
 	}
 
 	@ResponseBody
 	@RequestMapping("/save")
-	public ResponseJSON save(@RequestBody JsonRequest jReq) {
-		JSONObjectResponse jRes = new JSONObjectResponse();
+	public AjaxPageResponse save(TemplateRActionTemplate data) {
 		ArrayEntityProxy.setLocalUser(UserUtils.getCurrentUser());
-		TemplateRActionTemplate data = parseToTmplData(jReq.getJsonObject());
+		
 		try {
 			ratmplService.merge(data);
-			jRes.setStatus("suc");
-		} catch (Exception e) {
-			logger.error("保存模板时发生错误", e);
-			jRes.setStatus("error");
+			return AjaxPageResponse.CLOSE_AND_REFRESH_PAGE("保存成功", data.getModule() + "_ratmpl_list");
+		}catch (Exception e) {
+			logger.error("保存失败", e);
+			if(e instanceof ConstraintViolationException) {
+				if("module_key_unique".equalsIgnoreCase(((ConstraintViolationException) e).getConstraintName())) {
+					return AjaxPageResponse.FAILD("Key值重复， 保存失败");
+				}
+			}
+			return AjaxPageResponse.FAILD("保存失败");
 		}
-		return jRes;
 	}
 
 	@ResponseBody
@@ -233,12 +237,12 @@ public class AdminRActionTemplateController {
 	}
 
 	@ResponseBody
-	@RequestMapping("/copy/{atmplId}/{targetModuleName}")
-	public ResponseJSON copy(@PathVariable Long atmplId, @PathVariable String targetModuleName) {
+	@RequestMapping("/copy/{tmplId}/{targetModuleName}")
+	public ResponseJSON copy(@PathVariable Long tmplId, @PathVariable String targetModuleName) {
 		JSONObjectResponse jRes = new JSONObjectResponse();
 		try {
 			ArrayEntityProxy.setLocalUser(UserUtils.getCurrentUser());
-			Long newTmplId = ratmplService.copy(atmplId, targetModuleName);
+			Long newTmplId = ratmplService.copy(tmplId, targetModuleName);
 			if (newTmplId != null) {
 				jRes.setStatus("suc");
 				jRes.put("newTmplId", newTmplId);
@@ -249,13 +253,14 @@ public class AdminRActionTemplateController {
 		return jRes;
 	}
 
-	@RequestMapping("/rel_selection/{stmplId}")
-	public String relationSelection( @PathVariable Long stmplId, String exists,
+	@RequestMapping("/rel_selection/{tmplId}")
+	public String relationSelection( @PathVariable Long tmplId, String exists,
 			PageInfo pageInfo, HttpServletRequest request, Model model, HttpSession session) {
 
 		TemplateGroup tmplGroup = null;
+		
 		TemplateListTemplate ltmpl = null;
-		TemplateSelectionTemplate stmpl = stmplService.getTemplate(stmplId);
+		TemplateSelectionTemplate stmpl = stmplService.getTemplate(tmplId);
 		String moduleName = stmpl.getModule();
 
 		// 获得查询池
@@ -272,7 +277,7 @@ public class AdminRActionTemplateController {
 		// 根据传入的条件和约束开始初始化查询对象，但还不获取实体数据
 		query.prepare(requrestCriteriaMap, applicationContext);
 
-		model.addAttribute("type", "atmpl");
+		model.addAttribute("type", "ratmpl");
 		model.addAttribute("stmpl", stmpl);
 		model.addAttribute("stmplJson", JSON.toJSON(stmpl));
 
@@ -284,25 +289,25 @@ public class AdminRActionTemplateController {
 
 	}
 	
-	@ResponseBody
-	@RequestMapping("/load_entities/{stmplId}")
-	public ResponseJSON loadEntities(
-			@PathVariable Long stmplId,
-			@RequestParam String codes, 
-			@RequestParam String fields) {
-		JSONObjectResponse jRes = new JSONObjectResponse();
-		TemplateSelectionTemplate stmpl = stmplService.getTemplate(stmplId);
-			
-		EntitiesQueryParameter param = new EntitiesQueryParameter(stmpl.getModule(), UserUtils.getCurrentUser());
-		param.setEntityCodes(TextUtils.split(codes, ",", HashSet<String>::new, c->c));
-		param.setRelationName(stmpl.getRelationName());
-		Map<String, RelSelectionEntityPropertyParser> parsers = entityService.queryRelationEntityParsers(param);
-		
-		
-		JSONObject entities = AdminModulesController.toEntitiesJson(parsers, TextUtils.split(fields, ",", HashSet<String>::new, f->f));
-		jRes.put("entities", entities);
-		jRes.setStatus("suc");
-		return jRes;
-	}
+//	@ResponseBody
+//	@RequestMapping("/load_entities/{stmplId}")
+//	public ResponseJSON loadEntities(
+//			@PathVariable Long stmplId,
+//			@RequestParam String codes, 
+//			@RequestParam String fields) {
+//		JSONObjectResponse jRes = new JSONObjectResponse();
+//		TemplateSelectionTemplate stmpl = stmplService.getTemplate(stmplId);
+//			
+//		EntitiesQueryParameter param = new EntitiesQueryParameter(stmpl.getModule(), UserUtils.getCurrentUser());
+//		param.setEntityCodes(TextUtils.split(codes, ",", HashSet<String>::new, c->c));
+//		param.setRelationName(stmpl.getRelationName());
+//		Map<String, RelSelectionEntityPropertyParser> parsers = entityService.queryRelationEntityParsers(param);
+//		
+//		
+//		JSONObject entities = AdminModulesController.toEntitiesJson(parsers, TextUtils.split(fields, ",", HashSet<String>::new, f->f));
+//		jRes.put("entities", entities);
+//		jRes.setStatus("suc");
+//		return jRes;
+//	}
 
 }
