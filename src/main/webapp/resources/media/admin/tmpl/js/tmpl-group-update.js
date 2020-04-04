@@ -200,6 +200,8 @@ define(function(require, exports, module) {
 				iconClass: (tmplAction && tmplAction.iconClass) || ''
 			});
 			$row.data('action-item', item);
+			var $multi = $row.find('.multiple');
+			$multi.val(tmplAction?tmplAction.multiple:"0");
 			var $multiCheckbox = $row.find('label.multi-checkbox :checkbox'), $multiTransaction = $row
 					.find('label.multi-transactional');
 			var $outgoing = $row.find(':checkbox.outgoing');
