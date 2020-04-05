@@ -150,6 +150,10 @@ define(function(require, exports, module) {
 				iconClass: (tmplJump && tmplJump.iconClass) || ''
 			});
 			$row.data('jump-item', item);
+			
+			var $multi = $row.find('.multiple');
+			$multi.val(tmplJump?tmplJump.multiple:"0");
+			
 			var $multiCheckbox = $row.find('label.multi-checkbox :checkbox'), $multiTransaction = $row
 					.find('label.multi-transactional');
 			var $outgoing = $row.find(':checkbox.outgoing');
@@ -177,6 +181,7 @@ define(function(require, exports, module) {
 				iconClass: (tmplRAction && tmplRAction.iconClass) || ''
 			});
 			$row.data('raction-item', item);
+			
 			var $outgoing = $row.find(':checkbox.outgoing');
 			
 			if(tmplRAction && tmplRAction.outgoing === 1){
