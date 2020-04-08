@@ -141,9 +141,9 @@ define(function(require1, exports, module){
 						pointModuleName : groupFieldData.pointModuleName,
 						refGroupId		: groupFieldData.refGroupId,
 						refGroupTitle   : groupFieldData.refGroupTitle,
-						validators		: []
+						validators		: groupFieldData.validators?groupFieldData.validators:[]
 				};
-				var VALIDATORS = ['require1d'];
+				var VALIDATORS = ['required'];
 				if(!$.isArray(groupFieldData.validators)){
 					groupFieldData.validators = [];
 				}

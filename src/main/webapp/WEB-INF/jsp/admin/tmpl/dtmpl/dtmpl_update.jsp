@@ -123,7 +123,7 @@
 		<div class="form-group field-item movable \${fieldAvailable? '': 'field-unavailable'} \${colNum == 2? 'dbcol': ''}" field-id="\${fieldId}" refGroupId="\${refGroupId}" pointModuleName="\${pointModuleName}"  data-id="\${id}"
 			title="\${fieldAvailable? fieldOriginTitle: '无效字段' }">
 			<div class="dtmpl-field-validates">
-				<i class="dtmpl-field-validate-required \${validators.required? 'active-validator': ''}"></i>
+				<i class="dtmpl-field-validate-required \${validators["required"]? 'active-validator': ''}"></i>
 			</div>
 			<label class="control-label field-title">\${title}</label>
 			<div class="field-value">

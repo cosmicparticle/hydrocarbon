@@ -460,7 +460,7 @@ public class Api2EntityCurdController {
 					jRes.put("sucsCount", sucs);
 				} catch (Exception e) {
 					logger.error("执行失败", e);
-					jRes.setStatus("error");
+					jRes.setStatus("操作执行失败");
 				}
 			} else {
 				jRes.setStatus("not found action");
