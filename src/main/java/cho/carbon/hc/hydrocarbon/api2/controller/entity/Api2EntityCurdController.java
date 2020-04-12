@@ -164,8 +164,8 @@ public class Api2EntityCurdController {
 			String disabledColIds, ApiUser user) {
 		JSONObjectResponse jRes = new JSONObjectResponse();
 		SideMenuLevel2Menu menu = authService.validateUserL2MenuAccessable(user, menuId);
-		
-		TemplateRActionTemplate raction =null;
+
+		TemplateRActionTemplate raction = null;
 
 		if (menu.getStatViewId() != null || menu.getTemplateGroupId() != null) {
 			Map<Long, String> requrestCriteriaMap = lcriteriFacrory.exractTemplateCriteriaMap(request);
@@ -174,7 +174,7 @@ public class Api2EntityCurdController {
 			EntityQueryPool qPool = EntityQueryPoolUtils.getEntityQueryPool(user);
 			// 注册一个查询
 			EntityQuery query = qPool.regist();
-			
+
 			query.setPageSize(pageInfo.getPageSize());
 			if (ratmplId != null) {
 				raction = ratmplService.getTemplate(ratmplId);
@@ -206,7 +206,7 @@ public class Api2EntityCurdController {
 			// 传递参数到页面
 			writeListPageAttributes(jRes, query, menu, ltmpl);
 		}
-		if(raction!=null) {
+		if (raction != null) {
 			jRes.put("ratmplId", ratmplId);
 			jRes.put("rootCode", rootCode);
 			jRes.put("ratmplTitle", raction.getTitle());
@@ -389,16 +389,16 @@ public class Api2EntityCurdController {
 			"/save/{contextType:rabc}/{validateSign:user|\\d+}/{fieldGroupId}",
 			"/save/{contextType:node}/{validateSign:user|\\d+}/{nodeId}",
 			"/save/{contextType:relation}/{validateSign:user|\\d+}/{ratmplId}/{rootCode}",
-			"/save/{contextType:rfield}/{validateSign:user|\\d+}/{rfieldId}",})
+			"/save/{contextType:rfield}/{validateSign:user|\\d+}/{rfieldId}", })
 	public ResponseJSON save(@PathVariable String contextType, @PathVariable String validateSign,
 			@PathVariable(required = false) Long fieldGroupId, @PathVariable(required = false) Long nodeId,
 			@PathVariable(required = false) Long ratmplId, @PathVariable(required = false) Long rootCode, Long dtmplId,
 			@RequestParam(value = Api2Constants.KEY_FUSE_MODE, required = false) Boolean fuseMode,
 			@RequestParam(value = Api2Constants.KEY_ACTION_ID, required = false) Long actionId,
-			@PathVariable(required = false) Long rfieldId,
-			RequestParameterMapComposite composite, ApiUser user) {
+			@PathVariable(required = false) Long rfieldId, RequestParameterMapComposite composite, ApiUser user) {
 		ValidateDetailParamter vparam = new ValidateDetailParamter(validateSign, user);
-		vparam.setNodeId(nodeId).setDetailTemplateId(dtmplId).setFieldGroupId(fieldGroupId).setRatmplId(ratmplId).setRfieldId(rfieldId);
+		vparam.setNodeId(nodeId).setDetailTemplateId(dtmplId).setFieldGroupId(fieldGroupId).setRatmplId(ratmplId)
+				.setRfieldId(rfieldId);
 		ValidateDetailResult validateResult = authService.validateDetailAuth(vparam);
 
 		JSONObjectResponse jRes = new JSONObjectResponse();
@@ -416,21 +416,24 @@ public class Api2EntityCurdController {
 			EntityQueryParameter param = new EntityQueryParameter(validateResult.getDetailTemplate().getModule(), user);
 			param.setArrayItemCriterias(arrayItemFilterService
 					.getArrayItemFilterCriterias(validateResult.getDetailTemplate().getId(), user));
-			
-			if(ratmplId!=null) {//添加一个关系吧
+
+			if (ratmplId != null) {// 添加一个关系吧
 				TemplateRActionTemplate ratmpl = ratmplService.getTemplate(ratmplId);
-				
-				String compName=dictService.getComposite(tmplGroupService.getTemplate(ratmpl.getGroupId()).getModule(), ratmpl.getCompositeId()).getName();
-				entityMap.put(compName+".$$flag$$", true);
-				entityMap.put(compName+"[0].$$label$$", ratmpl.getRelationName());
-				entityMap.put(compName+"[0].唯一编码", rootCode);		
+
+				String compName = dictService
+						.getComposite(tmplGroupService.getTemplate(ratmpl.getGroupId()).getModule(),
+								ratmpl.getCompositeId())
+						.getName();
+				entityMap.put(compName + ".$$flag$$", true);
+				entityMap.put(compName + "[0].$$label$$", ratmpl.getRelationName());
+				entityMap.put(compName + "[0].唯一编码", rootCode);
 			}
-			
+
 			EntityFusionRunner.running(fuseMode, jRes, entityMap, param, entityService);
 		} catch (Exception e) {
 			logger.error("保存实体时出现异常", e);
 			jRes.setStatus("error");
-			jRes.put("message",e.getMessage());
+			jRes.put("message", e.getMessage());
 		}
 		return jRes;
 	}
@@ -457,16 +460,16 @@ public class Api2EntityCurdController {
 						return jRes;
 					}
 				}
-					ActionDoneMessage msg = atmplService.doAction(atmpl, entityCodes,
-							TemplateGroupAction.ACTION_MULTIPLE_TRANSACTION.equals(groupAction.getMultiple()), user);
-					if(msg.success()) {
-						jRes.setStatus("suc");
-						jRes.put("sucsCount", msg.getSucs());
-					}else {
-						jRes.setStatus("操作执行失败");
-						jRes.put("message", msg.getDesc());
-					}
-					
+				ActionDoneMessage msg = atmplService.doAction(atmpl, entityCodes,
+						TemplateGroupAction.ACTION_MULTIPLE_TRANSACTION.equals(groupAction.getMultiple()), user);
+				if (msg.success()) {
+					jRes.setStatus("suc");
+					jRes.put("sucsCount", msg.getSucs());
+				} else {
+					jRes.setStatus("操作执行失败");
+					jRes.put("message", msg.getDesc());
+				}
+
 			} else {
 				jRes.setStatus("not found action");
 			}
@@ -565,8 +568,8 @@ public class Api2EntityCurdController {
 	@RequestMapping({ "/detail/{validateSign:\\d+}/{code}", "/detail/{validateSign:user}/*",
 			"/detail/{validateSign:\\d+}/{ratmplId}/{code}" })
 	public ResponseJSON detail(@PathVariable String validateSign, @PathVariable(required = false) String code,
-			@PathVariable(required = false) Long ratmplId, Long versionCode, Long nodeId, Long fieldGroupId,Long rfieldId,
-			Long dtmplId, ApiUser user) {
+			@PathVariable(required = false) Long ratmplId, Long versionCode, Long nodeId, Long fieldGroupId,
+			Long rfieldId, Long dtmplId, ApiUser user) {
 		ValidateDetailParamter vparam = new ValidateDetailParamter(validateSign, user);
 		vparam.setCode(code).setNodeId(nodeId).setFieldGroupId(fieldGroupId).setRatmplId(ratmplId).setRfieldId(rfieldId)
 				.setDetailTemplateId(dtmplId);
@@ -578,7 +581,7 @@ public class Api2EntityCurdController {
 		EntityQueryParameter queryParam = new EntityQueryParameter(dtmpl.getModule(), vResult.getEntityCode(), user);
 		queryParam.setArrayItemCriterias(arrayItemFilterService.getArrayItemFilterCriterias(dtmpl.getId(), user));
 //		ModuleEntityPropertyParser entity = entityService.getEntityParser(queryParam);
-		ModuleEntityPropertyParser entity=null;
+		ModuleEntityPropertyParser entity = null;
 		EntityVersionItem lastHistory = entityService.getLastHistoryItem(queryParam);
 		if (versionCode != null && lastHistory != null && !versionCode.equals(lastHistory.getCode())) {
 			entity = entityService.getHistoryEntityParser(queryParam, versionCode, null);
@@ -622,8 +625,8 @@ public class Api2EntityCurdController {
 	}
 
 	@RequestMapping({ "/entityQuery/detailGroup/{validateSign:user|\\d+}/{dgroupId}" })
-	public ResponseJSON getEntityQuery4DetailGroupSelecter(@PathVariable String validateSign, @PathVariable Long dgroupId,
-			String excepts, HttpServletRequest request, ApiUser user) {
+	public ResponseJSON getEntityQuery4DetailGroupSelecter(@PathVariable String validateSign,
+			@PathVariable Long dgroupId, String excepts, HttpServletRequest request, ApiUser user) {
 		TemplateDetailFieldGroup fieldGroup = authService.validateSelectionAuth(validateSign, dgroupId, user);
 		JSONObjectResponse jRes = new JSONObjectResponse();
 		EntityQueryPool qPool = EntityQueryPoolUtils.getEntityQueryPool(user);
@@ -633,7 +636,7 @@ public class Api2EntityCurdController {
 		jRes.put("queryKey", query.getKey());
 		return jRes;
 	}
-	
+
 	@RequestMapping({ "/entityQuery/rfield/{validateSign:user|\\d+}/{rfieldId}" })
 	public ResponseJSON getEntityQuery4RFieldSelecter(@PathVariable String validateSign, @PathVariable Long rfieldId,
 			String excepts, HttpServletRequest request, ApiUser user) {
@@ -646,11 +649,10 @@ public class Api2EntityCurdController {
 		jRes.put("queryKey", query.getKey());
 		return jRes;
 	}
-	
-	
 
 	/**
 	 * 暂支持一个entity.特别注意
+	 * 
 	 * @param validateSign
 	 * @param rfieldId
 	 * @param codes
@@ -660,39 +662,33 @@ public class Api2EntityCurdController {
 	 */
 	@RequestMapping({ "/load_entities/rfield/{validateSign:user|\\d+}/{rfieldId}" })
 	public ResponseJSON loadSelectedEntities4RField(@PathVariable String validateSign, @PathVariable Long rfieldId,
-			@RequestParam String codes, String fieldNames, ApiUser user) {
+			@RequestParam String codes, ApiUser user) {
 		TemplateDetailField detailField = authService.validateSelectionAuth4RField(validateSign, rfieldId, user);
 		TemplateGroup group = tmplGroupService.getTemplate(detailField.getRefGroupId());
-		
-		//转换 detailfieldid到查询的detail
 
-		
+		// 转换 detailfieldid到查询的detail
+
 //		Set<String> codeSet = TextUtils.split(codes, ",");
 //		codeSet.remove("");
 //		Set<String> fieldNameSet = null;
 //		fieldNameSet = TextUtils.split(fieldNames, ",");
 //		fieldNameSet.remove("");
-
-		if (fieldNames != null ) {
-			EntityQueryParameter queryParam = new EntityQueryParameter(detailField.getPointModuleName(), codes, user);
-			ModuleEntityPropertyParser entity = entityService.getEntityParser(queryParam);
-			JSONObjectResponse jRes = new JSONObjectResponse();		
-			if (entity == null) {
-				jRes.setStatus("notFoundEntity");
-				jRes.put("message", "没有找到实体");
-			} else {
-				// 用模板组合解析，并返回可以解析为json的对象
+		EntityQueryParameter queryParam = new EntityQueryParameter(detailField.getPointModuleName(), codes, user);
+		ModuleEntityPropertyParser entity = entityService.getEntityParser(queryParam);
+		JSONObjectResponse jRes = new JSONObjectResponse();
+		if (entity == null) {
+			jRes.setStatus("notFoundEntity");
+			jRes.put("message", "没有找到实体");
+		} else {
+			// 用模板组合解析，并返回可以解析为json的对象
 //				EntityDetail detail = entityConvertService.convertEntityDetail(entity,
 //						dtmplService.getTemplate(detailField.getRefGroupDtmplid()));
-				jRes.put("value", codes+"@R@"+entity.getFormatedProperty(detailField.getRefShowTitle()));
-				jRes.setStatus("suc");
-			}
-			return jRes;
-		} else {
-			throw new RuntimeException("Must set unempty parameter one of \"fieldNames\" ");
+			jRes.put("value", codes + "@R@" + entity.getFormatedProperty(detailField.getRefShowTitle()));
+			jRes.setStatus("suc");
 		}
+		return jRes;
 	}
-	
+
 	@RequestMapping({ "/load_entities/detailGroup/{validateSign:user|\\d+}/{groupId}" })
 	public ResponseJSON loadSelectedEntities(@PathVariable String validateSign, @PathVariable Long groupId,
 			@RequestParam String codes, String fieldNames, String dfieldIds, ApiUser user) {
