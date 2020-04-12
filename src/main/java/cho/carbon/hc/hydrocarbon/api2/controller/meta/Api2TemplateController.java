@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import cho.carbon.hc.copframe.dto.ajax.JSONObjectResponse;
 import cho.carbon.hc.copframe.dto.ajax.ResponseJSON;
 import cho.carbon.hc.dataserver.model.modules.service.ModulesService;
+import cho.carbon.hc.dataserver.model.tmpl.pojo.TemplateDetailField;
 import cho.carbon.hc.dataserver.model.tmpl.pojo.TemplateDetailFieldGroup;
 import cho.carbon.hc.dataserver.model.tmpl.pojo.TemplateTreeTemplate;
 import cho.carbon.hc.dataserver.model.tmpl.service.DetailTemplateService;
@@ -53,7 +54,8 @@ public class Api2TemplateController {
 		"/dtmpl_config/{contextType:normal}/{validateSign:user|\\d+}/*",
 		"/dtmpl_config/{contextType:rabc}/{validateSign:user|\\d+}/{fieldGroupId}",
 		"/dtmpl_config/{contextType:node}/{validateSign:user|\\d+}/{nodeId}",
-		"/dtmpl_config/{contextType:relation}/{validateSign:user|\\d+}/{ratmplId}"
+		"/dtmpl_config/{contextType:relation}/{validateSign:user|\\d+}/{ratmplId}",
+		"/dtmpl_config/{contextType:rfield}/{validateSign:user|\\d+}/{rfieldId}"
 	})
 	public ResponseJSON detailTemplateConfig(
 			@PathVariable String contextType,
@@ -61,16 +63,15 @@ public class Api2TemplateController {
 			@PathVariable(required=false) Long fieldGroupId,
 			@PathVariable(required=false) Long nodeId,
 			@PathVariable(required=false) Long ratmplId,
+			@PathVariable(required=false) Long rfieldId,
 			Long dtmplId,
 			ApiUser user) {
 		ValidateDetailParamter vparam = new ValidateDetailParamter(validateSign, user);
-		
 
-		
 		vparam
 			.setNodeId(nodeId)
 			.setDetailTemplateId(dtmplId)
-			.setFieldGroupId(fieldGroupId).setRatmplId(ratmplId);
+			.setFieldGroupId(fieldGroupId).setRatmplId(ratmplId).setRfieldId(rfieldId);
 			;
 		ValidateDetailResult validateResult = authService.validateDetailAuth(vparam);
 		JSONObjectResponse jRes = new JSONObjectResponse();
@@ -79,12 +80,21 @@ public class Api2TemplateController {
 		return jRes;
 	}
 	
-	@RequestMapping("/select_config/{validateSign:user|\\d+}/{fieldGroupId}")
+	@RequestMapping("/select_config/detailGroup/{validateSign:user|\\d+}/{fieldGroupId}")
 	public ResponseJSON selectConfig(@PathVariable String validateSign, 
 			@PathVariable Long fieldGroupId, ApiUser user) {
 		TemplateDetailFieldGroup fieldGroup = authService.validateSelectionAuth(validateSign, fieldGroupId, user);
 		JSONObjectResponse jRes = new JSONObjectResponse();
 		jRes.put("config", tJsonService.toSelectConfig(fieldGroup));
+		return jRes;
+	}
+	
+	@RequestMapping("/select_config/rfield/{validateSign:user|\\d+}/{fieldId}")
+	public ResponseJSON selectConfig4RField(@PathVariable String validateSign, 
+			@PathVariable Long fieldId, ApiUser user) {
+		TemplateDetailField detailField = authService.validateSelectionAuth4RField(validateSign, fieldId, user);
+		JSONObjectResponse jRes = new JSONObjectResponse();
+		jRes.put("config", tJsonService.toSelectConfig4RField(detailField));
 		return jRes;
 	}
 	

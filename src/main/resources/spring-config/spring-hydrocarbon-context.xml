@@ -21,6 +21,7 @@
 	<import resource="spring-dao.xml"/>
 	
 	<import resource="classpath*:carbon-imservice-spring-client.xml"/>
+	<import resource="classpath*:spring-carbon-fg-*.xml"/>
 	<!--  
 	<import resource="classpath*:carbon-spring-redis.xml"/> 
 	-->

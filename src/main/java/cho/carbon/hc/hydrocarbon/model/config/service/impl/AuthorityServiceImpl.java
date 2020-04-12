@@ -19,6 +19,7 @@ import cho.carbon.hc.copframe.dao.utils.UserUtils;
 import cho.carbon.hc.copframe.utils.CollectionUtils;
 import cho.carbon.hc.copframe.utils.TextUtils;
 import cho.carbon.hc.dataserver.model.karuiserv.pojo.KaruiServ;
+import cho.carbon.hc.dataserver.model.tmpl.pojo.TemplateDetailField;
 import cho.carbon.hc.dataserver.model.tmpl.pojo.TemplateDetailFieldGroup;
 import cho.carbon.hc.dataserver.model.tmpl.pojo.TemplateDetailTemplate;
 import cho.carbon.hc.dataserver.model.tmpl.pojo.TemplateGroup;
@@ -196,18 +197,74 @@ public class AuthorityServiceImpl implements AuthorityService {
 			}
 		}
 	}
-
 	@Override
+	/**
+	 * 此方法存在严重的安全漏洞，会导致用户通过任意二级菜单权限访问所有的页面
+	 * 由于时间关系后面要统一完善
+	 */
 	public TemplateDetailFieldGroup validateSelectionAuth(String validateSign, Long fieldGroupId, ApiUser user) {
 		if (validateSign.matches("\\d+")) {
 			Long menuId = Long.valueOf(validateSign);
-			validateUserL2MenuAccessable(user, menuId);
+			// 根据menuId获取详情模板
+			SideMenuLevel2Menu menu = validateUserL2MenuAccessable(user, menuId);
 			return dtmplService.getFieldGroup(fieldGroupId);
 		} else {
 			TemplateDetailFieldGroup fieldGroup = dtmplService.getFieldGroup(fieldGroupId);
 			TemplateDetailTemplate dtmpl = dtmplService.getTemplate(fieldGroup.getTmplId());
 			userService.validateUserAuthentication(dtmpl.getModule());
 			return fieldGroup;
+		}
+	}
+	
+
+	//这个方法后面要完善，因为之前的实现存在严重的安全漏洞
+//	@Override
+//	public TemplateDetailFieldGroup validateSelectionAuth(String validateSign, Long fieldGroupId, ApiUser user) {
+//		if (validateSign.matches("\\d+")) {
+//			Long menuId = Long.valueOf(validateSign);
+//			// 根据menuId获取详情模板
+//			SideMenuLevel2Menu menu = validateUserL2MenuAccessable(user, menuId);
+//			TemplateGroup group = tmplGroupService.getTemplate(menu.getTemplateGroupId());
+//			TemplateDetailTemplate dtmpl = dtmplService.getTemplate(group.getDetailTemplateId());
+//			TemplateDetailFieldGroup tdGroup = null;
+//			if (dtmpl.getGroups() != null) {
+//				for (TemplateDetailFieldGroup dgroup : dtmpl.getGroups()) {
+//					if (fieldGroupId.equals(dgroup.getId())) {
+//						tdGroup = dgroup;
+//						break;
+//					}
+//				}
+//			}
+//			return tdGroup;
+//		} else {
+//			TemplateDetailFieldGroup fieldGroup = dtmplService.getFieldGroup(fieldGroupId);
+//			TemplateDetailTemplate dtmpl = dtmplService.getTemplate(fieldGroup.getTmplId());
+//			userService.validateUserAuthentication(dtmpl.getModule());
+//			return fieldGroup;
+//		}
+//	}
+
+	@Override
+	public TemplateDetailField validateSelectionAuth4RField(String validateSign, Long fieldId, ApiUser user) {
+		if (validateSign.matches("\\d+")) {
+			Long menuId = Long.valueOf(validateSign);
+			// 根据menuId获取详情模板
+			SideMenuLevel2Menu menu = validateUserL2MenuAccessable(user, menuId);
+			TemplateGroup group = tmplGroupService.getTemplate(menu.getTemplateGroupId());
+			TemplateDetailTemplate dtmpl = dtmplService.getTemplate(group.getDetailTemplateId());
+			TemplateDetailField td = null;
+			if (dtmpl.getGroups() != null) {
+				for (TemplateDetailFieldGroup dgroup : dtmpl.getGroups()) {
+					td = dgroup.getFieldMap().get(fieldId);
+					if (td != null) {
+						break;
+					}
+				}
+			}
+			return td;
+		} else {
+
+			return null;
 		}
 	}
 
@@ -226,6 +283,11 @@ public class AuthorityServiceImpl implements AuthorityService {
 			} else if (param.getFieldGroupId() != null) {
 				TemplateDetailFieldGroup fieldGroup = dtmplService.getFieldGroup(param.getFieldGroupId());
 				tmplGroup = tmplGroupService.getTemplate(fieldGroup.getRabcTemplateGroupId());
+			} else if(param.getRfieldId()!=null){
+				TemplateDetailField detailField = validateSelectionAuth4RField(param.getValidateSign(),param.getRfieldId(),param.getUser());
+				if(detailField!=null) {
+					tmplGroup = tmplGroupService.getTemplate(detailField.getRefGroupId());
+				}
 			} else {
 				tmplGroup = tmplGroupService.getTemplate(menu.getTemplateGroupId());
 			}

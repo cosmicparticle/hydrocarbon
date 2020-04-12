@@ -6,6 +6,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import cho.carbon.auth.pojo.AuthorityVO;
 import cho.carbon.hc.dataserver.model.karuiserv.pojo.KaruiServ;
+import cho.carbon.hc.dataserver.model.tmpl.pojo.TemplateDetailField;
 import cho.carbon.hc.dataserver.model.tmpl.pojo.TemplateDetailFieldGroup;
 import cho.carbon.hc.dataserver.model.tmpl.pojo.TemplateGroup;
 import cho.carbon.hc.dataserver.model.tmpl.pojo.TemplateGroupAction;
@@ -34,7 +35,10 @@ public interface AuthorityService {
 
 	void validateGroupAction(TemplateGroupAction groupAction, TemplateGroup tmplGroup, String codes);
 
-	TemplateDetailFieldGroup validateSelectionAuth(String validateSign, Long groupId, ApiUser user);
+	TemplateDetailFieldGroup  validateSelectionAuth(String validateSign, Long groupId, ApiUser user);
+	
+	TemplateDetailField  validateSelectionAuth4RField(String validateSign, Long groupId, ApiUser user);
+	
 
 	ValidateDetailResult validateDetailAuth(ValidateDetailParamter param);
 

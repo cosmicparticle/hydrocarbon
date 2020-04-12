@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 import cho.carbon.hc.dataserver.model.tmpl.pojo.AbstractListColumn;
 import cho.carbon.hc.dataserver.model.tmpl.pojo.AbstractListCriteria;
 import cho.carbon.hc.dataserver.model.tmpl.pojo.AbstractListTemplate;
+import cho.carbon.hc.dataserver.model.tmpl.pojo.TemplateDetailField;
 import cho.carbon.hc.dataserver.model.tmpl.pojo.TemplateDetailFieldGroup;
 import cho.carbon.hc.dataserver.model.tmpl.pojo.TemplateGroup;
 import cho.carbon.hc.dataserver.model.tmpl.pojo.TemplateStatView;
@@ -17,6 +18,8 @@ public interface TemplateJsonParseService {
 	JSONObject toTemplateGroupJson(TemplateGroup tmplGroup);
 
 	JSONObject toSelectConfig(TemplateDetailFieldGroup fieldGroup);
+	
+	JSONObject toSelectConfig4RField(TemplateDetailField detailField);
 
 	JSONObject toDetailTemplateConfig(ValidateDetailResult validateResult);
 

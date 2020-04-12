@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	  xmlns:cxf="http://cxf.apache.org/core"
+	 xmlns:jaxws="http://cxf.apache.org/jaxws"
+	xmlns:jaxrs="http://cxf.apache.org/jaxrs"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans-4.3.xsd 
+		http://cxf.apache.org/core
+        http://cxf.apache.org/schemas/core.xsd
+        http://cxf.apache.org/jaxws 
+        http://cxf.apache.org/schemas/jaxws.xsd
+		http://cxf.apache.org/jaxrs 
+		http://cxf.apache.org/schemas/jaxrs.xsd">
+
+
+	<jaxws:client id="programInfoService" 
+		serviceClass="cho.carbon.imodel.model.program.service.ProgramInfoService" 
+		address="http://localhost:90/carbonmodel/services/programInfoService">
+	</jaxws:client>
+
+	<jaxws:client id="miTableSyncRemoteDBService" 
+		serviceClass="cho.carbon.imodel.model.modelitem.service.MiTableSyncRemoteDBService" 
+		address="http://localhost:90/carbonmodel/services/miTableSyncRemoteDBService">	
+	</jaxws:client>
+	
+	<!-- 打印报文 -->
+	<!--  <cxf:bus>
+        <cxf:features>
+            <cxf:logging/>
+        </cxf:features>
+    </cxf:bus>  -->
+</beans>
