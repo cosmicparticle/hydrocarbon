@@ -388,15 +388,17 @@ public class Api2EntityCurdController {
 			"/save/{contextType:normal}/{validateSign:user|\\d+}/*",
 			"/save/{contextType:rabc}/{validateSign:user|\\d+}/{fieldGroupId}",
 			"/save/{contextType:node}/{validateSign:user|\\d+}/{nodeId}",
-			"/save/{contextType:relation}/{validateSign:user|\\d+}/{ratmplId}/{rootCode}" })
+			"/save/{contextType:relation}/{validateSign:user|\\d+}/{ratmplId}/{rootCode}",
+			"/save/{contextType:rfield}/{validateSign:user|\\d+}/{rfieldId}",})
 	public ResponseJSON save(@PathVariable String contextType, @PathVariable String validateSign,
 			@PathVariable(required = false) Long fieldGroupId, @PathVariable(required = false) Long nodeId,
 			@PathVariable(required = false) Long ratmplId, @PathVariable(required = false) Long rootCode, Long dtmplId,
 			@RequestParam(value = Api2Constants.KEY_FUSE_MODE, required = false) Boolean fuseMode,
 			@RequestParam(value = Api2Constants.KEY_ACTION_ID, required = false) Long actionId,
+			@PathVariable(required = false) Long rfieldId,
 			RequestParameterMapComposite composite, ApiUser user) {
 		ValidateDetailParamter vparam = new ValidateDetailParamter(validateSign, user);
-		vparam.setNodeId(nodeId).setDetailTemplateId(dtmplId).setFieldGroupId(fieldGroupId).setRatmplId(ratmplId);
+		vparam.setNodeId(nodeId).setDetailTemplateId(dtmplId).setFieldGroupId(fieldGroupId).setRatmplId(ratmplId).setRfieldId(rfieldId);
 		ValidateDetailResult validateResult = authService.validateDetailAuth(vparam);
 
 		JSONObjectResponse jRes = new JSONObjectResponse();
@@ -428,6 +430,7 @@ public class Api2EntityCurdController {
 		} catch (Exception e) {
 			logger.error("保存实体时出现异常", e);
 			jRes.setStatus("error");
+			jRes.put("message",e.getMessage());
 		}
 		return jRes;
 	}
@@ -631,10 +634,10 @@ public class Api2EntityCurdController {
 		return jRes;
 	}
 	
-	@RequestMapping({ "/entityQuery/rfield/{validateSign:user|\\d+}/{fieldId}" })
-	public ResponseJSON getEntityQuery4RFieldSelecter(@PathVariable String validateSign, @PathVariable Long fieldId,
+	@RequestMapping({ "/entityQuery/rfield/{validateSign:user|\\d+}/{rfieldId}" })
+	public ResponseJSON getEntityQuery4RFieldSelecter(@PathVariable String validateSign, @PathVariable Long rfieldId,
 			String excepts, HttpServletRequest request, ApiUser user) {
-		TemplateDetailField detailField = authService.validateSelectionAuth4RField(validateSign, fieldId, user);
+		TemplateDetailField detailField = authService.validateSelectionAuth4RField(validateSign, rfieldId, user);
 		JSONObjectResponse jRes = new JSONObjectResponse();
 		EntityQueryPool qPool = EntityQueryPoolUtils.getEntityQueryPool(user);
 		EntityQuery query = qPool.regist();
@@ -649,16 +652,16 @@ public class Api2EntityCurdController {
 	/**
 	 * 暂支持一个entity.特别注意
 	 * @param validateSign
-	 * @param fieldId
+	 * @param rfieldId
 	 * @param codes
 	 * @param fieldNames
 	 * @param user
 	 * @return
 	 */
-	@RequestMapping({ "/load_entities/rfield/{validateSign:user|\\d+}/{fieldId}" })
-	public ResponseJSON loadSelectedEntities4RField(@PathVariable String validateSign, @PathVariable Long fieldId,
+	@RequestMapping({ "/load_entities/rfield/{validateSign:user|\\d+}/{rfieldId}" })
+	public ResponseJSON loadSelectedEntities4RField(@PathVariable String validateSign, @PathVariable Long rfieldId,
 			@RequestParam String codes, String fieldNames, ApiUser user) {
-		TemplateDetailField detailField = authService.validateSelectionAuth4RField(validateSign, fieldId, user);
+		TemplateDetailField detailField = authService.validateSelectionAuth4RField(validateSign, rfieldId, user);
 		TemplateGroup group = tmplGroupService.getTemplate(detailField.getRefGroupId());
 		
 		//转换 detailfieldid到查询的detail

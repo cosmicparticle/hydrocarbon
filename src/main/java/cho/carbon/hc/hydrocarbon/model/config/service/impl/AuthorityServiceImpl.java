@@ -245,7 +245,7 @@ public class AuthorityServiceImpl implements AuthorityService {
 //	}
 
 	@Override
-	public TemplateDetailField validateSelectionAuth4RField(String validateSign, Long fieldId, ApiUser user) {
+	public TemplateDetailField validateSelectionAuth4RField(String validateSign, Long rfieldId, ApiUser user) {
 		if (validateSign.matches("\\d+")) {
 			Long menuId = Long.valueOf(validateSign);
 			// 根据menuId获取详情模板
@@ -255,7 +255,7 @@ public class AuthorityServiceImpl implements AuthorityService {
 			TemplateDetailField td = null;
 			if (dtmpl.getGroups() != null) {
 				for (TemplateDetailFieldGroup dgroup : dtmpl.getGroups()) {
-					td = dgroup.getFieldMap().get(fieldId);
+					td = dgroup.getFieldMap().get(rfieldId);
 					if (td != null) {
 						break;
 					}

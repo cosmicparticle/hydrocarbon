@@ -37,7 +37,7 @@ public interface AuthorityService {
 
 	TemplateDetailFieldGroup  validateSelectionAuth(String validateSign, Long groupId, ApiUser user);
 	
-	TemplateDetailField  validateSelectionAuth4RField(String validateSign, Long groupId, ApiUser user);
+	TemplateDetailField  validateSelectionAuth4RField(String validateSign, Long rfieldId, ApiUser user);
 	
 
 	ValidateDetailResult validateDetailAuth(ValidateDetailParamter param);
