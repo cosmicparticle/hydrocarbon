@@ -56,6 +56,7 @@ import cho.carbon.hc.dataserver.model.service.EntityFusionRunner;
 import cho.carbon.hc.dataserver.model.service.EntityQueryParameter;
 import cho.carbon.hc.dataserver.model.service.ModuleEntityService;
 import cho.carbon.hc.dataserver.model.tmpl.manager.TreeTemplateManager.TreeRelationComposite;
+import cho.carbon.hc.dataserver.model.tmpl.param.ActionDoneMessage;
 import cho.carbon.hc.dataserver.model.tmpl.pojo.ArrayEntityProxy;
 import cho.carbon.hc.dataserver.model.tmpl.pojo.TemplateActionTemplate;
 import cho.carbon.hc.dataserver.model.tmpl.pojo.TemplateDetailFieldGroup;
@@ -778,12 +779,12 @@ public class AdminModulesController {
 	}
 
 	@RequestMapping("/rabc_detail/{menuId}/{fieldGroupId}")
-	public String rabcDetail(@PathVariable Long menuId, @PathVariable Long fieldGroupId,  String entityCode,
-			 Model model) {
+	public String rabcDetail(@PathVariable Long menuId, @PathVariable Long fieldGroupId, String entityCode,
+			Model model) {
 		SideMenuLevel2Menu menu = authService.validateL2MenuAccessable(menuId);
 		TemplateGroup mainTmplGroup = tmplGroupService.getTemplate(menu.getTemplateGroupId());
 		TemplateDetailTemplate mainDtmpl = dtmplService.getTemplate(mainTmplGroup.getDetailTemplateId());
-		TemplateGroup tmplGroup=null;
+		TemplateGroup tmplGroup = null;
 		if (mainDtmpl != null) {
 			TemplateDetailFieldGroup fieldGroup = mainDtmpl.getGroups().stream()
 					.filter(fg -> fieldGroupId.equals(fg.getId())).findFirst().get();
@@ -791,7 +792,7 @@ public class AdminModulesController {
 			Long relationTemplateGroupId = fieldGroup.getRabcTemplateGroupId();
 
 			if (relationTemplateGroupId != null) {
-				 tmplGroup = tmplGroupService.getTemplate(relationTemplateGroupId);
+				tmplGroup = tmplGroupService.getTemplate(relationTemplateGroupId);
 			}
 		}
 		model.addAttribute("menu", menu);
@@ -916,12 +917,12 @@ public class AdminModulesController {
 			parsers = parserss;
 			Map<String, String> fieldMap = new HashMap<>();
 			fieldSet.forEach(k -> {
-				if(k.contains(".")) {
+				if (k.contains(".")) {
 					fieldMap.put(k, k.split("\\.")[1]);
-				}else {
+				} else {
 					fieldMap.put(k, k);
 				}
-				
+
 			});
 			entities = toEntitiesJson(parsers, fieldMap);
 		}
@@ -1021,20 +1022,14 @@ public class AdminModulesController {
 		Set<String> codes = (Set<String>) vRes;
 		TemplateActionTemplate action = atmplService.getTemplate(groupAction.getAtmplId());
 		if (action != null) {
-			try {
-				int sucs = atmplService.doAction(action, codes,
-						TemplateGroupAction.ACTION_MULTIPLE_TRANSACTION.equals(groupAction.getMultiple()),
-						UserUtils.getCurrentUser());
-				if(sucs==0) {
-					return AjaxPageResponse.FAILD("执行失败");
-				}else if(sucs<codes.size()){
-					return AjaxPageResponse.FAILD("执行失败"+ (codes.size()-sucs) + "个实体。"+"处理成功"+ sucs + "个实体");
-				}else {
-					return AjaxPageResponse.REFRESH_LOCAL("执行结束, 共成功处理" + sucs + "个实体");
-				}
-			} catch (Exception e) {
-				logger.error("操作失败", e);
-				return AjaxPageResponse.FAILD("执行失败");
+			ActionDoneMessage msg = atmplService.doAction(action, codes,
+					TemplateGroupAction.ACTION_MULTIPLE_TRANSACTION.equals(groupAction.getMultiple()),
+					UserUtils.getCurrentUser());
+			if (msg.success()) {
+				return AjaxPageResponse.REFRESH_LOCAL("执行结束, 共成功处理" + msg.getTotal() + "个实体");
+
+			} else {
+				return AjaxPageResponse.FAILD("执行失败," + msg.getDesc());
 			}
 		} else {
 			return AjaxPageResponse.FAILD("操作不存在");

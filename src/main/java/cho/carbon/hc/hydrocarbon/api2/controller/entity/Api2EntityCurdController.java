@@ -45,6 +45,7 @@ import cho.carbon.hc.dataserver.model.service.EntityQueryParameter;
 import cho.carbon.hc.dataserver.model.service.ModuleEntityService;
 import cho.carbon.hc.dataserver.model.statview.service.StatViewService;
 import cho.carbon.hc.dataserver.model.tmpl.manager.TreeTemplateManager.TreeRelationComposite;
+import cho.carbon.hc.dataserver.model.tmpl.param.ActionDoneMessage;
 import cho.carbon.hc.dataserver.model.tmpl.pojo.AbstractListTemplate;
 import cho.carbon.hc.dataserver.model.tmpl.pojo.ArrayEntityProxy;
 import cho.carbon.hc.dataserver.model.tmpl.pojo.TemplateActionTemplate;
@@ -453,15 +454,16 @@ public class Api2EntityCurdController {
 						return jRes;
 					}
 				}
-				try {
-					int sucs = atmplService.doAction(atmpl, entityCodes,
+					ActionDoneMessage msg = atmplService.doAction(atmpl, entityCodes,
 							TemplateGroupAction.ACTION_MULTIPLE_TRANSACTION.equals(groupAction.getMultiple()), user);
-					jRes.setStatus("suc");
-					jRes.put("sucsCount", sucs);
-				} catch (Exception e) {
-					logger.error("执行失败", e);
-					jRes.setStatus("操作执行失败");
-				}
+					if(msg.success()) {
+						jRes.setStatus("suc");
+						jRes.put("sucsCount", msg.getSucs());
+					}else {
+						jRes.setStatus("操作执行失败");
+						jRes.put("message", msg.getDesc());
+					}
+					
 			} else {
 				jRes.setStatus("not found action");
 			}

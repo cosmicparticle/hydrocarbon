@@ -44,6 +44,7 @@ import cho.carbon.hc.dataserver.model.service.EntitiesQueryParameter;
 import cho.carbon.hc.dataserver.model.service.EntityFusionRunner;
 import cho.carbon.hc.dataserver.model.service.EntityQueryParameter;
 import cho.carbon.hc.dataserver.model.service.ModuleEntityService;
+import cho.carbon.hc.dataserver.model.tmpl.param.ActionDoneMessage;
 import cho.carbon.hc.dataserver.model.tmpl.pojo.AbstractListCriteria;
 import cho.carbon.hc.dataserver.model.tmpl.pojo.AbstractListTemplate;
 import cho.carbon.hc.dataserver.model.tmpl.pojo.ArrayEntityProxy;
@@ -694,10 +695,10 @@ public class ApiEntityController {
 			TemplateActionTemplate atmpl = atmplService.getTemplate(groupAction.getAtmplId());
 			if (atmpl != null) {
 				try {
-					int sucs = actService.doAction(atmpl, codes,
+					ActionDoneMessage msg = actService.doAction(atmpl, codes,
 							TemplateGroupAction.ACTION_MULTIPLE_TRANSACTION.equals(groupAction.getMultiple()), user);
 					res.setStatus("suc");
-					res.put("msg", "执行结束, 共成功处理" + sucs + "个实体");
+					res.put("msg", "执行结束, 共成功处理" + msg.getSucs() + "个实体");
 				} catch (Exception e) {
 					logger.error("操作失败", e);
 					res.setStatus("error");
